@@ -1,0 +1,210 @@
+﻿@*@model InvestmentManagement.ViewModel.ViewModelBase*@
+
+@using InvestmentManagement.Models;
+@using InvestmentManagement.ViewModel;
+
+@{
+    ViewModelBase Model = new ViewModelBase();
+    CommonFunction oCommonFunction = new CommonFunction();
+    Model.Menus = oCommonFunction.GetMenus(); 
+}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="~/CSS/layout.css" rel="stylesheet" />
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/CSS/jquery-ui.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/fixedDeposit.js"></script>
+    <script src="~/Scripts/jsapi.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+    <title></title>
+
+</head>
+<body>
+    @if (Model.Menus != null)
+    {
+        <header class="header">
+            <div id="top">
+                <div class="wrapper">
+                    <a href="#" title="" class="logo">
+                        <img src="../../images/MoneyPro.png" alt="Logo" />
+                    </a>
+
+                    <div class="topNav">
+                        <div class="presentUser">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                    User
+                                <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                        <ul class="userNav pB">
+                            <li><a href="#" title="">Messages <span class="badge">4</span></a></li>
+                            <li role="presentation"><a class="load" role="menuitem" tabindex="-1" href="~/#/Settings/Settings?lblbreadcum=Settings">Settings</a></li>
+                            <li><a href="@Url.Action("LogOut", "Home")" title=""><i class=""></i>Logout</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="clear"></div>
+
+                </div>
+            </div>
+        </header>
+    }
+    <section class="mainContainer">
+        @if (Model.Menus != null)
+        {
+                         
+            <nav class="navbar navbar-default navbar-static mainmenue" id="navbar-example">
+                <div class="container-fluid">
+
+                    <div class="collapse navbar-collapse bs-example-js-navbar-collapse" style="width: 100%; margin-left: -29px;">
+                        <ul class="nav navbar-nav" id="navbar">
+                            @if (Model.Menus != null)
+                            {
+                                
+                                var rootMenus = Model.Menus.Where(m => m.PARENTNAMEID == null && m.NAME != "Settings").OrderBy(m => m.ORDERINDEX).ToList();
+                                //USER HANDLING
+                             
+                                foreach (var menu in rootMenus)
+                                {
+
+                                    if (Session["UserId"].ToString() == "bosl" || Session["UserId"].ToString() == "INV-ADMIN" || Session["UserId"].ToString() == "Moshiur" 
+                                      || ((menu.CAPTION == "Fixed Deposit" || menu.CAPTION == "Report") && Session["UserId"].ToString() == "Burhan")  //  || ((menu.CAPTION == "Bonds" || menu.CAPTION == "Report") && Session["UserId"].ToString() == "Moshiur")                                   
+                                      || ((menu.CAPTION == "Equity" || menu.CAPTION == "Depository" || menu.CAPTION == "Trade" || menu.CAPTION == "Report") && Session["UserId"].ToString() == "Imtiaz"))
+                                   { 
+                                    
+                                    var subMenus = Model.Menus.Where(m => m.PARENTNAMEID == menu.REFERENCE).OrderBy(m => m.ORDERINDEX).ToList();
+                                    if (subMenus.Count > 0)
+                                    {
+                                  <li class="dropdown">
+                                    <a aria-expanded="false" role="button" aria-haspopup="true" data-toggle="dropdown" class="dropdown-toggle" href="#" id="drop1">
+                                        @menu.CAPTION
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul aria-labelledby="drop1" role="menu" class="dropdown-menu">
+                                        @foreach (var submenu in subMenus)
+                                        {                                  
+                                            <li role="presentation"><a class="load" role="menuitem" tabindex="-1" href="~/#/@submenu.CONTROLLER/@submenu.ACTION?lblbreadcum=@submenu.PARAMETER">@submenu.CAPTION</a></li>                                          
+                                        }
+                                    </ul>
+                                  </li>
+                                    }
+                                    else
+                                    {
+                                     <li role="presentation"><a class="load" role="menuitem" tabindex="-1" href="~/#/@menu.CONTROLLER/@menu.ACTION?lblbreadcum=@menu.PARAMETER">@menu.CAPTION</a></li>
+                                    }                                    
+                                  }
+                                  
+                                }
+                               
+
+                            }
+
+
+                        </ul>
+
+                    </div>
+                    <!-- /.nav-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+        }
+        <!-- Sidebar ends -->
+        <div class="components">
+            <section id="page">
+                <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+                @RenderBody()
+            </section>
+        </div>
+    </section>
+
+    <footer class="footer"></footer>
+
+
+    <script src="~/Scripts/sammy.js"></script>
+    <script src="~/Scripts/routing.js"></script>
+    <script src="~/Scripts/jquery-ui.js"></script>
+
+    <script>
+        function formatDate(format) {
+            if (format == 'long') {
+                return ('dd-M-y');
+            }
+        }
+        $(function () {
+            var routing = new Routing('@Url.Content("~/")', '#page', 'welcome');
+            routing.init();
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(".load").click(function () {
+                   
+           
+            try{
+                $("#navbar .dropdown").removeClass("open");
+                $('.userNav .dropdown').removeClass("open");
+                var link = $(this).attr("href");
+
+                $(".loadingImage").show();
+              
+              
+              //  alert(link);
+
+                $.get('<%= Url.Action(' + link + ') %>', {},
+                    function (data) {
+                    
+                        $('#result').html(data);                    
+                        $('.loadingImage').hide();
+                    });
+
+                //$.ajax({
+                //    type: 'GET',
+                //    url: link,
+                //    dataType: 'html',
+                //    //data: {
+                //    //    email: $('#email').val()
+                //    //},
+                //    success: function (data) {
+                //        $('#replace').html(data);
+                //        $('.loadingImage').hide();
+                //    },
+                //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                //        $('.loadingImage').hide();
+                //        //$('#message').removeClass().addClass('error').text('There was an error.').show(500);
+                //        alert('There was an error!');
+                //    }
+                //});
+             
+               
+
+            } catch (err)
+            {
+                alert(err.message);
+                $('.loadingImage').hide();
+            }
+          
+        });
+
+    </script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+</body>
+</html>

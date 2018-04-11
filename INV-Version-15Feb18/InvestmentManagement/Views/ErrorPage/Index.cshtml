@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="~/CSS/layout.css" rel="stylesheet" />
+    <link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+       <script src="~/Scripts/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+    <header class="header">
+        <div id="top">
+            <div class="wrapper">
+                <a href="#" title="" class="logo" style="display: none">
+                    <img src="" alt="Logo" /></a>
+                <div class="topNav">
+                    <div class="presentUser">
+                    
+                    </div>
+
+
+                    <ul class="userNav pB">
+                     
+
+
+                        <li>
+                     
+
+                        </li>
+
+
+                        <li></li>
+
+
+
+
+                    </ul>
+                </div>
+
+
+
+
+                <div class="clear"></div>
+
+            </div>
+        </div>
+    </header>
+     <section class="mainContainer">
+            <nav class="navbar navbar-default navbar-static mainmenue" id="navbar-example">
+            <div class="container-fluid">
+
+                <div class="collapse navbar-collapse bs-example-js-navbar-collapse" style="width: 100%; margin-left: -29px;">
+                    <ul class="nav navbar-nav" id="navbar">
+                      
+
+                    </ul>
+
+                </div>
+                <!-- /.nav-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+         <div class="components">
+           <div class="jumbotron">
+ 
+  <p>@ViewBag.Message</p>
+               <br />
+<p><a class="btn btn-primary btn-lg" href="@Url.Action("Index", "Home")" role="button">Go Back</a></p>
+</div>
+        </div>
+         </section>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="FDRTaxStatement" targetNamespace="http://tempuri.org/FDRTaxStatement.xsd" xmlns:mstns="http://tempuri.org/FDRTaxStatement.xsd" xmlns="http://tempuri.org/FDRTaxStatement.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="FDRTaxStatement" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="FDRTaxStatement" msprop:Generator_UserDSName="FDRTaxStatement">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="FDRTaxStatement" msprop:Generator_TableClassName="FDRTaxStatementDataTable" msprop:Generator_TableVarName="tableFDRTaxStatement" msprop:Generator_TablePropName="_FDRTaxStatement" msprop:Generator_RowDeletingName="FDRTaxStatementRowDeleting" msprop:Generator_RowChangingName="FDRTaxStatementRowChanging" msprop:Generator_RowEvHandlerName="FDRTaxStatementRowChangeEventHandler" msprop:Generator_RowDeletedName="FDRTaxStatementRowDeleted" msprop:Generator_UserTableName="FDRTaxStatement" msprop:Generator_RowChangedName="FDRTaxStatementRowChanged" msprop:Generator_RowEvArgName="FDRTaxStatementRowChangeEvent" msprop:Generator_RowClassName="FDRTaxStatementRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FdrNo" msprop:Generator_ColumnVarNameInTable="columnFdrNo" msprop:Generator_ColumnPropNameInRow="FdrNo" msprop:Generator_ColumnPropNameInTable="FdrNoColumn" msprop:Generator_UserColumnName="FdrNo" type="xs:string" minOccurs="0" />
+              <xs:element name="FINameAndBranch" msprop:Generator_ColumnVarNameInTable="columnFINameAndBranch" msprop:Generator_ColumnPropNameInRow="FINameAndBranch" msprop:Generator_ColumnPropNameInTable="FINameAndBranchColumn" msprop:Generator_UserColumnName="FINameAndBranch" type="xs:string" minOccurs="0" />
+              <xs:element name="OpeningOrRenewedDate" msprop:Generator_ColumnVarNameInTable="columnOpeningOrRenewedDate" msprop:Generator_ColumnPropNameInRow="OpeningOrRenewedDate" msprop:Generator_ColumnPropNameInTable="OpeningOrRenewedDateColumn" msprop:Generator_UserColumnName="OpeningOrRenewedDate" type="xs:string" minOccurs="0" />
+              <xs:element name="MaturityDate" msprop:Generator_ColumnVarNameInTable="columnMaturityDate" msprop:Generator_ColumnPropNameInRow="MaturityDate" msprop:Generator_ColumnPropNameInTable="MaturityDateColumn" msprop:Generator_UserColumnName="MaturityDate" type="xs:string" minOccurs="0" />
+              <xs:element name="RenewalDate" msprop:Generator_ColumnVarNameInTable="columnRenewalDate" msprop:Generator_ColumnPropNameInRow="RenewalDate" msprop:Generator_ColumnPropNameInTable="RenewalDateColumn" msprop:Generator_UserColumnName="RenewalDate" type="xs:string" minOccurs="0" />
+              <xs:element name="GrossInterest" msprop:Generator_ColumnVarNameInTable="columnGrossInterest" msprop:Generator_ColumnPropNameInRow="GrossInterest" msprop:Generator_ColumnPropNameInTable="GrossInterestColumn" msprop:Generator_UserColumnName="GrossInterest" type="xs:string" minOccurs="0" />
+              <xs:element name="SourceTax" msprop:Generator_ColumnVarNameInTable="columnSourceTax" msprop:Generator_ColumnPropNameInRow="SourceTax" msprop:Generator_ColumnPropNameInTable="SourceTaxColumn" msprop:Generator_UserColumnName="SourceTax" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

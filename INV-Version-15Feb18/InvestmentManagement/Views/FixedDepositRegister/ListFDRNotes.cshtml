@@ -1,0 +1,466 @@
+﻿@model InvestmentManagement.Models.GridModel<InvestmentManagement.InvestmentManagement.Models.FDRNOTE>
+
+
+<div id="replace">
+
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+    <div class="wrapper pl">
+        <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+
+            <strong>Info !</strong>
+            @ViewBag.Message
+        </div>
+        <div class="container-fluid Grid-Container">
+
+
+
+            <div class="widget mb20">
+                <div class="whead">
+                    <h6>@Session["currentPage"]</h6>
+
+                    <div class="clear"></div>
+                </div>
+
+                <div class="formRow dgHeaderBk">
+                    <div class="container-fluid">
+                        <div class="col-md-6">
+                            <div>
+                                <label class="">
+                                   From Date
+                                </label>
+                                <input type="text" class="datepicker datePickerWidth" id="openingDate" name="openingDate" placeholder="Select date">
+                                @*<span class="checkbox" style="display: inline !important; margin-left: 25px;">
+                                    <input type="checkbox" id="chkopeningDate">
+                                    Show All
+                                </span>*@
+                            </div>
+                            <div>
+                                <label class="">
+                                   To Date
+                                </label>
+
+                                <input type="text" class="datepicker datePickerWidth" id="toDate" name="toDate" placeholder="Select date" style="margin-left: 20px;">
+                                @*<span class="checkbox" style="display: inline !important; margin-left: 25px;">
+                                    <input type="checkbox" id="chkmatureDate">
+                                    Show All
+                                </span>*@
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <div>
+                                <label>Financial Institution</label>
+                                @Html.DropDownList("FINANCIALINSTITUTION_REFERENCE", (SelectList)ViewBag.financialInstitutionList, "Select All", new { @class = "control-label entrylable drpResize", style = "width:35%; margin-top:0px !important; margin-bottom:4px !important;" })
+                            </div>
+                            <label>Status</label>
+                            @Html.DropDownList("STATUS", (SelectList)ViewBag.statuslist, "Select All", new { @class = "control-label entrylable drpResize", style = "width:35%;  margin-left:95px;margin-top:0px !important;" })
+
+                            <input type="button" id="btn-search" class="btn btn-primary dgBtn" value="Apply" />
+
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-md-6">
+                            <div>
+                                <label class="">
+                                    Opening Date
+                                </label>
+                                <input type="text" class="datepicker datePickerWidth" id="openingDate" name="openingDate" placeholder="Select date">
+                                <span class="checkbox" style="display: inline !important; margin-left: 25px;">
+                                    <input type="checkbox" id="chkopeningDate">
+                                    Show All
+                                </span>
+                            </div>
+                            <div>
+                                <label class="">
+                                    Mature Date
+                                </label>
+
+                                <input type="text" class="datepicker datePickerWidth" id="matureDate" name="matureDate" placeholder="Select date" style="margin-left: 10px;">
+                                <span class="checkbox" style="display: inline !important; margin-left: 25px;">
+                                    <input type="checkbox" id="chkmatureDate">
+                                    Show All
+                                </span>
+                            </div>
+
+
+                        </div>*@
+
+                <script>
+                    function ChkAddClass() {
+
+                        var dir = $('#dir').val();
+                        var col = $('#col').val().replace(/\s/g, '');
+                        //alert(col);
+
+                        var header = $('th a[href*=' + col + ']');
+                        //alert(header.text());
+                        var countTh = document.getElementsByTagName('th').length;
+
+
+                        for (var i = 1; i <= countTh; i++) {
+
+                            var txtTh = $('.ASPGrid tr th:nth-child(' + i + ')').text().replace(/\s/g, '');
+
+                            if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Ascending') {
+                                //alert("");
+                                //alert(txtTh + "" + col);
+                                $(".ASPGrid tr th").addClass("sorting");
+
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("ascending");
+                               // $(".ASPGrid tr th:nth-child(1)").removeClass("sorting ascending");
+                                $(".ASPGrid tr th:nth-child(9)").removeClass("sorting ascending");
+
+                            }
+
+                            else if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Descending') {
+                                //alert(txtTh + "" + col);
+                                $(".ASPGrid tr th").addClass("sorting");
+
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("descending");
+                                //$(".ASPGrid tr th:nth-child(1)").removeClass("sorting descending");
+                                $(".ASPGrid tr th:nth-child(9)").removeClass("sorting descending");
+
+
+                            }
+                        }
+
+
+                        //$("select,.check :checkbox").not("#ddlPageSize").uniform();
+
+                        //$('.selector').not("#ddlPageSize").addClass('pull-right');
+                        //$('.checker').not("#ddlPageSize").addClass('dataGridCheckBox');
+                    }
+                </script>
+                <div id="WebGrid" class="formRow noPad btbNone tScroll">
+                    @{
+                        WebGrid grid = new WebGrid(rowsPerPage: Model.RowsPerPage, ajaxUpdateContainerId: "WebGrid", ajaxUpdateCallback: "ChkAddClass", sortFieldName: "sortdefault");
+                        grid.Bind(Model.DataModel, autoSortAndPage: false, rowCount: Model.RowsPerPage);
+				
+                        @grid.Table(columns: new[] {
+                //grid.Column(header: "Select",  format:@<text>
+                //    <div class="checkbox">
+                //            <label>
+                //                <input type="checkbox" value="">
+                //            </label>
+                //        </div>
+                //    </text>),
+    
+
+//grid.Column("@Html.DisplayFor(model => model.NOTEID)", style:"textColumn",header:""),
+
+                
+
+    
+
+//grid.Column("@Html.DisplayFor(model => model.PROPOSALDETAIL_REFERENCE)", style:"textColumn",header:""),
+
+                
+
+    
+
+//grid.Column("@Html.DisplayFor(model => model.NOTETYPE)", style:"textColumn",header:""),
+
+                
+
+    
+
+//grid.Column("@Html.DisplayFor(model => model.FDRNUMBER)", style:"textColumn",header:""),
+
+                
+
+    
+
+grid.Column("FINANCIALINSTITUTION.NAME", style:"textColumn",header:"Bank Name"),
+
+                
+//grid.Column("PROPOSALDETAIL_SUMMARY", style:"textColumn",header:"FDR Summary"),
+    
+
+//grid.Column("@Html.DisplayFor(model => model.BRANCH_REFERENCE)", style:"textColumn",header:""),
+
+                
+grid.Column("TENURE", style:"numericColumn",header:"Tenure"),
+
+grid.Column("TENURETERM", style:"textColumn",header:"Tenure Term"),
+    
+
+grid.Column("PRINCIPALAMOUNT", format:@<text>@item.PRINCIPALAMOUNT.ToString("N") BDT</text>, style:"numericColumn",header:"Principle Amount"),
+
+                
+
+    
+
+
+
+                
+
+    
+
+
+
+                
+
+    
+
+//grid.Column("@Html.DisplayFor(model => model.OFFERRATE)", format:@<text>@item.OFFERRATE.ToString("N") BDT</text>, style:"numericColumn",header:""),
+
+                
+
+    
+
+//grid.Column("@Html.DisplayFor(model => model.PROPOSEDDATE)", format:@<text>@item.PROPOSEDDATE.ToString("N") BDT</text>, style:"numericColumn",header:""),
+
+                
+
+    
+
+grid.Column("EXISTINGDEPOSIT", format:@<text>@item.EXISTINGDEPOSIT.ToString("N") BDT</text>, style:"numericColumn",header:"Existing Principal Amount"),
+
+                
+
+    
+
+grid.Column("CAPLIMIT", format:@<text>@item.CAPLIMIT.ToString("N") BDT</text>, style:"numericColumn",header:"Cap Limit"),
+
+                
+grid.Column("OFFERRATE", style:"numericColumn",header:"Offer Rate"),
+
+    
+
+//grid.Column("@Html.DisplayFor(model => model.PERCENTAGEOFFDR)", format:@<text>@item.PERCENTAGEOFFDR.ToString("N") BDT</text>, style:"numericColumn",header:""),
+
+                
+
+    
+
+//grid.Column("@Html.DisplayFor(model => model.CHEQUENO)", style:"textColumn",header:""),
+
+                
+
+    
+//grid.Column("@Html.DisplayFor(model => model.CHEQUEDATE)", header:"", format: f=>f.CHEQUEDATE.ToString("dd-MMM-yyyy"), style:"textColumn",header:""),
+                
+
+    
+
+//grid.Column("@Html.DisplayFor(model => model.PROPOSEDACTION)", style:"textColumn",header:""),
+
+                
+
+    
+
+//grid.Column("@Html.DisplayFor(model => model.ISSUEDBY)", style:"textColumn",header:""),
+
+                
+
+    
+//grid.Column("@Html.DisplayFor(model => model.ISSUEDDATE)", header:"", format: f=>f.ISSUEDDATE.ToString("dd-MMM-yyyy"), style:"textColumn",header:""),
+                
+
+    
+
+//grid.Column("@Html.DisplayFor(model => model.APPROVEDBY)", style:"textColumn",header:""),
+
+                
+
+    
+//grid.Column("@Html.DisplayFor(model => model.DATEAPPROVED)", header:"", format: f=>f.DATEAPPROVED.ToString("dd-MMM-yyyy"), style:"textColumn",header:""),
+                
+
+    
+
+grid.Column("STATUS", style:"textColumn",header:"Proposed Action")
+
+                
+
+    
+
+//grid.Column("@Html.DisplayFor(model => model.REFERENCE)", style:"textColumn",header:""),
+
+                
+
+    
+
+
+
+                
+,
+  grid.Column(header: "",  format:@<text>
+                        <div class="btn-group dropdown bdrNone">
+                            <a href="#" class="tablectrl_medium bDefault" data-toggle="dropdown"><span class="iconb" data-icon=""></span></a>
+                            <ul class="dropdown-menu pull-right cMbdr cMenu">
+                            <li><a class="load" role="menuitem" href="~/#/FixedDepositRegister/ApproveFDRNote?id=@item.REFERENCE"><span class=" icon-redo"></span>Approve</a></li>
+
+                                @* <li><a href=" @Url.Action("ApproveFDRNote","FixedDepositRegister", new {id=@item.REFERENCE})"><span class=" icon-redo"></span>Approve</a></li>*@
+                                @*<li><a href="/FixedDepositRegister/ApproveFDRNote?id=@item.REFERENCE"><span class="icos-add"></span>Approve</a></li>*@
+
+                                <li><a href="#"><span class="icos-add"></span>Print Encashment Note</a></li>
+                               
+                               @*   <li>
+                                    @if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+{
+  
+                                    @Ajax.ActionLink("Edit", "EditFDRNOTE", "FDRNOTE",new {id=@item.REFERENCE},
+
+
+    new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET",OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" })
+
+}
+else
+{
+<a class="load" role="menuitem" tabindex="-1" href="~/#/FDRNOTE/EditFDRNOTE?id=@item.REFERENCE">Edit</a>
+}
+</li>*@
+
+                            </ul>
+                        </div>
+                        </text>)
+                },
+                tableStyle: "ASPGrid",
+                htmlAttributes: new { cellspacing = "0", border = "0" },
+
+     footer: @<ul class="pagination">
+         @*<li class="@ViewBag.Prev"><a  class="@ViewBag.PrevNotActive" href="/FDRNOTE/ListFDRNOTE?PagingType=Prev&sort=@grid.SortColumn&currentFilter=@ViewBag.CurrentFilter&currentRowPerPage=@ViewBag.currentRowPerPage" data-swhglnk="true">Prev</a></li>
+   <li class="@ViewBag.Next"><a  class="@ViewBag.NextNotActive" href="/FDRNOTE/ListFDRNOTE?PagingType=Next&sort=@grid.SortColumn&currentFilter=@ViewBag.CurrentFilter&currentRowPerPage=@ViewBag.currentRowPerPage" data-swhglnk="true">Next</a></li>
+*@
+
+     </ul>
+
+                );
+                        @Html.Hidden("dir", grid.SortDirection)
+                        @Html.Hidden("col", grid.SortColumn)
+                    }
+                </div>
+                @*@if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+{
+                 @Ajax.ActionLink("Add", "AddFDRNOTE", "FDRNOTE",
+
+
+    new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { @class = "btn btn-success m10" })
+
+}
+else
+{
+<a class=" load btn btn-success m10" role="menuitem" tabindex="-1" href="~/#/FDRNOTE/AddFDRNOTE">Add</a>
+}*@
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+
+            $("#openingDate").datepicker({ dateFormat: formatDate('long') });
+            $('#openingDate').datepicker('setDate', new Date());
+            $("#toDate").datepicker({ dateFormat: formatDate('long') });
+            $('#toDate').datepicker('setDate', new Date());
+        });
+
+
+        $(".ASPGrid tr th").addClass("sorting");
+       // $(".ASPGrid tr th:nth-child(1)").removeClass("sorting");
+        $(".ASPGrid tr th:nth-child(9)").removeClass("sorting");
+
+        $('.not-active').bind('click', false);
+        $('#btn-search').on('click', function () {
+            $('.loadingImage').show();
+            
+            var filterstring = $('#txtCode').val();
+            $.get("/FixedDepositRegister/FDREncashmentNoteList?openingDate=" + $('#fromDate').val() + "&toDate=" + $('#toDate').val() + "&FINANCIALINSTITUTION_REFERENCE=" + $("#FINANCIALINSTITUTION_REFERENCE").val() + "&STATUS=" + $('#STATUS').val(), function (data) {
+                var getHTML = $(data);
+                $('#WebGrid').empty();
+
+                $('#WebGrid').html($('#WebGrid', getHTML));
+                ChkAddClass();
+                $('.loadingImage').hide();
+            });
+        });
+
+        $('#ddlPageSize').on('change', function () {
+            //$('.loadingImage').show();
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+            $.get("/FDRNOTE/ListFDRNOTE?sort=" + $('#col').val() + "&sortdir=" + $('#dir').val() + "&filterstring=" + $('#txtCode').val() + "&rows=" + valueSelected + "", function (data) {
+                var getHTML = $(data);
+                $('#WebGrid').empty();
+                $('#WebGrid').andSelf().unbind();
+                $('#WebGrid').html($('#WebGrid', getHTML));
+                ChkAddClass();
+                //$('.loadingImage').hide();
+
+            });
+        });
+    });
+
+</script>
+
+
+<script>
+    $(document).on('keypress', '.number', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+    $(document).on('keypress', '.decimal', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+</script>
+
+<script type="text/javascript">
+    function ShowProcessingMsg() {
+
+        $('.loadingImage').show();
+
+    }
+    function HideProcessingMsg() {
+        $('.loadingImage').hide();
+    }
+
+</script>
+
+<script>
+
+
+    $(document).on('click', '.dropdown-menu li a', function (event) {
+        var selText = $(this).text();
+        $('.hidden').val(selText);
+        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+        event.preventDefault();
+        //event.stopPropagation();
+        //return false;
+    });
+
+
+
+</script>

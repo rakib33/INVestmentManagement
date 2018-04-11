@@ -1,0 +1,401 @@
+﻿@model InvestmentManagement.Models.GridModel<InvestmentManagement.InvestmentManagement.Models.FIBRANCH>
+@*<script src="~/Scripts/angular.min.js"></script>*@
+
+@{
+    TempData["financialInstitution"] = ViewBag.FI;
+    var PostBack = ViewBag.PostBAck;
+    }
+<div id="replace">
+    
+    
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+    <div class="wrapper pl">
+        <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+
+            <strong>Info !</strong>
+            @ViewBag.Message        
+         
+        </div>
+        <div class="container-fluid Grid-Container">
+
+
+
+            <div class="widget mb20">
+                <div class="whead">
+               @*    style added by rakibul *@
+                    <h6 style="display:none">@Session["currentPage"]</h6>
+                    
+                  @*  <div class="clear"></div>*@
+                </div>
+
+                <div class="formRow dgHeaderBk">
+                    <div class="container-fluid">
+                        <div class="col-md-12">
+                            <div>
+                                <label>Financial Institution</label>
+                               @* @Html.DropDownList("FinancialInstitute", (SelectList)ViewBag.financialInstitutionList,"--Select a Bank--",new {onchange="CallChangefunc(this.value)", @class = "control-label entrylable drpResize", ng_bind="FinancialInstitute", style = "width:20%; margin-top:0px !important; margin-bottom:4px !important;"})*@
+
+                                @Html.DropDownList("FinancialInstitute", (SelectList)ViewBag.financialInstitutionList, new{ id="FinancialInstitute",@class = "control-label entrylable drpResize", ng_bind="FinancialInstitute", style = "width:30%; margin-top:0px !important; margin-bottom:4px !important;"})
+                                @*,"--Select a Bank--"*@
+
+                                <label id="errMsg">
+
+                                </label>
+                            </div>
+                           
+                            <input type="button" id="btnApply" class="btn btn-primary dgBtn" value="Apply" onclick="getdata()" />
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+
+                    $("#FinancialInstitute").change(function () {
+                        //added by rakibul date<11/18/15>
+                        var value = $(this).val();
+                        if (value != "")
+                        {
+                            var ddlist = document.getElementById("FinancialInstitute");
+                            document.getElementById('errMsg').innerHTML = "";
+
+                            ddlist.style.border = ".5px solid #000000";                     
+                        
+                        }
+                      
+                    });
+
+                    function ChkAddClass() {
+
+                        var dir = $('#dir').val();
+                        var col = $('#col').val().replace(/\s/g, '');
+                        //alert(col);
+
+                        var header = $('th a[href*=' + col + ']');
+                        //alert(header.text());
+                        var countTh = document.getElementsByTagName('th').length;
+
+
+                        for (var i = 1; i <= countTh; i++) {
+
+                            var txtTh = $('.ASPGrid tr th:nth-child(' + i + ')').text().replace(/\s/g, '');
+
+                            if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Ascending') {
+                                //alert("");
+                                //alert(txtTh + "" + col);
+                                $(".ASPGrid tr th").addClass("sorting");
+
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("ascending");
+                                $(".ASPGrid tr th:nth-child(1)").removeClass("sorting ascending");
+                                $(".ASPGrid tr th:nth-child(10)").removeClass("sorting ascending");
+
+                            } else if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Descending') {
+                                //alert(txtTh + "" + col);
+                                $(".ASPGrid tr th").addClass("sorting");
+
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("descending");
+                                $(".ASPGrid tr th:nth-child(1)").removeClass("sorting descending");
+                                $(".ASPGrid tr th:nth-child(10)").removeClass("sorting descending");
+
+
+                            }
+                        }
+
+
+                        //$("select,.check :checkbox").not("#ddlPageSize").uniform();
+
+                        //$('.selector').not("#ddlPageSize").addClass('pull-right');
+                        //$('.checker').not("#ddlPageSize").addClass('dataGridCheckBox');
+                    }
+                </script>
+                <div id="WebGrid" class="formRow noPad btbNone">
+                    @{
+                        var grid = new WebGrid(rowsPerPage: Model.RowsPerPage, ajaxUpdateContainerId: "WebGrid", ajaxUpdateCallback: "ChkAddClass", sortFieldName: "sortdefault");
+                        grid.Bind(Model.DataModel, autoSortAndPage: false, rowCount: Model.RowsPerPage);
+
+                        @grid.Table(columns: new[]
+                        {
+                            grid.Column(header: "Sl No",style:"textColumn", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),
+                            grid.Column("NAME", style: "textColumn", header: "Name"),
+                            grid.Column("ROUTINGNUMBER", style: "textColumn", header: "Routing Number"),
+                            grid.Column("DISTRICTNAME", style: "textColumn", header: "District Name"),
+                            grid.Column("DISTRICTCODE", style: "textColumn", header: "District Coder"),
+                            grid.Column("ADDRESSLINE1", style: "textColumn", header: "Addressline1"),
+                            grid.Column("ADDRESSLINE2", style: "textColumn", header: "Addressline2"),
+                            grid.Column("POSTCODE", style: "textColumn", header: "Post Code"),
+                            grid.Column("CONTACTPERSON", style: "textColumn", header: "Contact Person"),
+                            grid.Column(header: "", format:@<text>
+                                                                <div class="btn-group dropdown bdrNone">
+                                                                    <a href="#" class="tablectrl_medium bDefault" data-toggle="dropdown"><span class="iconb" data-icon=""></span></a>
+                                                                    <ul class="dropdown-menu pull-right cMbdr cMenu">
+                                                                      
+                                                                    <li>
+                                                                    <a class="load" role="menuitem" tabindex="-1" href="~/#/FinancialInstitution/EditBranch?branchReference=@item.REFERENCE">Edit</a>                                                            
+                                                                    </li>
+                                                                    @* <li>
+                                                                     <a class="load" role="menuitem" tabindex="-1" href="~/#/FinancialInstitution/Delete?branchReference=@item.REFERENCE">Delete</a>                                                            
+                                                                   
+                                                                     </li> *@
+                                                         
+                                                                    </ul>
+                                                                </div>
+                                                            </text>)
+                        },
+                            tableStyle: "ASPGrid",
+                            htmlAttributes: new {cellspacing = "0", border = "0"},
+                            footer: @<ul class="pagination">
+                                        <li class="@ViewBag.Prev"><a  class="@ViewBag.PrevNotActive" href="/FinancialInstitution/ListOfBranch?PagingType=Prev&sort=@grid.SortColumn&currentFilter=@ViewBag.CurrentFilter&currentRowPerPage=ViewBag.currentRowPerPage" data-swhglnk="true">Prev</a></li>
+                                         <li class="@ViewBag.Next"><a  class="@ViewBag.NextNotActive" href="/FinancialInstitution/ListOfBranch?PagingType=Next&sort=@grid.SortColumn&currentFilter=@ViewBag.CurrentFilter&currentRowPerPage=ViewBag.currentRowPerPage" data-swhglnk="true">Next</a></li>
+                                     </ul>
+                            )
+                        ;
+                        @Html.Hidden("dir", grid.SortDirection)
+                        @Html.Hidden("col", grid.SortColumn)
+                    }
+                </div>
+                
+                <div>
+              @if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*") || PostBack== "True")
+                {
+                    @Ajax.ActionLink("Add", "AddFinancialBranch", "FinancialInstitution",
+                        new AjaxOptions {UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg"}, new {@class = "btn btn-success m10"})
+                }
+                else
+                {
+                        //<a class=" load btn btn-success m10"  tabindex="-1" href="#btn">Add</a>
+               //          <a class="load" role="menuitem" tabindex="-1" href="~/FinancialInstitution/AddFinancialBranch?">Add</a>                       
+                <input type="button" id="addBtn" class="btn btn-primary dgBtn" value="Add" onclick="addBranch()" />
+                        // <button onclick="@Url.Action("AddFinancialBranch", "FinancialInstitution",null, new {@financialInstituteReference = "addBtn"})">Add</button>
+                }
+
+                </div>
+                
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script type="text/javascript">
+
+        function getdata() {
+
+
+            var financialInstituteReference = $('#FinancialInstitute').val();
+
+            console.log(financialInstituteReference);
+            //  alert('You selected '+financialInstituteReference);
+
+            if (financialInstituteReference == "") {
+
+                var lable = document.getElementById('errMsg');
+                var ddlist = document.getElementById('FinancialInstitute');
+
+                lable.innerHTML = 'Please select a Bank first!';
+                lable.style.color = "red";
+
+                document.getElementById("FinancialInstitute").style.border = "1px solid #FF0000";
+
+                return false;
+            } else {
+
+                document.getElementById('errMsg').innerHTML = "";
+
+                $('.loadingImage').show();
+
+                //$.get("/FinancialInstitution/ListOfBranch?FINANCIALINSTITUTION=" + $('#FinancialInstitute').val() + "&rows=" + $("#ddlPageSize").val() + "", function (data) {
+                //    var getHTML = $(data);
+                //    $('#WebGrid').empty();
+
+                //    $('#WebGrid').html($('#WebGrid', getHTML));
+                //    ChkAddClass();
+                //    $('.loadingImage').hide();
+                //});
+
+                $.ajax({
+                    url: '@Url.Action("ListOfBranch","FinancialInstitution")',
+                    contentType: 'application/html; charset=utf-8',
+                    type: 'GET',
+                    dataType: 'html',
+                    data: {
+                        FINANCIALINSTITUTION: $('#FinancialInstitute').val(),
+                        rows: $("#ddlPageSize").val(),
+                    },
+
+                }).success(function (result) {
+                    console.log('success');
+                    var getHTML = $(result);
+
+                    $('#WebGrid').empty();
+                    $('#WebGrid').html($('#WebGrid', getHTML));
+                    ChkAddClass();
+                    $('.loadingImage').hide();
+                    console.log('complete');
+
+                }).error(function (xhr, status) {
+                    // console.log('error\n :'+xhr.responseText)
+                    console.log(xhr.error);
+                    //hide the loading image
+                    $('.loadingImage').hide();
+
+                    //alert(xhr.responseText);
+
+
+                });
+
+                return true;
+            }
+
+        }
+
+        function addBranch() {
+            //$('#addBtn').click(function () {
+            //added by Rakibul date<11/28/1015>
+
+            var financialInstituteReference = $('#FinancialInstitute').val();
+            console.log(financialInstituteReference);
+            //   alert(financialInstituteReference);
+
+            if (financialInstituteReference == "") {
+
+
+                var lable = document.getElementById('errMsg');
+                var ddlist = document.getElementById('FinancialInstitute');
+
+                lable.innerHTML = 'Please select a Bank first!';
+                lable.style.color = "red";
+
+                document.getElementById("FinancialInstitute").style.border = "1px solid #FF0000";
+
+                imageUploadLabel.style.display = "none";
+                imageUploadLabel.style.display = "inline-block"
+
+                return false;
+            }
+            else {
+
+                document.getElementById('errMsg').innerHTML = "";
+
+                var path = '@Url.Content("~/#/FinancialInstitution/AddFinancialBranch")' + "?financialInstituteReference=" + financialInstituteReference;
+                location.href = path;
+                return true;
+            }
+            //});
+        }
+
+    </script>
+
+<script type="text/javascript">
+
+   
+
+    $(document).ready(function () {
+        $("#WebGrid").addClass("webgridscroll");
+        $(".ASPGrid tr th").addClass("sorting");
+        // $(".ASPGrid tr th:nth-child(1)").removeClass("sorting");
+        $(".ASPGrid tr th:nth-child(6)").removeClass("sorting");
+
+        $('.not-active').bind('click', false);
+
+
+    
+        function CallChangefunc(val) {
+            //added by rakibul date<11/28/2015>
+            alert(val);
+        }        
+
+        void addBtnAndbtnCommon()
+        {
+            var lable = document.getElementById('errMsg');
+            var ddlist = document.getElementById('FinancialInstitute');
+
+            lable.innerHTML = 'Please select a Bank first!';
+            lable.style.color = "red";
+
+            document.getElementById("FinancialInstitute").style.border = "1px solid #FF0000";
+        }
+
+
+        $('#ddlPageSize').on('change', function () {
+            //$('.loadingImage').show();
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+            $.get("/FinancialInsitute/ListOfBranch?sort=" + $('#col').val() + "&sortdir=" + $('#dir').val() + "&filterstring=" + $('#txtCode').val() + "&rows=" + valueSelected + "", function (data) {
+                var getHTML = $(data);
+                $('#WebGrid').empty();
+                $('#WebGrid').andSelf().unbind();
+                $('#WebGrid').html($('#WebGrid', getHTML));
+                ChkAddClass();
+                //$('.loadingImage').hide();
+
+            });
+        });
+    });
+
+</script>
+
+
+<script>
+    $(document).on('keypress', '.number', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+    $(document).on('keypress', '.decimal', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+</script>
+
+<script type="text/javascript">
+    function ShowProcessingMsg() {
+
+        $('.loadingImage').show();
+
+    }
+
+    function HideProcessingMsg() {
+        $('.loadingImage').hide();
+    }
+
+</script>
+
+<script>
+
+
+    $(document).on('click', '.dropdown-menu li a', function (event) {
+        var selText = $(this).text();
+        $('.hidden').val(selText);
+        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+        event.preventDefault();
+        //event.stopPropagation();
+        //return false;
+    });
+
+
+</script>
+
+
+</div>

@@ -1,0 +1,212 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.FDRNOTE
+
+
+@{
+    ViewBag.Title = "ApproveFDRNote";
+
+    DateTime? _EncashmentDate = ViewBag.EncashmentDate;
+}
+
+
+
+<div id="Replace">
+    <script type="text/ecmascript">
+        $(function () {
+            $('.datepicker').datepicker({ dateFormat: formatDate('long') });
+        });
+    </script>
+
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @ViewBag.breadcum
+    </ol>
+    <div class="wrapper pl">
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            Info!
+        </div>
+        <div class="container-fluid">
+
+            <div class="widget col-md-5">
+                <div class="whead">
+                    <h6>
+                        <label id="lblHeader" title="">@ViewBag.Header</label>
+                    </h6>
+                    <div class="clear">
+                    </div>
+                </div>
+                @using (Ajax.BeginForm("AddFDRNOTE", "FDRNOTE", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+                {
+                    
+                    @Html.Hidden("REFERENCE", @Model.REFERENCE);
+                    @Html.Hidden("FIXEDDEPOSIT_REFERENCE", @Model.FIXEDDEPOSIT_REFERENCE);
+                    
+                    
+                    
+                    <div class="">
+                        <ul class="entryForm singleadd">
+
+                           
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.FDRNUMBER, new { @class = "control-label entrylable" })
+
+                                @Html.TextBoxFor(model => model.FDRNUMBER, new { @class = "form-control",@readonly = "readonly", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.FDRNUMBER) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.FDRNUMBER) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.FDRNUMBER)
+
+                            </li>                            
+                           
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.PRINCIPALAMOUNT, new { @class = "control-label entrylable" })
+
+
+
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.PRINCIPALAMOUNT, new { @class = "form-control decimal",@readonly = "readonly", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.PRINCIPALAMOUNT) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.PRINCIPALAMOUNT) + "'" })
+                                    <div class="input-group-addon">.00</div>
+                                </div>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.PRINCIPALAMOUNT)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.TENURE, new { @class = "control-label entrylable" })
+
+
+
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.TENURE, new { @class = "form-control decimal",@readonly = "readonly", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.TENURE) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.TENURE) + "'" })
+                                   
+                                </div>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.TENURE)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.TENURETERM, new { @class = "control-label entrylable" })
+
+
+
+
+                                @Html.TextBoxFor(model => model.TENURETERM, new { @class = "form-control",@readonly = "readonly", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.TENURETERM) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.TENURETERM) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.TENURETERM)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.OFFERRATE, new { @class = "control-label entrylable" })
+
+
+
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.OFFERRATE, new { @class = "form-control decimal",@readonly = "readonly", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.OFFERRATE) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.OFFERRATE) + "'" })
+                                    <div class="input-group-addon">.00</div>
+                                </div>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.OFFERRATE)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.PROPOSEDRATE, new { @class = "control-label entrylable" })
+
+
+
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.PROPOSEDRATE, new { @class = "form-control decimal", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.PROPOSEDRATE) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.PROPOSEDRATE) + "'" })
+                                    <div class="input-group-addon">.00</div>
+                                </div>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.PROPOSEDRATE)
+
+                            </li>        
+                            <li class="form-group">
+                                    <label class="control-label entrylable">ENCASHMENT DATE</label>
+                                <div class='input-group date'>
+                                    @Html.TextBox("EncashmentDate", @_EncashmentDate.Value.ToString("dd-MMM-yy"), new { @required = "required", @class = "datepicker form-control", @placeholder = "Select a Date " })
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    <script>
+                                        $('#EncashmentDate').datepicker({ dateFormat: formatDate('long') });
+                                    </script>
+                                </div>                                  
+                                </li>                   
+                           
+                        </ul>
+                        <button type="submit" class="btn btn-success btnSingleAddForm">Confirm</button>
+
+
+                    </div>
+
+
+                }
+
+            </div>
+
+
+        </div>
+    </div>
+    <p></p>
+
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+    @*<script>
+
+        $(function () {
+            $('.datepicker').datepicker({ dateFormat: "dd/mm/yy" });
+
+        });
+
+    </script>*@
+
+    <script>
+        $(document).on('keypress', '.number', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+        $(document).on('keypress', '.decimal', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+
+
+    </script>
+
+</div>
+
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

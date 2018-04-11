@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TradeOrder" targetNamespace="http://tempuri.org/TradeOrder.xsd" xmlns:mstns="http://tempuri.org/TradeOrder.xsd" xmlns="http://tempuri.org/TradeOrder.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TradeOrder" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="TradeOrder" msprop:Generator_UserDSName="TradeOrder">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="TradeOrder" msprop:Generator_TableClassName="TradeOrderDataTable" msprop:Generator_TableVarName="tableTradeOrder" msprop:Generator_TablePropName="_TradeOrder" msprop:Generator_RowDeletingName="TradeOrderRowDeleting" msprop:Generator_RowChangingName="TradeOrderRowChanging" msprop:Generator_RowEvHandlerName="TradeOrderRowChangeEventHandler" msprop:Generator_RowDeletedName="TradeOrderRowDeleted" msprop:Generator_UserTableName="TradeOrder" msprop:Generator_RowChangedName="TradeOrderRowChanged" msprop:Generator_RowEvArgName="TradeOrderRowChangeEvent" msprop:Generator_RowClassName="TradeOrderRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Instrument" msprop:Generator_ColumnVarNameInTable="columnInstrument" msprop:Generator_ColumnPropNameInRow="Instrument" msprop:Generator_ColumnPropNameInTable="InstrumentColumn" msprop:Generator_UserColumnName="Instrument" type="xs:string" minOccurs="0" />
+              <xs:element name="Qty" msprop:Generator_ColumnVarNameInTable="columnQty" msprop:Generator_ColumnPropNameInRow="Qty" msprop:Generator_ColumnPropNameInTable="QtyColumn" msprop:Generator_UserColumnName="Qty" type="xs:string" minOccurs="0" />
+              <xs:element name="ClosingPrice" msprop:Generator_ColumnVarNameInTable="columnClosingPrice" msprop:Generator_ColumnPropNameInRow="ClosingPrice" msprop:Generator_ColumnPropNameInTable="ClosingPriceColumn" msprop:Generator_UserColumnName="ClosingPrice" type="xs:string" minOccurs="0" />
+              <xs:element name="Total" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:string" minOccurs="0" />
+              <xs:element name="LowerLimit" msprop:Generator_ColumnVarNameInTable="columnLowerLimit" msprop:Generator_ColumnPropNameInRow="LowerLimit" msprop:Generator_ColumnPropNameInTable="LowerLimitColumn" msprop:Generator_UserColumnName="LowerLimit" type="xs:string" minOccurs="0" />
+              <xs:element name="UpperLimit" msprop:Generator_ColumnVarNameInTable="columnUpperLimit" msprop:Generator_ColumnPropNameInRow="UpperLimit" msprop:Generator_ColumnPropNameInTable="UpperLimitColumn" msprop:Generator_UserColumnName="UpperLimit" type="xs:string" minOccurs="0" />
+              <xs:element name="MaximumQty" msprop:Generator_ColumnVarNameInTable="columnMaximumQty" msprop:Generator_ColumnPropNameInRow="MaximumQty" msprop:Generator_ColumnPropNameInTable="MaximumQtyColumn" msprop:Generator_UserColumnName="MaximumQty" type="xs:string" minOccurs="0" />
+              <xs:element name="TransactionType" msprop:Generator_ColumnVarNameInTable="columnTransactionType" msprop:Generator_ColumnPropNameInRow="TransactionType" msprop:Generator_ColumnPropNameInTable="TransactionTypeColumn" msprop:Generator_UserColumnName="TransactionType" type="xs:string" minOccurs="0" />
+              <xs:element name="RecordDate" msprop:Generator_ColumnVarNameInTable="columnRecordDate" msprop:Generator_ColumnPropNameInRow="RecordDate" msprop:Generator_ColumnPropNameInTable="RecordDateColumn" msprop:Generator_UserColumnName="RecordDate" type="xs:string" minOccurs="0" />
+              <xs:element name="Reference" msprop:Generator_ColumnVarNameInTable="columnReference" msprop:Generator_ColumnPropNameInRow="Reference" msprop:Generator_ColumnPropNameInTable="ReferenceColumn" msprop:Generator_UserColumnName="Reference" type="xs:string" minOccurs="0" />
+              <xs:element name="EntryDate" msprop:Generator_ColumnVarNameInTable="columnEntryDate" msprop:Generator_ColumnPropNameInRow="EntryDate" msprop:Generator_ColumnPropNameInTable="EntryDateColumn" msprop:Generator_UserColumnName="EntryDate" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

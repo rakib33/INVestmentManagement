@@ -1,0 +1,434 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.FIXEDDEPOSIT
+
+@{
+    InvestmentManagement.InvestmentManagement.Models.FIXEDDEPOSIT FDR = new InvestmentManagement.InvestmentManagement.Models.FIXEDDEPOSIT();
+    FDR = Model;
+    }
+
+
+<div id="Replace">
+
+    <script>
+
+        $(function () {
+            console.log("started");
+            $('.datepicker').datepicker({ dateFormat: formatDate('long') });
+
+        });
+
+</script>
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+          @Session["currentPage"]
+        </span>
+
+    </div>
+   <ol class="breadcrumb">
+      @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+<div class="wrapper pl">
+    <div class="alert alert-success mt20">
+        <button class="close" data-dismiss="alert" type="button">×</button>
+         @ViewBag.Message
+    </div>
+    <div class="container-fluid">
+ <img class="loadingImage" src="~/Images/loading.gif" style="display:none;" />
+        <div class="widget col-md-5">
+            <div class="whead">
+                <h6>
+                    <label id="lblHeader" title="">@ViewBag.Header</label>
+                </h6>
+                <div class="clear">
+                </div>
+            </div>
+
+    <div class="row">
+
+        @using (Ajax.BeginForm("EncashFixedDeposit", "FixedDepositRegister", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+        { 
+         @Html.Hidden("REFERENCE", @Model.REFERENCE)
+        <ul class="entryForm singleadd">
+            <li class="form-group">
+
+                <label class="control-label entrylable" for="INTERESTRECEIVED">Financial Institution</label>
+                @Html.TextBoxFor(model => model.FINANCIALINSTITUTION.NAME, new { @required = "required", @class = "form-control", @readonly = "readonly", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.FINANCIALINSTITUTION.NAME) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.FINANCIALINSTITUTION.NAME) + "'" })
+                <br />
+                @Html.ValidationMessageFor(model => model.FINANCIALINSTITUTION.NAME)
+            </li>
+
+            <li class="form-group">
+                <label class="control-label entrylable" for="INTERESTRECEIVED">FDR No.</label>
+                @Html.TextBoxFor(model => model.DEPOSITNUMBER, new { @required = "required", @class = "form-control", @readonly = "readonly", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.DEPOSITNUMBER) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.DEPOSITNUMBER) + "'" })
+                <br />
+                @Html.ValidationMessageFor(model => model.DEPOSITNUMBER)
+            </li>
+
+            <li class="form-group">
+                @Html.LabelFor(model => model.MRNO, new { @class = "control-label entrylable" })
+                @Html.TextBoxFor(model => model.MRNO, new { @required = "required", @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.MRNO) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.MRNO) + "'" })
+                <br />
+                @Html.ValidationMessageFor(model => model.MRNO)
+            </li>
+
+            <li class="form-group">
+                @Html.LabelFor(model => model.MRDATE, new { @class = "control-label entrylable" })
+
+
+                <div class='input-group date'>
+                    <input type="text" required="required" class="datepicker form-control" id="MRDATE" value="@ViewBag.Mrdate" name="MRDATE" placeholder="Select date">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+
+                <br />
+                @Html.ValidationMessageFor(model => model.MRDATE)
+            </li>
+
+            <li class="form-group">
+                @Html.LabelFor(model => model.ENCASHMENTDATE, new { @class = "control-label entrylable" })
+
+                <div class='input-group date'>
+                    <input type="text" required="required" class="datepicker form-control" id="ENCASHMENTDATE" name="ENCASHMENTDATE" value="@ViewBag.EncashDate" placeholder="Select date">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+
+                <br />
+                @Html.ValidationMessageFor(model => model.ENCASHMENTDATE)
+
+            </li>
+
+
+            <li class="form-group">
+
+                @Html.LabelFor(model => model.PRINCIPALAMOUNT, new { @class = "control-label entrylable" })
+
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.PRINCIPALAMOUNT, new { @required = "required", @class = "form-control decimal", @readonly = "readonly", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.PRINCIPALAMOUNT) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.PRINCIPALAMOUNT) + "'" })
+                    <div class="input-group-addon">.00</div>
+                </div>
+                <br />
+                @Html.ValidationMessageFor(model => model.PRINCIPALAMOUNT)
+
+            </li>
+
+            <li class="form-group">
+
+                @Html.LabelFor(model => model.GROSSINTEREST, new { @class = "control-label entrylable" })
+
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.GROSSINTEREST, new { @readonly = "readonly", @required = "required", @class = "form-control decimal", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.GROSSINTEREST) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.GROSSINTEREST) + "'" })
+                    <div class="input-group-addon">.00</div>
+                    @* @onkeyup="ChangeEDOC()"*@
+                </div>
+                <br />
+                @Html.ValidationMessageFor(model => model.GROSSINTEREST)
+
+            </li>
+            <li class="form-group">
+                @Html.LabelFor(model => model.TAXRATE, new { @class = "control-label entrylable" })
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.TAXRATE, new { @required = "required", @class = "form-control decimal", @readonly = "readonly" })
+                    <div class="input-group-addon">.00</div>
+                </div>
+                <br />
+                @Html.ValidationMessageFor(model => model.TAXRATE)
+
+            </li>
+
+
+            <li class="form-group">
+
+                @Html.LabelFor(model => model.SOURCETAX, new { @class = "control-label entrylable" })
+
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.SOURCETAX, new { @required = "required", @class = "form-control decimal", @readonly = "readonly", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.SOURCETAX) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.SOURCETAX) + "'" })
+                    <div class="input-group-addon">.00</div>
+                </div>
+                <br />
+                @Html.ValidationMessageFor(model => model.SOURCETAX)
+
+            </li>
+            <li class="form-group">
+
+                @Html.LabelFor(model => model.EXCISEDUTY, new { @class = "control-label entrylable" })
+
+
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.EXCISEDUTY, new { @onkeyup = "ChangeEDOC()", @required = "required", @class = "form-control decimal", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.EXCISEDUTY) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.EXCISEDUTY) + "'" })
+                    <div class="input-group-addon">.00</div>
+                </div>
+                <br />
+                @Html.ValidationMessageFor(model => model.EXCISEDUTY)
+
+            </li>
+            <li class="form-group">
+                <label class="control-label entrylable" for="INTERESTRECEIVED">P.O charge & others</label>
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.OTHERCHARGE, new { @onkeyup = "ChangeEDOC()", @class = "form-control decimal", @required = "required", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.OTHERCHARGE) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.OTHERCHARGE) + "'" })
+                    <div class="input-group-addon">.00</div>
+                </div>
+                <br />
+                @Html.ValidationMessageFor(model => model.OTHERCHARGE)
+
+            </li>
+            <li class="form-group">
+
+                <label class="control-label entrylable" for="INTERESTRECEIVED">Net Interest</label>
+
+
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.NETINTERESTRECEIVABLE, new { @class = "form-control decimal", @required = "required", @readonly = "readonly", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.NETINTERESTRECEIVABLE) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.NETINTERESTRECEIVABLE) + "'" })
+                    <div class="input-group-addon">.00</div>
+                </div>
+                <br />
+                @Html.ValidationMessageFor(model => model.NETINTERESTRECEIVABLE)
+
+            </li>
+
+            <li class="form-group">
+                @Html.LabelFor(model => model.ACTUALINTERESTRECEIVED, new { @class = "control-label entrylable" })
+
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.ACTUALINTERESTRECEIVED, new { @onkeyup = "ChangePrincipal()", @required = "required", @class = "form-control decimal", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.ACTUALINTERESTRECEIVED) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.ACTUALINTERESTRECEIVED) + "'" })
+                    <div class="input-group-addon">.00</div>
+                </div>
+                <br />
+                @Html.ValidationMessageFor(model => model.ACTUALINTERESTRECEIVED)
+
+            </li>
+
+
+            <li class="form-group">
+
+                <label class="control-label entrylable" for="INTERESTRECEIVED">Principal & Interest</label>
+
+                <div class="input-group">
+                    @Html.TextBoxFor(model => model.TOTALAMOUNTRECEIVABLE, new { @class = "form-control decimal", @readonly = "readonly", @required = "required", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.TOTALAMOUNTRECEIVABLE) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.TOTALAMOUNTRECEIVABLE) + "'" })
+                    <div class="input-group-addon">.00</div>
+                </div>
+                <br />
+                @Html.ValidationMessageFor(model => model.TOTALAMOUNTRECEIVABLE)
+
+            </li>
+
+
+        </ul>
+        if (ViewBag.Reconcilled != "True")
+        {
+            <button type="submit" class="btn btn-success btnSingleAddForm" onclick="return CheckGross()">Confirm</button>
+        }
+        }
+
+        
+    </div>
+
+            
+          @*  <div class="btn-EnPrint">
+            @using (Html.BeginForm("GenerateEncashedFDRReport", "FixedDepositRegister"))
+            {
+                
+                              @Html.Hidden("reference", Model.REFERENCE)
+                              @Html.Hidden("ED")
+                              @Html.Hidden("OC")
+                              @Html.Hidden("MRNo")
+                              @Html.Hidden("MRDate")
+                             
+                             <input type="submit" class="btn btn-primary dgBtn EnPrint" style="margin-top:88px" value="Print"  />
+            }
+                </div>*@
+
+
+    <div class="row">
+        <div class="col-md-2">
+              @using (Html.BeginForm("GenerateEncashedFDRReport", "FixedDepositRegister"))
+            {
+                
+               @Html.Hidden("reference", Model.REFERENCE)
+               @Html.Hidden("ED")
+               @Html.Hidden("OC")
+               @Html.Hidden("MRNo")
+               @Html.Hidden("MRDate")
+                <div>
+
+                </div>             
+               <input type="submit" class="btn btn-primary dgBtn EnPrint" value="Print"  /> @*style="margin-top:88px"*@
+            }
+        </div>
+      
+         </div>
+        </div>
+       </div>
+
+    </div>
+</div>
+    <p></p>
+
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+
+
+<script>
+    $(document).on('keypress', '.number', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8) {
+            // let it happen, don't do anything
+        } else if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+    $(document).on('keypress', '.decimal', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8) {
+            // let it happen, don't do anything
+        } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+
+
+    function ChangePrincipal()
+    {
+        var pa = parseFloat(document.getElementById("PRINCIPALAMOUNT").value);
+
+        var Actual = parseFloat(document.getElementById("ACTUALINTERESTRECEIVED").value);
+        if (isNaN(Actual))
+            Actual = 0;
+
+       // alert('principal:'+pa+' Actual: '+Actual);
+        var total = parseFloat(pa + Actual);
+
+        document.getElementById("TOTALAMOUNTRECEIVABLE").value = total.toFixed(2);
+    }
+
+    function ChangeEDOC()
+    {
+        var ED =parseFloat(document.getElementById('EXCISEDUTY').value);
+        var OC =parseFloat(document.getElementById('OTHERCHARGE').value);
+
+        var pa = $('#PRINCIPALAMOUNT').val();
+        var gross = $('#GROSSINTEREST').val();
+        var source = $('#SOURCETAX').val();
+        var taxRate = $('#TAXRATE').val();
+
+        gross = parseFloat(gross);
+        taxRate = parseFloat(taxRate);
+
+        //alert(pa+' gross '+gross+' '+source+' taxrate:'+taxRate);
+
+        if (isNaN(gross) || gross < 1) {
+            document.getElementById('GROSSINTEREST').value = 0;
+            gross = 0;
+
+        }
+        if (isNaN(ED))
+        {
+            //alert('y');
+            document.getElementById('EXCISEDUTY').value = 0;
+            ED = 0;
+        }
+        if (isNaN(OC))
+        {
+            // alert('y');
+            document.getElementById('OTHERCHARGE').value = 0;
+            OC = 0;
+        }
+
+        document.getElementById('ED').value =ED;
+        document.getElementById('OC').value = OC;
+        try {
+
+            if (gross > 0) {
+
+                //calculate first source
+
+                source = parseFloat(gross * taxRate / 100);
+
+                var netInterest = gross - source - ED - OC;
+
+                netInterest = parseFloat(netInterest);
+
+                // alert('net: ' + netInterest);
+                pa = parseFloat(pa);
+                // alert('pa' +pa);
+                var total = parseFloat(pa + netInterest);
+
+                // alert('total: '+total);
+                document.getElementById("SOURCETAX").value = source.toFixed(2);
+                document.getElementById("NETINTERESTRECEIVABLE").value = netInterest.toFixed(2);
+                document.getElementById("ACTUALINTERESTRECEIVED").value = netInterest.toFixed(2);
+                document.getElementById("TOTALAMOUNTRECEIVABLE").value = total.toFixed(2);
+
+            } else {
+
+                alert('Gross Interest must not be Zero !!');
+            }
+
+        } catch (err) {
+            console.log(err.message);
+            alert(err.message);
+        }
+
+       //// alert(ED + " " + OC);
+
+       // var PA =parseFloat(document.getElementById('PRINCIPALAMOUNT').value);
+       // var Gross =parseFloat(document.getElementById('GROSSINTEREST').value);
+       // var Source =parseFloat(document.getElementById('SOURCETAX').value);
+
+       // var Net = parseFloat(Gross - Source - ED - OC);
+        
+       // var Total = parseFloat(PA + Net);
+
+       // document.getElementById('NETINTERESTRECEIVABLE').value=Net.toFixed(2); //Math.Round(number) used to fl0or or ceiling
+       // document.getElementById('TOTALAMOUNTRECEIVABLE').value=Total.toFixed(2);       
+      
+    }
+   
+    function CheckGross() {
+
+        var gross = $('#GROSSINTEREST').val();
+        var NetInterest = $('#NETINTERESTRECEIVABLE').val();
+        var source = $('#SOURCETAX').val();
+        var total = $('#TOTALAMOUNTRECEIVABLE').val();
+        var actualInterest = $('#ACTUALINTERESTRECEIVED').val();
+             
+        gross = parseFloat(gross);
+        NetInterest = parseFloat(NetInterest);
+        source = parseFloat(source);
+        actualInterest = parseFloat(actualInterest);
+        // alert(gross+' '+ source +' '+ NetInterest+' '+ total)
+        if (gross > 0 && source > 0 && NetInterest > 0 && total > 0 && actualInterest>0) {
+            return true;
+        } else {
+            alert('Gross Interest or Source Tax or Net/Actual Interest must greater then zero.')
+        }
+        return false;
+    }
+
+</script>
+           <script type="text/javascript">
+               $(".load").click(function () {
+                   $(".loadingImage").show();
+                   var link = $(this).attr("href");
+                   debugger;
+                   $.get('<%= Url.Action(' + link + ') %>', {},
+                       function (data) {
+                           $('#result').html(data);
+                           $('.loadingImage').hide();
+                       });
+               });
+
+    </script>
+</div>
+

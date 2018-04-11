@@ -1,0 +1,142 @@
+﻿
+@model InvestmentManagement.InvestmentManagement.Models.SCRIPTTRANSFER
+
+
+<div id="Replace">
+
+    <script type="text/ecmascript">
+        $(function () {
+            $('.datepicker').datepicker({ dateFormat: formatDate('long') });
+        });
+    </script>
+
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+    @*fixed Deposit markup*@
+
+    <div class="wrapper pl">
+        <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+        <div id="FixedDeposit">
+            <div class="alert alert-success mt20">
+                <button class="close" data-dismiss="alert" type="button">×</button>
+                @ViewBag.Message
+            </div>
+        
+            <div class="whead">
+                <h6>
+                    <label id="lblHeader" title="">@ViewBag.Header</label>
+                </h6>
+                <div class="clear">
+                </div>
+            </div>
+
+            
+          @using (Ajax.BeginForm("EditTradeOrder", "ScriptTransfer", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+          {
+  
+               @Html.HiddenFor(model => model.REFERENCE)             
+
+                <div id="BondInformation" class="container-fluid">
+
+                    <div class="widget ">
+                        <div class="whead">
+                            <h6>
+                                <label id="" title="">Edit Trade Order Type</label>
+                            </h6>
+                            <div class="clear">
+                            </div>
+                        </div>
+
+                        <div class="">
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.ACCOUNTNUMBER, new { @class = "control-label entrylable" })
+                                    @Html.TextBoxFor(model => model.ACCOUNTNUMBER, new { @class = "form-control", @value = "Enter Bond Id", style = "width: 50%",@readonly="readonly"})
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.ACCOUNTNUMBER)
+                                </li>
+                                <li>
+                                   <label class = "control-label entrylable" >INSTRUMENT</label>                                   
+                                    @Html.TextBoxFor(model => model.INSTRUMENT.NAME, new { @class = "form-control", @value = "Instrument", style = "width: 50%",@readonly="readonly"})
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.INSTRUMENT.NAME)
+                                   
+                                </li>
+                                <li class="form-group">
+                                    <label class="control-label entrylable">TRANSACTION TYPE</label>
+                                    <br />
+                                    @Html.DropDownList("TRANSACTIONTYPE", new List<SelectListItem>
+                                    {                                     
+                                        new SelectListItem{ Text="Buy Order", Value = "B" }, 
+                                        new SelectListItem{ Text="Sale Order", Value = "S" },        
+                                                                 
+                                     }, "Select Transaction Type", new { @class = "control-label entrylable drpResize", @required = "required" })                                                   
+                                   <br />
+                                   @Html.ValidationMessageFor(model => model.TRANSACTIONTYPE)
+
+                                </li>                                                                                        
+                            </ul>
+                         </div>
+
+                    </div>
+
+                </div>
+                
+                
+                <div class="row">
+                    <div class="col-md-offset-1" style="margin-left: 151px;">
+                       
+                        <button type="submit" class="btn btn-success btnSingleAddForm">Save</button>                 
+                       
+                        <a class="load btn btn-danger closeButton" href="~/#/ScriptTransfer/ListTradeOrder?lblbreadcum=">Close</a>
+                       
+                    </div>
+                    
+                </div>
+            }
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }  
+
+        $(document).on('keypress', '.number', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+        $(document).on('keypress', '.decimal', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+
+
+    </script>
+
+</div>
+

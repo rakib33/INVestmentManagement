@@ -1,0 +1,280 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.COMPANY
+
+
+
+
+<div id="Replace">
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+       <li> <a class="load" role="menuitem" tabindex="-1" href="~/#/Home/Index?lblbreadcum=@Session["PreviousPage"]">Dashboard</a></li>
+        <li><a class="load" href="~/#/Settings/Settings?lblbreadcum=Settings">Settings</a></li>     
+        <li class="active">@ViewBag.breadcum</li>
+    </ol>
+    <div class="wrapper pl">
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            @ViewBag.Message
+        </div>
+        <div class="container-fluid">
+
+            <div class="widget">
+                <div class="whead">
+                    <h6>
+                        <label id="lblHeader" title="">@ViewBag.breadcum</label>
+                    </h6>
+                    <div class="clear">
+                    </div>
+                </div>
+                @using (Ajax.BeginForm("EditCompany", "Company", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+                { 
+
+                    <div class="entryForm">
+
+                        @Html.Hidden("CREATEDBY", @Model.CREATEDBY)
+                        @Html.Hidden("CREATEDDATE", @Model.CREATEDDATE)
+
+                        @Html.Hidden("LASTUPDATED", @Model.LASTUPDATED)
+                        @Html.Hidden("LASTUPDATEDBY", @Model.LASTUPDATEDBY)
+                        @*@Html.Hidden("USERID", @Model.USERID)*@
+                        @Html.Hidden("REFERENCE", @Model.REFERENCE)
+                        <ul class="col-md-6 entryForm ">
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.NAME, new { @class = "control-label entrylable" })
+
+
+
+
+                                @Html.TextBoxFor(model => model.NAME, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.NAME) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.NAME) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.NAME)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.TIN, new { @class = "control-label entrylable" })
+
+
+
+
+                                @Html.TextBoxFor(model => model.TIN, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.TIN) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.TIN) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.TIN)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.WEBSITE, new { @class = "control-label entrylable" })
+
+
+
+
+                                @Html.TextBoxFor(model => model.WEBSITE, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.WEBSITE) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.WEBSITE) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.WEBSITE)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.ADDRESSLINE1, new { @class = "control-label entrylable" })
+
+
+
+
+                                @Html.TextBoxFor(model => model.ADDRESSLINE1, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.ADDRESSLINE1) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.ADDRESSLINE1) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.ADDRESSLINE1)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.CITY, new { @class = "control-label entrylable" })
+
+
+
+
+                                @Html.TextBoxFor(model => model.CITY, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.CITY) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.CITY) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.CITY)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.COUNTRY, new { @class = "control-label entrylable" })
+
+
+
+
+                                @Html.TextBoxFor(model => model.COUNTRY, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.COUNTRY) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.COUNTRY) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.COUNTRY)
+
+                            </li>
+                        </ul>
+
+                        <ul class="col-md-6 entryForm">
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.CODE, new { @class = "control-label entrylable" })
+
+
+
+
+                                @Html.TextBoxFor(model => model.CODE, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.CODE) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.CODE) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.CODE)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.REGISTRATIONNO, new { @class = "control-label entrylable" })
+
+
+
+
+                                @Html.TextBoxFor(model => model.REGISTRATIONNO, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.REGISTRATIONNO) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.REGISTRATIONNO) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.REGISTRATIONNO)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.FAXNUMBER, new { @class = "control-label entrylable" })
+
+
+
+
+                                @Html.TextBoxFor(model => model.FAXNUMBER, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.FAXNUMBER) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.FAXNUMBER) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.FAXNUMBER)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.CURRENCY, new { @class = "control-label entrylable" })
+
+
+
+
+                                @Html.TextBoxFor(model => model.CURRENCY, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.CURRENCY) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.CURRENCY) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.CURRENCY)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.ADDRESSLINE2, new { @class = "control-label entrylable" })
+
+
+
+
+                                @Html.TextBoxFor(model => model.ADDRESSLINE2, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.ADDRESSLINE2) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.ADDRESSLINE2) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.ADDRESSLINE2)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.POSTCODE, new { @class = "control-label entrylable" })
+
+
+
+
+                                @Html.TextBoxFor(model => model.POSTCODE, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.POSTCODE) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.POSTCODE) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.POSTCODE)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.EMAIL, new { @class = "control-label entrylable" })
+
+
+
+
+                                @Html.TextBoxFor(model => model.EMAIL, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.EMAIL) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.EMAIL) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.EMAIL)
+
+                            </li>
+                        </ul>
+
+
+                        <button type="submit" class="btn btn-success lastli" tabindex="">Save</button>
+                        <a class="load btn btn-danger closeButton" href="~/#/Settings/Settings?lblbreadcum=">Close</a>
+
+                    </div>
+
+
+
+                }
+
+            </div>
+
+
+        </div>
+    </div>
+    <p></p>
+
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+    <script>
+
+        $(function () {
+            $('.datepicker').datepicker({ dateFormat: "dd/mm/yy" });
+
+            //$(".dropdown-menu li a").click(function (event) {
+            //var selText = $(this).text();
+            //$('.hidden').val(selText);
+            //$(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+            //event.preventDefault();
+            //});
+
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(".load").click(function () {
+            $(".loadingImage").show();
+            var link = $(this).attr("href");
+            debugger;
+            $.get('<%= Url.Action(' + link + ') %>', {},
+                function (data) {
+                    $('#result').html(data);
+                    $('.loadingImage').hide();
+                });
+        });
+
+    </script>
+
+</div>
+

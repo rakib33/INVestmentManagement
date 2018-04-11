@@ -1,0 +1,327 @@
+﻿@using System.Web.Helpers;
+@model InvestmentManagement.Models.GridModel<InvestmentManagement.InvestmentManagement.Models.FINANCIALINSTITUTION>
+
+<div id="replace">
+ 
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+
+    @*Main Container*@
+    <div class="wrapper pl">
+        @* <img class="loadingImage" src="~/Images/loading.gif" style="display:none;" />*@
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+
+            <strong>Info !</strong>
+            @ViewBag.Message
+        </div>
+        <div class="container-fluid Grid-Container">
+
+
+
+            <div class="widget mb20">
+                <div class="whead">
+                    <h6>@Session["currentPage"]</h6>
+                    @* <select id="ddlPageSize">
+                                
+                                <option selected="selected">15</option>
+                                <option>50</option>
+                                <option>100</option>
+                            </select>
+                    <h6 style="float:right">Select Row Count</h6>*@
+                   
+                    <div class="clear"></div>
+                </div>
+
+                <div class="formRow dgHeaderBk">
+                    <div class="container-fluid">
+                        <div class="col-md-12">
+                            <input type="text" id="txtCode" class="tableSearchField" placeholder="Enter Code" />
+                            <input type="button" id="btn" class="btn btn-primary dgBtn" value="Apply" />
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                                      
+                    function ChkAddClass() {
+                        if ($('.ASPGrid').height() >= 700) {
+                            $('#WebGrid').addClass("webgridscroll");
+
+                        }
+
+                        if ($('.ASPGrid').width() >= 800) {
+                            $('#WebGrid').addClass("webgridHorizontalscroll");
+
+                        }
+                        var dir = $('#dir').val();
+                        var col = $('#col').val().replace(/\s/g, '');
+                        //alert(col);
+
+                        var header = $('th a[href*=' + col + ']');
+                        //alert(header.text());
+                        var countTh = document.getElementsByTagName('th').length;
+
+
+                        for (var i = 1; i <= countTh; i++) {
+
+                            var txtTh = $('.ASPGrid tr th:nth-child(' + i + ')').text().replace(/\s/g, '');
+
+                            if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Ascending') {
+                                //alert("");
+                                //alert(txtTh + "" + col);
+                                $(".ASPGrid tr th").addClass("sorting");
+
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("ascending");
+                                //$(".ASPGrid tr th:nth-child(1)").removeClass("sorting ascending");
+                                $(".ASPGrid tr th:nth-child(10)").removeClass("sorting ascending");
+
+                            }
+
+                            else if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Descending') {
+                                //alert(txtTh + "" + col);
+                                $(".ASPGrid tr th").addClass("sorting");
+
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("descending");
+                                //$(".ASPGrid tr th:nth-child(1)").removeClass("sorting descending");
+                                $(".ASPGrid tr th:nth-child(10)").removeClass("sorting descending");
+
+
+                            }
+                        }
+                    }                                     
+                            
+
+                    
+                </script>
+
+                <div id="WebGrid" class="formRow noPad btbNone tScroll">
+                    @{
+                        var grid = new WebGrid(null, rowsPerPage: 15, ajaxUpdateContainerId: "WebGrid", ajaxUpdateCallback: "ChkAddClass"); //, pageFieldName:"asd",sortFieldName:"sortdefault"
+                        grid.Bind(Model.DataModel, rowCount: Model.RowsPerPage, autoSortAndPage: false);
+                        @grid.Table(columns: new[]
+                        {
+                            // grid.Column(header: "Select",  format:@<text>
+                            //         <div class="checkbox">
+                            //             <label>
+                            //                 <input type="checkbox" value="">
+                            //             </label>
+                            //         </div>
+                            //         </text>),
+                            grid.Column(header: "Sl No",style:"textColumn", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),
+                            grid.Column("CODE", style: "textColumn", header: "Code"),
+                            grid.Column("NAME", style: "textColumn", header: "Name"),                        
+                            grid.Column("InstitutionType", style: "textColumn", header: "Institution Type"),
+                            grid.Column("CAPLIMIT", style: "numericColumn", header: "Cap Limit", format:@<text>@item.CAPLIMIT.ToString("N") BDT</text>),
+                           
+                           //add by rakibul date 8th Feb,2016
+                            grid.Column("NPLPERCENTAGE", style: "textColumn", header: "NPL(%)", format:@<text>@item.NPLPERCENTAGE.ToString("N") BDT</text>),
+                            grid.Column("TAXRATE", style: "numericColumn", header: "Tax Rate", format:@<text>@item.TAXRATE.ToString("N") BDT</text>),
+                            grid.Column("EXCISEDUTY", style: "numericColumn", header: "Excise Duty", format:@<text>@item.EXCISEDUTY.ToString("N") BDT</text>),
+                            grid.Column("OTHERCHARGE", style: "numericColumn", header: "Other Charge", format:@<text>@item.OTHERCHARGE.ToString("N") BDT</text>),
+                            grid.Column("CONTACTPERSON", style: "textColumn", header: "Contact Person"),
+                            grid.Column("CONTACTNO", style: "textColumn", header: "Contact No"),
+                            grid.Column("CAMELRATING", style: "textColumn", header: "Camel Rating"),
+                            grid.Column("OFFERRATE1", style: "textColumn", header: "3 Month"),
+                            grid.Column("OFFERRATE2", style: "textColumn", header: "6 Month"),
+                            grid.Column("OFFERRATE3", style: "textColumn", header: "1 Year"),
+                            
+                            grid.Column("IsSelect", style: "textColumn", header: "Selected"),
+                            grid.Column(header: "", format:@<text>
+                                                                <div class="btn-group dropdown bdrNone">
+                                                                    <a href="#" class="tablectrl_medium bDefault" data-toggle="dropdown"><span class="iconb" data-icon=""></span></a>
+                                                                    <ul class="dropdown-menu pull-right cMbdr cMenu">
+                                                                        @* <li><a href="#"><span class="icos-add"></span>Add*</a></li>*@
+                                                                        <li><a class="load" role="menuitem" href="~/#/FinancialInstitution/ListOfBranch?FINANCIALINSTITUTION=@item.REFERENCE&lblbreadcum=FIBranch"><span class=" icon-redo"></span>Branch</a></li>
+                                                                        <li>
+                                                                            @if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+                                                                            {
+                                                                                @Ajax.ActionLink("Edit", "EditFinancialInstitution", "FinancialInstitution", new {id = @item.REFERENCE},
+                                                                                    new AjaxOptions {UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg"})
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a class="load" role="menuitem" tabindex="-1" href="~/#/FinancialInstitution/EditFinancialInstitution?id=@item.REFERENCE">Edit</a>
+                                                                            }
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </text>)
+                        },
+                            tableStyle: "ASPGrid",
+                            htmlAttributes: new {cellspacing = "0", border = "0"},
+                            footer: @<ul class="pagination">
+                          
+                                         @* 
+         <li class="@ViewBag.Prev"><a class="@ViewBag.PrevNotActive" id="prev" >Prev</a></li>
+         <li class="@ViewBag.Next"><a class="@ViewBag.NextNotActive" id="next"  >Next</a></li>*@
+
+                                     </ul>
+                            )
+                        ;
+                        @Html.Hidden("dir", grid.SortDirection)
+                        @Html.Hidden("col", grid.SortColumn)
+                    }
+                </div>
+        
+                @if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+                {
+                    @Ajax.ActionLink("Add", "AddFinancialInstitution", "FinancialInstitution",
+                        new AjaxOptions {UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg"}, new {@class = "btn btn-success m10"})
+                }
+                else
+                {
+                    <a class=" load btn btn-success m10" role="menuitem" tabindex="-1" href="~/#/FinancialInstitution/AddFinancialInstitution">Add</a>
+                }
+
+
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('#WebGrid').addClass("webgridscroll");
+        //$('.ASPGrid').addClass("webgridscroll");
+        //var aspgridheight = $('.ASPGrid').height();
+        //alert(aspgridheight);
+        //var WebGridheight = $('#WebGrid').height();
+        //alert(WebGridheight);
+        $(".ASPGrid tr th").addClass("sorting");
+        //$(".ASPGrid tr th:nth-child(1)").removeClass("sorting");
+        $(".ASPGrid tr th:nth-child(6)").removeClass("sorting");
+
+        $('.not-active').bind('click', false);
+        $(document).on('click', '#next', function(event) {
+            $('.loadingImage').show();
+
+            $.get("/FinancialInstitution/ListFinancialInstitution?PagingType=Next&sort=" + $('#col').val() + "&sortdir=" + $('#dir').val() + "&filterstring=" + $('#txtCode').val() + "&rows=" + $("#ddlPageSize").val() + "", function(data) {
+                var getHTML = $(data);
+                $('#WebGrid').empty();
+                $('#WebGrid').andSelf().unbind();
+                $('#WebGrid').html($('#WebGrid', getHTML));
+                ChkAddClass();
+                $('.loadingImage').hide();
+            });
+        });
+        $('#btn').on('click', function() {
+            $('.loadingImage').show();
+            //$('#WebGrid').addClass("webgridscroll");
+            var filterstring = $('#txtCode').val();
+            $.get("/FinancialInstitution/ListFinancialInstitution?filterstring=" + $('#txtCode').val() + "&rows=" + $("#ddlPageSize").val() + "", function(data) {
+                var getHTML = $(data);
+                $('#WebGrid').empty();
+
+                $('#WebGrid').html($('#WebGrid', getHTML));
+                ChkAddClass();
+                $('.loadingImage').hide();
+            });
+        });
+
+        $('#ddlPageSize').on('change', function() {
+            //$('.loadingImage').show();
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+            
+            $.get("/FinancialInstitution/ListFinancialInstitution?sort=" + $('#col').val() + "&sortdir=" + $('#dir').val() + "&filterstring=" + $('#txtCode').val() + "&rows=" + valueSelected + "", function(data) {
+                var getHTML = $(data);
+                $('#WebGrid').empty();
+                $('#WebGrid').andSelf().unbind();
+                $('#WebGrid').html($('#WebGrid', getHTML));
+                ChkAddClass();
+                //$('.loadingImage').hide();
+
+            });
+        });
+      
+
+    });
+</script>
+
+<script>
+
+    $(document).on('click', '#prev', function(event) {
+        $('.loadingImage').show();
+
+        $.get("/FinancialInstitution/ListFinancialInstitution?PagingType=Prev&sort=" + $('#col').val() + "&sortdir=" + $('#dir').val() + "&filterstring=" + $('#txtCode').val() + "&rows=" + $("#ddlPageSize").val() + "", function(data) {
+            var getHTML = $(data);
+            $('#WebGrid').empty();
+
+            $('#WebGrid').html($('#WebGrid', getHTML));
+            ChkAddClass();
+            $('.loadingImage').hide();
+        });
+    });
+
+
+    $(document).on('keypress', '.number', function(event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+    $(document).on('keypress', '.decimal', function(event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+
+
+</script>
+
+<script>
+
+
+    $(document).on('click', '.dropdown-menu li a', function(event) {
+        var selText = $(this).text();
+        $('.hidden').val(selText);
+        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+        event.preventDefault();
+        //event.stopPropagation();
+        //return false;
+    });
+
+
+</script>
+
+
+<script type="text/javascript">
+    function ShowProcessingMsg() {
+
+        $('.loadingImage').show();
+
+    }
+
+    function HideProcessingMsg() {
+        $('.loadingImage').hide();
+    }
+
+</script>
+
+
+
+

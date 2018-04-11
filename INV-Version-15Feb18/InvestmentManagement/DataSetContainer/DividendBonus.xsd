@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DividendBonus" targetNamespace="http://tempuri.org/DividendBonus.xsd" xmlns:mstns="http://tempuri.org/DividendBonus.xsd" xmlns="http://tempuri.org/DividendBonus.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DividendBonus" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DividendBonus" msprop:Generator_UserDSName="DividendBonus">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DividendBonus" msprop:Generator_TableClassName="DividendBonusDataTable" msprop:Generator_TableVarName="tableDividendBonus" msprop:Generator_TablePropName="_DividendBonus" msprop:Generator_RowDeletingName="DividendBonusRowDeleting" msprop:Generator_RowChangingName="DividendBonusRowChanging" msprop:Generator_RowEvHandlerName="DividendBonusRowChangeEventHandler" msprop:Generator_RowDeletedName="DividendBonusRowDeleted" msprop:Generator_UserTableName="DividendBonus" msprop:Generator_RowChangedName="DividendBonusRowChanged" msprop:Generator_RowEvArgName="DividendBonusRowChangeEvent" msprop:Generator_RowClassName="DividendBonusRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ISIN" msprop:Generator_ColumnVarNameInTable="columnISIN" msprop:Generator_ColumnPropNameInRow="ISIN" msprop:Generator_ColumnPropNameInTable="ISINColumn" msprop:Generator_UserColumnName="ISIN" type="xs:string" minOccurs="0" />
+              <xs:element name="CATYPE" msprop:Generator_ColumnVarNameInTable="columnCATYPE" msprop:Generator_ColumnPropNameInRow="CATYPE" msprop:Generator_ColumnPropNameInTable="CATYPEColumn" msprop:Generator_UserColumnName="CATYPE" type="xs:string" minOccurs="0" />
+              <xs:element name="SHORTNAME" msprop:Generator_ColumnVarNameInTable="columnSHORTNAME" msprop:Generator_ColumnPropNameInRow="SHORTNAME" msprop:Generator_ColumnPropNameInTable="SHORTNAMEColumn" msprop:Generator_UserColumnName="SHORTNAME" type="xs:string" minOccurs="0" />
+              <xs:element name="CASHPAYMENTDATE" msprop:Generator_ColumnVarNameInTable="columnCASHPAYMENTDATE" msprop:Generator_ColumnPropNameInRow="CASHPAYMENTDATE" msprop:Generator_ColumnPropNameInTable="CASHPAYMENTDATEColumn" msprop:Generator_UserColumnName="CASHPAYMENTDATE" type="xs:string" minOccurs="0" />
+              <xs:element name="RECORDDATE" msprop:Generator_ColumnVarNameInTable="columnRECORDDATE" msprop:Generator_ColumnPropNameInRow="RECORDDATE" msprop:Generator_ColumnPropNameInTable="RECORDDATEColumn" msprop:Generator_UserColumnName="RECORDDATE" type="xs:string" minOccurs="0" />
+              <xs:element name="BOHOLDING" msprop:Generator_ColumnVarNameInTable="columnBOHOLDING" msprop:Generator_ColumnPropNameInRow="BOHOLDING" msprop:Generator_ColumnPropNameInTable="BOHOLDINGColumn" msprop:Generator_UserColumnName="BOHOLDING" type="xs:string" minOccurs="0" />
+              <xs:element name="NETCASHAMOUNT" msprop:Generator_ColumnVarNameInTable="columnNETCASHAMOUNT" msprop:Generator_ColumnPropNameInRow="NETCASHAMOUNT" msprop:Generator_ColumnPropNameInTable="NETCASHAMOUNTColumn" msprop:Generator_UserColumnName="NETCASHAMOUNT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

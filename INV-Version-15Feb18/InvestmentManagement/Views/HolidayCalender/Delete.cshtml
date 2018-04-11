@@ -1,0 +1,39 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.HOLIDAYCALENDER
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>HOLIDAYCALENDER</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.REFERENCE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.REFERENCE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HOLIDAY)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HOLIDAY)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NOTE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NOTE)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

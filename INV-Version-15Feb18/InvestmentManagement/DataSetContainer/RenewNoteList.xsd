@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="RenewNoteList" targetNamespace="http://tempuri.org/RenewNoteList.xsd" xmlns:mstns="http://tempuri.org/RenewNoteList.xsd" xmlns="http://tempuri.org/RenewNoteList.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="RenewNoteList" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="RenewNoteList" msprop:Generator_UserDSName="RenewNoteList">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="RenewNoteList" msprop:Generator_TableClassName="RenewNoteListDataTable" msprop:Generator_TableVarName="tableRenewNoteList" msprop:Generator_RowChangedName="RenewNoteListRowChanged" msprop:Generator_TablePropName="_RenewNoteList" msprop:Generator_RowDeletingName="RenewNoteListRowDeleting" msprop:Generator_RowChangingName="RenewNoteListRowChanging" msprop:Generator_RowEvHandlerName="RenewNoteListRowChangeEventHandler" msprop:Generator_RowDeletedName="RenewNoteListRowDeleted" msprop:Generator_RowClassName="RenewNoteListRow" msprop:Generator_UserTableName="RenewNoteList" msprop:Generator_RowEvArgName="RenewNoteListRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NAME" msprop:Generator_ColumnVarNameInTable="columnNAME" msprop:Generator_ColumnPropNameInRow="NAME" msprop:Generator_ColumnPropNameInTable="NAMEColumn" msprop:Generator_UserColumnName="NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="BRANCH" msprop:Generator_ColumnVarNameInTable="columnBRANCH" msprop:Generator_ColumnPropNameInRow="BRANCH" msprop:Generator_ColumnPropNameInTable="BRANCHColumn" msprop:Generator_UserColumnName="BRANCH" type="xs:string" minOccurs="0" />
+              <xs:element name="TENURE_x0020_" msprop:Generator_ColumnVarNameInTable="columnTENURE_" msprop:Generator_ColumnPropNameInRow="TENURE_" msprop:Generator_ColumnPropNameInTable="TENURE_Column" msprop:Generator_UserColumnName="TENURE " type="xs:string" minOccurs="0" />
+              <xs:element name="TENURETERM_x0020_" msprop:Generator_ColumnVarNameInTable="columnTENURETERM_" msprop:Generator_ColumnPropNameInRow="TENURETERM_" msprop:Generator_ColumnPropNameInTable="TENURETERM_Column" msprop:Generator_UserColumnName="TENURETERM " type="xs:string" minOccurs="0" />
+              <xs:element name="PRINCIPALAMOUNT" msprop:Generator_ColumnVarNameInTable="columnPRINCIPALAMOUNT" msprop:Generator_ColumnPropNameInRow="PRINCIPALAMOUNT" msprop:Generator_ColumnPropNameInTable="PRINCIPALAMOUNTColumn" msprop:Generator_UserColumnName="PRINCIPALAMOUNT" type="xs:string" minOccurs="0" />
+              <xs:element name="CAPLIMIT" msprop:Generator_ColumnVarNameInTable="columnCAPLIMIT" msprop:Generator_ColumnPropNameInRow="CAPLIMIT" msprop:Generator_ColumnPropNameInTable="CAPLIMITColumn" msprop:Generator_UserColumnName="CAPLIMIT" type="xs:string" minOccurs="0" />
+              <xs:element name="PRVOFFERRATE" msprop:Generator_ColumnVarNameInTable="columnPRVOFFERRATE" msprop:Generator_ColumnPropNameInRow="PRVOFFERRATE" msprop:Generator_ColumnPropNameInTable="PRVOFFERRATEColumn" msprop:Generator_UserColumnName="PRVOFFERRATE" type="xs:string" minOccurs="0" />
+              <xs:element name="PROPOSEDRATE" msprop:Generator_ColumnVarNameInTable="columnPROPOSEDRATE" msprop:Generator_ColumnPropNameInRow="PROPOSEDRATE" msprop:Generator_ColumnPropNameInTable="PROPOSEDRATEColumn" msprop:Generator_UserColumnName="PROPOSEDRATE" type="xs:string" minOccurs="0" />
+              <xs:element name="MATURITYDATE" msprop:Generator_ColumnVarNameInTable="columnMATURITYDATE" msprop:Generator_ColumnPropNameInRow="MATURITYDATE" msprop:Generator_ColumnPropNameInTable="MATURITYDATEColumn" msprop:Generator_UserColumnName="MATURITYDATE" type="xs:string" minOccurs="0" />
+              <xs:element name="PROPOSEDACTION" msprop:Generator_ColumnVarNameInTable="columnPROPOSEDACTION" msprop:Generator_ColumnPropNameInRow="PROPOSEDACTION" msprop:Generator_ColumnPropNameInTable="PROPOSEDACTIONColumn" msprop:Generator_UserColumnName="PROPOSEDACTION" type="xs:string" minOccurs="0" />
+              <xs:element name="maturedMonthYear" msprop:Generator_ColumnVarNameInTable="columnmaturedMonthYear" msprop:Generator_ColumnPropNameInRow="maturedMonthYear" msprop:Generator_ColumnPropNameInTable="maturedMonthYearColumn" msprop:Generator_UserColumnName="maturedMonthYear" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

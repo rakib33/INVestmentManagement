@@ -1,0 +1,1436 @@
+﻿
+<link href="~/CSS/ListReport.css" rel="stylesheet" />
+
+<div class="contentTop">
+    <span class="pageTitle">
+        <span class=" glyphicon glyphicon-yen"></span>
+        @Session["currentPage"]
+    </span>
+    <script>
+        $(document).ready(function () {
+
+            var RemoveJQUIDatepicker = function () {
+                $(".datePicker").datepicker("destroy");
+                $(".datePicker").removeClass("hasDatePicker");
+                $(".datePicker").removeAttr("Disabled");
+
+                console.log('destroy');
+            };
+
+            var SetJQUIDatePicker = function () {
+                $(".datepicker").datepicker({ dateFormat: formatDate('long') });
+                jQuery.datepicker.dpDiv.appendTo(jQuery('body'));
+                console.log('Set');
+            }
+
+            $(function () {
+                $(".datepicker").datepicker({ dateFormat: formatDate('long') });
+
+                RemoveJQUIDatepicker();
+                SetJQUIDatePicker();
+
+                $('.datepicker').datepicker('setDate', new Date());
+
+                $(".BGTBDate").datepicker({ dateFormat: formatDate('long') });
+                $('.BGTBDate').datepicker('setDate', new Date());
+                
+                
+            });
+        });
+</script>
+</div>
+
+<ol class="breadcrumb">
+    <li><a class="load" role="menuitem" tabindex="-1" href="~/#/Home/Index?lblbreadcum=@Session["PreviousPage"]">Dashboard</a></li>
+
+    <li class="active">@ViewBag.currentPage</li>
+</ol>
+
+
+<div class="wrapper pl">
+    <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+    <div class="alert alert-success mt20">
+        <button class="close" data-dismiss="alert" type="button">×</button>
+
+        <strong>Info !</strong>
+        @ViewBag.Message
+    </div>
+
+@*<div class="container demo">*@
+     <div class="container-fluid Grid-Container">
+        <!--Uploader Part -->
+        <div class="widget mb20">
+              
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+       @* FDR REPORT Panel*@
+
+        @if (Session["UserId"].ToString() == "Burhan" || Session["UserId"].ToString() == "Moshiur" || Session["UserId"].ToString() == "bosl" || Session["UserId"].ToString() == "INV-ADMIN")
+        {
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <i class="more-less glyphicon glyphicon-plus"></i>
+                        FDR Report List
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                <div class="formRow dgHeaderBk bottomborder">
+                                <div class="container-fluid">
+                                    @using (Html.BeginForm("FDRStatementReportByDate", "Report"))
+                                    {
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h5><b>1. FDR Main Statement</b></h5>
+                                            </div>
+                                            <div class="col-md-2">
+                                                By Date
+                                            </div>
+                                            <div class="col-md-2 position1">
+                                            @*    <input type="text" id="toDateFS" class="datepicker inputArea" disabled="disabled" name="toDateFS" required="required"/>*@
+                                            </div>
+                                            <div class="col-md-2 ">
+                                                <h5>Bank</h5>
+                                            </div>
+                                            <div class="col-md-2  position2">
+                                                @Html.DropDownList("FI_Ref", (SelectList)ViewBag.FINANCIALINSTITUTIONList, "Select an Institution", new { @onchange = "getBranch(this.value);", @class = "control-label entrylable drpResize drop-resize" })
+                                            </div>
+
+                                            <div class="col-md-2">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <h5>Tenure</h5>
+                                            </div>
+                                            <div class="col-md-2 position1">
+                                                <input id="TENURE" name="TENURE" type="number" class="drop-resize">
+                                            </div>
+                                            <div class="col-md-2 ">
+                                                <h5>Terms</h5>
+                                            </div>
+                                            <div class="col-md-2  position2">
+                                                @Html.DropDownList("TERMS", (SelectList)ViewBag.termList, "select Term", new { @class = "control-label entrylable drpResize drop-resize" })
+
+                                            </div>
+                                            <div class="col-md-2 pull-right">
+                                                <input type="checkbox" name="IsExcell" id="IsExcell" value="true" />
+                                                <label>Excell</label>
+                                                <button type="submit" id="" class="btn btn-primary">Print</button>                                              
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+
+
+                                <div class="container-fluid">
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h5><b>2. FDR Encashment Statement</b></h5>
+                                        </div>
+                                        @using (Html.BeginForm("FDREncashmentReportByDate", "Report"))
+                                        {
+                                            <div class="col-md-2">
+                                                <h5>Date From</h5>
+                                            </div>
+                                            <div class="col-md-2 position1">
+                                                <input type="text" id="fromDateFE" class="datepicker inputArea" name="fromDateFS" required="required" />
+                                            </div>
+                                            <div class="col-md-2 ">
+                                                <h5>Date To</h5>
+                                            </div>
+                                            <div class="col-md-2  position2">
+                                                <input type="text" id="toDateFE" class="datepicker inputArea" name="toDateFS" required="required" />
+                                            </div>
+                                            <div class="col-md-2 pull-right">
+                                                <input type="checkbox" name="IsExcell" value="true" />
+                                                <label>Excell</label>
+                                                <button type="submit" id="" class="btn btn-primary">Print</button>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h5><b>3. FDR Renewal Statement</b></h5>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <h5>Date From</h5>
+                                        </div>
+                                        @using (Html.BeginForm("FDRRenewReportByDate", "Report"))
+                                        {
+                                            <div class="col-md-2 position1">
+                                                <input type="text" id="fromDateFR" class="datepicker inputArea" name="fromDateFS" required="required" />
+                                            </div>
+                                            <div class="col-md-2 ">
+                                                <h5>Date To</h5>
+                                            </div>
+                                            <div class="col-md-2  position2">
+                                                <input type="text" id="toDateFR" class="datepicker inputArea" name="toDateFS" required="required"/>
+                                            </div>
+                                            <div class="col-md-2 pull-right">
+                                                <input type="checkbox" name="IsExcell" value="true" />
+                                                <label>Excell</label>
+                                                <button type="submit" id="" class="btn btn-primary">Print</button>
+                                            </div>
+                                    }
+                                    </div>
+                                </div>
+
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h5><b>4. FDR Encashment Tax Statement</b></h5>
+                                        </div>
+                                        @using (Html.BeginForm("FDREncashmentTaxStatement", "Report"))
+                                        {
+                                            <div class="col-md-2">
+                                                <h5>Date From</h5>
+                                            </div>
+                                            <div class="col-md-2 position1">
+                                                <input type="text" id="fromDateFdrTax" class="datepicker inputArea" name="fromDateFdrTax" required="required"/>
+                                            </div>
+                                            <div class="col-md-2 ">
+                                                <h5>Date To</h5>
+                                            </div>
+                                            <div class="col-md-2  position2">
+                                                <input type="text" id="toDateFdrTax" class="datepicker inputArea" name="toDateFdrTax" required="required" />
+                                            </div>
+                                            <div class="col-md-2 pull-right">
+                                                <input type="checkbox" name="IsExcell" value="true" />
+                                                <label>Excell</label>
+                                                <button type="submit" id="" class="btn btn-primary">Print</button>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h5><b>5. FDR Renewal Tax Statement</b></h5>
+                                        </div>
+                                        @using (Html.BeginForm("FDRRenewalTaxStatement", "Report"))
+                                        {
+                                            <div class="col-md-2">
+                                                <h5>Date From</h5>
+                                            </div>
+                                            <div class="col-md-2 position1">
+                                                <input type="text" id="fromDateRewTax" class="datepicker inputArea" name="fromDateRewTax" required="required" />
+                                            </div>
+                                            <div class="col-md-2 ">
+                                                <h5>Date To</h5>
+                                            </div>
+                                            <div class="col-md-2  position2">
+                                                <input type="text" id="toDateFdrRewTax" class="datepicker inputArea" name="toDateFdrRewTax" required="required" />
+                                            </div>
+                                            <div class="col-md-2 pull-right">
+                                                  <input type="checkbox" name="IsExcell" value="true" />
+                                                <label>Excell</label>
+                                                <button type="submit" id="" class="btn btn-primary">Print</button>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h5><b>6. FDR Maturity Statement</b></h5>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <h5>Date From</h5>
+                                        </div>
+                                        @using (Html.BeginForm("FDRMaturityStatement", "Report"))
+                                        {
+                                            <div class="col-md-2 position1">
+                                                <input type="text" id="fromDateFMS" class="datepicker inputArea" name="fromDateFS" required="required" />
+                                            </div>
+                                            <div class="col-md-2 ">
+                                                <h5>Date To</h5>
+                                            </div>
+                                            <div class="col-md-2  position2">
+                                                <input type="text" id="toDateFMS" class="datepicker inputArea" name="toDateFS" required="required" />
+                                            </div>
+                                            <div class="col-md-2 pull-right">
+                                                  <input type="checkbox" name="IsExcell" value="true" />
+                                                <label>Excell</label>
+                                                <button type="submit" id="" class="btn btn-primary">Print</button>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+
+
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h5><b>7. FDR Bank Wise Statement</b></h5>
+                                        </div>
+
+                                        @using (Html.BeginForm("FDRBankWiseStatement", "Report"))
+                                        {
+                                           <div class="col-md-2">
+                                                <h5>Option</h5>
+                                            </div>
+                                            <div class="col-md-2 position1">
+                                              @Html.DropDownList("Option", new List<SelectListItem>
+                                              { new SelectListItem{ Text="All Institutions", Value = "AB" },
+                                                new SelectListItem{ Text="Only Existing Institutions", Value = "FB" },                                                                  
+                                              }, "Select a Option", new { @class = "control-label entrylable drpResize drop-resize"})
+                                            </div>
+                                            <div class="col-md-2 ">
+                                                Date To
+                                            </div>                                                                  
+                                            <div class="col-md-2  position2">                                             
+                                            </div>
+                                            <div class="col-md-2 pull-right">
+                                                  <input type="checkbox" name="IsExcell" value="true" />
+                                                <label>Excell</label>
+                                                <button type="submit" id="" class="btn btn-primary">Print</button>
+                                            </div>
+                                         }
+                                    </div>
+                                </div>
+                             @*   <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h5><b>8. FDR Selected Bank Statement</b></h5>
+                                        </div>
+
+                                        @using (Html.BeginForm("FDRSelectedBankStatement", "Report"))
+                                        {
+                                            <div class="col-md-2">
+                                                <h5>Option</h5>
+                                            </div>
+                                            <div class="col-md-2 position1">
+                                                @Html.DropDownList("Option", new List<SelectListItem>
+                                                          { new SelectListItem{ Text="All Institutions", Value = "AB" },
+                                                            new SelectListItem{ Text="Only Selected Institutions", Value = "FB" },                                                                  
+                                                          }, "Select a Option", new { @class = "control-label entrylable drpResize drop-resize" })
+                                            </div>
+                                            <div class="col-md-2 ">
+                                               
+                                            </div>                                                                  
+                                            <div class="col-md-2  position2">                                              
+                                            </div>
+                                            <div class="col-md-2 pull-right">
+                                                <input type="checkbox" name="IsExcell" value="true" />
+                                                <label>Excell</label>
+                                                <button type="submit" id="" class="btn btn-primary">Print</button>
+                                            </div>
+                                         }
+                                    </div>
+                                </div>*@
+
+
+
+                            </div>
+                            <div class="whead">
+                                <h6>Report History List</h6>
+                                <div class="clear"></div>
+                            </div>
+
+                            <div class="formRow dgHeaderBk">
+
+                                <div class="container-fluid">
+                                    @using (Html.BeginForm("FDRStatementReportHistoryByDate", "Report"))
+                                    {
+                                        @Html.Hidden("HasHistory", "true")
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h5><b>9. FDR Main Statement History</b></h5>
+                                            </div>
+                                            <div class="col-md-2">
+                                                By Date
+                                            </div>
+                                            <div class="col-md-2 position1">
+                                                <input type="text" id="toDateFS1" class="datepicker inputArea" name="toDateFS" required="required" />
+                                            </div>
+                                            <div class="col-md-2 ">
+                                                <h5>Bank</h5>
+                                            </div>
+                                            <div class="col-md-2  position2">
+                                                @Html.DropDownList("FI_Ref", (SelectList)ViewBag.FINANCIALINSTITUTIONList, "Select an Institution", new { @onchange = "getBranch(this.value);", @class = "control-label entrylable drpResize drop-resize" })
+                                            </div>
+
+                                            <div class="col-md-2">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <h5>Tenure</h5>
+                                            </div>
+                                            <div class="col-md-2 position1">
+                                                <input id="TENURE1" name="TENURE" type="number" class="drop-resize">
+                                            </div>
+                                            <div class="col-md-2 ">
+                                                <h5>Terms</h5>
+                                            </div>
+                                            <div class="col-md-2  position2">
+                                                @Html.DropDownList("TERMS", (SelectList)ViewBag.termList, "select Term", new { @class = "control-label entrylable drpResize drop-resize" })
+
+                                            </div>
+                                            <div class="col-md-2 pull-right">
+                                                 <input type="checkbox" name="IsExcell" value="true" />
+                                                <label>Excell</label>
+                                                <button type="submit" id="" class="btn btn-primary">Print</button>
+                                            </div>
+                                        </div>
+                                  }
+
+                                </div>
+
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h5><b>10. FDR Bank Wise History</b></h5>
+                                        </div>
+
+                                        @using (Html.BeginForm("FDRBankWiseHistory", "Report"))
+                                        {
+                                            
+                                            <div class="col-md-2">
+                                                <h5>Option</h5>
+                                            </div>
+                                            <div class="col-md-2 position1">
+                                              @Html.DropDownList("Option", new List<SelectListItem>
+                                              { new SelectListItem{ Text="All Institutions", Value = "AB" },
+                                                new SelectListItem{ Text="Only Existing Institutions", Value = "FB" },                                                                  
+                                              }, "Select a Option", new { @class = "control-label entrylable drpResize drop-resize"})
+                                            </div>
+                                            <div class="col-md-2 ">
+                                                Date To
+                                            </div>                                                      
+                                            <div class="col-md-2  position2">
+                                                <input type="text" id="toDateBWH" class="datepicker inputArea" name="toDateBWH" required="required" />
+                                            </div>
+                                            <div class="col-md-2 pull-right">
+                                                  <input type="checkbox" name="IsExcell" value="true" />
+                                                <label>Excell</label>
+                                                <button type="submit" id="" class="btn btn-primary">Print</button>
+                                            </div>
+                                         }
+                                    </div>
+                                </div>
+
+                                <div class="container-fluid">
+                                    @using (Html.BeginForm("FDRACHistoryByDate", "Report"))
+                                    {
+                                        @Html.Hidden("HasHistory", "true")
+                       
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h5><b>11. FDR Single A/C History</b></h5>
+                                            </div>
+
+                                            <div class="col-md-2 ">
+                                            </div>
+
+                                            <div class="col-md-2  position1">
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <h5>FDR No</h5>
+                                            </div>
+
+                                            <div class="col-md-2 position2">
+                                                <input id="fdrNo" name="FDR_NO" type="text" class="drop-resize">
+                                            </div>
+
+                                            <div class="col-md-2 pull-right">
+                                                 <input type="checkbox" name="IsExcell" value="true" />
+                                                <label>Excell</label>
+                                                <button type="submit" id="" class="btn btn-primary">Print</button>
+                                            </div>
+
+                                        </div>                     
+                                      }
+                                </div>
+
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h5><b>12. FDR Selected Bank History</b></h5>
+                                        </div>
+
+                                        @using (Html.BeginForm("FDRSelectedBankWiseHistory", "Report"))
+                                        {
+                                            <div class="col-md-2">
+                                                <h5>Option</h5>
+                                            </div>
+                                            <div class="col-md-2 position1">
+                                              @Html.DropDownList("Option", new List<SelectListItem>
+                                              { new SelectListItem{ Text="All Institutions", Value = "AB" },
+                                                new SelectListItem{ Text="Only Selected Institutions", Value = "FB" },                                                                  
+                                              }, "Select a Option", new { @class = "control-label entrylable drpResize drop-resize"})
+                                            </div>
+                                            <div class="col-md-2 ">
+                                                Date To
+                                            </div>                                                      
+                                            <div class="col-md-2  position2">
+                                                <input type="text" class="datepicker inputArea" name="toDateBWH" required="required" />
+                                            </div>
+                                            <div class="col-md-2 pull-right">
+                                                  <input type="checkbox" name="IsExcell" value="true" />
+                                                <label>Excell</label>
+                                                <button type="submit" id="" class="btn btn-primary">Print</button>
+                                            </div>
+                                         }
+                                    </div>
+                                </div>
+
+                            </div>    
+                </div>
+            </div>
+        </div>
+
+        }
+        
+          @* STOCK REPORT Panel*@
+          @if (Session["UserId"].ToString() == "Imtiaz" || Session["UserId"].ToString() == "Moshiur" || Session["UserId"].ToString() == "bosl" || Session["UserId"].ToString() == "INV-ADMIN")
+          {          
+           <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <i class="more-less glyphicon glyphicon-plus"></i>
+                        Stock Report List
+                    </a>
+                </h4>
+            </div>
+            
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">                
+                    <div class="container-fluid">
+                        @using (Html.BeginForm("StockBuySellByDate", "Report"))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5><b>1. Buy Sell Statement</b></h5>
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <h6>From Date</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                    <input type="text" id="fromDate" class="datepicker inputArea" name="fromDate" required="required" />
+                                </div>
+                                <div class="col-md-2 pull-left left-padding">
+                                    <h6>To Date</h6>
+                                </div>
+                                <div class="col-md-2  position2">
+                                    <input type="text" id="toDate " class="datepicker inputArea" name="toDate" required="required" />
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+
+                                <div class="col-md-2 pull-left">
+                                    <h6>Trade Code</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                </div>
+                                <div class="col-md-2  position2">
+                                    @Html.DropDownList("tradeCode", (SelectList)ViewBag.InstrumentList, "Select Trade Code", new { @class = "control-label entrylable drop-resize" })
+
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+                    <div class="container-fluid">
+                        @using (Html.BeginForm("TradeOrderByDate", "Report"))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5><b>2. Trade Order</b></h5>
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <h5>Date</h5>
+                                </div>
+                                <div class="col-md-2 position1">
+                                    <input type="text" id="OnDate" class="datepicker inputArea" name="OnDate" required="required" />
+                                </div>
+                                <div class="col-md-2 pull-left left-padding">
+                                    <h6>Trade Code</h6>
+                                </div>
+                                <div class="col-md-2  position2">
+                                    @Html.DropDownList("tradeCode", (SelectList)ViewBag.InstrumentList, "Select Trade Code", new { @class = "control-label entrylable drop-resize" })
+                                </div>
+
+                                <div class="col-md-2 pull-right">
+                                </div>
+                            </div>   
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+
+                                <div class="col-md-2 pull-left">
+                                </div>
+                                <div class="col-md-2 position1">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <h5>Is Pending :</h5>
+                                </div>
+                                <div class="col-md-2  position2">
+                                    <input type="checkbox" name="IsPending" value="true" />
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>                           
+                            
+                        }
+
+                    </div>
+
+                    <div class="container-fluid">
+                        @using (Html.BeginForm("fractionReceivedByDate", "Report"))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5><b>3. Fraction Received Statement</b></h5>
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <h6>From Date</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                    <input type="text"  class="datepicker inputArea" name="fromDate" required="required" />
+                                </div>
+                                <div class="col-md-2 pull-left left-padding">
+                                    <h6>To Date</h6>
+                                </div>
+                                <div class="col-md-2  position2">
+                                    <input type="text"  class="datepicker inputArea" name="toDate" required="required" />
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+
+                                <div class="col-md-2 pull-left">
+                                    <h6>Trade Code</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                </div>
+                                <div class="col-md-2  position2">
+                                    @Html.DropDownList("tradeCode", (SelectList)ViewBag.InstrumentList, "Select Trade Code", new { @class = "control-label entrylable drop-resize" })
+
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="container-fluid">
+                        @using (Html.BeginForm("ExtraDividendReceivedByDate", "Report"))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5><b>4. Extra Dividend Received Statement</b></h5>
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <h6>From Date</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                    <input type="text"  class="datepicker inputArea" name="fromDate" required="required" />
+                                </div>
+                                <div class="col-md-2 pull-left left-padding">
+                                    <h6>To Date</h6>
+                                </div>
+                                <div class="col-md-2  position2">
+                                    <input type="text"  class="datepicker inputArea" name="toDate" required="required" />
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+
+                                <div class="col-md-2 pull-left">
+                                    <h6>Trade Code</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                </div>
+                                <div class="col-md-2  position2">
+                                    @Html.DropDownList("tradeCode", (SelectList)ViewBag.InstrumentList, "Select Trade Code", new { @class = "control-label entrylable drop-resize" })
+
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="container-fluid">
+                        @using (Html.BeginForm("CommissionStatementByDate", "Report"))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5><b>5. Commission Statement</b></h5>
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <h6>From Date</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                    <input type="text" class="datepicker inputArea" name="fromDate" required="required" />
+                                </div>
+                                <div class="col-md-2 pull-left left-padding">
+                                    <h6>To Date</h6>
+                                </div>
+                                <div class="col-md-2  position2">
+                                    <input type="text"  class="datepicker inputArea" name="toDate" required="required" />
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+
+                                <div class="col-md-2 pull-left">
+                                    <h6>Trade Code</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                </div>
+                                <div class="col-md-2  position2">
+                                    @Html.DropDownList("tradeCode", (SelectList)ViewBag.InstrumentList, "Select Trade Code", new { @class = "control-label entrylable drop-resize" })
+
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>
+                        }
+
+                    </div>                
+                    
+                    <div class="container-fluid">
+                        @using (Html.BeginForm("PayInStatementByDate", "Report"))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5><b>6. PayIn Statement</b></h5>
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <h6>From Date</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                    <input type="text" class="datepicker inputArea" name="fromDate" required="required" />
+                                </div>
+                                <div class="col-md-2 pull-left left-padding">
+                                    <h6>To Date</h6>
+                                </div>
+                                <div class="col-md-2  position2">
+                                    <input type="text"  class="datepicker inputArea" name="toDate" required="required" />
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+
+                                <div class="col-md-2 pull-left">
+                                    <h6>Trade Code</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                </div>
+                                <div class="col-md-2  position2">
+                                    @Html.DropDownList("tradeCode", (SelectList)ViewBag.InstrumentList, "Select Trade Code", new { @class = "control-label entrylable drop-resize" })
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+                    @*<div class="container-fluid">
+                        @using (Html.BeginForm("ProfitLossStatementByDate", "Report"))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5><b>Profit/Loss Statement</b></h5>
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <h6>From Date</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                    <input type="text" class="datepicker inputArea" name="fromDate" required="required" />
+                                </div>
+                                <div class="col-md-2 pull-left left-padding">
+                                    <h6>To Date</h6>
+                                </div>
+                                <div class="col-md-2  position2">
+                                    <input type="text"  class="datepicker inputArea" name="toDate" required="required" />
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+
+                                <div class="col-md-2 pull-left">
+                                    <h6>Trade Code</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                </div>
+                                <div class="col-md-2  position2">
+                                    @Html.DropDownList("tradeCode", (SelectList)ViewBag.InstrumentList, "Select Trade Code", new { @class = "control-label entrylable drop-resize" })
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>
+                          }
+
+                    </div>*@
+
+
+                     <div class="container-fluid">
+                        @using (Html.BeginForm("InstrumentWiseLeadger", "Report"))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5><b>7. Instrument Wise Leadger</b></h5>
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <h6>From Date</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                    <input type="text" class="datepicker inputArea" name="fromDate" value="" />
+                                </div>
+                                <div class="col-md-2 pull-left left-padding">
+                                    <h6>To Date</h6>
+                                </div>
+                                <div class="col-md-2  position2">
+                                    <input type="text"  class="datepicker inputArea" name="toDate" required="required" />
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+
+                                <div class="col-md-2 pull-left">
+                                    <h6>Trade Code</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                </div>
+                                <div class="col-md-2  position2">
+                                    @Html.DropDownList("tradeCode", (SelectList)ViewBag.InstrumentList, "Select Trade Code", new { @class = "control-label entrylable drop-resize", @required = "required" })
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+                     <div class="container-fluid">
+                        @using (Html.BeginForm("InvestorProfitLossStatement", "Report"))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5><b>8. Investment Profit And Loss Statement</b></h5>
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <h6>From Date</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                    <input type="text" class="datepicker inputArea" name="fromDate" required="required" />
+                                </div>
+                                <div class="col-md-2 pull-left left-padding">
+                                    <h6>To Date</h6>
+                                </div>
+                                <div class="col-md-2  position2">
+                                    <input type="text"  class="datepicker inputArea" name="toDate" required="required" />
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+
+                                <div class="col-md-2 pull-left">
+                                    <h6>Trade Code</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                </div>
+                                <div class="col-md-2  position2">
+                                    @Html.DropDownList("tradeCode", (SelectList)ViewBag.InstrumentList, "Select Trade Code", new { @class = "control-label entrylable drop-resize" })
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>
+                        }
+
+                    </div>                                         
+
+                     <div class="container-fluid">
+                        @using (Html.BeginForm("StockCashReceivable", "Report"))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5><b>9. Stock & Cash Receivable Statement</b></h5>
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <h6>From Date</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                    <input type="text" class="datepicker inputArea" name="FromDate" required="required" />
+                                </div>
+                                <div class="col-md-2 pull-left left-padding">
+                                    <h6>To Date</h6>
+                                </div>
+                                <div class="col-md-2  position2">
+                                    <input type="text"  class="datepicker inputArea" name="ToDate" required="required" />
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+
+                                <div class="col-md-2 pull-left">
+                                    <h6>Trade Code</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                </div>
+                                <div class="col-md-2  position2">
+                                    @Html.DropDownList("tradeCode", (SelectList)ViewBag.InstrumentList, "Select Trade Code", new { @class = "control-label entrylable drop-resize" })
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+                     <div class="container-fluid">
+                        @using (Html.BeginForm("CashDividendReceived", "Report"))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5><b>10. Cash Dividend Received Statement</b></h5>
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <h6>From Date</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                    <input type="text" class="datepicker inputArea" name="fromDate" required="required" />
+                                </div>
+                                <div class="col-md-2 pull-left left-padding">
+                                    <h6>To Date</h6>
+                                </div>
+                                <div class="col-md-2  position2">
+                                    <input type="text"  class="datepicker inputArea" name="toDate" required="required" />
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+
+                                <div class="col-md-2 pull-left">
+                                    <h6>Trade Code</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                </div>
+                                <div class="col-md-2  position2">
+                                    @Html.DropDownList("tradeCode", (SelectList)ViewBag.InstrumentList, "Select Trade Code", new { @class = "control-label entrylable drop-resize" })
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    
+                     <div class="container-fluid">
+                        @using (Html.BeginForm("GetRightShareReceived", "Report"))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5><b>11. Right Share Received Statement</b></h5>
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <h6>From Date</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                    <input type="text" class="datepicker inputArea" name="fromDate" required="required" />
+                                </div>
+                                <div class="col-md-2 pull-left left-padding">
+                                    <h6>To Date</h6>
+                                </div>
+                                <div class="col-md-2  position2">
+                                    <input type="text"  class="datepicker inputArea" name="toDate" required="required" />
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+
+                                <div class="col-md-2 pull-left">
+                                    <h6>Trade Code</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                </div>
+                                <div class="col-md-2  position2">
+                                    @Html.DropDownList("tradeCode", (SelectList)ViewBag.InstrumentList, "Select Trade Code", new { @class = "control-label entrylable drop-resize" })
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    
+                     <div class="container-fluid">
+                        @using (Html.BeginForm("GetBonusShareReceived", "Report"))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5><b>12. Stock Dividend/Bonus Received Statement</b></h5>
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <h6>From Date</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                    <input type="text" class="datepicker inputArea" name="fromDate" required="required" />
+                                </div>
+                                <div class="col-md-2 pull-left left-padding">
+                                    <h6>To Date</h6>
+                                </div>
+                                <div class="col-md-2  position2">
+                                    <input type="text"  class="datepicker inputArea" name="toDate" required="required" />
+                                </div>
+
+                                <div class="col-md-2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+
+                                <div class="col-md-2 pull-left">
+                                    <h6>Trade Code</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                </div>
+                                <div class="col-md-2  position2">
+                                    @Html.DropDownList("tradeCode", (SelectList)ViewBag.InstrumentList, "Select Trade Code", new { @class = "control-label entrylable drop-resize" })
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+
+                    <div class="container-fluid">
+                        @using (Html.BeginForm("GetStockLedgerStatement", "Report"))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5><b>13. Stock Ledger Statement</b></h5>
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <h6>From Date</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                    <input type="text" class="datepicker inputArea" name="fromDate" required="required" />
+                                </div>
+                                <div class="col-md-2 pull-left left-padding">
+                                    <h6>To Date</h6>
+                                </div>
+                                <div class="col-md-2  position2">
+                                    <input type="text"  class="datepicker inputArea" name="toDate" required="required" />
+                                </div>
+
+                                <div class="col-md-2 pull-right">
+                                     <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>
+                            @*
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+
+                                <div class="col-md-2 pull-left">
+                                    <h6>Trade Code</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                </div>
+                                <div class="col-md-2  position2">
+                                    @Html.DropDownList("tradeCode", (SelectList)ViewBag.InstrumentList, "Select Trade Code", new { @class = "control-label entrylable drop-resize" })
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>*@
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+          }
+          
+            @* BOND REPORT Panel*@
+            @if (Session["UserId"].ToString() == "Moshiur" || Session["UserId"].ToString() == "bosl" || Session["UserId"].ToString() == "INV-ADMIN")
+            {            
+            <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
+                        <i class="more-less glyphicon glyphicon-plus"></i>
+                        Bond Report List
+                    </a>
+                </h4>
+            </div>
+
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+
+                    <div class="formRow dgHeaderBk bottomborder">
+
+                    <div class="container-fluid">
+                        @using (Html.BeginForm("TreasuryBondStatement", "Report"))
+                        {
+                                                      
+                            <div class="row">
+                                <div class="col-md-4">
+                                     <h5><b>1. Treasury Bond Statement</b></h5>
+                                </div>
+
+                                <div class="col-md-2 pull-left">
+                                    <h6>Fi Institiation</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                </div>
+                                <div class="col-md-2  position2">
+                                    @Html.DropDownList("tradeCode", (SelectList)ViewBag.financialInstitutionList, "Select FI Instituation", new { @class = "control-label entrylable drop-resize" })
+                                </div>
+                                 @*<div class="col-md-1 pull-left" style="color:green;font-weight:bold">
+                                    In Excel
+                                    <input type="checkbox" name="IsExcel" value="true" />
+                                </div>*@
+                                <div class="col-md-2 pull-right">                           
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+                    <div class="container-fluid">
+                        @using (Html.BeginForm("HalfYearlyCouponStatement", "Report"))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5><b>2. Half yearly Coupon Interest</b></h5>
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <h6>From Date</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                    <input type="text" class="datepicker inputArea" name="fromDate" required="required" />
+                                </div>
+                                <div class="col-md-2 pull-left left-padding">
+                                    <h6>To Date</h6>
+                                </div>
+                                <div class="col-md-2  position2">
+                                    <input type="text"  class="datepicker inputArea" name="toDate" required="required" />
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <h6>Fi Institiation</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                </div>
+                                <div class="col-md-2  position2">
+                                    @Html.DropDownList("tradeCode", (SelectList)ViewBag.financialInstitutionList, "Select FI Instituation", new { @class = "control-label entrylable drop-resize" })
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+                    <div class="container-fluid">
+                        @using (Html.BeginForm("InterestIncomeBGTBStatement", "Report"))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5><b>3. Interest Income BGTB</b></h5>
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                    <h6>Search Date</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                   @* <input type="text" id="getYear"  class="BGTBDate inputArea" name="getDate" required="required"/>*@
+                                    <input type="text" id="SearchDate" class="datepicker inputArea" name="SearchDate" required="required" />
+                                </div>
+                                <div class="col-md-2 pull-left left-padding">
+                                    <h6>Option</h6>
+                                </div>
+                                <div class="col-md-2  position2">                                   
+                                   <select class="control-label entrylable drop-resize" id="Option" name="Option">
+                                        <option value="">Select Option</option>
+                                        <option value="Quarterly">1st Quarterly</option>
+                                        <option value="HalfYearly">Half Yearly</option>
+                                        <option value="3rdQuarterly">3rd Quarterly</option>                                        
+                                       <option value="Yearly">Yearly</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+
+                                <div class="col-md-2 pull-left">
+                                    <h6>Fi Institiation</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                </div>
+                                <div class="col-md-2  position2">
+                                    @Html.DropDownList("tradeCode", (SelectList)ViewBag.financialInstitutionList, "Select FI Instituation", new { @class = "control-label entrylable drop-resize" })
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                     <input type="checkbox" name="IsExcell" value="true" />
+                                                <label>Excell</label>
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                          
+                    </div>
+
+
+                    <div class="whead">
+                       <h6>Bond History Reports</h6>
+                       <div class="clear"></div>
+                       </div>
+                    <div class="formRow dgHeaderBk">
+                      <div class="container-fluid">
+                        @using (Html.BeginForm("TreasuryBondStatement", "Report"))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5><b>4. Treasury Bond History Statement</b></h5>
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                   <h6>Search Date</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                    <input type="text"  class="datepicker inputArea" name="BondDate" required="required" />
+                                </div>
+                                <div class="col-md-2 pull-left left-padding">
+                                  <h6>Fi Institiation</h6>
+                                </div>
+                                <div class="col-md-2  position2">
+                                   @Html.DropDownList("tradeCode", (SelectList)ViewBag.financialInstitutionList, "Select FI Instituation", new { @class = "control-label entrylable drop-resize" })  
+                                </div>
+                                 <input hidden="hidden" type="text" class="inputArea btnDisable" value="true" name="IsHistory" required="required" />
+                                 <div class="col-md-2 pull-right">                           
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>                           
+                            
+                        }
+
+                    </div>
+                    </div>    
+
+                </div>
+            </div>
+        </div>
+            }
+        
+         @if (Session["UserId"].ToString() == "Moshiur" || Session["UserId"].ToString() == "bosl" || Session["UserId"].ToString() == "INV-ADMIN")
+           { 
+            <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingFour">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        <i class="more-less glyphicon glyphicon-plus"></i>
+                        Particular Report List
+                    </a>
+                </h4>
+            </div>
+
+            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                <div class="panel-body">
+
+                    <div class="formRow dgHeaderBk bottomborder">
+
+                    <div class="container-fluid">
+                        @using (Html.BeginForm("ParticularReportStatement", "Report"))
+                        {
+                                                      
+                            <div class="row">
+                                <div class="col-md-4">
+                                     <h5><b>1. Statement Of Total Investment</b></h5>
+                                </div>
+
+                                <div class="col-md-2 pull-left">
+                                    <h6>Search Date</h6>
+                                </div>
+                                <div class="col-md-2 position1">
+                                </div>
+                                <div class="col-md-2 pull-left">
+                                </div>
+                                <div class="col-md-2  position2">
+                                    <input type="text" class="datepicker inputArea" name="SearchDate" required="required" />
+                                </div>                               
+                                <div class="col-md-2 pull-right">    
+                                    <input type="checkbox" name="IsExcell" value="true" />
+                                     <label>Excell</label>                       
+                                    <button type="submit" id="" class="btn btn-primary">Print</button>
+                                </div>
+                            </div>
+                        }
+
+                    </div>                
+                          
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+           }
+
+    </div><!-- panel-group -->
+    
+    </div>
+   </div>
+</div><!-- container -->
+
+@*    </div>*@
+
+<script>
+
+    $('#getYear').datepicker()
+        .on("change", function (e) {
+
+            alert($(this).val())
+
+            $('#SearchDate').datepicker('setDate', $(this).val());          
+         
+    });
+
+    function ShowYear() {
+        var date = $("#date").datepicker({ dateFormat: formatDate('long') }).val()
+        alert(date);
+    }
+
+    function toggleIcon(e) {
+        $(e.target)
+            .prev('.panel-heading')
+            .find(".more-less")
+            .toggleClass('glyphicon-plus glyphicon-minus');
+    }
+    $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+    $('.panel-group').on('shown.bs.collapse', toggleIcon);
+</script>

@@ -1,0 +1,502 @@
+﻿@model List<InvestmentManagement.InvestmentManagement.Models.ChequeDrawnViewModel>
+@*@model InvestmentManagement.InvestmentManagement.Models.ChequeViewModel*@
+@{
+    TempData["pnref"] = ViewBag.pnref;
+    TempData["lblbredcum"] = ViewBag.lblbredcum;
+    int j = 0;
+    int Index = 0;
+    TempData["DateTime"] = null;
+}
+
+
+<div id="Replace">
+
+    <script type="text/javascript">
+      
+
+        function CheckAmount() {
+
+
+            var ckeckDate = document.getElementById('PRINCIPALAMOUNT').value;
+
+            var principle = document.getElementById('PRINCIPALAMOUNT').value;
+            //var Cdate = document.getElementById("_CHEQUEDATE").value;
+            var dateCheck = true; // false;
+            alert('You inserted Cheque Date: ' + Cdate);
+
+            principle = parseFloat(principle);
+
+
+          
+            //end checking 
+
+            var ChequeAmount = 0;
+            if (dateCheck == true) {
+                $('.amount').each(function () {
+                    text = $(this).val(),
+                    ChequeAmount += parseFloat(text)
+                    // alert(ChequeAmount)
+                })
+
+                //  alert('Your total Cheque amount is: '+ CheckAmount);
+                if (parseFloat(ChequeAmount) > 0) {
+                    if (principle == ChequeAmount) {
+                        return true;
+                    }
+                    else if (ChequeAmount < principle) {
+                        alert('Cheque amount is ' + (principle - ChequeAmount) + ' less then Principle Amount!!', 'Amount Overless');
+                    }
+                    else if (ChequeAmount > principle) {
+                        alert('Cheque amount is ' + (ChequeAmount - principle) + ' more then Principle Amount!!', 'Amount Overflow');
+                    }
+                }
+                else {
+                    alert('you should insert a cheque amount!', 'Null Value');
+                }
+            }
+            else
+                alert("Please enter date as format dd-MMM-yy");
+            return false;
+        }
+    </script>
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.breadcum)
+    </ol>
+
+    <div class="wrapper pl">
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            <strong>Info !</strong>
+            @ViewBag.Message
+        </div>
+        <div class="container-fluid">
+
+            @using (Ajax.BeginForm("ApproveFDRPurchaseNote", "FDRNOTE", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+            {                       
+                
+                
+                <div id="NoteInformation" class="container-fluid">
+                    <div class="widget ">
+                        <div class="whead">
+                            <h6>
+                                <label id="" title="">FDR Purchase Note Information</label>
+                            </h6>
+                            <div class="clear">
+                            </div>
+                        </div>
+
+                        <div class="">
+
+                            @foreach (var item in ViewBag.FDRNoteList)
+                            { 
+                    
+                                <ul class="col-md-6 entryForm bottomNonePadding">
+                                    <li class="form-group">
+                                        <span class="control-label entrylable">FINANCIAL INSTITUTION</span>
+                                        <br />
+                                        @Html.DropDownList("FINANCIALINSTITUTION_REFERENCE", (SelectList)ViewBag.FInstitution_Ref, new { @class = "control-label entrylable drpResize drpsize", @disabled = "disabled" })
+                                    </li>
+
+                                    <li class="form-group">
+                                        <span class="control-label entrylable">BRANCH</span>
+                                        <br />
+                                        @Html.DropDownList("BRANCH_REFERENCE", (SelectList)ViewBag.FIBranch_Ref, new { @class = "control-label entrylable drpResize drpsize", @disabled = "disabled" })
+                                    </li>
+
+                                    <li class="form-group">
+                                        <span class="control-label entrylable">EXISTING DEPOSIT</span>
+                                        <div class="input-group">
+                                            @Html.TextBox("EXISTINGDEPOSIT", (decimal)item.EXISTINGDEPOSIT, new { @class = "form-control decimal", @readonly = "readonly" })
+                                            <div class="input-group-addon">.00</div>
+                                        </div>
+                                    </li>
+                                    
+
+                                    <li class="form-group" style="margin-top: 5px;">
+                                        <span class="control-label entrylable">PERCENTAGE OF FDR</span>
+                                        <div class="input-group">
+                                            @Html.TextBox("PERCENTAGEOFFDR", (decimal)item.PERCENTAGEOFFDR, new { @class = "form-control decimal", @readonly = "readonly" })
+                                            <div class="input-group-addon">.00</div>
+                                        </div>
+                                    </li>
+
+                                    <li class="form-group" style="margin-top: 5px;">
+                                        <span class="control-label entrylable">CAP LIMIT</span>
+                                        <div class="input-group">
+                                            @Html.TextBox("CAPLIMIT", (decimal)item.CAPLIMIT, new { @class = "form-control decimal", @readonly = "readonly", @placeholder = "Please Enter Your" })
+                                            <div class="input-group-addon">.00</div>
+                                        </div>
+                                    </li>
+
+                                    <li class="form-group">
+                                        <span class="control-label entrylable">CONTACT PERSON</span>
+                                        <div class="input-group">
+                                            @Html.TextBox("CONTACTPERSON", (string)item.CONTACTPERSON, new { @class = "form-control", @readonly = "readonly", required = "required" })
+                                        </div>
+                                    </li>
+
+
+                                    <li class="form-group">
+                                        <span class="control-label entrylable">SIGNATORY1</span>
+                                        <div class="input-group">
+                                            @Html.TextBox("SIGNATORY1", (string)item.SIGNATORY1, new { @class = "form-control", required = "required" })
+                                        </div>
+                                    </li>
+
+
+                                    <li class="form-group">
+                                        <span class="control-label entrylable">SIGNATORY2</span>
+                                        <div class="input-group">
+                                            @Html.TextBox("SIGNATORY2", (string)item.SIGNATORY2, new { @class = "form-control", required = "required" })
+                                        </div>
+                                    </li>
+
+
+
+                                </ul>
+                                <ul class="col-md-6 entryForm bottomNonePadding">
+                                    <li class="form-group">
+                                        @Html.Hidden("REFERENCE", (string)item.REFERENCE)
+                                    </li>
+
+                                    <li class="form-group">
+                                        <span class="control-label entrylable">PROPOSED RATE</span>
+                                        <div class="input-group">
+                                            @Html.TextBox("PROPOSEDRATE", (decimal)item.PROPOSEDRATE, new { @class = "form-control decimal", @readonly = "readonly" })
+                                            <div class="input-group-addon">.00</div>
+                                        </div>
+
+                                    </li>
+
+                                    <li class="form-group">
+                                        <span class="control-label entrylable">OFFER RATE</span>
+                                        <div class="input-group">
+                                            @Html.TextBox("OFFERRATE", (decimal)item.OFFERRATE, new { @class = "form-control decimal", @readonly = "readonly" })
+                                            <div class="input-group-addon">.00</div>
+                                        </div>
+                                    </li>
+
+
+                                    <li class="form-group">
+                                        <span class="control-label entrylable">PRINCIPAL AMOUNT</span>
+                                        <div class="input-group">
+                                            @Html.TextBox("PRINCIPALAMOUNT", (decimal)item.PRINCIPALAMOUNT, new { @class = "form-control decimal", @readonly = "readonly" })
+                                            <div class="input-group-addon">.00</div>
+                                        </div>
+                                    </li>
+
+                                    <li class="form-group">
+
+
+                                        <span class="control-label entrylable">TENURE--------------- TERM---------------------  Mode</span>
+                                        <br />
+
+
+                                        @*@Html.TextBox("TENURE",(decimal)item.TENURE, new { @class = "form-control number", @readonly = "readonly", @value = ViewBag.TENURE, style = "width: 20% !important; display:inline !important;", @type = "number"})
+                                        @Html.DropDownList("TENURETERM", (SelectList)ViewBag.TenureList, "select a list", new { @class = "control-label entrylable drpResize drpsize", @disabled = "disabled", style = "height: 35px !important; margin-top:0px !important; width:30%;" })
+                                        *@
+
+                                        @Html.TextBox("TENURE", (decimal)item.TENURE, new { @class = "form-control number", @readonly = "readonly", @value = ViewBag.TENURE, style = "width: 20% !important; display:inline !important;", @type = "number" })
+                                        @Html.DropDownList("TENURETERM", (SelectList)ViewBag.TenureList, "select a list", new { @class = "control-label entrylable drpResize drpsize", @disabled = "disabled", style = "height: 35px !important; margin-top:0px !important; width:30%;" })
+                                        @Html.TextBox("INTERESTMODE", (string)item.INTERESTMODE, new { @class = "form-control", @readonly = "readonly", @value = ViewBag.INTERESTMODE, style = "width: 30% !important; display:inline !important;" })
+                                        
+                                    </li>
+
+                                    <li class="form-group">
+                                        <span class="control-label entrylable">Interval ------------------- Annual Days</span>
+                                        <br />
+                                        @Html.TextBox("COMPOUNDINTERESTINTERVAL", (string)item.COMPOUNDINTERESTINTERVAL, new { @class = "form-control", @readonly = "readonly", @value = ViewBag.COMPOUNDINTERESTINTERVAL, style = "width:30% !important; display:inline !important;" })
+                                        @Html.TextBox("ANNUALDAYS", (decimal?)item.ANNUALDAYS, new { @class = "form-control number", @readonly = "readonly", @value = ViewBag.ANNUALDAYS, style = "width: 20% !important; display:inline !important;", @type = "number" })
+                                    </li>
+
+                                    <li class="form-group">
+                                        <span class="control-label entrylable">PROPOSAL SUMMARY</span>
+                                        @Html.TextBox("PROPOSALSUMMARY", (string)item.PROPOSALSUMMARY, new { @class = "form-control", @readonly = "readonly" })
+                                        <br />
+                                        @Html.ValidationMessage("PROPOSALSUMMARY")
+                                    </li>
+
+                                </ul>
+                            }
+                        </div>
+                    </div>
+                </div>
+                    
+                               
+                <div class="container-fluid">
+                    <div class="widget ">
+                        <div class="whead">
+                            <h6>
+                                <label id="" title="">CHEQUE DETAILS</label>
+                            </h6>
+                            <div class="clear">
+                            </div>
+                        </div>
+
+                        <div id="cheque" class="">
+
+                           @* <div style="margin-left: 10px; margin-top: 10px; margin-bottom: 10px; width: 500px;">
+
+
+                                <span class="control-label entrylable">CHEQUE DATE</span>
+
+                                <div class='input-group date col-md-6'>
+                                    <input type="text" id="_CHEQUEDATE" name="_CHEQUEDATE" required placeholder="dd/mm/yyyy(23/04/2016)" class="form-control datePicker" />
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+                                </div>
+                                <div class="col-md-4" style="padding-bottom: 2px">
+                                    eg: 04/06/2016
+                                </div>
+
+                            </div>*@
+                            <br />
+                            <div id="Addbtn" style="margin-left: 10px; padding-bottom: 15px;">
+                                @*class="col-md-3"*@
+                                <button type="button" class="btn-default btn-sm" style="color: green" onclick="AddRow()">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </div>
+                            <table id="DataTable" style="width: 1000; margin-top: 10px;">
+                                @if (Model != null && Model.Count > 0)
+                                {
+                                    Index = 1;
+
+
+                                    foreach (var i in Model)
+                                    {
+                                    
+                                    <tr>
+                                        <td style="width: 20px; text-align: center">@Index</td>
+                                        <td>
+                                            @Html.DropDownListFor(a => a[j].CHEQUEDRAWNFROM, ViewBag.financialInstitutionList as SelectList, "Select Institution", new { @class = "form-control", @required = "required" })
+                                        </td>
+
+                                        <td class='input-group date' style="width: 500px;">@*display: none*@
+
+                                            @Html.TextBoxFor(a => a[j].CHEQUEDATE, new { id = "[" + j + "].CHEQUEDATE", required = "required", @placeholder = "date: day-month-year", @class = "datepicker form-control", style = "width:200px;" })
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </td>
+
+
+                                        <td>
+                                            @Html.TextBoxFor(a => a[j].CHEQUENO, new { @class = "form-control", required = "required", @placeholder = "Cheque Number" })
+                                        </td>
+
+                                        <td>
+                                            @Html.TextBoxFor(a => a[j].CHEQUEAMOUNT, new { @class = "form-control decimal", required = "required", @placeholder = "Amount" })                                        
+                                        </td>
+
+                                        <td style="width: 120px">
+                                            @Html.DropDownListFor(a => a[j].PROPOSEDACTION, (SelectList)ViewBag.ProposaedAction, "select a list", new { required = "required", @class = "form-control" })
+                                        </td>
+
+                                        <td id="btn" style="width: 10px;">
+                                            @if (j > 0)
+                                            {
+                                                <a href="#" class="remove btn-default btn-sm" style="color: red" onclick="SomeDeleteRowFunction(this)"><span class="glyphicon glyphicon-remove"></span></a>                                   
+                                            }
+                                        </td>
+                                    </tr>  
+                                            j++;
+                                            Index++;
+                                    }
+                                }
+                            </table>
+                        </div>
+                    </div>
+                </div> 
+           
+                
+                <div id="Save" class="container-fluid">
+                    <div class="widget ">
+                        <div class="whead">
+                            <button type="submit" class="btn btn-success" tabindex="" onclick="return CheckAmount()">Confirm</button>
+                            @**@
+                            <a class="load btn btn-danger" href="~/#/FDRNOTE/ListFDRNOTE?lblbreadcum=FDR Notes">Close</a>
+                        </div>
+
+                    </div>
+                </div>
+
+            }
+
+        </div>
+
+    </div>
+    <p></p>
+
+
+    <script type="text/javascript">
+        //ajax beginform on begin also add jquery datepicker
+        function ShowProcessingMsg() {
+             $('.loadingImage').show();
+        }
+
+        //after datapost success and replace div we call jquery datepicker onsuccess event so it work 
+        //after data post
+        function HideProcessingMsg() {          
+            $('.loadingImage').hide();
+        }      
+    </script>
+
+
+    <script>
+        $(document).on('keypress', '.number', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+        $(document).on('keypress', '.decimal', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+    </script>
+
+    <script>
+            $(function () {                           
+                $('.datepicker').datepicker({ dateFormat: formatDate('long') });              
+                //alert('Approved Your FDR!!');
+
+                $(".datePicker").datepicker("destroy");
+                $(".datePicker").removeClass("hasDatePicker");
+                $(".datePicker").removeAttr("Disabled");
+                $(".datepicker").datepicker({ dateFormat: formatDate('long'), minDate: 0 });
+                jQuery.datepicker.dpDiv.appendTo(jQuery('body'));
+            });
+    </script>
+
+
+    <script type="text/javascript">
+
+      
+        //remove a row passing row index e
+        $(document).ready(function () {      
+          
+            $('.datepicker').datepicker({ dateFormat: "long" });
+           
+            $(".datePicker").datepicker("destroy");
+            $(".datePicker").removeClass("hasDatePicker");
+            $(".datePicker").removeAttr("Disabled");
+
+            $(".datepicker").datepicker({ dateFormat: formatDate('long'), minDate: 0 });
+            jQuery.datepicker.dpDiv.appendTo(jQuery('body'));
+          
+        });
+
+
+        function SomeDeleteRowFunction(o) {
+          //  delete cheque extra row        
+            //no clue what to put here?
+            var p = o.parentNode.parentNode;
+            p.parentNode.removeChild(p);
+        }
+
+        function AddRow(e) {
+                       
+            //Destroy all datepicker for dynamically added element
+           // RemoveJQUIDatepicker();
+            $(".datePicker").datepicker("destroy");
+            $(".datePicker").removeClass("hasDatePicker");
+            $(".datePicker").removeAttr("Disabled");
+
+            var prev;
+            var change;
+            var newHtml = '<tr>';
+
+
+            var table = document.getElementById("DataTable");
+
+            //get the table last row index
+            var lastRowIndex = table.rows.length;
+            //if two row 0,1 then lastRowIndex=2        
+
+            //Count number of columns in a table row
+            var totalcell = table.rows[lastRowIndex - 1].cells.length;
+
+            //alert('total cell: ' + totalcell);
+
+
+            for (var i = 0; i < totalcell; i++) {
+                //get per cell inner html
+                var cellInnerHtml = table.rows[lastRowIndex - 1].cells[i].innerHTML;
+
+               // alert('cell:[' + i + '] inner html:   ' + cellInnerHtml);
+                //we know first cell is index so just incriment it
+
+                if (i == 0) {
+                    var index = parseInt(cellInnerHtml);
+                    index = index + 1;                  
+                    newHtml += '<td style="width:20px;text-align:center">';
+                    newHtml += index;
+                    newHtml += '</td>';
+                }
+                else {
+
+                    if (i == 6) //last cell remove button
+                    {
+                        // alert('last cell');
+                        newHtml += '<td id="btn">';
+                        newHtml += '<a href="#" id="' + lastRowIndex + '" class="remove btn-default btn-sm" style="color:red" onclick="SomeDeleteRowFunction(this)"><span class="glyphicon glyphicon-remove"></span></a> ';
+                        newHtml += '</td>';
+                    }
+
+                    else {
+
+                        var p = lastRowIndex - 1;
+                        prev = '[' + p + ']';
+                       
+                        change = '[' + lastRowIndex + ']';                     
+
+                        if (i == 2) { //DatePicker Cell
+                           
+                            newHtml += '<td class="input-group date" style="width:500px;">';
+
+                            //datepicker field has id and name both but replace only one at a time so we replace here one time that work for id
+                            cellInnerHtml = cellInnerHtml.replace(prev, change);                      
+                            //alert('replace: ' + cellInnerHtml);
+                        }
+                        else {                           
+                            newHtml += '<td>';
+                          }
+
+                        newHtml += cellInnerHtml.replace(prev, change);                      
+                        newHtml += '</td>';
+                    }
+                }
+            }
+
+            newHtml += '</tr>';
+
+            $('#DataTable').append(newHtml);        
+
+            //set datepicker for dynamicaly added element
+            // SetJQUIDatePicker();
+
+            //change date time picker so that clicking Apply btn picker work 
+            $(".datepicker").datepicker({ dateFormat: formatDate('long') });
+            $(".datePicker").datepicker("destroy");
+            $(".datePicker").removeClass("hasDatePicker");
+            $(".datePicker").removeAttr("Disabled");
+            $(".datepicker").datepicker({ dateFormat: formatDate('long'), minDate: 0 });
+            jQuery.datepicker.dpDiv.appendTo(jQuery('body'));
+        }
+    </script>
+
+</div>
+

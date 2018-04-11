@@ -1,0 +1,276 @@
+﻿@model InvestmentManagement.Models.GridModel<InvestmentManagement.InvestmentManagement.Models.SCRIPTTRANSFER>
+
+<div id="replace">
+
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+        <script>
+
+            $(document).ready(function () {
+                $(function () {
+
+                    $(".datePicker").datepicker({ dateFormat: formatDate('long') });
+                    $('.datePicker').datepicker('setDate', new Date());
+                });
+            });
+        </script>
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+    <div class="wrapper pl">
+        <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            <strong>Info !@ViewBag.HtmlStr</strong>
+            @ViewBag.Message
+        </div>
+        <div class="container-fluid Grid-Container">
+
+
+
+            <div class="widget mb20">
+                <div class="whead">
+                    <h6>@Session["currentPage"]</h6>
+                    <select id="ddlPageSize">
+                        <option selected="selected">15</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                    <h6 style="float: right">Select Row Count</h6>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="formRow dgHeaderBk">
+                    <div class="container-fluid">
+                        <div class="col-md-12">
+                            @using (Html.BeginForm("ListFractionReceived", "ScriptTransfer", FormMethod.Get))
+                            {
+                                
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        From Date  
+                                        <input type="text" id="CreatedDate" class="inputArea datePicker" name="CreteadDate" />  @*inputArea*@
+                                    </div>
+                                    <div class="col-md-5">
+                                        To Date  
+                                        <input type="text" id="ToDate" class="inputArea datePicker" name="ToDate" />
+                                    </div>
+                                    <div class="col-md-1">
+                                        <input type="button" id="btn" class="btn btn-primary dgBtn" value="Apply" />
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4">
+                                <div class="form-group">
+                                    <div class="col-sm-8">
+                                        @if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+                                        {
+                                            @Ajax.ActionLink("Add", "AddScriptTransfer", "ScriptTransfer", new { Option = "Fraction" },
+                                            new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { @class = "btn btn-success" })
+                                        }
+                                        else
+                                        {
+                                            <a class=" load btn btn-success m10" role="menuitem" tabindex="-1" href="~/#/ScriptTransfer/AddScriptTransfer?Option=Fraction">Add</a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <script>
+                    function ChkAddClass() {
+
+                        var dir = $('#dir').val();
+                        var col = $('#col').val().replace(/\s/g, '');
+                        //alert(col);
+
+                        var header = $('th a[href*=' + col + ']');
+                        //alert(header.text());
+                        var countTh = document.getElementsByTagName('th').length;
+
+
+                        for (var i = 1; i <= countTh; i++) {
+
+                            var txtTh = $('.ASPGrid tr th:nth-child(' + i + ')').text().replace(/\s/g, '');
+
+                            if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Ascending') {                               
+                                $(".ASPGrid tr th").addClass("sorting");
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("ascending");
+                            }
+
+                            else if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Descending') {                               
+                                $(".ASPGrid tr th").addClass("sorting");
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("descending");
+                            }
+                        }
+                    }
+                </script>
+                <div id="PortfolioWebGrid" class="formRow noPad btbNone tScroll">
+                    @{
+                        WebGrid grid = new WebGrid(rowsPerPage: Model.RowsPerPage, ajaxUpdateContainerId: "PortfolioWebGrid", ajaxUpdateCallback: "ChkAddClass", sortFieldName: "sortdefault");
+                        grid.Bind(Model.DataModel, autoSortAndPage: false, rowCount: Model.RowsPerPage);
+				
+                        @grid.Table(columns: new[] {
+              
+                grid.Column(header:"Sl No",style:"textColumn", format:@<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),
+                
+                grid.Column("ENTRYDATE",format:@<text>@(@item.ENTRYDATE ==null?"":string.Format("{0:dd MMM yyyy}", item.ENTRYDATE ))</text>, style:"textColumn",header:"Fraction Received Date"),                
+                
+                grid.Column("INSTRUMENT.NAME",format:@<text>@item.INSTRUMENT.NAME (@item.INSTRUMENT.SHORTNAME)</text>, style:"textColumn",header:"Trade Code"),  
+                
+                grid.Column("TRANSACTIONTYPE",format:@<text>@(item.TRANSACTIONTYPE=="R"?"Received":item.TRANSACTIONTYPE=="D"?"Delivery":item.TRANSACTIONTYPE=="B" ? "Buy Order":item.TRANSACTIONTYPE=="S" ? "Sale Order":item.TRANSACTIONTYPE=="F"?"Fraction Received":"")</text>, style:"textColumn",header:"Type"),               
+               
+                grid.Column("SHAREQTY", format:@<text>@item.SHAREQTY.ToString("N")</text>, style:"numericColumn",header:"Quantity"), 
+               
+                grid.Column("TOTAL", format:@<text>@(item.TOTAL==null?"":item.TOTAL.ToString("N"))</text>, style:"numericColumn",header:"Amount"),                 
+                
+                grid.Column("DESCRIPTION",format:@<text>@item.DESCRIPTION</text>, style:"textColumn",header:"Description"),  
+                                
+                grid.Column("RECORDDATE",format:@<text>@(@item.RECORDDATE ==null?"":string.Format("{0:dd MMM yyyy}", item.RECORDDATE ))</text>, style:"textColumn",header:"Record Date"),
+               
+                grid.Column("STATUS",format:@<text>@item.DESCRIPTION</text>, style:"textColumn",header:"Status"),
+                        
+                grid.Column(header: "",  format:@<text>
+                        <div class="btn-group dropdown bdrNone">
+                            <a href="#" class="tablectrl_medium bDefault" data-toggle="dropdown"><span class="iconb" data-icon=""></span></a>
+                            <ul class="dropdown-menu pull-right cMbdr cMenu">
+                                <li>
+                                    @if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+                      {  
+                                        @Ajax.ActionLink("Edit", "EditScriptTransfer", "ScriptTransfer",new {Ref=@item.REFERENCE,Option="Fraction"},
+                      new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET",OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" })
+                      }
+                      else
+                      {
+                                        <a class="load" role="menuitem" tabindex="-1" href="~/#/ScriptTransfer/EditScriptTransfer?Ref=@item.REFERENCE&Option=Fraction">Edit</a>
+                      }
+                                </li>
+                            </ul>
+                        </div>
+                        </text>)
+                },
+
+
+
+                tableStyle: "ASPGrid",
+                htmlAttributes: new { cellspacing = "0", border = "0" },
+
+                footer: @<ul class="pagination">
+                </ul>
+
+                );
+                        @Html.Hidden("dir", grid.SortDirection)
+                        @Html.Hidden("col", grid.SortColumn)
+                    }
+                </div>
+                @*   @if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+                        {
+                        @Ajax.ActionLink("Add", "AddScriptTransfer", "ScriptTransfer",new {Option="Fraction"},
+                        new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { @class = "btn btn-success" })
+                        }
+                        else
+                        {
+                        <a class=" load btn btn-success m10" role="menuitem" tabindex="-1" href="~/#/ScriptTransfer/AddScriptTransfer?Option=Fraction">Add</a>
+                        }*@
+
+            </div>
+            <div class="clear"></div>
+
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".ASPGrid tr th").addClass("sorting");
+
+
+        $('.not-active').bind('click', false);
+
+        $('#btn').on('click', function () {
+            $('.loadingImage').show();
+
+            var filterstring = $('#CreatedDate').val();
+            $.get("/ScriptTransfer/ListFractionReceived?CreatedDate=" + $('#CreatedDate').val() + "&rows=" + $("#ddlPageSize").val() + "&ToDate=" + $("#ToDate").val() + "", function (data) {
+                var getHTML = $(data);
+                $('#PortfolioWebGrid').empty();
+
+                $('#PortfolioWebGrid').html($('#PortfolioWebGrid', getHTML));
+                ChkAddClass();
+                $('.loadingImage').hide();
+            });
+        });
+
+
+    });
+
+</script>
+
+
+<script>
+    $(document).on('keypress', '.number', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+    $(document).on('keypress', '.decimal', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+
+</script>
+
+<script type="text/javascript">
+    function ShowProcessingMsg() {
+
+        $('.loadingImage').show();
+
+    }
+    function HideProcessingMsg() {
+        $('.loadingImage').hide();
+    }
+
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        $(function () {
+
+            $("#txtCode").datepicker({ dateFormat: 'dd-M-yy', });
+            $('#txtCode').datepicker('setDate', new Date());
+
+        });
+
+    });
+</script>
+
+
+

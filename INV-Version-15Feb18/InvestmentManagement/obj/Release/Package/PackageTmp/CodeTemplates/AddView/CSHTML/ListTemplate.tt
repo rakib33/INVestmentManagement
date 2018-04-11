@@ -1,0 +1,529 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#@ import namespace="Microsoft.VisualStudio.Web.Mvc.Scaffolding.BuiltIn" #>
+<#@ assembly name="System.ComponentModel.DataAnnotations" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ assembly name="System.Data.Linq" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.ComponentModel.DataAnnotations" #>
+<#@ import namespace="System.Data.Linq.Mapping" #>
+<#@ import namespace="System.Data.Objects.DataClasses" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="Microsoft.VisualStudio.Web.Mvc.Scaffolding.BuiltIn" #>
+<#
+MvcTextTemplateHost mvcHost = MvcTemplateHost;
+#>
+@model <#= mvcHost.ViewDataTypeName #>
+<#
+// The following chained if-statement outputs the file header code and markup for a partial view, a content page, or a regular view.
+if(mvcHost.IsPartialView) {
+#>
+
+<#
+} else if(mvcHost.IsContentPage) {
+#>
+
+@{
+    ViewBag.Title = "<#= mvcHost.ViewName#>";
+<#
+if (!String.IsNullOrEmpty(mvcHost.MasterPageFile)) {
+#>
+    Layout = "<#= mvcHost.MasterPageFile#>";
+<#
+}
+#>
+}
+
+
+
+<#
+} else {
+#>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title><#= mvcHost.ViewName #></title>
+</head>
+<body>
+<#
+    PushIndent("    ");
+}
+#>
+<div id="replace">
+
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        <li><a class="load" href="@Url.Action("Index", "Home")">@Session["PreviousPage"]</a></li>
+
+        <li class="active">@Session["currentPage"]</li>
+    </ol>
+ <div class="wrapper pl">
+         <img class="loadingImage" src="~/Images/loading.gif" style="display:none;" />
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+
+            <strong>Info !</strong>
+            @ViewBag.Message
+        </div>
+        <div class="container-fluid Grid-Container">
+
+
+
+            <div class="widget mb20">
+                <div class="whead">
+                     <h6>@Session["currentPage"]</h6>
+                     <select id="ddlPageSize">
+                                
+                                <option selected="selected">15</option>
+                                <option>50</option>
+                                <option>100</option>
+                            </select>
+                    <h6 style="float:right">Select Row Count</h6>
+                   <div class="clear"></div>
+                </div>
+
+                <div class="formRow dgHeaderBk">
+                    <div class="container-fluid">
+                        <div class="col-md-12">
+                            <input type="text" id="txtCode" class="tableSearchField" placeholder="Enter Search Criteria" />
+                            <input type="button" id="btn" class="btn btn-primary dgBtn" value="Apply" />
+                            
+                        </div>
+                    </div>
+                </div>
+
+               <script>
+                    function ChkAddClass() {
+                       
+                        var dir = $('#dir').val();
+                        var col = $('#col').val().replace(/\s/g, '');
+                       //alert(col);
+                        
+                        var header = $('th a[href*='+col+']');
+                        //alert(header.text());
+                        var countTh = document.getElementsByTagName('th').length;
+
+
+                        for (var i = 1; i <= countTh; i++) {
+
+                            var txtTh = $('.ASPGrid tr th:nth-child(' + i + ')').text().replace(/\s/g, '');
+                            
+                            if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Ascending') {
+                                //alert("");
+                                //alert(txtTh + "" + col);
+                                $(".ASPGrid tr th").addClass("sorting");
+
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("ascending");
+                                $(".ASPGrid tr th:nth-child(1)").removeClass("sorting ascending");
+                                $(".ASPGrid tr th:nth-child(10)").removeClass("sorting ascending");
+
+                            }
+
+                            else if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Descending') {
+                                //alert(txtTh + "" + col);
+                                $(".ASPGrid tr th").addClass("sorting");
+
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("descending");
+                                $(".ASPGrid tr th:nth-child(1)").removeClass("sorting descending");
+                                $(".ASPGrid tr th:nth-child(10)").removeClass("sorting descending");
+
+
+                            }
+                        }
+
+
+                        //$("select,.check :checkbox").not("#ddlPageSize").uniform();
+
+                        //$('.selector').not("#ddlPageSize").addClass('pull-right');
+                        //$('.checker').not("#ddlPageSize").addClass('dataGridCheckBox');
+                    }
+                </script>
+<div id="WebGrid" class="formRow noPad btbNone tScroll">
+            @{
+                WebGrid grid = new WebGrid(rowsPerPage: Model.RowsPerPage, ajaxUpdateContainerId: "WebGrid", ajaxUpdateCallback: "ChkAddClass",sortFieldName:"sortdefault");
+                grid.Bind(Model.DataModel, autoSortAndPage: false, rowCount: Model.RowsPerPage);
+				
+                @grid.Table(columns: new[] {
+                grid.Column(header: "Select",  format:@<text>
+                    <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="">
+                            </label>
+                        </div>
+                    </text>),
+<#
+foreach (ModelProperty property in GetModelProperties(mvcHost.ViewDataType)) {
+    if (!property.IsPrimaryKey && property.Scaffold) {
+#>
+    
+<# 
+            if (property.UnderlyingType == typeof(DateTime)){
+
+#>
+grid.Column("@Html.DisplayFor(model => model.<#= property.Name #>)", header:"", format: f=>f.<#= property.ValueExpression #>.ToString("dd-MMM-yyyy"), style:"textColumn",header:""),
+<#            }  else if (property.UnderlyingType == typeof(double) || property.UnderlyingType == typeof(decimal)|| property.UnderlyingType == typeof(float)){ 
+
+
+#>
+
+grid.Column("@Html.DisplayFor(model => model.<#= property.Name #>)", format:@<text>@item.<#= property.ValueExpression #>.ToString("N") BDT</text>, style:"numericColumn",header:""),
+
+<#            }  else if (property.UnderlyingType == typeof(int) || property.UnderlyingType==typeof(long)){ 
+
+
+#>
+
+grid.Column("@Html.DisplayFor(model => model.<#= property.Name #>)", format:@<text>@item.<#= property.ValueExpression #>.ToString("N") BDT</text>, style:"numericColumn",header:""),
+
+<#            }  else if (property.UnderlyingType == typeof(bool)){ 
+
+
+#>
+grid.Column("@Html.DisplayFor(model => model.<#= property.Name #>)", style:"check dataGridCheckBox",header:""),
+<#            }  else { 
+
+
+#>
+
+grid.Column("@Html.DisplayFor(model => model.<#= property.Name #>)", style:"textColumn",header:""),
+
+<# 
+}
+#>
+                
+
+<#
+    }
+}
+#>
+  grid.Column(header: "",  format:@<text>
+                        <div class="btn-group dropdown bdrNone">
+                            <a href="#" class="tablectrl_medium bDefault" data-toggle="dropdown"><span class="iconb" data-icon=""></span></a>
+                            <ul class="dropdown-menu pull-right cMbdr cMenu">
+                                <li><a href="#"><span class="icos-add"></span>Add*</a></li>
+                                <li><a href=" @Url.Action("Edit","Home", new {id=@item.REFERENCE})"><span class=" icon-redo"></span>Share*</a></li>
+                                <li>
+                                    @if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+{
+  
+                                    @Ajax.ActionLink("Edit", "Edit<#= mvcHost.ViewDataType.Name #>", "<#= mvcHost.ViewDataType.Name #>",new {id=@item.REFERENCE},
+
+
+    new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET",OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" })
+
+}
+else
+{
+<a class="load" role="menuitem" tabindex="-1" href="~/#/<#= mvcHost.ViewDataType.Name #>/Edit<#= mvcHost.ViewDataType.Name #>?id=@item.REFERENCE">Edit</a>
+}
+</li>
+
+                            </ul>
+                        </div>
+                        </text>)
+                },
+                tableStyle: "ASPGrid",
+                htmlAttributes: new { cellspacing = "0", border = "0" },
+
+     footer: @<ul class="pagination">
+   <li class="@ViewBag.Prev"><a  class="@ViewBag.PrevNotActive" href="/<#= mvcHost.ViewDataType.Name #>/List<#= mvcHost.ViewDataType.Name #>?PagingType=Prev&sort=@grid.SortColumn&currentFilter=@ViewBag.CurrentFilter&currentRowPerPage=@ViewBag.currentRowPerPage" data-swhglnk="true">Prev</a></li>
+   <li class="@ViewBag.Next"><a  class="@ViewBag.NextNotActive" href="/<#= mvcHost.ViewDataType.Name #>/List<#= mvcHost.ViewDataType.Name #>?PagingType=Next&sort=@grid.SortColumn&currentFilter=@ViewBag.CurrentFilter&currentRowPerPage=@ViewBag.currentRowPerPage" data-swhglnk="true">Next</a></li>
+
+
+     </ul>
+
+                );
+                        @Html.Hidden("dir", grid.SortDirection)
+                        @Html.Hidden("col", grid.SortColumn)
+                    }
+                </div>
+@if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+{
+                 @Ajax.ActionLink("Add", "Add<#= mvcHost.ViewDataType.Name #>", "<#= mvcHost.ViewDataType.Name #>",
+
+
+    new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { @class = "btn btn-success m10" })
+
+}
+else
+{
+<a class=" load btn btn-success m10" role="menuitem" tabindex="-1" href="~/#/<#= mvcHost.ViewDataType.Name #>/Add<#= mvcHost.ViewDataType.Name #>">Add</a>
+}
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".ASPGrid tr th").addClass("sorting");
+        $(".ASPGrid tr th:nth-child(1)").removeClass("sorting");
+        $(".ASPGrid tr th:nth-child(7)").removeClass("sorting");
+
+        $('.not-active').bind('click', false);
+     $('#btn').on('click', function () {
+            $('.loadingImage').show();
+            alert(@grid.SortColumn);
+            var filterstring = $('#txtCode').val();
+            $.get("/<#=mvcHost.ViewDataType.Name #>/List<#=mvcHost.ViewDataType.Name #>?filterstring=" + $('#txtCode').val() + "&rows=" + $("#ddlPageSize").val() + "", function (data) {
+                var getHTML = $(data);
+                $('#WebGrid').empty();
+
+                $('#WebGrid').html($('#WebGrid', getHTML));
+                ChkAddClass();
+                $('.loadingImage').hide();
+            });
+        });
+
+        $('#ddlPageSize').on('change', function () {
+            //$('.loadingImage').show();
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+             $.get("/<#=mvcHost.ViewDataType.Name #>/List<#=mvcHost.ViewDataType.Name #>?sort=" + $('#col').val() + "&sortdir=" + $('#dir').val() + "&filterstring=" + $('#txtCode').val() + "&rows=" + valueSelected + "", function (data) {
+                var getHTML = $(data);
+                $('#WebGrid').empty();
+                $('#WebGrid').andSelf().unbind();
+                $('#WebGrid').html($('#WebGrid', getHTML));
+                ChkAddClass();
+                //$('.loadingImage').hide();
+
+            });
+        });
+    });
+
+</script>
+
+
+<script>
+    $(document).on('keypress', '.number', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+    $(document).on('keypress', '.decimal', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 ||event.keyCode==9) {
+            // let it happen, don't do anything
+        } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+</script>
+
+<script type="text/javascript">
+    function ShowProcessingMsg() {
+
+        $('.loadingImage').show();
+
+    }
+    function HideProcessingMsg() {
+        $('.loadingImage').hide();
+    }
+
+</script>
+
+    <script>
+
+   
+        $(document).on('click', '.dropdown-menu li a', function (event)
+          {
+                var selText = $(this).text();
+                $('.hidden').val(selText);
+                $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+                event.preventDefault();
+                //event.stopPropagation();
+                //return false;
+            });
+
+     
+
+</script>
+<#
+
+if(!mvcHost.IsPartialView && !mvcHost.IsContentPage) {
+    ClearIndent();
+#>
+</body>
+</html>
+<#
+}
+#>
+<#+
+// Describes the information about a property on the model
+class ModelProperty {
+    public string Name { get; set; }
+    public string AssociationName { get; set; }
+    public string ValueExpression { get; set; }
+    public string ModelValueExpression { get; set; }
+    public string ItemValueExpression { get; set; }
+    public Type UnderlyingType { get; set; }
+    public bool IsPrimaryKey { get; set; }
+    public bool IsForeignKey { get; set; }
+    public bool IsReadOnly { get; set; }
+    public bool Scaffold { get; set; }
+}
+
+// Change this list to include any non-primitive types you think should be eligible for display/edit
+static Type[] bindableNonPrimitiveTypes = new[] {
+    typeof(string),
+    typeof(decimal),
+    typeof(Guid),
+    typeof(DateTime),
+    typeof(DateTimeOffset),
+    typeof(TimeSpan),
+};
+
+// Call this to get the list of properties in the model. Change this to modify or add your
+// own default formatting for display values.
+List<ModelProperty> GetModelProperties(Type type) {
+    List<ModelProperty> results = GetEligibleProperties(type);
+    
+    foreach (ModelProperty prop in results) {
+        if (prop.UnderlyingType == typeof(double) || prop.UnderlyingType == typeof(decimal)) {
+            prop.ModelValueExpression = "String.Format(\"{0:F}\", " + prop.ModelValueExpression + ")";
+        }
+        else if (prop.UnderlyingType == typeof(DateTime)) {
+            prop.ModelValueExpression = "String.Format(\"{0:g}\", " + prop.ModelValueExpression + ")";
+        }
+    }
+
+    return results;
+}
+
+// Call this to determine if property has scaffolding enabled
+bool Scaffold(PropertyInfo property) {
+    foreach (object attribute in property.GetCustomAttributes(true)) {
+        var scaffoldColumn = attribute as ScaffoldColumnAttribute;
+        if (scaffoldColumn != null && !scaffoldColumn.Scaffold) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Call this to determine if the property represents a primary key. Change the
+// code to change the definition of primary key.
+bool IsPrimaryKey(PropertyInfo property) {
+    if (string.Equals(property.Name, "id", StringComparison.OrdinalIgnoreCase)) {  // EF Code First convention
+        return true;
+    }
+
+    if (string.Equals(property.Name, property.DeclaringType.Name + "id", StringComparison.OrdinalIgnoreCase)) {  // EF Code First convention
+        return true;
+    }
+
+    foreach (object attribute in property.GetCustomAttributes(true)) {
+        if (attribute is KeyAttribute) {  // WCF RIA Services and EF Code First explicit
+            return true;
+        }
+        
+        var edmScalar = attribute as EdmScalarPropertyAttribute;
+        if (edmScalar != null && edmScalar.EntityKeyProperty) {  // EF traditional
+            return true;
+        }
+
+        var column = attribute as ColumnAttribute;
+        if (column != null && column.IsPrimaryKey) {  // LINQ to SQL
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+// This will return the primary key property name, if and only if there is exactly
+// one primary key. Returns null if there is no PK, or the PK is composite.
+string GetPrimaryKeyName(Type type) {
+    IEnumerable<string> pkNames = GetPrimaryKeyNames(type);
+    return pkNames.Count() == 1 ? pkNames.First() : null;
+}
+
+// This will return all the primary key names. Will return an empty list if there are none.
+IEnumerable<string> GetPrimaryKeyNames(Type type) {
+    return GetEligibleProperties(type).Where(mp => mp.IsPrimaryKey).Select(mp => mp.Name);
+}
+
+// Call this to determine if the property represents a foreign key.
+bool IsForeignKey(PropertyInfo property) {
+    return MvcTemplateHost.RelatedProperties.ContainsKey(property.Name);
+}
+
+// A foreign key, e.g. CategoryID, will have a value expression of Category.CategoryID
+string GetValueExpressionSuffix(PropertyInfo property) {
+    RelatedModel propertyModel;
+    MvcTemplateHost.RelatedProperties.TryGetValue(property.Name, out propertyModel);
+
+    return propertyModel != null ? propertyModel.PropertyName + "." + propertyModel.DisplayPropertyName : property.Name;
+}
+
+// A foreign key, e.g. CategoryID, will have an association name of Category
+string GetAssociationName(PropertyInfo property) {
+    RelatedModel propertyModel;
+    MvcTemplateHost.RelatedProperties.TryGetValue(property.Name, out propertyModel);
+
+    return propertyModel != null ? propertyModel.PropertyName : property.Name;
+}
+
+// Helper
+List<ModelProperty> GetEligibleProperties(Type type) {
+    List<ModelProperty> results = new List<ModelProperty>();
+
+    foreach (PropertyInfo prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance)) {
+        Type underlyingType = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
+        if (prop.GetGetMethod() != null && prop.GetIndexParameters().Length == 0 && IsBindableType(underlyingType)) {
+            string valueExpression = GetValueExpressionSuffix(prop);
+
+            results.Add(new ModelProperty {
+                Name = prop.Name,
+                AssociationName = GetAssociationName(prop),
+                ValueExpression = valueExpression,
+                ModelValueExpression = "Model." + valueExpression,
+                ItemValueExpression = "item." + valueExpression,
+                UnderlyingType = underlyingType,
+                IsPrimaryKey = IsPrimaryKey(prop),
+                IsForeignKey = IsForeignKey(prop),
+                IsReadOnly = prop.GetSetMethod() == null,
+                Scaffold = Scaffold(prop)
+            });
+        }
+    }
+
+    return results;
+}
+
+// Helper
+bool IsBindableType(Type type) {
+    return type.IsPrimitive || bindableNonPrimitiveTypes.Contains(type);
+}
+
+MvcTextTemplateHost MvcTemplateHost {
+    get {
+        return (MvcTextTemplateHost)Host;
+    }
+}
+#>

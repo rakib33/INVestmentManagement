@@ -1,0 +1,604 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.FDRNOTE
+
+<div id="Replace">
+
+  @*jquery-1.7.1.js or jquery-1.7.1.min.js for cascading dropdownlist ajax call*@
+  <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+
+  <script type="text/javascript">
+        function TenureTerms(e) {
+            //if tearms days then InterestMode auto change to Flat
+
+            //alert(e);
+            var mode = document.getElementById('INTERESTMODE').value;
+
+            if (e == "Days" && mode == "Compound") {
+                document.getElementById('INTERESTMODE').value = "Flat";
+                alert(e + ' is not available for Compound!');
+
+                //anual Days is required              
+
+                $("#ANNUALDAYS").attr("required", true);
+                $("#COMPOUNDINTERESTINTERVAL").attr("required", false);
+            }
+        }
+
+        function InterestMode(value) {
+
+            // alert(value);
+            var isDays = document.getElementById('TENURETERM').value;
+
+            //None can not be accepted
+            if (value == "None") {
+                document.getElementById('INTERESTMODE').value = "Flat";
+            }
+            else if (value == "Compound") {
+                //if compound then check terms if it Days chnage it to months and Days option disable                
+                if (isDays == "Days") {
+                    document.getElementById('TENURETERM').value = "Months";
+                    alert(isDays + ' is not available for Compound!');
+                }
+                //anual days required false COMPOUNDINTERESTINTERVAL is true               
+
+                $("#ANNUALDAYS").attr("required", false);
+                $("#COMPOUNDINTERESTINTERVAL").attr("required", true);
+
+            }
+            else if (value == "Flat") {
+                $("#COMPOUNDINTERESTINTERVAL").attr("required", false);
+                if (isDays == "Days")
+                    $("#ANNUALDAYS").attr("required", true);
+            }
+
+}
+
+function ChequeInterval(interval) {
+
+            //alert(interval);
+            //   var interval = document.getElementById('COMPOUNDINTERESTINTERVAL').value;
+            var tenureTerm = document.getElementById('TENURETERM').value;
+            if (interval == "Daily") {
+                alert(interval + ' is not available in this regions!');
+                document.getElementById('COMPOUNDINTERESTINTERVAL').value = "Monthly";
+            }
+            else if (interval == "Yearly") {
+                //check TenureTerm it must be Yearly
+
+                //if (tenureTerm != "Years")
+                //{
+                //    alert('Term must be Years');
+                //    document.getElementById('TENURETERM').value = "Years";
+                //}
+
+    }
+}
+
+        function CheckInterestMode() {
+            //in this method we check is InterestMode Compound or flat None can not be entry
+            //if Flat then must has annual days
+            //if compound then must have CompoundInterval(Quarterly,monthly,Yearly,HalfYearly)
+            //alert('hitted');
+            var intersetMode = document.getElementById('INTERESTMODE').value;
+            var tenureTerms = document.getElementById('TENURETERM').value;
+            var annualDays = document.getElementById('ANNUALDAYS').value;
+            var Interval = document.getElementById('COMPOUNDINTERESTINTERVAL').value;
+
+            //Nan value can not get If NanN * 1=0
+            var IntannualDays = parseFloat(annualDays * 1);
+
+            // alert('Intannual Days' + IntannualDays);
+            var tenure = document.getElementById('TENURE').value;
+            var IntTenure = 0.0;
+
+            //IntTenure = parseFloat(tenure % 3);
+            //alert('float tenure' +parseFloat(tenure));
+            //alert('int annual days'+IntannualDays+'  IntTenure :'+IntTenure);
+
+            if (intersetMode == "Flat" && tenureTerms == "Days") {
+
+                $("#ANNUALDAYS").attr("required", true);
+                $("#COMPOUNDINTERESTINTERVAL").attr("required", false);
+
+                //must have annual days
+                if (IntannualDays == 0) {
+                    alert('Annual Days is required!')
+                    return false;
+                } else if (IntannualDays < 360 || IntannualDays > 366) {
+
+                    alert('Annual Days must be 360 to 366!')
+                    return false;
+                }
+            }
+            else if (intersetMode == "Compound") {
+                //must have CompoundInterval
+                if (Interval == "Daily") {
+                    alert(Interval + ' is not available in this regions!');
+                    return false;
+                }
+                else if (Interval == "Yearly" || Interval == "Quarterly" || Interval == "Monthly" || Interval == "HalfYearly") {
+
+                    if (isNaN(tenure) || tenure < 1) {
+                        alert('Tenure is required!');
+                        return false;
+
+                    } else {
+                        if (Interval == "Quarterly") {
+                            //check if terms =Months then is tenure %3=0 if not it is not supported Quarterly
+                            if (tenureTerms == "Months") {
+                                IntTenure = parseFloat(tenure % 3);
+                                if (IntTenure != 0) {
+
+                                    alert(tenure + ' is not supported for Quarterly Interval!')
+                                    return false;
+                                }
+                            }
+
+                        }
+                        else if (Interval == "HalfYearly") {
+
+                            //check if terms =Months then is tenure %6=0 if not it is not supported HalfYearly
+                            if (tenureTerms == "Months") {
+                                IntTenure = parseFloat(tenure % 6);
+                                if (IntTenure != 0) {
+
+                                    alert(tenure + ' is not supported for HalfYearly Interval!')
+                                    return false;
+                                }
+                            }
+                        }
+
+                        else if (Interval == "Yearly") {
+                            if (tenureTerms == "Months") {
+                                IntTenure = parseFloat(tenure % 12);
+                                if (IntTenure != 0) {
+
+                                    alert(tenure + ' is not supported for Yearly Interval!')
+                                    return false;
+                                }
+                            }
+                            else if (tenureTerms == "Days") {
+                                alert('Days is not supported for Compound!')
+                                return false;
+                            }
+
+                        }
+                    }
+                }
+                else {
+
+                    alert('Please select an Interval.');
+                    return false;
+                }
+            }
+
+            if (intersetMode == "Compound") {
+                //  alert('hitted Interval'+Interval);
+                if (Interval == "Yearly") {
+                    // alert(Interval);
+                }
+                else if (Interval == "Quarterly") {
+                    //alert(Interval);
+                }
+                else if (Interval == "Monthly") {
+                    //alert(Interval);
+                }
+                else if (Interval == "HalfYearly") {
+                    //alert(Interval);
+                }
+                else {
+                    //alert('false');
+                    //alert('Please select an Interval.');
+                    return false;
+                }
+            }
+            return true;
+
+        }
+
+    </script>
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        <li class="active">@ViewBag.breadcum</li>
+    </ol>
+    <div class="wrapper pl">
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            <strong>Info!</strong>
+            @ViewBag.Message
+        </div>
+        <div class="container-fluid">           
+            
+            @using (Ajax.BeginForm("FDRPurchaseNoteEntry", "FDRNOTE", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+            { 
+                
+                @Html.Hidden("REFERENCE", Model.REFERENCE)
+                @Html.Hidden("NOTEID", Model.NOTEID)
+                @Html.Hidden("NOTETYPE", Model.NOTETYPE)
+                @Html.Hidden("STATUS", Model.STATUS)
+                @Html.Hidden("CREATEDBY", Model.CREATEDBY)
+                @Html.Hidden("CREATEDDATE", Model.CREATEDDATE)
+                @Html.Hidden("OPENEDDATE", Model.OPENEDDATE)
+                
+                <div id="NoteInformation" class="container-fluid">
+                    <div class="widget ">
+                        <div class="whead">
+                            <h6>
+                                <label id="" title="">FDR Purchase Note Information</label>
+                            </h6>
+                            <div class="clear">
+                            </div>
+                        </div>
+
+                        <div class="">
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+
+
+
+                                  
+                                <li class="form-group">
+
+                                    @Html.LabelFor(model => model.FINANCIALINSTITUTION_REFERENCE, new { @class = "control-label entrylable" })
+                                    <br />
+                                    @Html.DropDownListFor(model => model.FINANCIALINSTITUTION_REFERENCE, (SelectList)ViewBag.financialInstitutionList, @Model.FINANCIALINSTITUTION_REFERENCE, new { @required = "required", @class = "control-label entrylable drpResize drpsize", @onchange = "GetBranch(this.value)" })
+                                </li>
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.BRANCH_REFERENCE, new { @class = "control-label entrylable" })
+
+                                    <br />
+                                    @Html.DropDownListFor(model => model.BRANCH_REFERENCE, new SelectList(string.Empty, "Value", "Text"), "Select a Branch", new { @class = "control-label entrylable drpResize drpsize", @required = "required" })
+
+                                    @*  this is the hidden field so that we understand is it come form FDRPurchaseNoteNew action style="display:none"*@
+
+                                    <div>
+                                        <input type="text" name="FDRPurchaseNoteEdit" id="FDRPurchaseNoteEdit" style="display:none" value="@ViewBag.FDRPurchaseNoteNew" />
+                                    </div>
+
+                                </li>
+
+                               
+                                <li class="form-group">
+
+                                    @Html.LabelFor(model => model.EXISTINGDEPOSIT, new { @class = "control-label entrylable" })
+                                    
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.EXISTINGDEPOSIT, new { @class = "form-control decimal", @required = "required", @readonly = "readonly", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.EXISTINGDEPOSIT) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.EXISTINGDEPOSIT) + "'" })
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.EXISTINGDEPOSIT)
+
+                                </li>
+                                <li class="form-group">
+
+                                    @Html.LabelFor(model => model.PERCENTAGEOFFDR, new { @class = "control-label entrylable" })
+
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.PERCENTAGEOFFDR, new { @class = "form-control decimal", @required = "required", @readonly = "readonly", Value = ViewBag.PercentOfFDR, @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.PERCENTAGEOFFDR) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.PERCENTAGEOFFDR) + "'" })
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.PERCENTAGEOFFDR)
+
+                                </li>
+
+                                <li class="form-group">
+                                @Html.LabelFor(model => model.CAPLIMIT, new { @class = "control-label entrylable" })
+                                <div class="input-group">
+                                @Html.TextBoxFor(model => model.CAPLIMIT, new { @class = "form-control decimal", @required = "required", @readonly = "readonly", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.CAPLIMIT) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.CAPLIMIT) + "'" })
+                                <div class="input-group-addon">.00</div>
+                                </div>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.CAPLIMIT)
+                                </li>
+
+                                <li class="form-group">
+                                @Html.LabelFor(model => model.SIGNATORY1, new { @class = "control-label entrylable" })
+                                @Html.TextBoxFor(model => model.SIGNATORY1, new { @class = "form-control", @required = "required", @value = @Model.SIGNATORY1, style = "width: 50%", @placeholder = "" + @Html.DisplayNameFor(model => model.SIGNATORY1) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.SIGNATORY1) + "'" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.SIGNATORY1)
+                                </li>
+
+
+                                 <li class="form-group">
+
+                                    @Html.LabelFor(model => model.SIGNATORY2, new { @class = "control-label entrylable" })
+
+
+                                    @Html.TextBoxFor(model => model.SIGNATORY2, new { @class = "form-control", @required = "required", @value = @Model.SIGNATORY2, style = "width: 50%", @placeholder = "" + @Html.DisplayNameFor(model => model.SIGNATORY2) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.SIGNATORY2) + "'" })
+
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.SIGNATORY2)
+
+                                </li>
+                                 <li class="form-group">
+                                @Html.LabelFor(model => model.CONTACTPERSON, new { @class = "control-label entrylable" })
+                              @*   @Html.Label("CONTACT DETAILS", new { @class = "control-label entrylable" })*@
+                                @Html.TextBoxFor(model => model.CONTACTPERSON, new { @class = "form-control", @required = "required", @value = @Model.CONTACTPERSON, @placeholder = @Html.DisplayNameFor(model => model.CONTACTPERSON), @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.CONTACTPERSON) + "'" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.CONTACTPERSON)
+                                </li>                      
+                                         
+                                <li style="height:150px;"></li>
+                             
+                                <li>
+                                    <input type="submit"  class="btn btn-success" value="Save" onclick="return CheckInterestMode()" />                        
+                                    <a class="load btn btn-danger" href="~/#/FDRProposalDetails/ListFDRProposalDetails?lblbreadcum=FDR Proposal Details">Close</a>
+                                </li>
+
+                            </ul>
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+                           
+                                
+                                <li class="form-group" style="padding:0px !important;">
+                                @Html.LabelFor(model => model.PRINCIPALAMOUNT, new { @class = "control-label entrylable" })
+                                <div class="input-group">
+                                @Html.TextBoxFor(model => model.PRINCIPALAMOUNT, new { @required = "required", @class = "form-control decimal", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.PRINCIPALAMOUNT) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.PRINCIPALAMOUNT) + "'" })
+                                <div class="input-group-addon">.00</div>
+                                </div>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.PRINCIPALAMOUNT)
+                                </li>
+
+                               
+                                
+                           <li style="padding:0px !important;">  @*class="form-group" *@
+                         
+                            <label class="control-label entrylable" for="Offer 1" style="color:red;">Proposed Offer - Tenure - Term - Interest Mode</label>
+                            <div class="input-group " style="width: 100% !important;">
+                            <div style="display: inline !important;">
+                            @Html.TextBoxFor(model => model.PROPOSEDRATE, new { @required = "required", @class = "form-control decimal",@Value =@Model.PROPOSEDRATE, style = "width: 15% !important; display:inline !important;margin-right:3px !important;", @placeholder = "Offer Rate" + @Html.DisplayNameFor(model => model.OFFERRATE) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.OFFERRATE) + "'" })
+                            @Html.TextBoxFor(model => model.TENURE, new { @required = "required", @class = "form-control number", @Value =@Model.TENURE, style = "width: 15% !important; display:inline !important;", @type = "number", @placeholder = "" + @Html.DisplayNameFor(model => model.TENURE) + "  (Only Numeric) ", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.TENURE) + "'" })
+                            
+                            @Html.DropDownListFor(model => model.TENURETERM, (SelectList)ViewBag.TenureList,@Model.TENURETERM,  new { @required = "required", @onchange = "TenureTerms(this.value)", @class = "control-label entrylable drpResize drpsize", style = "height: 35px !important; margin-top:0px !important; width:15%;" })
+                            @Html.DropDownListFor(model => model.INTERESTMODE, (SelectList)ViewBag.COMPOUNDINTERESTTYPEList,@Model.INTERESTMODE, new { @required = "required", @onchange = "InterestMode(this.value)", @class = "control-label entrylable drpResize drpsize", style = "width: 20% !important; display:inline !important;" })
+                            
+                            </div>
+                            </div>
+                            </li>
+                                
+                                     
+                           <li style="padding:0px !important;">  @*class="form-group" *@
+                         
+                            <label class="control-label entrylable" for="Offer 1" style="color:red;">Annual Days   Compound Interest Interval </label>
+                            <div class="input-group " style="width: 100% !important;">
+                            <div style="display: inline !important;">
+                           
+                                @Html.DropDownListFor(model => model.COMPOUNDINTERESTINTERVAL, (SelectList)ViewBag.ComoundInterestIntervalList,(string)ViewBag.COMPOUNDINTERESTINTERVAL, new { id = "COMPOUNDINTERESTINTERVAL",@class = "control-label entrylable drpResize drpsize",@onchange = "ChequeInterval(this.value)", style = "width: 30% !important; display:inline !important;" })  @* *@
+                           
+                                @Html.TextBoxFor(model => model.ANNUALDAYS, new { id = "ANNUALDAYS", @class = "form-control decimal", @value =@Model.ANNUALDAYS, @placeholder = "Annual Days", style = "width: 30% !important; display:inline !important;padding-left:5px;" })
+                            
+                              
+                                 </div>
+                            </div>
+                            </li>
+
+                   
+
+
+                                <li class="form-group" style="padding:0px !important;">
+                               @* @Html.LabelFor(model => model.OFFERRATE, new { @class = "control-label entrylable" })*@
+                                    <label class = "control-label entrylable">SUGGESTED OFFER RATE</label>
+                                <div class="input-group">
+                                @Html.TextBoxFor(model => model.OFFERRATE, new { @required = "required",@value =@Model.OFFERRATE, @class = "form-control decimal", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.OFFERRATE) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.OFFERRATE) + "'" })
+                                <div class="input-group-addon">.00</div>
+                                </div>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.OFFERRATE)
+                                </li>
+                                
+                                @*others offer rate tenure and terms also display hear in readonly formate*@
+                              
+                                @if (ViewBag.OfferRate != null)
+                                {
+                                    int i = 1;
+                                    int j = 0;
+                                    foreach (var item in ViewBag.OfferRate)
+                                    {
+
+                                        if (item.InterestMode == "None")
+                                        {
+                                            item.InterestMode = null;
+                                        }
+                                        <li style="padding:0px !important;">
+                                        @if (i == 1)
+                                        { 
+                                        <label class="control-label entrylable" for="Offer 2">Suggested Offer  -   Tenure   -   Term   -   Interest Mode</label>
+                                        
+                                        }
+                                        else
+                                        {
+                                            j = i - 1;
+                                            <label class="control-label entrylable" for="Offer 2">Offer @j  -   Tenure   -   Term   -   Interest Mode</label>
+                                        }
+                                            
+                                           @if (i == 1)
+                                           { 
+                                         <div class="input-group " style="width: 70% !important;border:1px solid red">                                       
+                                         <div style="display: inline !important;">
+                                        <input type="text" value="@item.Offer_Rate" readonly class = "form-control decimal", style = "width: 15% !important; display:inline !important;margin-right:3px !important;border:none !important"/>
+                                        <input type="text" value="@item.Tenure" readonly class = "form-control decimal", style = "width: 15% !important; display:inline !important;margin-right:3px !important;border:none !important"/>
+                                        <input type="text" value="@item.Terms" readonly class = "form-control decimal", style = "width: 30% !important; display:inline !important;margin-right:3px !important;border:none !important"/>                                        
+                                       <input type="text" value="@item.InterestMode" readonly class = "form-control decimal", style = "width: 35% !important; display:inline !important;margin-right:3px !important;border:none !important"/>                                        
+                                                                              
+                                        </div>
+                                        </div>
+                                           
+                                           }
+                                           else
+                                           {
+                                             
+                                         <div class="input-group " style="width: 70% !important;">                                          
+                                            
+                                        <div style="display: inline !important;">
+                                        <input type="text" value="@item.Offer_Rate" readonly class = "form-control decimal", style = "width: 15% !important; display:inline !important;margin-right:3px !important;border:none !important"/>
+                                        <input type="text" value="@item.Tenure" readonly class = "form-control decimal", style = "width: 15% !important; display:inline !important;margin-right:3px !important;border:none !important"/>
+                                        <input type="text" value="@item.Terms" readonly class = "form-control decimal", style = "width: 30% !important; display:inline !important;margin-right:3px !important;border:none !important"/>                                        
+                                       <input type="text" value="@item.InterestMode" readonly class = "form-control decimal", style = "width: 35% !important; display:inline !important;margin-right:3px !important;border:none !important"/>                                        
+                                       
+                                        
+                                        </div>
+                                        </div>
+                                           }
+
+                                        </li>
+                                           i++;
+                                    }
+
+                                }                                                                     
+
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>                 
+
+            }
+
+                
+
+        </div>
+    </div>
+    <p></p>
+
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+    <script>
+
+
+        function GetBranch(value) {
+            // alert(value);            
+            var CapLimit = 0;
+            var ED = 0;
+            var Npl = 0;
+            var Pfdr = 0;
+
+            var exp = 0;
+
+            $.ajax({
+                type: "GET",
+                url: '/FDRNote/GetFIDetails',
+                data: {
+                    reference: value
+                },
+                success: function (result) {
+                    //alert("success");
+                    var selectedDeviceModel = $('#BRANCH_REFERENCE');
+                    selectedDeviceModel.empty();
+                    selectedDeviceModel.append(
+                           $('<option/>', {
+                               value: "",
+                               text: "Select Branch"
+                           })
+                        );
+                    $.each(result, function (index, item) {
+
+                      //  alert('CapLimit:'+item.CAPLimit+' ED:'+item.ExitsingDeposit+' ExistingDeposit:'+item.ExitsingDeposit);
+                        try {
+                            if (index == 0) {
+                                CapLimit = item.CAPLimit;
+                                ED = item.ExitsingDeposit;
+                               // Npl = item.NPL;
+                                Pfdr = item.FDRPerentage;
+                            }
+
+                            selectedDeviceModel.append(
+                                $('<option/>', {
+                                    value: item.REFERENCE,
+                                    text: item.NAME
+                                })
+                             );
+
+                        }
+                        catch (err) {
+                            exp = 1;
+                            alert(err.message);
+                        }
+
+                    });
+
+                    if (exp != 1) {
+
+                        document.getElementById('CAPLIMIT').value = CapLimit.toFixed(2);
+                        document.getElementById('PERCENTAGEOFFDR').value = Pfdr.toFixed(2);
+                        document.getElementById('EXISTINGDEPOSIT').value = ED.toFixed(2);
+
+                    }
+                    
+                },
+                error: function () {
+                    alert("Error");
+                }
+            });
+
+
+        }
+
+
+
+
+        $(function () {
+            $('.datepicker').datepicker({ dateFormat: "dd/mm/yy" });
+        });
+
+        //document.getElementById("ANNUALDAYS").disabled = true;
+        //document.getElementById("COMPOUNDINTERESTINTERVAL").disabled = true;
+    </script>
+
+    <script>
+        $(document).on('keypress', '.number', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+        $(document).on('keypress', '.decimal', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+
+        function FIinfo(value) {
+            alert(value);
+
+            $.get("/FDRProposalDetails/GetFIDetails?reference=" + value, function (data) {
+                var obj = JSON.parse(data);
+                //    alert(obj.CAPLimit + '  exDepo' + obj.ExitsingDeposit);
+                document.getElementById('CAPLIMIT').value = obj.CAPLimit != null ? obj.CAPLimit : 0;
+                document.getElementById('PERCENTAGEOFFDR').value = obj.FDRPerentage != null ? obj.FDRPerentage : 0;
+                document.getElementById('EXISTINGDEPOSIT').value = obj.ExitsingDeposit != null ? obj.ExitsingDeposit : 0;
+
+            });
+        }
+
+    </script>
+        
+
+</div>
+

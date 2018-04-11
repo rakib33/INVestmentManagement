@@ -1,0 +1,170 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.STATUSPARAMETER
+
+
+
+
+<div id="Replace">
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+          @Session["currentPage"]
+        </span>
+
+    </div>
+   <ol class="breadcrumb">
+    @Html.Raw(@ViewBag.breadcum)
+    </ol>
+<div class="wrapper pl">
+    <div class="alert alert-success mt20">
+        <button class="close" data-dismiss="alert" type="button">×</button>
+         @ViewBag.Message
+    </div>
+    <div class="container-fluid">
+
+        <div class="widget col-md-5">
+            <div class="whead">
+                <h6>
+                    <label id="lblHeader" title="">@ViewBag.Header</label>
+                </h6>
+                <div class="clear">
+                </div>
+            </div>
+@using (Ajax.BeginForm("AddStatusParameter", "StatusParameter", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+{
+            <div class="">
+ <ul class="entryForm singleadd">
+      
+      
+
+    
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.ENTITY,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.ENTITY,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.ENTITY)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.ENTITY)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.ENTITY) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.PROPERTY,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.PROPERTY,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.PROPERTY)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.PROPERTY)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.PROPERTY) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.ISHIDDEN,new {@class="control-label entrylable"})
+			
+        
+       @* <br />*@
+        
+           <input type="checkbox"  name="ISHIDDEN" value="true" id="chkIsHidden" />
+
+@*            @Html.TextBoxFor(model => model.ISHIDDEN,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.ISHIDDEN)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.ISHIDDEN)+"'"})*@
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.ISHIDDEN) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.ISACTIVE,new {@class="control-label entrylable"})
+			
+        
+       @* <br />*@
+          <input type="checkbox"   name="ISACTIVE" value="true" id="chkIsActive"  />
+
+@*            @Html.TextBoxFor(model => model.ISACTIVE,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.ISACTIVE)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.ISACTIVE)+"'"})*@
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.ISACTIVE) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.DESCRIPTION,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.DESCRIPTION,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.DESCRIPTION)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.DESCRIPTION)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.DESCRIPTION) 
+       
+	   </li>
+                        </ul>
+             <button type="submit" class="btn btn-success btnSingleAddForm">Save</button>
+              <a class="load btn btn-danger closeButton" href="~/#/StatusParameter/ListStatusParameter?lblbreadcum=">Close</a> 
+      
+            </div>
+
+
+}
+
+        </div>
+
+
+    </div>
+</div>
+    <p></p>
+
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+<script>
+
+    $(function () {
+        $('.datepicker').datepicker({ dateFormat: "dd/mm/yy" });
+       
+
+    });
+
+</script>
+
+<script>
+    $(document).on('keypress', '.number', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8) {
+            // let it happen, don't do anything
+        } else if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+    $(document).on('keypress', '.decimal', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8) {
+            // let it happen, don't do anything
+        } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+
+
+</script>
+
+</div>
+

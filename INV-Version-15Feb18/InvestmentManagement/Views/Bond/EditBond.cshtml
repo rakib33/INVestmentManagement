@@ -1,0 +1,513 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.BOND
+
+<div id="Replace">
+
+    <script type="text/ecmascript">
+        $(function () {
+            $('.datepicker').datepicker({ dateFormat: formatDate('long') });
+        });
+    </script>
+
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+    @*fixed Deposit markup*@
+
+    <div class="wrapper pl">
+        <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+        <div id="FixedDeposit">
+            <div class="alert alert-success mt20">
+                <button class="close" data-dismiss="alert" type="button">×</button>
+                @ViewBag.Message
+            </div>
+            @using (Ajax.BeginForm("EditBond", " Bond", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+            { 
+                 @Html.Hidden("CREATEDBY", @Model.CREATEDBY)
+                 @Html.Hidden("CREATEDDATE", @Model.CREATEDDATE)
+                 @Html.Hidden("LASTUPDATED", @Model.LASTUPDATED)
+                 @Html.Hidden("LASTUPDATEDBY", @Model.LASTUPDATEDBY)
+                 @Html.Hidden("REFERENCE", @Model.REFERENCE) 
+                 @Html.Hidden("STATUS", @Model.STATUS)
+                
+                <div id="BondInformation" class="container-fluid">
+
+                    <div class="widget ">
+                        <div class="whead">
+                            <h6>
+                                <label id="" title="">Treasury Bond Information</label>
+                            </h6>
+                            <div class="clear">
+                            </div>
+                        </div>
+
+                        <div class="">
+
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+                                
+                                <li class="form-group">
+                                    <label class = "control-label entrylable">Instrument Id(ISIN No)</label>                                    
+                                    @Html.TextBoxFor(model => model.BONDID, new { @required="required", @class = "form-control", style = "width: 50%", @placeholder = "Enter Bond Id" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.BONDID)
+                                </li>
+
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.BONDISSUEDATE, new { @class = "control-label entrylable" })
+                                    <div class='input-group date'>
+                                    @Html.TextBoxFor(model => model.BONDISSUEDATE,"{0:dd-MMM-yy}", new { @required="required", @class = "datepicker form-control",style = "width: 100%", @value = "Select a Date", @placeholder = "Select a Date " })
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.BONDISSUEDATE)
+                                </li>
+
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.CHEQUEREFERENCE, new { @class = "control-label entrylable" })
+                                    @Html.TextBoxFor(model => model.CHEQUEREFERENCE, new { @class = "form-control", @value = "Enter Cheque Reference", style = "width: 50%" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.CHEQUEREFERENCE)
+                                </li>
+
+                                <li class="form-group">                                 
+                                    <label class="control-label entrylable" for="CHEQUEAMOUNT">Cheque Amount</label>     
+                                    @Html.TextBoxFor(model => model.CHEQUEAMOUNT, new {@required="required", @class = "form-control decimal",style = "width: 50%" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.CHEQUEAMOUNT)
+                                </li>
+
+                                 <li class="form-group">
+                                    <label class ="control-label entrylable">Auction No</label>
+                                    <div class='input-group date'>                             
+                                        @Html.TextBoxFor(model => model.AUCTION, new {@required="required", @class = "form-control auction-width", @placeholder = "Enter Auction" })
+                                        @Html.DropDownList("AuctionType", new List<SelectListItem>
+                                        {
+                                            new SelectListItem{ Text="Select Type", Value = "" },
+                                            new SelectListItem{ Text="Auction", Value = "Auction" }, //,Selected = true
+                                            new SelectListItem{ Text="NonAuction", Value = "Non Auction" },
+                                         }, new { @class="form-control auction-width",@required="required"})
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.AUCTION)
+                                </li>
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable" for="REMARKS">Remarks</label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.REMARKS, new { @class = "form-control", @placeholder = "Add Remarks" })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.REMARKS)
+                                </li>
+                            </ul>
+
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.SEQUENCENUMBER, new { @class = "control-label entrylable" })
+                                    <div class='input-group date'>
+                                        @Html.TextBoxFor(model => model.SEQUENCENUMBER, new {@required="required", @class = " form-control", @placeholder = "Enter the Sequence Number" })
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.SEQUENCENUMBER)
+                                </li>
+                                                             
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable">Issuing Bank</label>
+                                    <br />
+                                    @Html.DropDownListFor(model => model.FINANCIALINSTITUTION_REFERENCE, (SelectList)ViewBag.financialInstitutionList, "Select a Financial Institution", new { @required="required", @class = "control-label entrylable drpResize drpsize" })
+                                </li>
+
+                                <li class="form-group">                                 
+                                    <label class="control-label entrylable" for="CHEQUEAMOUNT">Cheque Clearing Charge</label>     
+                                    @Html.TextBoxFor(model => model.CHEQUECLEARINGCHARGE, new { @class = "form-control decimal",style = "width: 50%" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.CHEQUECLEARINGCHARGE)
+                                </li>
+                                <li class="form-group">                                                                     
+                                    <label class="control-label entrylable">Cheque Payment Date</label>
+                                    <div class='input-group date'>
+                                        @Html.TextBoxFor(model => model.CHEQUEDATE,"{0:dd-MMM-yy}", new { @required="required", @class = "datepicker form-control", @value = "Select a Date", @placeholder = "Select a Date " })
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.CHEQUEDATE)
+
+                                </li>
+
+                                <li class="form-group">                                                                     
+                                    <label class="control-label entrylable">Value Date</label>
+                                    <div class='input-group date'>
+                                        @Html.TextBoxFor(model => model.OPENINGDATE,"{0:dd-MMM-yy}", new { @required="required", @class = "datepicker form-control", @value = "Select a Date", @placeholder = "Select a Date " })
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.OPENINGDATE)
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div id="FixedDepositTerms" class="container-fluid">
+
+                    <div class="widget ">
+                        <div class="whead">
+                            <h6>
+                                <label id="Label1" title="">Bond Terms </label>
+                            </h6>
+                            <div class="clear">
+                            </div>
+                        </div>
+
+                        <div class="">
+
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+
+                                <li class="form-group">
+
+                                    @Html.LabelFor(model => model.FACEVALUE, new { @class = "control-label entrylable" })
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.FACEVALUE, new { @required="required", @class = "form-control decimal", @value = "Enter the Face Value", @placeholder = "" + @Html.DisplayNameFor(model => model.FACEVALUE) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.FACEVALUE) + "'" })
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.FACEVALUE)
+
+                                </li>
+
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable" for="DISCOUNT">Discount</label>                                  
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.DISCOUNT, new { @required="required", @class = "form-control decimal",@placeholder = "Enter Discount" })
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.DISCOUNT)
+
+                                </li>
+
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable" for="INTERESTMODE">Interest Mode/Receivable</label>
+                                    <br />
+                                   @* @Html.DropDownListFor(model => model.INTERESTMODE, (SelectList)ViewBag.InterestMode, "Select a Intert Mode", new {@required="required", @class = "control-label entrylable drpResize drpsize", style = "width: 25% !important;" })
+                                    @Html.DropDownListFor(model => model.COMPOUNDINTERESTINTERVAL, (SelectList)ViewBag.CompoundInterestInterval, "Select a Compound Interest Interval", new {@required="required", @class = "control-label entrylable drpResize drpsize", style = "width: 25% !important;" })
+                                    *@
+                                    @Html.DropDownList("INTERESTMODE",null, "Select a Intert Mode", new { @required = "required", @class = "control-label entrylable drpResize drpsize", style = "width: 25% !important;" })
+                                    @Html.DropDownList("COMPOUNDINTERESTINTERVAL",null, "Select Interest Interval", new { @required = "required", @class = "control-label entrylable drpResize drpsize", style = "width: 25% !important;" })
+                                                                       
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.INTERESTMODE)
+
+                                </li>
+                                <li class="form-group">
+                                    <label class = "control-label entrylable">Matured Date Format: 02-Apr-2031</label>                                   
+                                    <div class='input-group date'>
+                                 @*    @Html.TextBox("MATURITYDATE","", new { @required="required", @class = "form-control",@placeholder = "eg. 02-Apr-2031"})*@
+                                     @Html.TextBoxFor(model => model.MATURITYDATE,"{0:dd-MMM-yy}", new { @required="required", @readonly="readonly", @class = "datepicker form-control", @value = "Select a Date", @placeholder = "Select a Date " })                                     
+                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                    <br />
+                                  @*  @Html.ValidationMessageFor(model => model.MATURITYDATE)*@
+                              
+                                </li>
+                                <li class="form-group" style="margin-bottom: 20px;">
+                                    @Html.LabelFor(model => model.ANNUALDAYS, new { @class = "control-label entrylable" })
+                                    <br />
+                                    @Html.TextBoxFor(model => model.ANNUALDAYS, new {@required="required", @class = "form-control number", style = "width: 20% !important; display:inline !important;", @type = "number" })
+                                    <br />
+                                </li>
+                                
+                                   <li class="form-group" style="margin-bottom: 20px;">
+                                    <label class="control-label entrylable" for="OFFERRATE">Holding Period  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Holding Interest</label>
+                                    <div class="row">
+                                        <div class="col-md-3" style="width: 22% !important;">
+                                            <div class="input-group" style="width: 100% !important; display: table !important;">
+                                                @Html.TextBoxFor(model => model.HOLDINGPERIOD, new { @required = "required", @class = "form-control decimal", })                                       
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5" style="width: 60% !important;">
+                                            <div class="input-group" style="width: 50% !important; display: table !important;">
+                                                @Html.TextBoxFor(model => model.HOLDINGINTERESTPAID, new { @required = "required", @class = "form-control decimal", })                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                              
+                            </ul>
+
+                            <ul class="col-md-6 entryForm bottomNonePadding" style="height: 318px;">
+                                <li class="form-group" style="margin-bottom: 20px;">
+                                  
+                                    <div class="row">
+                                         <div class="col-md-3" style="width: 27% !important;">
+                                            <label class="control-label entrylable" for="CouponRate">Coupon Rate</label>
+                                            <div class="input-group" style="width: 100% !important; display: table !important;">
+                                                @Html.TextBoxFor(model => model.COUPONRATE, new {@required="required", @class = "form-control decimal",@placeholder = "Enter a Coupon Rate" })
+                                               @* <div class="input-group-addon">.00</div>*@
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3" style="width: 27% !important;">
+                                            <label class="control-label entrylable" for="OFFERRATE">Offer Rate</label>
+                                            <div class="input-group" style="width: 100% !important; display: table !important;">
+                                                @Html.TextBoxFor(model => model.OFFERRATE, new {@required="required", @class = "form-control decimal",@placeholder = "Enter a Offer Rate"})                                           
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3" style="width: 27% !important;">
+                                            <label class="control-label entrylable" for="TAXRATE">Tax Rate (%)</label>
+                                            <div class="input-group" style="width: 100% !important; display: table !important;">
+                                                @Html.TextBoxFor(model => model.TAXRATE, new {@required="required", @class = "form-control decimal", @placeholder = "Enter a Tax Rate" })                                       
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+
+                                </li>
+
+                              @*    <li class="form-group">
+                                    <label class="control-label entrylable" for="COMMISSION">Commission</label>                              
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.COMMISSION, new { @required="required", @class = "form-control decimal",@placeholder = "Enter Commission" })
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.COMMISSION)
+
+                                </li>*@
+
+
+                                <li class="form-group">                                   
+                                    @Html.LabelFor(model => model.TENURE, new {@class = "control-label entrylable" })
+                                    <br />
+                                    @Html.TextBoxFor(model => model.TENURE, new {@required="required", @class = "form-control number", @value = "", style = "width: 20% !important; display:inline !important;", @type = "number" })
+                                    @Html.DropDownListFor(model => model.TENURETERM, (SelectList)ViewBag.TenureList, "Select a Term", new {@required="required", @class = "control-label entrylable drpResize drpsize", style = "height: 35px !important; margin-top:0px !important; width:30%;" })
+                                                                     
+                                </li>
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.PREMIUMPAID, new { @class = "control-label entrylable" })
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.PREMIUMPAID, new {@required="required", @class = "form-control decimal", @placeholder = "Premium Paid" })
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.PREMIUMPAID)
+                                </li>
+
+                                <li class="form-group">                               
+                                    <label class="control-label entrylable" for="COMMISSION">Total Payment</label> 
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.BUYINGPRICE, new {@required="required", @class = "form-control decimal", @placeholder = "Enter Buying Price"})
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.BUYINGPRICE)
+                                </li>                                
+
+
+                                <li class="form-group">                                    
+                                    <input type="button" id="btn-PRIRCalc" class="btn btn-Primary " tabindex="" value="Apply" style="margin-left: 261px; margin-top: 0px;height:30px" />
+                                </li>
+                                
+                            </ul>
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+                <div id="InterestReceivable" class="container-fluid">
+
+                    <div class="widget ">
+                        <div class="whead">
+                            <h6>
+                                <label id="lblHeader" title="">Purchase Value and Interest Receivable</label>
+                            </h6>
+                            <div class="clear">
+                            </div>
+                        </div>
+                        
+                        <div class="">
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.COSTPRICE, new { @class = "control-label entrylable" })
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.COSTPRICE, new {@Value="",@required="required", @class = "form-control decimal", @readonly = "readonly", @placeholder = "Cost Price" })
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.COSTPRICE)
+                                </li>
+                                     
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.TOTALPURCHASEAMOUNT, new { @class = "control-label entrylable" })
+                                    <div class="input-group">
+                                        <input id="TOTALPURCHASEAMOUNT" class="form-control decimal" style="width: 100%;" type="text" placeholder="Total Purchase Amount" readonly="readonly" name="TOTALPURCHASEAMOUNT" data-val-number="The total purchase amount must be a number." data-val="true">
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.TOTALPURCHASEAMOUNT)
+                                </li>
+                                
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.SOURCETAX, new { @class = "control-label entrylable" })
+                                    <div class="input-group">
+                                        <input id="SOURCETAX" class="form-control decimal" style="width: 100%;" type="text" placeholder="Source Tax" readonly="readonly" name="SOURCETAX" required="required">
+                                        <div class="input-group-addon">.00</div>
+                                    </div>                                 
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.SOURCETAX)
+                                </li>
+                                
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.OTHERCHARGE, new { @class = "control-label entrylable" })
+                                    <div class="input-group">
+                                        <input id="OTHERCHARGE" class="form-control decimal" required="required" style="width: 100%;" type="text" placeholder="Other Charge" readonly="readonly" name="OTHERCHARGE" data-val-number="The field Excise Duty must be a number." data-val="true">
+                                        <div class="input-group-addon">.00</div> 
+                                    </div>                                    
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.OTHERCHARGE)
+                                </li>
+
+                            </ul>
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.TOTALCOMMISSIONGAIN, new { @class = "control-label entrylable" })
+                                    <div class="input-group">
+                                        <input id="TOTALCOMMISSIONGAIN" class="form-control decimal" required="required" type="text" style="width: 100%;" placeholder="Total Commission Gain " readonly="readonly" name="TOTALCOMMISSIONGAIN" data-val-number="The field Other Charge must be a number." data-val="true">
+                                        <div class="input-group-addon">.00</div>
+                                    </div>                                
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.TOTALCOMMISSIONGAIN)
+                                </li>
+                                
+
+                             @*   <li class="form-group" style="margin-bottom: 20px;">
+                                    <label class="control-label entrylable" for="OFFERRATE">Holding Period  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Holding Interest</label>
+                                    <div class="row">
+                                        <div class="col-md-3" style="width: 26% !important;">
+                                            <div class="input-group" style="width: 100% !important; display: table !important;">
+                                                @Html.TextBoxFor(model => model.HOLDINGPERIOD, new {@required="required", @class = "form-control decimal",@readonly = "readonly"})
+                                              
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5" style="width: 50% !important;">
+                                            <div class="input-group" style="width: 100% !important; display: table !important;">
+                                                @Html.TextBoxFor(model => model.HOLDINGINTERESTPAID, new {@required="required", @class = "form-control decimal",@readonly = "readonly"})
+                                        
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>*@
+
+                                                              
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.GROSSINTEREST, new { @class = "control-label entrylable" })
+                                    <div class="input-group">
+                                        <input id="GROSSINTEREST" class="form-control decimal" style="width: 100%;" type="text" placeholder="Gross Interest" readonly="readonly",required="required", name="GROSSINTEREST" data-val-number="The field gross interest must be a number." data-val="true">
+                                        <div class="input-group-addon">.00</div>
+                                    </div>                                  
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.GROSSINTEREST)
+                                </li>
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.EXCISEDUTY, new { @class = "control-label entrylable" })
+                                    <div class="input-group">
+                                        <input id="EXCISEDUTY" class="form-control decimal" required="required" style="width: 100%;" type="text" placeholder="Excise Duty" name="EXCISEDUTY" readonly="readonly" data-val-number="The field Excise Duty must be a number." data-val="true">
+                                        <div class="input-group-addon">.00</div>
+                                    </div>                                  
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.EXCISEDUTY)
+
+                                </li>
+
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable" for="NETINTEREST">Net Interest</label>
+                                    <div class="input-group">
+                                        <input id="NETINTEREST" class="form-control decimal" required="required" style="width: 100%;" type="text" placeholder="Net Interest" readonly="readonly" name="NETINTEREST" data-val-number="The field Net Interest must be a number." data-val="true">
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                   <br>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-offset-1" style="margin-left:151px;">
+                    <button type="submit" class="btn btn-success" style="margin-left: 16px; margin-top: 13px;" tabindex="">Save</button>
+                    <a class="load btn btn-danger" href="~/#/Bond/ListBond?lblbreadcum=" style="margin-top: 12px;">Close</a>
+                        </div>
+                </div>
+            }
+
+            </div>
+        </div>
+
+     <p></p>
+
+    <script src="~/Scripts/pVIRCalculation.js"></script>
+    <script src="~/Scripts/FormatNumber.js"></script>
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+        //$(function () {
+        //    $('.datepicker').datepicker({ dateFormat: formatDate('long') });
+        //});
+
+        $(document).on('keypress', '.number', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+        $(document).on('keypress', '.decimal', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+    </script>
+
+
+    </div>

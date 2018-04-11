@@ -1,0 +1,331 @@
+﻿@model InvestmentManagement.Models.GridModel<InvestmentManagement.InvestmentManagement.Models.INVESTMENTPARTICULAR>
+
+<div id="replace">
+
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+ <div class="wrapper pl">
+         <img class="loadingImage" src="~/Images/loading.gif" style="display:none;" />
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+
+          <strong>Info ! @Html.Raw(@ViewBag.Message)</strong>       
+        </div>
+        <div class="container-fluid Grid-Container">
+
+
+
+            <div class="widget mb20">
+                <div class="whead">
+                     <h6>@Session["currentPage"]</h6>
+                     <select id="ddlPageSize">
+                                <option selected="selected">15</option>
+                                <option>50</option>
+                                <option>100</option>
+                            </select>
+                    <h6 style="float:right">Select Row Count</h6>
+                   <div class="clear"></div>
+                </div>
+
+                <div class="formRow dgHeaderBk">
+                    <div class="container-fluid">
+
+                        
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="openingDate" class="col-sm-1 control-label">From Date</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" class="form-control datepicker datePickerWidth" id="FromDate" name="FromDate" placeholder="Select From Date">                                         
+                                    </div>
+                                     <label for="toDate" class="col-sm-1 control-label">To Date</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" class="form-control datepicker datePickerWidth" id="ToDate" name="ToDate" placeholder="Select To Date">                                         
+                                    </div>
+                                    <div class="col-sm-2">
+                                         <input type="button" id="btn" class="btn btn-primary dgBtn" value="Apply" />
+                                    </div>
+                                </div>
+
+                               
+                            </div>                            
+                        </div>
+                     
+                        @*<div class="col-md-12">
+                            <input type="text" id="txtCode" class="tableSearchField" placeholder="Enter Search Criteria" />
+                            <input type="button" id="btn" class="btn btn-primary dgBtn" value="Apply" />
+                            
+                        </div>*@
+                    </div>
+                </div>
+
+               <script>
+                   function ChkAddClass() {
+
+                       var dir = $('#dir').val();
+                       var col = $('#col').val().replace(/\s/g, '');
+                       //alert(col);
+
+                       var header = $('th a[href*=' + col + ']');
+                       //alert(header.text());
+                       var countTh = document.getElementsByTagName('th').length;
+
+
+                       for (var i = 1; i <= countTh; i++) {
+
+                           var txtTh = $('.ASPGrid tr th:nth-child(' + i + ')').text().replace(/\s/g, '');
+
+                           if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Ascending') {
+                               //alert("");
+                               //alert(txtTh + "" + col);
+                               $(".ASPGrid tr th").addClass("sorting");
+
+                               $('.ASPGrid tr th:nth-child(' + i + ')').addClass("ascending");
+                               // $(".ASPGrid tr th:nth-child(1)").removeClass("sorting ascending");
+                               $(".ASPGrid tr th:nth-child(8)").removeClass("sorting ascending");
+
+                           }
+
+                           else if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Descending') {
+                               //alert(txtTh + "" + col);
+                               $(".ASPGrid tr th").addClass("sorting");
+
+                               $('.ASPGrid tr th:nth-child(' + i + ')').addClass("descending");
+                               // $(".ASPGrid tr th:nth-child(1)").removeClass("sorting descending");
+                               $(".ASPGrid tr th:nth-child(8)").removeClass("sorting descending");
+
+
+                           }
+                       }
+
+                       $(".datepicker").datepicker({ dateFormat: formatDate('long') });
+
+                       $(".datePicker").datepicker("destroy");
+                       $(".datePicker").removeClass("hasDatePicker");
+                       $(".datePicker").removeAttr("Disabled");
+                       $(".datepicker").datepicker({ dateFormat: formatDate('long') });
+                       jQuery.datepicker.dpDiv.appendTo(jQuery('body'));
+
+
+                       //$("select,.check :checkbox").not("#ddlPageSize").uniform();
+
+                       //$('.selector').not("#ddlPageSize").addClass('pull-right');
+                       //$('.checker').not("#ddlPageSize").addClass('dataGridCheckBox');
+                   }
+                </script>
+<div id="NominalAccountWebGrid" class="formRow noPad btbNone tScroll">
+            @{
+                WebGrid grid = new WebGrid(rowsPerPage: Model.RowsPerPage, ajaxUpdateContainerId: "NominalAccountWebGrid", ajaxUpdateCallback: "ChkAddClass");
+                grid.Bind(Model.DataModel, autoSortAndPage: false, rowCount: Model.RowsPerPage);
+				
+                @grid.Table(columns: new[] {
+               
+//                grid.Column(header: "Select",  format:@<text>
+//                    <div class="checkbox">
+//                            <label>
+//                                <input type="checkbox" value="">
+//                            </label>
+//                        </div>
+//                    </text>),
+//    
+//
+
+
+grid.Column(header: "Sl No", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),
+grid.Column("CODE", style:"textColumn",header:"CODE"),
+grid.Column("PARTICULARSNAME", style:"textColumn",header:"PARTICULARS NAME"),
+grid.Column("LimitMinimum", format:@<text>@item.LimitMinimum %</text>, style:"numericColumn",header:"LIMIT (%)"),
+
+grid.Column("GROUPNAME", style:"textColumn",header:"GROUP NAME"),
+grid.Column("SUBGROUPNAME", style:"textColumn",header:"SUB GROUP NAME"),
+
+grid.Column("REMARKS", style:"textColumn",header:"REMARKS"),
+grid.Column("ISACTIVE", style:"textColumn",header:"ACTIVE"),
+
+//grid.Column("TRANSACTIONDATE", format:@<text>@(@item.TRANSACTIONDATE==null?"":string.Format("{0:dd MMM yyyy}", item.TRANSACTIONDATE))</text>, style:"textColumn",header:"TRANSACTION DATE"), //f=>f.CREATEDDATE.ToString("dd-MMM-yy")
+//grid.Column("NETAMOUNT", format:@<text>@item.NETAMOUNT.ToString("N")</text>, style:"numericColumn",header:"NETAMOUNT"),
+
+              
+
+  grid.Column(header: "",  format:@<text>
+                        <div class="btn-group dropdown bdrNone">
+                            <a href="#" class="tablectrl_medium bDefault" data-toggle="dropdown"><span class="iconb" data-icon=""></span></a>
+                            <ul class="dropdown-menu pull-right cMbdr cMenu">
+                             
+                                <li>
+                                     <a class="load" role="menuitem" tabindex="-1" href="~/#/InvParticulars/ListParticularsDetails?ParticularRef=@item.REFERENCE">Details</a>
+                                </li>
+                                <li>
+                                    @if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+                                    {
+  
+                                    @Ajax.ActionLink("Edit", "EditParticulars", "InvParticulars", new { ParticularRef = @item.REFERENCE },
+                                    new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" })
+
+                                    }
+                                    else
+                                    {
+                                        <a class="load" role="menuitem" tabindex="-1" href="~/#/InvParticulars/EditParticulars?ParticularRef=@item.REFERENCE">Edit</a>
+                                    }
+                                </li>
+                                
+
+                            </ul>
+                        </div>
+                        </text>)
+                },
+                tableStyle: "ASPGrid",
+                htmlAttributes: new { cellspacing = "0", border = "0" },
+
+     footer: @<ul class="pagination">
+   <li class="@ViewBag.Prev"><a  class="@ViewBag.PrevNotActive" href="/InvParticulars/ListParticularsList?PagingType=Prev&sort=@grid.SortColumn&currentFilter=@ViewBag.CurrentFilter&currentRowPerPage=@ViewBag.currentRowPerPage" data-swhglnk="true">Prev</a></li>
+   <li class="@ViewBag.Next"><a  class="@ViewBag.NextNotActive" href="/InvParticulars/ListParticularsList?PagingType=Next&sort=@grid.SortColumn&currentFilter=@ViewBag.CurrentFilter&currentRowPerPage=@ViewBag.currentRowPerPage" data-swhglnk="true">Next</a></li>
+
+
+     </ul>
+
+                );
+                        @Html.Hidden("dir", grid.SortDirection)
+                        @Html.Hidden("col", grid.SortColumn)
+                    }
+                </div>
+@if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+{
+                 @Ajax.ActionLink("Add", "AddNominalAccount", "NominalAccount",
+
+
+    new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { @class = "btn btn-success m10" })
+
+}
+else
+{
+<a class=" load btn btn-success m10" role="menuitem" tabindex="-1" href="~/#/NominalAccount/AddNominalAccount">Add</a>
+}
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".ASPGrid tr th").addClass("sorting");
+        //$(".ASPGrid tr th:nth-child(1)").removeClass("sorting");
+        $(".ASPGrid tr th:nth-child(8)").removeClass("sorting");
+
+        $('.not-active').bind('click', false);
+        $('#btn').on('click', function () {
+            $('.loadingImage').show();         
+       
+            $.get("/InvParticulars/ListParticularsList?rows=" + $("#ddlPageSize").val() + "&FromDate=" + $('#FromDate').val() + "&ToDate=" + $('#ToDate').val() + "", function (data) {
+                var getHTML = $(data);
+                $('#NominalAccountWebGrid').empty();
+
+                $('#NominalAccountWebGrid').html($('#NominalAccountWebGrid', getHTML));
+                ChkAddClass();
+                $('.loadingImage').hide();
+            });
+     });
+
+        $('#ddlPageSize').on('change', function () {
+            try{
+                $('.loadingImage').show();
+                var optionSelected = $("option:selected", this);
+                var valueSelected = this.value;
+                $.get("/InvParticulars/ListParticularsList?sort=" + $('#col').val() + "&sortdir=" + $('#dir').val() + "&filterstring=" + $('#txtCode').val() + "&rows=" + valueSelected + "", function (data) {
+                    var getHTML = $(data);
+                    $('#NominalAccountWebGrid').empty();
+                    $('#NominalAccountWebGrid').andSelf().unbind();
+                    $('#NominalAccountWebGrid').html($('#NominalAccountWebGrid', getHTML));
+                    ChkAddClass();
+                    $('.loadingImage').hide();
+
+                });
+            } catch (err)
+            {
+                $('.loadingImage').hide();
+              
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    $(document).on('keypress', '.number', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+    $(document).on('keypress', '.decimal', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+</script>
+
+<script type="text/javascript">
+    function ShowProcessingMsg() {
+
+        $('.loadingImage').show();
+
+    }
+    function HideProcessingMsg() {
+        $('.loadingImage').hide();
+    }
+
+</script>
+
+    <script>
+
+
+        $(document).ready(function () {  //ready
+          
+            $(function () {
+
+                $(".datepicker").datepicker({ dateFormat: formatDate('long') });
+
+                $(".datePicker").datepicker("destroy");
+                $(".datePicker").removeClass("hasDatePicker");
+                $(".datePicker").removeAttr("Disabled");
+                $(".datepicker").datepicker({ dateFormat: formatDate('long') });
+                jQuery.datepicker.dpDiv.appendTo(jQuery('body'));
+
+                $(".datepicker").datepicker().datepicker("setDate", new Date());
+            });
+        });
+
+
+        $(document).on('click', '.dropdown-menu li a', function (event) {
+            var selText = $(this).text();
+            $('.hidden').val(selText);
+            $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+            event.preventDefault();
+            //event.stopPropagation();
+            //return false;
+        });
+
+
+
+</script>

@@ -1,0 +1,135 @@
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Reports\BonusReceivable.rdlc
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Reports\FDProcurement.rdlc
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Reports\FDREncashment.rdlc
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Reports\FDREncashmentList.rdlc
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Reports\FDRproposal.rdlc
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Reports\FDRRenewal.rdlc
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Reports\FDRStatement.rdlc
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Reports\Portfolio.rdlc
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Reports\FDRRenewalNote.rdlc
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Reports\FDRRenewalNoteLetter.rdlc
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Reports\FDREncashmentNoteList.rdlc
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Reports\FDRMaturityStatement.rdlc
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Reports\BONDIncomeStatement.rdlc
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Reports\FDRPurchaseNoteLetter.rdlc
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\InvestmentManagement.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\InvestmentManagement.pdb
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Antlr3.Runtime.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\DotNetOpenAuth.AspNet.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\DotNetOpenAuth.Core.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\DotNetOpenAuth.OAuth.Consumer.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\DotNetOpenAuth.OAuth.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\DotNetOpenAuth.OpenId.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\EntityFramework.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Microsoft.Web.Infrastructure.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Microsoft.Web.WebPages.OAuth.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Newtonsoft.Json.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\PagedList.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\PagedList.Mvc.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Net.Http.Formatting.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Net.Http.WebRequest.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Web.Helpers.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Web.Http.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Web.Http.WebHost.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Web.Mvc.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Web.Optimization.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Web.Razor.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Web.WebPages.Deployment.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Web.WebPages.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Web.WebPages.Razor.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\WebGrease.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\WebMatrix.Data.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\WebMatrix.WebData.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\PagedList.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\PagedList.Mvc.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\EntityFramework.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Newtonsoft.Json.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Net.Http.Formatting.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Web.Helpers.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Web.Http.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Web.Http.WebHost.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Web.Mvc.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Web.Razor.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Web.WebPages.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Web.WebPages.Deployment.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\System.Web.WebPages.Razor.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\WebMatrix.Data.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\Microsoft.Web.WebPages.OAuth.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\WebMatrix.WebData.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\DotNetOpenAuth.AspNet.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\DotNetOpenAuth.Core.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\DotNetOpenAuth.OAuth.Consumer.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\DotNetOpenAuth.OAuth.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\DotNetOpenAuth.OpenId.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\obj\Release\RdlCompile.cache
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\obj\Release\RdlCompile.compiled
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\obj\Release\InvestmentManagement.dll
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\obj\Release\InvestmentManagement.pdb
+E:\BOSL Projects\INVESTMENT MANAGEMENT\InvestmentManagement\obj\Release\InvestmentManagement.csprojResolveAssemblyReference.cache
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Reports\BonusReceivable.rdlc
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Reports\FDProcurement.rdlc
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Reports\FDRproposal.rdlc
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Reports\FDRRenewalNoteLetter.rdlc
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Reports\FDREncashmentNoteList.rdlc
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Reports\FDRMaturityStatement.rdlc
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Reports\BONDIncomeStatement.rdlc
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Reports\FDRPurchaseNoteLetter.rdlc
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Reports\FDREncashment.rdlc
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Reports\FDRRenewalNote.rdlc
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Reports\FDRStatement.rdlc
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Reports\ShareReport\Portfolio.rdlc
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\InvestmentManagement.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\InvestmentManagement.pdb
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\DotNetOpenAuth.AspNet.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\DotNetOpenAuth.Core.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\DotNetOpenAuth.OAuth.Consumer.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\DotNetOpenAuth.OAuth.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\DotNetOpenAuth.OpenId.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\EntityFramework.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Microsoft.Web.Infrastructure.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Microsoft.Web.WebPages.OAuth.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Net.Http.Formatting.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Net.Http.WebRequest.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Web.Helpers.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Web.Http.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Web.Http.WebHost.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Web.Mvc.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Web.Optimization.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Web.Razor.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Web.WebPages.Deployment.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Web.WebPages.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Web.WebPages.Razor.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\WebMatrix.Data.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\WebMatrix.WebData.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\EntityFramework.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Microsoft.Web.Infrastructure.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Net.Http.Formatting.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Web.Helpers.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Web.Http.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Web.Http.WebHost.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Web.Mvc.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Web.Razor.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Web.WebPages.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Web.WebPages.Deployment.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\System.Web.WebPages.Razor.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\WebMatrix.Data.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Microsoft.Web.WebPages.OAuth.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\WebMatrix.WebData.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\DotNetOpenAuth.AspNet.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\DotNetOpenAuth.Core.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\DotNetOpenAuth.OAuth.Consumer.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\DotNetOpenAuth.OAuth.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\DotNetOpenAuth.OpenId.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\obj\Release\InvestmentManagement.csprojResolveAssemblyReference.cache
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\obj\Release\RdlCompile.cache
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\obj\Release\RdlCompile.compiled
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\obj\Release\InvestmentManagement.dll
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\obj\Release\InvestmentManagement.pdb
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Reports\Edited_FDRRenewal.rdlc
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Reports\Copy of FDRRenewalNoteLetter.rdlc
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Reports\Copy of FDRRenewalNote.rdlc
+E:\BOSL PROJECTS\1.INVESTMENT MANAGEMENT PROJECT\InvestmentManagement\bin\Newtonsoft.Json.dll

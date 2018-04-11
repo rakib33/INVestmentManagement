@@ -1,0 +1,369 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.INSTRUMENT
+
+
+@*<link href="~/CSS/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui.js"></script>*@
+<div id="Replace">
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+    <div class="wrapper pl">
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            @ViewBag.Message
+        </div>
+        <div class="container-fluid">
+
+            <div class="widget">
+                <div class="whead">
+                    <h6>
+                        <label id="lblHeader" title="">@ViewBag.Header</label>
+                    </h6>
+                    <div class="clear">
+                    </div>
+                </div>
+                @using (Ajax.BeginForm("AddInstrument", " Instrument", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+                { 
+
+                    <div class="entryForm">
+
+
+                        <ul class="col-md-6 entryForm ">
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.CSEID, new { @class = "control-label entrylable" })
+
+                                @Html.TextBoxFor(model => model.CSEID, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.CSEID) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.CSEID) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.CSEID)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.SHORTNAME, new { @class = "control-label entrylable" })
+
+                                @Html.TextBoxFor(model => model.SHORTNAME, new { @required = "required", @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.SHORTNAME) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.SHORTNAME) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.SHORTNAME)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.NAME, new { @class = "control-label entrylable" })
+                                @Html.TextBoxFor(model => model.NAME, new { @required = "required", @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.NAME) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.NAME) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.NAME)
+
+                            </li>
+                            <li class="form-group">
+                               <label class="control-label entrylable">Sector</label>
+                                <br />
+                               
+                               @Html.DropDownListFor(model => model.CATEGORY, (SelectList)ViewBag.InstrumentSectorList, "Select a Category", new { @class = "control-label entrylable drpResize", @required = "required" })
+
+                               @* @Html.TextBoxFor(model => model.CATEGORY, new { @required = "required", @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.CATEGORY) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.CATEGORY) + "'" })*@
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.CATEGORY)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.ALLOWNETTING, new { @class = "control-label entrylable" })
+
+                                <input type="checkbox" name="ALLOWNETTING" value="true" id="chkAllowNetting" />
+                                <br />
+                                @Html.ValidationMessageFor(model => model.ALLOWNETTING)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.DECLARATIONDATE, new { @class = "control-label entrylable" })
+
+                                <div class='input-group date'>
+                                    @Html.TextBoxFor(model => model.DECLARATIONDATE, new { @required = "required", @class = "datepicker form-control", @placeholder = "Select a Date" })
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.DECLARATIONDATE)
+
+                            </li>
+
+                            <li class="form-group">
+                                @Html.LabelFor(model => model.PREMIUM, new { @class = "control-label entrylable" })
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.PREMIUM, new { @required = "required", @class = "form-control decimal", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.PREMIUM) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.PREMIUM) + "'" })
+                                    <div class="input-group-addon">BDT</div>
+                                </div>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.PREMIUM)
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.TOTALSHARE, new { @class = "control-label entrylable" })
+
+
+
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.TOTALSHARE, new { @class = "form-control decimal", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.TOTALSHARE) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.TOTALSHARE) + "'" })
+
+                                </div>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.TOTALSHARE)
+
+                            </li>
+                            <li class="form-group">
+                                @Html.LabelFor(model => model.MARKETLOT, new { @class = "control-label entrylable" })
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.MARKETLOT, new { @class = "form-control decimal", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.MARKETLOT) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.MARKETLOT) + "'" })
+                                </div>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.MARKETLOT)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.LATESTEPS, new { @class = "control-label entrylable" })
+
+
+
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.LATESTEPS, new { @class = "form-control decimal", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.LATESTEPS) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.LATESTEPS) + "'" })
+
+                                </div>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.LATESTEPS)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.LASTMARKETPRICE, new { @class = "control-label entrylable" })
+
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.LASTMARKETPRICE, new { @class = "form-control decimal", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.LASTMARKETPRICE) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.LASTMARKETPRICE) + "'" })
+                                    <div class="input-group-addon">BDT</div>
+                                </div>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.LASTMARKETPRICE)
+
+                            </li>
+
+                            <li class="form-group">
+                                <button type="submit" class="btn btn-success lastli" tabindex="">Save</button>
+                                <a class="load btn btn-danger closeButton" href="~/#/Instrument/ListInstrument?lblbreadcum=">Close</a>
+                            </li>
+
+                        </ul>
+
+                        <ul class="col-md-6 entryForm">
+                            <li class="form-group">
+
+                              @Html.LabelFor(model => model.INSTRUMENTTYPE, new { @class = "control-label entrylable" })
+                              @*@Html.TextBoxFor(model => model.INSTRUMENTTYPE,new {@required = "required",@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.INSTRUMENTTYPE)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.INSTRUMENTTYPE)+"'"})*@
+                                  @Html.DropDownList("INSTRUMENTTYPE", new List<SelectListItem>
+                                    {                                           
+                                        new SelectListItem{ Text="Demat", Value = "Demat" },
+                                        new SelectListItem{ Text="Paper", Value = "Paper" }                                                                 
+                                    
+                                     }, "Select Instrument Type", new { @required = "required", @class = "form-control" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.INSTRUMENTTYPE)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.ISIN, new { @class = "control-label entrylable" })
+
+                                @Html.TextBoxFor(model => model.ISIN, new { @required = "required", @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.ISIN) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.ISIN) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.ISIN)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.INSTRUMENTCATEGORY_REFERENCE, new { @class = "control-label entrylable" })
+
+                                <br />
+                                @Html.DropDownListFor(model => model.INSTRUMENTCATEGORY_REFERENCE, (SelectList)ViewBag.instrumentCategoryList, "Select a Category", new { @class = "control-label entrylable drpResize", @required = "required" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.INSTRUMENTCATEGORY_REFERENCE)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.ISNONMARGINABLE, new { @class = "control-label entrylable" })
+
+                                <input type="checkbox" name="ISNONMARGINABLE" value="true" id="chkIsNonMarginable" />
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.ISNONMARGINABLE)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.ISSPOT, new { @class = "control-label entrylable" })
+
+                                @* <br />*@
+
+                                <input type="checkbox" name="ISSPOT" value="true" id="chkIsSpot" />
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.ISSPOT)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.FACEVALUE, new { @class = "control-label entrylable" })
+
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.FACEVALUE, new { @required = "required", @class = "form-control decimal", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.FACEVALUE) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.FACEVALUE) + "'" })
+                                    <div class="input-group-addon">BDT</div>
+                                </div>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.FACEVALUE)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.IPO, new { @class = "control-label entrylable" })
+
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.IPO, new { @class = "form-control decimal", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.IPO) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.IPO) + "'" })
+                                </div>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.IPO)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.PUBLICSHARE, new { @class = "control-label entrylable" })
+
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.PUBLICSHARE, new { @class = "form-control decimal", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.PUBLICSHARE) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.PUBLICSHARE) + "'" })
+                                    @*<div class="input-group-addon">BDT</div>*@
+                                </div>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.PUBLICSHARE)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.NETASSETVALUE, new { @class = "control-label entrylable" })
+
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.NETASSETVALUE, new { @class = "form-control decimal", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.NETASSETVALUE) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.NETASSETVALUE) + "'" })
+                                    <div class="input-group-addon">BDT</div>
+                                </div>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.NETASSETVALUE)
+
+                            </li>
+                            <li class="form-group">
+                                @Html.LabelFor(model => model.PERATIO, new { @class = "control-label entrylable" })
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.PERATIO, new { @required = "required", @class = "form-control decimal", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.PERATIO) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.PERATIO) + "'" })
+                                    @*<div class="input-group-addon">.00</div>*@
+                                </div>
+                                <br />
+                                @Html.ValidationMessageFor(model => model.PERATIO)
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.STATUS, new { @class = "control-label entrylable" })
+                                <br />
+                                @Html.DropDownListFor(model => model.STATUS, new SelectListItem[] { 
+                                 new SelectListItem { Text = "Closed", Value = "Closed" }, 
+                                 new SelectListItem { Text = "Active", Value = "Active" },
+                                 new SelectListItem { Text="OTC", Value ="OTC"}
+                                
+                                }, "Select a Status", new { @required = "required", @class = "control-label entrylable drpResize" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.STATUS)
+
+                            </li>
+                        </ul>
+
+
+
+
+                    </div>
+
+
+
+                }
+
+            </div>
+
+
+        </div>
+    </div>
+    <p></p>
+
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+    <script>
+
+        $(function () {
+            $('.datepicker').datepicker({ dateFormat: formatDate('long') });
+
+            //$(".dropdown-menu li a").click(function (event) {
+            //var selText = $(this).text();
+            //$('.hidden').val(selText);
+            //$(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+            //event.preventDefault();
+            //});
+
+        });
+
+    </script>
+
+    <script>
+        $(document).on('keypress', '.number', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+        $(document).on('keypress', '.decimal', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+
+
+    </script>
+
+</div>
+

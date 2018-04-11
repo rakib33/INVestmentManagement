@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="StockCashReceivable" targetNamespace="http://tempuri.org/StockCashReceivable.xsd" xmlns:mstns="http://tempuri.org/StockCashReceivable.xsd" xmlns="http://tempuri.org/StockCashReceivable.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="StockCashReceivable" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="StockCashReceivable" msprop:Generator_UserDSName="StockCashReceivable">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="StockCashReceivable" msprop:Generator_TableClassName="StockCashReceivableDataTable" msprop:Generator_TableVarName="tableStockCashReceivable" msprop:Generator_RowChangedName="StockCashReceivableRowChanged" msprop:Generator_TablePropName="_StockCashReceivable" msprop:Generator_RowDeletingName="StockCashReceivableRowDeleting" msprop:Generator_RowChangingName="StockCashReceivableRowChanging" msprop:Generator_RowEvHandlerName="StockCashReceivableRowChangeEventHandler" msprop:Generator_RowDeletedName="StockCashReceivableRowDeleted" msprop:Generator_RowClassName="StockCashReceivableRow" msprop:Generator_UserTableName="StockCashReceivable" msprop:Generator_RowEvArgName="StockCashReceivableRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ISIN" msprop:Generator_ColumnVarNameInTable="columnISIN" msprop:Generator_ColumnPropNameInRow="ISIN" msprop:Generator_ColumnPropNameInTable="ISINColumn" msprop:Generator_UserColumnName="ISIN" type="xs:string" minOccurs="0" />
+              <xs:element name="ShortName" msprop:Generator_ColumnVarNameInTable="columnShortName" msprop:Generator_ColumnPropNameInRow="ShortName" msprop:Generator_ColumnPropNameInTable="ShortNameColumn" msprop:Generator_UserColumnName="ShortName" type="xs:string" minOccurs="0" />
+              <xs:element name="Catype" msprop:Generator_ColumnVarNameInTable="columnCatype" msprop:Generator_ColumnPropNameInRow="Catype" msprop:Generator_ColumnPropNameInTable="CatypeColumn" msprop:Generator_UserColumnName="Catype" type="xs:string" minOccurs="0" />
+              <xs:element name="Holding" msprop:Generator_ColumnVarNameInTable="columnHolding" msprop:Generator_ColumnPropNameInRow="Holding" msprop:Generator_ColumnPropNameInTable="HoldingColumn" msprop:Generator_UserColumnName="Holding" type="xs:string" minOccurs="0" />
+              <xs:element name="BShareReceivable" msprop:Generator_ColumnVarNameInTable="columnBShareReceivable" msprop:Generator_ColumnPropNameInRow="BShareReceivable" msprop:Generator_ColumnPropNameInTable="BShareReceivableColumn" msprop:Generator_UserColumnName="BShareReceivable" type="xs:string" minOccurs="0" />
+              <xs:element name="RShareReceivable" msprop:Generator_ColumnVarNameInTable="columnRShareReceivable" msprop:Generator_ColumnPropNameInRow="RShareReceivable" msprop:Generator_ColumnPropNameInTable="RShareReceivableColumn" msprop:Generator_UserColumnName="RShareReceivable" type="xs:string" minOccurs="0" />
+              <xs:element name="MarketPrice" msprop:Generator_ColumnVarNameInTable="columnMarketPrice" msprop:Generator_ColumnPropNameInRow="MarketPrice" msprop:Generator_ColumnPropNameInTable="MarketPriceColumn" msprop:Generator_UserColumnName="MarketPrice" type="xs:string" minOccurs="0" />
+              <xs:element name="BonusMarketValue" msprop:Generator_ColumnVarNameInTable="columnBonusMarketValue" msprop:Generator_ColumnPropNameInRow="BonusMarketValue" msprop:Generator_ColumnPropNameInTable="BonusMarketValueColumn" msprop:Generator_UserColumnName="BonusMarketValue" type="xs:string" minOccurs="0" />
+              <xs:element name="CashDividendReceivable" msprop:Generator_ColumnVarNameInTable="columnCashDividendReceivable" msprop:Generator_ColumnPropNameInRow="CashDividendReceivable" msprop:Generator_ColumnPropNameInTable="CashDividendReceivableColumn" msprop:Generator_UserColumnName="CashDividendReceivable" type="xs:string" minOccurs="0" />
+              <xs:element name="RecordDate" msprop:Generator_ColumnVarNameInTable="columnRecordDate" msprop:Generator_ColumnPropNameInRow="RecordDate" msprop:Generator_ColumnPropNameInTable="RecordDateColumn" msprop:Generator_UserColumnName="RecordDate" type="xs:string" minOccurs="0" />
+              <xs:element name="Declaration" msprop:Generator_ColumnVarNameInTable="columnDeclaration" msprop:Generator_ColumnPropNameInRow="Declaration" msprop:Generator_ColumnPropNameInTable="DeclarationColumn" msprop:Generator_UserColumnName="Declaration" type="xs:string" minOccurs="0" />
+              <xs:element name="EffectiveDate" msprop:Generator_ColumnVarNameInTable="columnEffectiveDate" msprop:Generator_ColumnPropNameInRow="EffectiveDate" msprop:Generator_ColumnPropNameInTable="EffectiveDateColumn" msprop:Generator_UserColumnName="EffectiveDate" type="xs:string" minOccurs="0" />
+              <xs:element name="Remarks" msprop:Generator_ColumnVarNameInTable="columnRemarks" msprop:Generator_ColumnPropNameInRow="Remarks" msprop:Generator_ColumnPropNameInTable="RemarksColumn" msprop:Generator_UserColumnName="Remarks" type="xs:string" minOccurs="0" />
+              <xs:element name="AmtBonus" msprop:Generator_ColumnVarNameInTable="columnAmtBonus" msprop:Generator_ColumnPropNameInRow="AmtBonus" msprop:Generator_ColumnPropNameInTable="AmtBonusColumn" msprop:Generator_UserColumnName="AmtBonus" type="xs:string" minOccurs="0" />
+              <xs:element name="Amtdividend" msprop:Generator_ColumnVarNameInTable="columnAmtdividend" msprop:Generator_ColumnPropNameInRow="Amtdividend" msprop:Generator_ColumnPropNameInTable="AmtdividendColumn" msprop:Generator_UserColumnName="Amtdividend" type="xs:string" minOccurs="0" />
+              <xs:element name="AMT" msprop:Generator_ColumnVarNameInTable="columnAMT" msprop:Generator_ColumnPropNameInRow="AMT" msprop:Generator_ColumnPropNameInTable="AMTColumn" msprop:Generator_UserColumnName="AMT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

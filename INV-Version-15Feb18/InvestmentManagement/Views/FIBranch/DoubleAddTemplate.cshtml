@@ -1,0 +1,222 @@
+﻿
+@model InvestmentManagement.InvestmentManagement.Models.FIBRANCH
+
+
+
+
+<div id="Replace">
+    <div class="contentTop">
+        <span class="pageTitle">
+           <span class=" glyphicon glyphicon-yen"></span>
+          @Session["currentPage"]
+        </span>
+
+    </div>
+  <ol class="breadcrumb">
+        <li><a class="load" href="@Url.Action("Index", "Home")">@Session["PreviousPage"]</a></li>
+        <li>@Ajax.ActionLink((string)Session["currentPage"], "ListFIBRANCH", "FIBRANCH",
+
+
+    new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" })</li>
+        <li class="active">@ViewBag.breadcum</li>
+    </ol>
+<div class="wrapper pl">
+    <div class="alert alert-success mt20">
+        <button class="close" data-dismiss="alert" type="button">×</button>
+         @ViewBag.Message
+    </div>
+    <div class="container-fluid">
+
+        <div class="widget">
+            <div class="whead">
+                <h6>
+                    <label id="lblHeader" title="">@ViewBag.breadcum</label>
+                </h6>
+                <div class="clear">
+                </div>
+            </div>
+@using (Ajax.BeginForm("AddFIBRANCH", " FIBRANCH", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }))
+{ 
+
+<div class="entryForm"> 
+
+		
+        <ul class="col-md-6 entryForm ">
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.ROUTINGNUMBER,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.ROUTINGNUMBER,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.ROUTINGNUMBER)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.ROUTINGNUMBER)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.ROUTINGNUMBER) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.DISTRICTCODE,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.DISTRICTCODE,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.DISTRICTCODE)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.DISTRICTCODE)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.DISTRICTCODE) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.ADDRESSLINE1,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.ADDRESSLINE1,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.ADDRESSLINE1)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.ADDRESSLINE1)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.ADDRESSLINE1) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.CONTACTPERSON,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.CONTACTPERSON,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.CONTACTPERSON)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.CONTACTPERSON)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.CONTACTPERSON) 
+       
+	   </li>
+                        </ul >
+
+<ul class="col-md-6 entryForm">
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.CODE,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.CODE,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.CODE)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.CODE)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.CODE) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.SWIFTCODE,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.SWIFTCODE,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.SWIFTCODE)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.SWIFTCODE)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.SWIFTCODE) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.DISTRICTNAME,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.DISTRICTNAME,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.DISTRICTNAME)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.DISTRICTNAME)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.DISTRICTNAME) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.POSTCODE,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.POSTCODE,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.POSTCODE)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.POSTCODE)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.POSTCODE) 
+       
+	   </li>
+                        </ul>
+             
+
+ <button type="submit" class="btn btn-success lastli" tabindex="">Save</button>
+
+</div>
+
+
+
+}
+
+        </div>
+
+
+    </div>
+</div>
+    <p></p>
+
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+<script>
+
+    $(function () {
+        $('.datepicker').datepicker({ dateFormat: formatDate('long')});
+       
+        //$(".dropdown-menu li a").click(function (event) {
+            //var selText = $(this).text();
+            //$('.hidden').val(selText);
+            //$(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+            //event.preventDefault();
+        //});
+
+    });
+
+</script>
+
+<script>
+    $(document).on('keypress', '.number', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8) {
+            // let it happen, don't do anything
+        } else if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+    $(document).on('keypress', '.decimal', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8) {
+            // let it happen, don't do anything
+        } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+
+
+</script>
+
+</div>
+

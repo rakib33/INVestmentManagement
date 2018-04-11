@@ -1,0 +1,432 @@
+﻿
+@model InvestmentManagement.InvestmentManagement.Models.JOURNALHEAD
+
+
+
+
+<div id="Replace">
+    <div class="contentTop">
+        <span class="pageTitle">
+           <span class=" glyphicon glyphicon-yen"></span>
+          @Session["currentPage"]
+        </span>
+
+    </div>
+  <ol class="breadcrumb">
+       @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+<div class="wrapper pl">
+    <div class="alert alert-success mt20">
+        <button class="close" data-dismiss="alert" type="button">×</button>
+         @ViewBag.Message
+    </div>
+    <div class="container-fluid">
+
+        <div class="widget">
+            <div class="whead">
+                <h6>
+                    <label id="lblHeader" title="">@ViewBag.Header</label>
+                </h6>
+                <div class="clear">
+                </div>
+            </div>
+@using (Ajax.BeginForm("EditJournalHead", " JOURNALHEAD", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+{ 
+
+<div class=""> 
+		       @Html.Hidden("CREATEDBY", @Model.CREATEDBY)
+     @Html.Hidden("CREATEDDATE", @Model.CREATEDDATE)
+  
+     @Html.Hidden("REFERENCE", @Model.REFERENCE)
+		
+        <ul class="col-md-6 entryForm">
+
+              
+
+               <li class="form-group">
+           
+            @Html.LabelFor(model => model.FINANCIALYEAR_REFERENCE, new { @class = "control-label entrylable" })
+			 @Html.LabelFor(model => model.FINANCIALPERIOD_REFERENCE, new { @class = "control-label entrylable", style = "margin-left:117px;" })
+        
+        <br />
+
+           @Html.DropDownListFor(model => model.FINANCIALYEAR_REFERENCE, (SelectList)ViewBag.FINANCIALYEAR, "Select a list", new { @class = "control-label entrylable drpResize", style = "height:38px;margin-bottom: -5px !important;" })
+		
+    
+              @Html.DropDownListFor(model => model.FINANCIALPERIOD_REFERENCE, (SelectList)ViewBag.PERIOD, "Select a list", new { @class = "control-label entrylable drpResize", style = "height:38px;margin-bottom: -5px !important;" })         
+           
+			
+        
+        <br />
+
+          
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.FINANCIALPERIOD_REFERENCE) 
+
+       
+	   </li>
+
+               <li class="form-group">
+           
+            @Html.LabelFor(model => model.DESCRIPTION, new { @class = "control-label entrylable" })
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.DESCRIPTION, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.DESCRIPTION) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.DESCRIPTION) + "'" })
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.DESCRIPTION) 
+       
+	   </li>
+
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.FOLIONUMBER, new { @class = "control-label entrylable" })
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.FOLIONUMBER, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.FOLIONUMBER) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.FOLIONUMBER) + "'" })
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.FOLIONUMBER) 
+       
+	   </li>
+
+
+
+@*            <li class="form-group">
+                 <button type="submit" class="btn btn-success doubleColumnButton" tabindex="">Save</button>
+            <a class="load btn btn-danger closeButton" href="~/#/JournalHead/ListJournalHead?lblbreadcum=" style="margin-top: 45px !important;">Close</a>
+            </li>*@
+                        </ul >
+
+<ul class="col-md-6 entryForm">
+
+          <li class="form-group">
+           
+            @Html.LabelFor(model => model.TRANSACTIONDATE, new { @class = "control-label entrylable" })
+			
+        
+      
+            
+                <div class='input-group date'>
+
+            @Html.TextBoxFor(model => model.TRANSACTIONDATE,"{0:dd/MM/yyyy}", new { @class = "datepicker form-control" })
+ <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                       
+                    </div>
+		
+	     <br />
+	    @Html.ValidationMessageFor(model => model.TRANSACTIONDATE) 
+       
+	   </li>
+
+        <li class="form-group">
+           
+            @Html.LabelFor(model => model.PAYMENTTYPE, new { @class = "control-label entrylable" })
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.PAYMENTTYPE, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.PAYMENTTYPE) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.PAYMENTTYPE) + "'" })
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.PAYMENTTYPE) 
+       
+	   </li>
+
+
+ @*     <li class="form-group">
+           
+            @Html.LabelFor(model => model.ACCOUNTREF, new { @class = "control-label entrylable" })
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.ACCOUNTREF, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.ACCOUNTREF) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.ACCOUNTREF) + "'" })
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.ACCOUNTREF) 
+       
+	   </li>*@
+ @*     <li class="form-group">
+           
+            @Html.LabelFor(model => model.JOURNALTYPE, new { @class = "control-label entrylable" })
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.JOURNALTYPE, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.JOURNALTYPE) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.JOURNALTYPE) + "'" })
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.JOURNALTYPE) 
+       
+	   </li>*@
+   
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.REMARKS, new { @class = "control-label entrylable" })
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.REMARKS, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.REMARKS) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.REMARKS) + "'" })
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.REMARKS) 
+       
+	   </li>
+
+@*                <li class="form-group">
+           
+            @Html.LabelFor(model => model.FINANCIALPERIOD_REFERENCE,new {@class="control-label entrylable"})
+			
+        
+        <br />
+
+           @Html.DropDownListFor(model => model.FINANCIALPERIOD_REFERENCE, (SelectList)ViewBag.PERIOD, "Select a list", new { @class = "control-label entrylable drpResize", style = "height:38px;"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.FINANCIALPERIOD_REFERENCE) 
+       
+	   </li>*@
+                        </ul>
+             
+
+
+
+</div>
+
+
+
+}
+
+        </div>
+
+
+    </div>
+</div>
+    <p></p>
+
+                       <div class="container-fluid Grid-Container">
+
+
+
+             <div class="widget mb20">
+        <div class="whead">
+            <h6>Journal Line</h6>
+            <div class="clear"></div>
+        </div>
+
+                  <table id="initRow" hidden>
+                 <thead>
+
+                 </thead>
+                     <tbody>
+
+                          <tr class="entryForm" hidden>
+                                    <td style="text-align:left;">
+                      <select id="tdNominal">
+                            @foreach (var nominalAcc in ViewBag.NOMINALACCOUNT)
+                            {
+                                 <option value=@nominalAcc.REFERENCE>@nominalAcc.CODE</option>
+                            }
+                        </select>
+                    </td>
+                              <td hidden>
+
+
+                              </td>
+                  
+                
+                    <td class="form-group" style="text-align:left;">
+                        <input type="text" class="form-control" name="DESCRIPTION" /></td>
+                   
+                         <td class="form-group" style="text-align:right;" id="tdDebit">
+                        <input type="text" class="form-control decimal" name="DEBIT" /></td>
+                    
+                         <td class="form-group" style="text-align:right;" id="tdCredit">
+                        <input type="text" class="form-control decimal" name="CREDIT" /></td>
+              
+                    <td class="form-group" style="text-align:right;"></td>
+                        
+                    <td >
+                     
+                        
+                        <img src='../../images/save.png' class='btnSave'/>
+                        <img src="~/images/delete.png" alt="Delete" style="border-width: 0px;" class='btnDelete' />
+                       
+                        </td>
+                                <td id="" hidden></td>
+                  
+                      <td id="ddlNoiminal" hidden>
+                      <select>
+                            @foreach (var nominalAcc in ViewBag.NOMINALACCOUNT)
+                            {
+                                 <option value=@nominalAcc.REFERENCE>@nominalAcc.CODE</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+                     </tbody>
+
+                 </table>
+
+
+
+        <table id="tblGrid" class="ASPGrid">
+           <thead>
+                <tr>
+                    <th style="text-align:left;">Nominal Account</th>
+                     <th style="" hidden></th>
+                    <th style="text-align:left;">Description</th>
+                    <th style="text-align:right;">Debit</th>
+                    <th style="text-align:right">Credit</th>
+                   
+                    <th style="text-align:right;">Balance</th>
+                    
+                    <th style=""></th>
+                    <th style="" hidden></th>
+                </tr>
+            </thead>
+            <tbody>
+               
+                  @foreach (var JournalLine in ViewBag.JournalLine)
+                  {
+                <tr class="entryForm">
+                    
+                       @foreach (var nominalAcc in ViewBag.NOMINALACCOUNT)
+                       {
+                           if (@JournalLine.NOMINALACCOUNT_REFERENCE == @nominalAcc.REFERENCE)
+                           {
+                                      <td style="text-align:left;">
+                                   @nominalAcc.CODE </td>
+                                  
+                       
+                                          <td style="text-align:left;" hidden>@JournalLine.NOMINALACCOUNT_REFERENCE</td>
+                                  
+                                  
+                        
+                               break;
+                           }
+
+                       }
+
+                    <td class="form-group" style="text-align:left;">@JournalLine.DESCRIPTION</td>        
+                    
+                         <td class="form-group" style="text-align:right;">@JournalLine.DEBIT.ToString("N")</td>
+                             
+                       
+                    
+                         <td class="form-group" style="text-align:right;">@JournalLine.CREDIT.ToString("N")</td>  
+                    <td class="form-group" style="text-align:right;">@JournalLine.NETAMOUNT.ToString("N")</td>
+                         
+                        
+                    <td >
+                      @* 
+                               <span class="glyphicon glyphicon-ok btnSave" aria-hidden="true">Save</span>
+                          
+                                  <span class="glyphicon glyphicon-remove btnSave" aria-hidden="true">Edit</span>*@
+                        
+                        <img src="~/images/update.png" class='btnEditJournalLine' alt="Edit" style="border-width: 0px;" />
+                     
+                       
+                        </td>
+                         
+                   
+                        
+                       <td  hidden>@JournalLine.REFERENCE</td>
+                      <td  hidden>@JournalLine.CREATEDDATE</td>
+                       <td  hidden>@JournalLine.CREATEDBY</td>
+                        
+                 
+
+                </tr>
+                  }
+            </tbody>
+                       <tfoot>
+                <tr>
+                    <td><input type="button" class="btn btn-success" value="Add New" id="btnAdd" /></td>
+                    <td hidden></td>
+                    <td></td>
+                    <td style="text-align:left;">
+                        Total Debit
+                        <span style="float:right;" id="TotalDebit">@ViewBag.totalDebit</span>
+                    </td>
+                    <td style="text-align:left;">
+                          Total Credit
+                        <span style="float:right;" id="TotalCredit">@ViewBag.totalCredit</span>
+                    </td>
+                    <td style="text-align:left;">
+                        Total Balance
+                        <span style="float:right;" id="TotalBalance">@ViewBag.totalBalance</span>
+                    </td>
+                     <td></td>
+
+                </tr>
+
+            </tfoot>
+
+        </table>
+    </div>
+            <div class="clear"></div>
+        </div>
+
+
+
+
+
+
+   
+    <br />
+    <a class="load btn btn-danger" href="~/#/JournalHead/ListJournalHead?lblbreadcum=" style="float:right; margin-right: 44px;">Close</a>
+     <input type="button" class="btn btn-success" value="Save" id="Update" style="float:right; margin-right:4px;"/>
+
+    <p></p>
+
+
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+   
+<script>
+
+    $(function () {
+   
+        $('.datepicker').datepicker({ dateFormat: 'dd - mm - yy' });
+
+    });
+
+</script>
+           <script type="text/javascript">
+               $(".load").click(function () {
+                   $(".loadingImage").show();
+                   var link = $(this).attr("href");
+                   debugger;
+                   $.get('<%= Url.Action(' + link + ') %>', {},
+                       function (data) {
+                           $('#result').html(data);
+                           $('.loadingImage').hide();
+                       });
+               });
+
+    </script>
+
+  <script src="~/Scripts/FormatNumber.js"></script>
+ 
+ <script src="~/Scripts/customgrid.js"></script>
+  
+ </div>
+

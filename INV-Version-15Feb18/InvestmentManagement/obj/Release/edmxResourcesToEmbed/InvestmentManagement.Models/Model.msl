@@ -1,0 +1,2597 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="APPLICATIONPARAMETERs">
+      <EntityTypeMapping TypeName="Model.APPLICATIONPARAMETER">
+        <MappingFragment StoreEntitySet="APPLICATIONPARAMETER">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="ENTITY" ColumnName="ENTITY" />
+          <ScalarProperty Name="PROPERTY" ColumnName="PROPERTY" />
+          <ScalarProperty Name="ISHIDDEN" ColumnName="ISHIDDEN" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="APPLICATIONPARAMETERDETAILS">
+      <EntityTypeMapping TypeName="Model.APPLICATIONPARAMETERDETAIL">
+        <MappingFragment StoreEntitySet="APPLICATIONPARAMETERDETAILS">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="APPLICATIONPARAMETER_REFERENCE" ColumnName="APPLICATIONPARAMETER_REFERENCE" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="ISHIDDEN" ColumnName="ISHIDDEN" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="ISDEFAULT" ColumnName="ISDEFAULT" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="APPLICATIONUSERs">
+      <EntityTypeMapping TypeName="Model.APPLICATIONUSER">
+        <MappingFragment StoreEntitySet="APPLICATIONUSER">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="DEPARTMENT_REFERENCE" ColumnName="DEPARTMENT_REFERENCE" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="USERGROUP_REFERENCE" ColumnName="USERGROUP_REFERENCE" />
+          <ScalarProperty Name="EMAILADDRESS" ColumnName="EMAILADDRESS" />
+          <ScalarProperty Name="LASTLOGIN" ColumnName="LASTLOGIN" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BANKACCOUNTs">
+      <EntityTypeMapping TypeName="Model.BANKACCOUNT">
+        <MappingFragment StoreEntitySet="BANKACCOUNT">
+          <ScalarProperty Name="BACSREF" ColumnName="BACSREF" />
+          <ScalarProperty Name="ACCOUNTTYPE" ColumnName="ACCOUNTTYPE" />
+          <ScalarProperty Name="ACCOUNTNUMBER" ColumnName="ACCOUNTNUMBER" />
+          <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+          <ScalarProperty Name="ADDITIONALREFERENCE" ColumnName="ADDITIONALREFERENCE" />
+          <ScalarProperty Name="BANKNAME" ColumnName="BANKNAME" />
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="NOMACCOUNT" ColumnName="NOMACCOUNT" />
+          <ScalarProperty Name="SWIFTCODE" ColumnName="SWIFTCODE" />
+          <ScalarProperty Name="BANKACCOUNTNAME" ColumnName="BANKACCOUNTNAME" />
+          <ScalarProperty Name="BRANCH" ColumnName="BRANCH" />
+          <ScalarProperty Name="ISCOMPANY" ColumnName="ISCOMPANY" />
+          <ScalarProperty Name="CHEQUENAME" ColumnName="CHEQUENAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BOMAINTENANCELOGs">
+      <EntityTypeMapping TypeName="Model.BOMAINTENANCELOG">
+        <MappingFragment StoreEntitySet="BOMAINTENANCELOG">
+          <ScalarProperty Name="IMPORTDATE" ColumnName="IMPORTDATE" />
+          <ScalarProperty Name="OPERATORID" ColumnName="OPERATORID" />
+          <ScalarProperty Name="WORKSTATIONID" ColumnName="WORKSTATIONID" />
+          <ScalarProperty Name="NEWVALUE" ColumnName="NEWVALUE" />
+          <ScalarProperty Name="TRANSACTIONDESC" ColumnName="TRANSACTIONDESC" />
+          <ScalarProperty Name="EXCEPTIONDETAIL" ColumnName="EXCEPTIONDETAIL" />
+          <ScalarProperty Name="BOID" ColumnName="BOID" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="TRACENUMBER" ColumnName="TRACENUMBER" />
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="ISEXCEPTION" ColumnName="ISEXCEPTION" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="FIELDDESC" ColumnName="FIELDDESC" />
+          <ScalarProperty Name="OLDVALUE" ColumnName="OLDVALUE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BONDs">
+      <EntityTypeMapping TypeName="Model.BOND">
+        <MappingFragment StoreEntitySet="BOND">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="FINANCIALINSTITUTION_REFERENCE" ColumnName="FINANCIALINSTITUTION_REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="BONDID" ColumnName="BONDID" />
+          <ScalarProperty Name="BONDTYPE" ColumnName="BONDTYPE" />
+          <ScalarProperty Name="SEQUENCENUMBER" ColumnName="SEQUENCENUMBER" />
+          <ScalarProperty Name="FACEVALUE" ColumnName="FACEVALUE" />
+          <ScalarProperty Name="CHEQUEDATE" ColumnName="CHEQUEDATE" />
+          <ScalarProperty Name="CHEQUEREFERENCE" ColumnName="CHEQUEREFERENCE" />
+          <ScalarProperty Name="CHEQUEAMOUNT" ColumnName="CHEQUEAMOUNT" />
+          <ScalarProperty Name="CHEQUECLEARINGCHARGE" ColumnName="CHEQUECLEARINGCHARGE" />
+          <ScalarProperty Name="BONDISSUEDATE" ColumnName="BONDISSUEDATE" />
+          <ScalarProperty Name="TENURE" ColumnName="TENURE" />
+          <ScalarProperty Name="TENURETERM" ColumnName="TENURETERM" />
+          <ScalarProperty Name="TERMSINDAYS" ColumnName="TERMSINDAYS" />
+          <ScalarProperty Name="INTERESTPAYMENTPERIOD" ColumnName="INTERESTPAYMENTPERIOD" />
+          <ScalarProperty Name="MATURITYDATE" ColumnName="MATURITYDATE" />
+          <ScalarProperty Name="OFFERRATE" ColumnName="OFFERRATE" />
+          <ScalarProperty Name="COUPONRATE" ColumnName="COUPONRATE" />
+          <ScalarProperty Name="BUYINGPRICE" ColumnName="BUYINGPRICE" />
+          <ScalarProperty Name="COSTPRICE" ColumnName="COSTPRICE" />
+          <ScalarProperty Name="PREMIUMPAID" ColumnName="PREMIUMPAID" />
+          <ScalarProperty Name="TAXRATE" ColumnName="TAXRATE" />
+          <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
+          <ScalarProperty Name="COMMISSION" ColumnName="COMMISSION" />
+          <ScalarProperty Name="HOLDINGINTERESTPAID" ColumnName="HOLDINGINTERESTPAID" />
+          <ScalarProperty Name="TOTALPURCHASEAMOUNT" ColumnName="TOTALPURCHASEAMOUNT" />
+          <ScalarProperty Name="TOTALCOMMISSIONGAIN" ColumnName="TOTALCOMMISSIONGAIN" />
+          <ScalarProperty Name="INTERESTMODE" ColumnName="INTERESTMODE" />
+          <ScalarProperty Name="GROSSINTEREST" ColumnName="GROSSINTEREST" />
+          <ScalarProperty Name="SOURCETAX" ColumnName="SOURCETAX" />
+          <ScalarProperty Name="EXCISEDUTY" ColumnName="EXCISEDUTY" />
+          <ScalarProperty Name="OTHERCHARGE" ColumnName="OTHERCHARGE" />
+          <ScalarProperty Name="COMPOUNDINTERESTTYPE" ColumnName="COMPOUNDINTERESTTYPE" />
+          <ScalarProperty Name="COMPOUNDINTERESTINTERVAL" ColumnName="COMPOUNDINTERESTINTERVAL" />
+          <ScalarProperty Name="ANNUALDAYS" ColumnName="ANNUALDAYS" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="ACCEPTEDBY" ColumnName="ACCEPTEDBY" />
+          <ScalarProperty Name="ACCEPTEDDATE" ColumnName="ACCEPTEDDATE" />
+          <ScalarProperty Name="REJECTEDBY" ColumnName="REJECTEDBY" />
+          <ScalarProperty Name="REJECTEDDATE" ColumnName="REJECTEDDATE" />
+          <ScalarProperty Name="HOLDINGPERIOD" ColumnName="HOLDINGPERIOD" />
+          <ScalarProperty Name="NETINTEREST" ColumnName="NETINTEREST" />
+          <ScalarProperty Name="OPENINGDATE" ColumnName="OPENINGDATE" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+          <ScalarProperty Name="AUCTION" ColumnName="AUCTION" />
+          <ScalarProperty Name="AUCTIONDATE" ColumnName="AUCTIONDATE" />
+          <ScalarProperty Name="ENCASHEDDATE" ColumnName="ENCASHEDDATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BOND_CHEQUEDRAWN">
+      <EntityTypeMapping TypeName="Model.BOND_CHEQUEDRAWN">
+        <MappingFragment StoreEntitySet="BOND_CHEQUEDRAWN">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="BOND_REFERENCE" ColumnName="BOND_REFERENCE" />
+          <ScalarProperty Name="BONDNOTE_REFERENCE" ColumnName="BONDNOTE_REFERENCE" />
+          <ScalarProperty Name="CHEQUENO" ColumnName="CHEQUENO" />
+          <ScalarProperty Name="CHEQUEAMOUNT" ColumnName="CHEQUEAMOUNT" />
+          <ScalarProperty Name="PROPOSEDACTION" ColumnName="PROPOSEDACTION" />
+          <ScalarProperty Name="APPROVEDBY" ColumnName="APPROVEDBY" />
+          <ScalarProperty Name="APPROVEDDATE" ColumnName="APPROVEDDATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="CHEQUEDRAWNFROM" ColumnName="CHEQUEDRAWNFROM" />
+          <ScalarProperty Name="CHEQUEDATE" ColumnName="CHEQUEDATE" />
+          <ScalarProperty Name="STRCHEQUEDATE" ColumnName="STRCHEQUEDATE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="CHEQUE_CLEARING_CHARGE" ColumnName="CHEQUE_CLEARING_CHARGE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BONDENCASHMENTs">
+      <EntityTypeMapping TypeName="Model.BONDENCASHMENT">
+        <MappingFragment StoreEntitySet="BONDENCASHMENT">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="BONDID" ColumnName="BONDID" />
+          <ScalarProperty Name="MRNO" ColumnName="MRNO" />
+          <ScalarProperty Name="MRDATE" ColumnName="MRDATE" />
+          <ScalarProperty Name="ENCASHMENTDATE" ColumnName="ENCASHMENTDATE" />
+          <ScalarProperty Name="RECEIVEDON" ColumnName="RECEIVEDON" />
+          <ScalarProperty Name="INTERESTFROM" ColumnName="INTERESTFROM" />
+          <ScalarProperty Name="INTERESTTO" ColumnName="INTERESTTO" />
+          <ScalarProperty Name="GROSSINTEREST" ColumnName="GROSSINTEREST" />
+          <ScalarProperty Name="SOURCETAX" ColumnName="SOURCETAX" />
+          <ScalarProperty Name="EXCISEDUTY" ColumnName="EXCISEDUTY" />
+          <ScalarProperty Name="OTHERCHARGE" ColumnName="OTHERCHARGE" />
+          <ScalarProperty Name="NETINTEREST" ColumnName="NETINTEREST" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BONDREDEMPTIONSCHEDULEs">
+      <EntityTypeMapping TypeName="Model.BONDREDEMPTIONSCHEDULE">
+        <MappingFragment StoreEntitySet="BONDREDEMPTIONSCHEDULE">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="PRIVATEBOND_REFERENCE" ColumnName="PRIVATEBOND_REFERENCE" />
+          <ScalarProperty Name="REDEMPTIONYEAR" ColumnName="REDEMPTIONYEAR" />
+          <ScalarProperty Name="REDEMPTIONPERCENT" ColumnName="REDEMPTIONPERCENT" />
+          <ScalarProperty Name="REDEMPTIONDATE" ColumnName="REDEMPTIONDATE" />
+          <ScalarProperty Name="REDEMPTIONBY" ColumnName="REDEMPTIONBY" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="ACCEPTEDBY" ColumnName="ACCEPTEDBY" />
+          <ScalarProperty Name="ACCEPTEDDATE" ColumnName="ACCEPTEDDATE" />
+          <ScalarProperty Name="REJECTEDBY" ColumnName="REJECTEDBY" />
+          <ScalarProperty Name="REJECTEDDATE" ColumnName="REJECTEDDATE" />
+          <ScalarProperty Name="PRINCIPAL" ColumnName="PRINCIPAL" />
+          <ScalarProperty Name="INITIALPRINCIPAL" ColumnName="INITIALPRINCIPAL" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+          <ScalarProperty Name="COUPONRATE" ColumnName="COUPONRATE" />
+          <ScalarProperty Name="REDMPTION_PRINCIPAL" ColumnName="REDMPTION_PRINCIPAL" />
+          <ScalarProperty Name="TAXRATE" ColumnName="TAXRATE" />
+          <ScalarProperty Name="GROSSINTEREST" ColumnName="GROSSINTEREST" />
+          <ScalarProperty Name="SOURCETAX" ColumnName="SOURCETAX" />
+          <ScalarProperty Name="EXCISEDUTY" ColumnName="EXCISEDUTY" />
+          <ScalarProperty Name="OTHERCHARGE" ColumnName="OTHERCHARGE" />
+          <ScalarProperty Name="NETINTEREST" ColumnName="NETINTEREST" />
+          <ScalarProperty Name="ISREDMTION" ColumnName="ISREDMTION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bonuses">
+      <EntityTypeMapping TypeName="Model.BONUS">
+        <MappingFragment StoreEntitySet="BONUS">
+          <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+          <ScalarProperty Name="CDBLREFERENCE" ColumnName="CDBLREFERENCE" />
+          <ScalarProperty Name="INVESTORREF" ColumnName="INVESTORREF" />
+          <ScalarProperty Name="ISIN" ColumnName="ISIN" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="RECORDDATE" ColumnName="RECORDDATE" />
+          <ScalarProperty Name="EXCEPTION" ColumnName="EXCEPTION" />
+          <ScalarProperty Name="ISEXCEPTION" ColumnName="ISEXCEPTION" />
+          <ScalarProperty Name="CERTIFICATENO" ColumnName="CERTIFICATENO" />
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="DECLARATIONDATE" ColumnName="DECLARATIONDATE" />
+          <ScalarProperty Name="DOCUMENTNO" ColumnName="DOCUMENTNO" />
+          <ScalarProperty Name="INSTRUMENTREF" ColumnName="INSTRUMENTREF" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="TRANDATE" ColumnName="TRANDATE" />
+          <ScalarProperty Name="BOID" ColumnName="BOID" />
+          <ScalarProperty Name="TRANSACTIONTYPE" ColumnName="TRANSACTIONTYPE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BRANCHes">
+      <EntityTypeMapping TypeName="Model.BRANCH">
+        <MappingFragment StoreEntitySet="BRANCH">
+          <ScalarProperty Name="ACRANGETO" ColumnName="ACRANGETO" />
+          <ScalarProperty Name="BRANCHTYPE" ColumnName="BRANCHTYPE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="ACCOUNTFEE" ColumnName="ACCOUNTFEE" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="ACRANGEFROM" ColumnName="ACRANGEFROM" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="WEB" ColumnName="WEB" />
+          <ScalarProperty Name="COMMMISSIONRATE" ColumnName="COMMMISSIONRATE" />
+          <ScalarProperty Name="PREFIX" ColumnName="PREFIX" />
+          <ScalarProperty Name="MERCHANTBANKNOMINAL" ColumnName="MERCHANTBANKNOMINAL" />
+          <ScalarProperty Name="TRADEBOUGHTPOSTING" ColumnName="TRADEBOUGHTPOSTING" />
+          <ScalarProperty Name="TRADESOLDPOSTING" ColumnName="TRADESOLDPOSTING" />
+          <ScalarProperty Name="COMMISSIONPOSTING" ColumnName="COMMISSIONPOSTING" />
+          <ScalarProperty Name="CSETRADEBOUGHTPOSTING" ColumnName="CSETRADEBOUGHTPOSTING" />
+          <ScalarProperty Name="CSETRADESOLDPOSTING" ColumnName="CSETRADESOLDPOSTING" />
+          <ScalarProperty Name="CSECOMMISSIONPOSTING" ColumnName="CSECOMMISSIONPOSTING" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BROKERs">
+      <EntityTypeMapping TypeName="Model.BROKER">
+        <MappingFragment StoreEntitySet="BROKER">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="MEMBERID" ColumnName="MEMBERID" />
+          <ScalarProperty Name="CDBLID" ColumnName="CDBLID" />
+          <ScalarProperty Name="BONUMBER" ColumnName="BONUMBER" />
+          <ScalarProperty Name="DSEEXCHANGEID" ColumnName="DSEEXCHANGEID" />
+          <ScalarProperty Name="CSEEXCHANGEID" ColumnName="CSEEXCHANGEID" />
+          <ScalarProperty Name="DSECLEARINGBO" ColumnName="DSECLEARINGBO" />
+          <ScalarProperty Name="CSECLEARINGBO" ColumnName="CSECLEARINGBO" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="COMMISSIONRATE" ColumnName="COMMISSIONRATE" />
+          <ScalarProperty Name="DEFAULTTRADER" ColumnName="DEFAULTTRADER" />
+          <ScalarProperty Name="MINIMUMAMOUNT" ColumnName="MINIMUMAMOUNT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CASHDIVIDENDDECLARATIONs">
+      <EntityTypeMapping TypeName="Model.CASHDIVIDENDDECLARATION">
+        <MappingFragment StoreEntitySet="CASHDIVIDENDDECLARATION">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="ACCOUNTNUMBER" ColumnName="ACCOUNTNUMBER" />
+          <ScalarProperty Name="INSTRUMENTACREF" ColumnName="INSTRUMENTACREF" />
+          <ScalarProperty Name="ISIN" ColumnName="ISIN" />
+          <ScalarProperty Name="SHAREQTY" ColumnName="SHAREQTY" />
+          <ScalarProperty Name="NETCASHDIVIDEND" ColumnName="NETCASHDIVIDEND" />
+          <ScalarProperty Name="CASHRECEIVEDDATE" ColumnName="CASHRECEIVEDDATE" />
+          <ScalarProperty Name="GROSSAMOUNT" ColumnName="GROSSAMOUNT" />
+          <ScalarProperty Name="TAX" ColumnName="TAX" />
+          <ScalarProperty Name="TAXRATE" ColumnName="TAXRATE" />
+          <ScalarProperty Name="REFERENCENO" ColumnName="REFERENCENO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CHARGEHEADs">
+      <EntityTypeMapping TypeName="Model.CHARGEHEAD">
+        <MappingFragment StoreEntitySet="CHARGEHEAD">
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="CHARGETYPE" ColumnName="CHARGETYPE" />
+          <ScalarProperty Name="AMOUNT" ColumnName="AMOUNT" />
+          <ScalarProperty Name="ISPERCENTAGE" ColumnName="ISPERCENTAGE" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CHEQUEDRAWNs">
+      <EntityTypeMapping TypeName="Model.CHEQUEDRAWN">
+        <MappingFragment StoreEntitySet="CHEQUEDRAWN">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="FIXEDDEPOSIT_REFERENCE" ColumnName="FIXEDDEPOSIT_REFERENCE" />
+          <ScalarProperty Name="FDRNOTE_REFERENCE" ColumnName="FDRNOTE_REFERENCE" />
+          <ScalarProperty Name="CHEQUENO" ColumnName="CHEQUENO" />
+          <ScalarProperty Name="CHEQUEAMOUNT" ColumnName="CHEQUEAMOUNT" />
+          <ScalarProperty Name="PROPOSEDACTION" ColumnName="PROPOSEDACTION" />
+          <ScalarProperty Name="APPROVEDBY" ColumnName="APPROVEDBY" />
+          <ScalarProperty Name="APPROVEDDATE" ColumnName="APPROVEDDATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="CHEQUEDRAWNFROM" ColumnName="CHEQUEDRAWNFROM" />
+          <ScalarProperty Name="CHEQUEDATE" ColumnName="CHEQUEDATE" />
+          <ScalarProperty Name="STRCHEQUEDATE" ColumnName="STRCHEQUEDATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COMPANies">
+      <EntityTypeMapping TypeName="Model.COMPANY">
+        <MappingFragment StoreEntitySet="COMPANY">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="REGISTRATIONNO" ColumnName="REGISTRATIONNO" />
+          <ScalarProperty Name="TIN" ColumnName="TIN" />
+          <ScalarProperty Name="FAXNUMBER" ColumnName="FAXNUMBER" />
+          <ScalarProperty Name="WEBSITE" ColumnName="WEBSITE" />
+          <ScalarProperty Name="CURRENCY" ColumnName="CURRENCY" />
+          <ScalarProperty Name="ADDRESSLINE1" ColumnName="ADDRESSLINE1" />
+          <ScalarProperty Name="ADDRESSLINE2" ColumnName="ADDRESSLINE2" />
+          <ScalarProperty Name="CITY" ColumnName="CITY" />
+          <ScalarProperty Name="POSTCODE" ColumnName="POSTCODE" />
+          <ScalarProperty Name="COUNTRY" ColumnName="COUNTRY" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONTROLACCOUNTs">
+      <EntityTypeMapping TypeName="Model.CONTROLACCOUNT">
+        <MappingFragment StoreEntitySet="CONTROLACCOUNT">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="NOMINALACCOUNT_REFERENCE" ColumnName="NOMINALACCOUNT_REFERENCE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CORPORATEACTIONs">
+      <EntityTypeMapping TypeName="Model.CORPORATEACTION">
+        <MappingFragment StoreEntitySet="CORPORATEACTION">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="INVESTORREF" ColumnName="INVESTORREF" />
+          <ScalarProperty Name="PROCFLAG" ColumnName="PROCFLAG" />
+          <ScalarProperty Name="LOCKINBALANCE" ColumnName="LOCKINBALANCE" />
+          <ScalarProperty Name="ISIN" ColumnName="ISIN" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="RECORDDATE" ColumnName="RECORDDATE" />
+          <ScalarProperty Name="EXCEPTION" ColumnName="EXCEPTION" />
+          <ScalarProperty Name="ISEXCEPTION" ColumnName="ISEXCEPTION" />
+          <ScalarProperty Name="ISCREDIT" ColumnName="ISCREDIT" />
+          <ScalarProperty Name="SEQUENCENO" ColumnName="SEQUENCENO" />
+          <ScalarProperty Name="PREMIUM" ColumnName="PREMIUM" />
+          <ScalarProperty Name="FREEZEBALANCE" ColumnName="FREEZEBALANCE" />
+          <ScalarProperty Name="IMPORTDATE" ColumnName="IMPORTDATE" />
+          <ScalarProperty Name="CATYPE" ColumnName="CATYPE" />
+          <ScalarProperty Name="EFFECTIVEDATE" ColumnName="EFFECTIVEDATE" />
+          <ScalarProperty Name="BOID" ColumnName="BOID" />
+          <ScalarProperty Name="FREEBALANCE" ColumnName="FREEBALANCE" />
+          <ScalarProperty Name="INSTRUMENTNAME" ColumnName="INSTRUMENTNAME" />
+          <ScalarProperty Name="DRCRFLAG" ColumnName="DRCRFLAG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CORPORATEACTIONRECEIVABLEs">
+      <EntityTypeMapping TypeName="Model.CORPORATEACTIONRECEIVABLE">
+        <MappingFragment StoreEntitySet="CORPORATEACTIONRECEIVABLE">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="NUMRATION" ColumnName="NUMRATION" />
+          <ScalarProperty Name="INVESTORNAME" ColumnName="INVESTORNAME" />
+          <ScalarProperty Name="SEQUENCENO" ColumnName="SEQUENCENO" />
+          <ScalarProperty Name="ISIN" ColumnName="ISIN" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="RECORDDATE" ColumnName="RECORDDATE" />
+          <ScalarProperty Name="ISEXCEPTION" ColumnName="ISEXCEPTION" />
+          <ScalarProperty Name="INVESTORACREF" ColumnName="INVESTORACREF" />
+          <ScalarProperty Name="CATYPE" ColumnName="CATYPE" />
+          <ScalarProperty Name="EXCEPTIONDETAIL" ColumnName="EXCEPTIONDETAIL" />
+          <ScalarProperty Name="ENTITLEMENT" ColumnName="ENTITLEMENT" />
+          <ScalarProperty Name="CASHFRACAMOUNT" ColumnName="CASHFRACAMOUNT" />
+          <ScalarProperty Name="PARHOLDING" ColumnName="PARHOLDING" />
+          <ScalarProperty Name="EFFECTIVEDATE" ColumnName="EFFECTIVEDATE" />
+          <ScalarProperty Name="BOID" ColumnName="BOID" />
+          <ScalarProperty Name="IMPORTDATE" ColumnName="IMPORTDATE" />
+          <ScalarProperty Name="INSTRUMENTNAME" ColumnName="INSTRUMENTNAME" />
+          <ScalarProperty Name="PARRATION" ColumnName="PARRATION" />
+          <ScalarProperty Name="DRCRFLAG" ColumnName="DRCRFLAG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CURRENCies">
+      <EntityTypeMapping TypeName="Model.CURRENCY">
+        <MappingFragment StoreEntitySet="CURRENCY">
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="SYMBOL" ColumnName="SYMBOL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DAILYCHARGEs">
+      <EntityTypeMapping TypeName="Model.DAILYCHARGE">
+        <MappingFragment StoreEntitySet="DAILYCHARGE">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="IMPORTDATE" ColumnName="IMPORTDATE" />
+          <ScalarProperty Name="TRANSDESCRIPTION" ColumnName="TRANSDESCRIPTION" />
+          <ScalarProperty Name="TOTALCHARGE" ColumnName="TOTALCHARGE" />
+          <ScalarProperty Name="TOTALAMOUNT" ColumnName="TOTALAMOUNT" />
+          <ScalarProperty Name="SERVICETAX" ColumnName="SERVICETAX" />
+          <ScalarProperty Name="TRANSVALUE" ColumnName="TRANSVALUE" />
+          <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+          <ScalarProperty Name="NOOFTRANS" ColumnName="NOOFTRANS" />
+          <ScalarProperty Name="EXCEPTIONDETAILS" ColumnName="EXCEPTIONDETAILS" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DAILYCHARGEDETAILs">
+      <EntityTypeMapping TypeName="Model.DAILYCHARGEDETAIL">
+        <MappingFragment StoreEntitySet="DAILYCHARGEDETAIL">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="SERVICETAX" ColumnName="SERVICETAX" />
+          <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+          <ScalarProperty Name="INVESTORNAME" ColumnName="INVESTORNAME" />
+          <ScalarProperty Name="ISIN" ColumnName="ISIN" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="CHARGERATEAMOUNT" ColumnName="CHARGERATEAMOUNT" />
+          <ScalarProperty Name="ISEXCEPTION" ColumnName="ISEXCEPTION" />
+          <ScalarProperty Name="INVESTORACREF" ColumnName="INVESTORACREF" />
+          <ScalarProperty Name="TOTALAMOUNT" ColumnName="TOTALAMOUNT" />
+          <ScalarProperty Name="TRANSDESCRIPTION" ColumnName="TRANSDESCRIPTION" />
+          <ScalarProperty Name="EXCEPTIONDETAIL" ColumnName="EXCEPTIONDETAIL" />
+          <ScalarProperty Name="TOTALCHARGE" ColumnName="TOTALCHARGE" />
+          <ScalarProperty Name="TRANSVALUE" ColumnName="TRANSVALUE" />
+          <ScalarProperty Name="BOID" ColumnName="BOID" />
+          <ScalarProperty Name="IMPORTDATE" ColumnName="IMPORTDATE" />
+          <ScalarProperty Name="INSTRUMENTNAME" ColumnName="INSTRUMENTNAME" />
+          <ScalarProperty Name="TRANSREFNO" ColumnName="TRANSREFNO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DEMATCONFIRMs">
+      <EntityTypeMapping TypeName="Model.DEMATCONFIRM">
+        <MappingFragment StoreEntitySet="DEMATCONFIRM">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="BALANCETYPE" ColumnName="BALANCETYPE" />
+          <ScalarProperty Name="EXCEPTIONDETAILS" ColumnName="EXCEPTIONDETAILS" />
+          <ScalarProperty Name="INVESTORNAME" ColumnName="INVESTORNAME" />
+          <ScalarProperty Name="PROCESSEDSTATUS" ColumnName="PROCESSEDSTATUS" />
+          <ScalarProperty Name="ISIN" ColumnName="ISIN" />
+          <ScalarProperty Name="ACCEPTEDQTY" ColumnName="ACCEPTEDQTY" />
+          <ScalarProperty Name="CERTNO" ColumnName="CERTNO" />
+          <ScalarProperty Name="ISEXCEPTION" ColumnName="ISEXCEPTION" />
+          <ScalarProperty Name="DRF" ColumnName="DRF" />
+          <ScalarProperty Name="INVESTORACREF" ColumnName="INVESTORACREF" />
+          <ScalarProperty Name="DRN" ColumnName="DRN" />
+          <ScalarProperty Name="ISDEFAULTAVGCHANGE" ColumnName="ISDEFAULTAVGCHANGE" />
+          <ScalarProperty Name="BUSINESSDATE" ColumnName="BUSINESSDATE" />
+          <ScalarProperty Name="CERTSTATUS" ColumnName="CERTSTATUS" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="FOLIONO" ColumnName="FOLIONO" />
+          <ScalarProperty Name="CERTQTY" ColumnName="CERTQTY" />
+          <ScalarProperty Name="AVGCOST" ColumnName="AVGCOST" />
+          <ScalarProperty Name="DNREND" ColumnName="DNREND" />
+          <ScalarProperty Name="REQUESTEDQTY" ColumnName="REQUESTEDQTY" />
+          <ScalarProperty Name="BOID" ColumnName="BOID" />
+          <ScalarProperty Name="INSTRUMENTNAME" ColumnName="INSTRUMENTNAME" />
+          <ScalarProperty Name="REJECTEDQTY" ColumnName="REJECTEDQTY" />
+          <ScalarProperty Name="DNRSTART" ColumnName="DNRSTART" />
+          <ScalarProperty Name="LOCKINEXPIRY" ColumnName="LOCKINEXPIRY" />
+          <ScalarProperty Name="LOCKINBALANCE" ColumnName="LOCKINBALANCE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DEPARTMENTs">
+      <EntityTypeMapping TypeName="Model.DEPARTMENT">
+        <MappingFragment StoreEntitySet="DEPARTMENT">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DEPOSITORYSETTINGS">
+      <EntityTypeMapping TypeName="Model.DEPOSITORYSETTING">
+        <MappingFragment StoreEntitySet="DEPOSITORYSETTINGS">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="FILENAME" ColumnName="FILENAME" />
+          <ScalarProperty Name="CHARGERATE" ColumnName="CHARGERATE" />
+          <ScalarProperty Name="MINIMUMFEE" ColumnName="MINIMUMFEE" />
+          <ScalarProperty Name="METHODNAME" ColumnName="METHODNAME" />
+          <ScalarProperty Name="SEQ" ColumnName="SEQ" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DIVIDENDs">
+      <EntityTypeMapping TypeName="Model.DIVIDEND">
+        <MappingFragment StoreEntitySet="DIVIDEND">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="GROSSCASHAMOUNT" ColumnName="GROSSCASHAMOUNT" />
+          <ScalarProperty Name="NETCASHAMOUNT" ColumnName="NETCASHAMOUNT" />
+          <ScalarProperty Name="SEQUENCENO" ColumnName="SEQUENCENO" />
+          <ScalarProperty Name="BANKACCOUNTNO" ColumnName="BANKACCOUNTNO" />
+          <ScalarProperty Name="BOTYPE" ColumnName="BOTYPE" />
+          <ScalarProperty Name="ISIN" ColumnName="ISIN" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="RECORDDATE" ColumnName="RECORDDATE" />
+          <ScalarProperty Name="EXCEPTION" ColumnName="EXCEPTION" />
+          <ScalarProperty Name="TAXAMOUNT" ColumnName="TAXAMOUNT" />
+          <ScalarProperty Name="ISEXCEPTION" ColumnName="ISEXCEPTION" />
+          <ScalarProperty Name="NATIONALITY" ColumnName="NATIONALITY" />
+          <ScalarProperty Name="ISINSHORTNAME" ColumnName="ISINSHORTNAME" />
+          <ScalarProperty Name="BOCATEGORY" ColumnName="BOCATEGORY" />
+          <ScalarProperty Name="INVESTORACREF" ColumnName="INVESTORACREF" />
+          <ScalarProperty Name="BOHOLDING" ColumnName="BOHOLDING" />
+          <ScalarProperty Name="PROCFLAG" ColumnName="PROCFLAG" />
+          <ScalarProperty Name="RESIDENCY" ColumnName="RESIDENCY" />
+          <ScalarProperty Name="BANKNAME" ColumnName="BANKNAME" />
+          <ScalarProperty Name="DIVIDENDAMT" ColumnName="DIVIDENDAMT" />
+          <ScalarProperty Name="CASHPAYMENTDATE" ColumnName="CASHPAYMENTDATE" />
+          <ScalarProperty Name="BRANCHNAME" ColumnName="BRANCHNAME" />
+          <ScalarProperty Name="CATYPE" ColumnName="CATYPE" />
+          <ScalarProperty Name="EFFECTIVEDATE" ColumnName="EFFECTIVEDATE" />
+          <ScalarProperty Name="BOID" ColumnName="BOID" />
+          <ScalarProperty Name="IMPORTDATE" ColumnName="IMPORTDATE" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+          <ScalarProperty Name="TAXRATE" ColumnName="TAXRATE" />
+          <ScalarProperty Name="CASHRECEIVEDDATE" ColumnName="CASHRECEIVEDDATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EXTRADIVIDENDRECEIVEDs">
+      <EntityTypeMapping TypeName="Model.EXTRADIVIDENDRECEIVED">
+        <MappingFragment StoreEntitySet="EXTRADIVIDENDRECEIVED">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="ACCOUNTNUMBER" ColumnName="ACCOUNTNUMBER" />
+          <ScalarProperty Name="INSTRUMENTACREF" ColumnName="INSTRUMENTACREF" />
+          <ScalarProperty Name="TRANSACTIONTYPE" ColumnName="TRANSACTIONTYPE" />
+          <ScalarProperty Name="SHAREQTY" ColumnName="SHAREQTY" />
+          <ScalarProperty Name="NETCASHDIVIDEND" ColumnName="NETCASHDIVIDEND" />
+          <ScalarProperty Name="GROSSAMOUNT" ColumnName="GROSSAMOUNT" />
+          <ScalarProperty Name="TAXRATE" ColumnName="TAXRATE" />
+          <ScalarProperty Name="FOLIONUMBER" ColumnName="FOLIONUMBER" />
+          <ScalarProperty Name="CASHRECEIVEDDATE" ColumnName="CASHRECEIVEDDATE" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="RECORDDATE" ColumnName="RECORDDATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FDRENCASHMENTs">
+      <EntityTypeMapping TypeName="Model.FDRENCASHMENT">
+        <MappingFragment StoreEntitySet="FDRENCASHMENT">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="FDRNUMBER" ColumnName="FDRNUMBER" />
+          <ScalarProperty Name="MRNO" ColumnName="MRNO" />
+          <ScalarProperty Name="MRDATE" ColumnName="MRDATE" />
+          <ScalarProperty Name="ENCASHMENTDATE" ColumnName="ENCASHMENTDATE" />
+          <ScalarProperty Name="RECEIVEDON" ColumnName="RECEIVEDON" />
+          <ScalarProperty Name="INTERESTFROM" ColumnName="INTERESTFROM" />
+          <ScalarProperty Name="INTERESTTO" ColumnName="INTERESTTO" />
+          <ScalarProperty Name="GROSSINTEREST" ColumnName="GROSSINTEREST" />
+          <ScalarProperty Name="SOURCETAX" ColumnName="SOURCETAX" />
+          <ScalarProperty Name="EXCISEDUTY" ColumnName="EXCISEDUTY" />
+          <ScalarProperty Name="OTHERCHARGE" ColumnName="OTHERCHARGE" />
+          <ScalarProperty Name="NETINTEREST" ColumnName="NETINTEREST" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FDRINTERESTs">
+      <EntityTypeMapping TypeName="Model.FDRINTEREST">
+        <MappingFragment StoreEntitySet="FDRINTEREST">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="FIXEDDEPOSIT_REFERENCE" ColumnName="FIXEDDEPOSIT_REFERENCE" />
+          <ScalarProperty Name="PRINCIPALAMOUNT" ColumnName="PRINCIPALAMOUNT" />
+          <ScalarProperty Name="RATEOFINTEREST" ColumnName="RATEOFINTEREST" />
+          <ScalarProperty Name="FROMDATE" ColumnName="FROMDATE" />
+          <ScalarProperty Name="TODATE" ColumnName="TODATE" />
+          <ScalarProperty Name="GROSSINTEREST" ColumnName="GROSSINTEREST" />
+          <ScalarProperty Name="TAXRATE" ColumnName="TAXRATE" />
+          <ScalarProperty Name="SOURCETAX" ColumnName="SOURCETAX" />
+          <ScalarProperty Name="EXCISEDUTY" ColumnName="EXCISEDUTY" />
+          <ScalarProperty Name="OTHERCHARGE" ColumnName="OTHERCHARGE" />
+          <ScalarProperty Name="NETINTERESTRECEIVABLE" ColumnName="NETINTERESTRECEIVABLE" />
+          <ScalarProperty Name="AMOUNTRECEIVABLE" ColumnName="AMOUNTRECEIVABLE" />
+          <ScalarProperty Name="COMPOUNDVALUE" ColumnName="COMPOUNDVALUE" />
+          <ScalarProperty Name="TAXUPONGROSS" ColumnName="TAXUPONGROSS" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="PRICIPALUPONNET" ColumnName="PRICIPALUPONNET" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FDRNOTEs">
+      <EntityTypeMapping TypeName="Model.FDRNOTE">
+        <MappingFragment StoreEntitySet="FDRNOTE">
+          <ScalarProperty Name="NOTEID" ColumnName="NOTEID" />
+          <ScalarProperty Name="FDRPROPOSALDETAILSREF" ColumnName="FDRPROPOSALDETAILSREF" />
+          <ScalarProperty Name="NOTETYPE" ColumnName="NOTETYPE" />
+          <ScalarProperty Name="FDRNUMBER" ColumnName="FDRNUMBER" />
+          <ScalarProperty Name="FINANCIALINSTITUTION_REFERENCE" ColumnName="FINANCIALINSTITUTION_REFERENCE" />
+          <ScalarProperty Name="BRANCH_REFERENCE" ColumnName="BRANCH_REFERENCE" />
+          <ScalarProperty Name="PRINCIPALAMOUNT" ColumnName="PRINCIPALAMOUNT" />
+          <ScalarProperty Name="TENURE" ColumnName="TENURE" />
+          <ScalarProperty Name="TENURETERM" ColumnName="TENURETERM" />
+          <ScalarProperty Name="OFFERRATE" ColumnName="OFFERRATE" />
+          <ScalarProperty Name="PROPOSEDRATE" ColumnName="PROPOSEDRATE" />
+          <ScalarProperty Name="EXISTINGDEPOSIT" ColumnName="EXISTINGDEPOSIT" />
+          <ScalarProperty Name="CAPLIMIT" ColumnName="CAPLIMIT" />
+          <ScalarProperty Name="CHEQUENO" ColumnName="CHEQUENO" />
+          <ScalarProperty Name="CHEQUEDATE" ColumnName="CHEQUEDATE" />
+          <ScalarProperty Name="PROPOSEDACTION" ColumnName="PROPOSEDACTION" />
+          <ScalarProperty Name="APPROVEDBY" ColumnName="APPROVEDBY" />
+          <ScalarProperty Name="APPROVEDDATE" ColumnName="APPROVEDDATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="PROPOSALSUMMARY" ColumnName="PROPOSALSUMMARY" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="FIXEDDEPOSIT_REFERENCE" ColumnName="FIXEDDEPOSIT_REFERENCE" />
+          <ScalarProperty Name="CHEQUEDRAWNFROM" ColumnName="CHEQUEDRAWNFROM" />
+          <ScalarProperty Name="CONTACTPERSON" ColumnName="CONTACTPERSON" />
+          <ScalarProperty Name="SIGNATORY1" ColumnName="SIGNATORY1" />
+          <ScalarProperty Name="SIGNATORY2" ColumnName="SIGNATORY2" />
+          <ScalarProperty Name="PERCENTAGEOFFDR" ColumnName="PERCENTAGEOFFDR" />
+          <ScalarProperty Name="INTERESTMODE" ColumnName="INTERESTMODE" />
+          <ScalarProperty Name="ANNUALDAYS" ColumnName="ANNUALDAYS" />
+          <ScalarProperty Name="COMPOUNDINTERESTINTERVAL" ColumnName="COMPOUNDINTERESTINTERVAL" />
+          <ScalarProperty Name="OPENEDDATE" ColumnName="OPENEDDATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FDRPROPOSALs">
+      <EntityTypeMapping TypeName="Model.FDRPROPOSAL">
+        <MappingFragment StoreEntitySet="FDRPROPOSAL">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="PROPOSALID" ColumnName="PROPOSALID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FDRPROPOSALDETAILS">
+      <EntityTypeMapping TypeName="Model.FDRPROPOSALDETAIL">
+        <MappingFragment StoreEntitySet="FDRPROPOSALDETAILS">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="FDRPROPOSAL_REFERENCE" ColumnName="FDRPROPOSAL_REFERENCE" />
+          <ScalarProperty Name="FINANCIALINSTITUTION_REFERENCE" ColumnName="FINANCIALINSTITUTION_REFERENCE" />
+          <ScalarProperty Name="TERMS" ColumnName="TERMS" />
+          <ScalarProperty Name="TENURE" ColumnName="TENURE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="ACCEPTEDBY" ColumnName="ACCEPTEDBY" />
+          <ScalarProperty Name="ACCEPTEDDATE" ColumnName="ACCEPTEDDATE" />
+          <ScalarProperty Name="REJECTEDBY" ColumnName="REJECTEDBY" />
+          <ScalarProperty Name="REJECTEDDATE" ColumnName="REJECTEDDATE" />
+          <ScalarProperty Name="TENURE2" ColumnName="TENURE2" />
+          <ScalarProperty Name="TERM2" ColumnName="TERM2" />
+          <ScalarProperty Name="TENURE3" ColumnName="TENURE3" />
+          <ScalarProperty Name="TERM3" ColumnName="TERM3" />
+          <ScalarProperty Name="BRANCH_REFERENCE" ColumnName="BRANCH_REFERENCE" />
+          <ScalarProperty Name="CURRENTHOLDING" ColumnName="CURRENTHOLDING" />
+          <ScalarProperty Name="PRINCIPALAMOUNT" ColumnName="PRINCIPALAMOUNT" />
+          <ScalarProperty Name="EXISTINGCAPLIMIT" ColumnName="EXISTINGCAPLIMIT" />
+          <ScalarProperty Name="PERCENTAGEOFTOTALFDR" ColumnName="PERCENTAGEOFTOTALFDR" />
+          <ScalarProperty Name="NPL" ColumnName="NPL" />
+          <ScalarProperty Name="OFFERRATE" ColumnName="OFFERRATE" />
+          <ScalarProperty Name="ANNUALDAYS" ColumnName="ANNUALDAYS" />
+          <ScalarProperty Name="INTERESTMODE" ColumnName="INTERESTMODE" />
+          <ScalarProperty Name="OFFERRATE3" ColumnName="OFFERRATE3" />
+          <ScalarProperty Name="OFFERRATE2" ColumnName="OFFERRATE2" />
+          <ScalarProperty Name="INTERESTMODE1" ColumnName="INTERESTMODE1" />
+          <ScalarProperty Name="INTERESTMODE3" ColumnName="INTERESTMODE3" />
+          <ScalarProperty Name="INTERESTMODE2" ColumnName="INTERESTMODE2" />
+          <ScalarProperty Name="TENURE1" ColumnName="TENURE1" />
+          <ScalarProperty Name="TERM1" ColumnName="TERM1" />
+          <ScalarProperty Name="OFFERRATE1" ColumnName="OFFERRATE1" />
+          <ScalarProperty Name="INTERESTMODE4" ColumnName="INTERESTMODE4" />
+          <ScalarProperty Name="TENURE4" ColumnName="TENURE4" />
+          <ScalarProperty Name="TERM4" ColumnName="TERM4" />
+          <ScalarProperty Name="OFFERRATE4" ColumnName="OFFERRATE4" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FIBRANCHes">
+      <EntityTypeMapping TypeName="Model.FIBRANCH">
+        <MappingFragment StoreEntitySet="FIBRANCH">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="ROUTINGNUMBER" ColumnName="ROUTINGNUMBER" />
+          <ScalarProperty Name="SWIFTCODE" ColumnName="SWIFTCODE" />
+          <ScalarProperty Name="DISTRICTCODE" ColumnName="DISTRICTCODE" />
+          <ScalarProperty Name="DISTRICTNAME" ColumnName="DISTRICTNAME" />
+          <ScalarProperty Name="ADDRESSLINE1" ColumnName="ADDRESSLINE1" />
+          <ScalarProperty Name="ADDRESSLINE2" ColumnName="ADDRESSLINE2" />
+          <ScalarProperty Name="POSTCODE" ColumnName="POSTCODE" />
+          <ScalarProperty Name="CONTACTPERSON" ColumnName="CONTACTPERSON" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="FINANCIALINSTITUTION_REFERENCE" ColumnName="FINANCIALINSTITUTION_REFERENCE" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FINANCIALINSTITUTIONs">
+      <EntityTypeMapping TypeName="Model.FINANCIALINSTITUTION">
+        <MappingFragment StoreEntitySet="FINANCIALINSTITUTION">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="SWIFTCODE" ColumnName="SWIFTCODE" />
+          <ScalarProperty Name="INSTITUTIONTYPE" ColumnName="INSTITUTIONTYPE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="CONTACTNO" ColumnName="CONTACTNO" />
+          <ScalarProperty Name="CONTACTPERSON" ColumnName="CONTACTPERSON" />
+          <ScalarProperty Name="CAPLIMIT" ColumnName="CAPLIMIT" />
+          <ScalarProperty Name="NPLPERCENTAGE" ColumnName="NPLPERCENTAGE" />
+          <ScalarProperty Name="OTHERCHARGE" ColumnName="OTHERCHARGE" />
+          <ScalarProperty Name="EXCISEDUTY" ColumnName="EXCISEDUTY" />
+          <ScalarProperty Name="TAXRATE" ColumnName="TAXRATE" />
+          <ScalarProperty Name="CAMELRATING" ColumnName="CAMELRATING" />
+          <ScalarProperty Name="OFFERRATE1" ColumnName="OFFERRATE1" />
+          <ScalarProperty Name="OFFERRATE2" ColumnName="OFFERRATE2" />
+          <ScalarProperty Name="OFFERRATE3" ColumnName="OFFERRATE3" />
+          <ScalarProperty Name="ADDRESSLINE1" ColumnName="ADDRESSLINE1" />
+          <ScalarProperty Name="ADDRESSLINE2" ColumnName="ADDRESSLINE2" />
+          <ScalarProperty Name="ISSELECT" ColumnName="ISSELECT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FINANCIALYEARs">
+      <EntityTypeMapping TypeName="Model.FINANCIALYEAR">
+        <MappingFragment StoreEntitySet="FINANCIALYEAR">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="YEARINDEX" ColumnName="YEARINDEX" />
+          <ScalarProperty Name="DATEFROM" ColumnName="DATEFROM" />
+          <ScalarProperty Name="DATETO" ColumnName="DATETO" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FIXEDDEPOSITs">
+      <EntityTypeMapping TypeName="Model.FIXEDDEPOSIT">
+        <MappingFragment StoreEntitySet="FIXEDDEPOSIT">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="DEPOSITNUMBER" ColumnName="DEPOSITNUMBER" />
+          <ScalarProperty Name="FINANCIALINSTITUTION_REFERENCE" ColumnName="FINANCIALINSTITUTION_REFERENCE" />
+          <ScalarProperty Name="PRINCIPALAMOUNT" ColumnName="PRINCIPALAMOUNT" />
+          <ScalarProperty Name="CHEQUEDATE" ColumnName="CHEQUEDATE" />
+          <ScalarProperty Name="CHEQUEREFERENCE" ColumnName="CHEQUEREFERENCE" />
+          <ScalarProperty Name="TENURE" ColumnName="TENURE" />
+          <ScalarProperty Name="TENURETERM" ColumnName="TENURETERM" />
+          <ScalarProperty Name="TERMSINDAYS" ColumnName="TERMSINDAYS" />
+          <ScalarProperty Name="INTERESTRECEIVINGPERIOD" ColumnName="INTERESTRECEIVINGPERIOD" />
+          <ScalarProperty Name="MATURITYDATE" ColumnName="MATURITYDATE" />
+          <ScalarProperty Name="EXISTINGCAPLIMIT" ColumnName="EXISTINGCAPLIMIT" />
+          <ScalarProperty Name="RATEOFINTEREST" ColumnName="RATEOFINTEREST" />
+          <ScalarProperty Name="ADVANCEDINTERESTRATE" ColumnName="ADVANCEDINTERESTRATE" />
+          <ScalarProperty Name="INTERESTMODE" ColumnName="INTERESTMODE" />
+          <ScalarProperty Name="COMPOUNDINTERESTTYPE" ColumnName="COMPOUNDINTERESTTYPE" />
+          <ScalarProperty Name="COMPOUNDINTERESTINTERVAL" ColumnName="COMPOUNDINTERESTINTERVAL" />
+          <ScalarProperty Name="ANNUALDAYS" ColumnName="ANNUALDAYS" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="ACCEPTEDBY" ColumnName="ACCEPTEDBY" />
+          <ScalarProperty Name="ACCEPTEDDATE" ColumnName="ACCEPTEDDATE" />
+          <ScalarProperty Name="REJECTEDBY" ColumnName="REJECTEDBY" />
+          <ScalarProperty Name="REJECTEDDATE" ColumnName="REJECTEDDATE" />
+          <ScalarProperty Name="OPENINGDATE" ColumnName="OPENINGDATE" />
+          <ScalarProperty Name="RENWALDATE" ColumnName="RENWALDATE" />
+          <ScalarProperty Name="RENEWALDEPOSITNUMBER" ColumnName="RENEWALDEPOSITNUMBER" />
+          <ScalarProperty Name="TAXDEDUCTIONCRITERIA" ColumnName="TAXDEDUCTIONCRITERIA" />
+          <ScalarProperty Name="HOLDINGPERIOD" ColumnName="HOLDINGPERIOD" />
+          <ScalarProperty Name="GROSSINTEREST" ColumnName="GROSSINTEREST" />
+          <ScalarProperty Name="SOURCETAX" ColumnName="SOURCETAX" />
+          <ScalarProperty Name="EXCISEDUTY" ColumnName="EXCISEDUTY" />
+          <ScalarProperty Name="OTHERCHARGE" ColumnName="OTHERCHARGE" />
+          <ScalarProperty Name="PRESENTPRINCIPALAMOUNT" ColumnName="PRESENTPRINCIPALAMOUNT" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+          <ScalarProperty Name="NETINTERESTRECEIVABLE" ColumnName="NETINTERESTRECEIVABLE" />
+          <ScalarProperty Name="TOTALAMOUNTRECEIVABLE" ColumnName="TOTALAMOUNTRECEIVABLE" />
+          <ScalarProperty Name="RECEIVABLETILL" ColumnName="RECEIVABLETILL" />
+          <ScalarProperty Name="MRNO" ColumnName="MRNO" />
+          <ScalarProperty Name="MRDATE" ColumnName="MRDATE" />
+          <ScalarProperty Name="ENCASHMENTDATE" ColumnName="ENCASHMENTDATE" />
+          <ScalarProperty Name="ACTUALINTERESTRECEIVED" ColumnName="ACTUALINTERESTRECEIVED" />
+          <ScalarProperty Name="BRANCH_REFERENCE" ColumnName="BRANCH_REFERENCE" />
+          <ScalarProperty Name="SIGNATORY1" ColumnName="SIGNATORY1" />
+          <ScalarProperty Name="SIGNATORY2" ColumnName="SIGNATORY2" />
+          <ScalarProperty Name="TAXRATE" ColumnName="TAXRATE" />
+          <ScalarProperty Name="INITIALPRINCIPALAMOUNT" ColumnName="INITIALPRINCIPALAMOUNT" />
+          <ScalarProperty Name="INITIALOPENINGDATE" ColumnName="INITIALOPENINGDATE" />
+          <ScalarProperty Name="INITIALFIXEDDEPOSITREF" ColumnName="INITIALFIXEDDEPOSITREF" />
+          <ScalarProperty Name="PROPOSEDACTION" ColumnName="PROPOSEDACTION" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="POSTGL_STATUS" ColumnName="POSTGL_STATUS" />
+          <ScalarProperty Name="POSTGL_FROM" ColumnName="POSTGL_FROM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GOVBONDINTERESTSCHEDULEs">
+      <EntityTypeMapping TypeName="Model.GOVBONDINTERESTSCHEDULE">
+        <MappingFragment StoreEntitySet="GOVBONDINTERESTSCHEDULE">
+          <ScalarProperty Name="BOND_REFERENCE" ColumnName="BOND_REFERENCE" />
+          <ScalarProperty Name="SEQUENCENUMBER" ColumnName="SEQUENCENUMBER" />
+          <ScalarProperty Name="DUEDATE" ColumnName="DUEDATE" />
+          <ScalarProperty Name="GROSSINTEREST" ColumnName="GROSSINTEREST" />
+          <ScalarProperty Name="TAXRATE" ColumnName="TAXRATE" />
+          <ScalarProperty Name="SOURCETAX" ColumnName="SOURCETAX" />
+          <ScalarProperty Name="OTHERCHARGE" ColumnName="OTHERCHARGE" />
+          <ScalarProperty Name="NETINTEREST" ColumnName="NETINTEREST" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="MRNO" ColumnName="MRNO" />
+          <ScalarProperty Name="MRDATE" ColumnName="MRDATE" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+          <ScalarProperty Name="INTERESTRECEIVEDDATE" ColumnName="INTERESTRECEIVEDDATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HOLDINGs">
+      <EntityTypeMapping TypeName="Model.HOLDING">
+        <MappingFragment StoreEntitySet="HOLDING">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="INVESTORNAME" ColumnName="INVESTORNAME" />
+          <ScalarProperty Name="MATUREDBALANCE" ColumnName="MATUREDBALANCE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="NETBALANCE" ColumnName="NETBALANCE" />
+          <ScalarProperty Name="INSTRUMENTNAME" ColumnName="INSTRUMENTNAME" />
+          <ScalarProperty Name="BUSINESSDATE" ColumnName="BUSINESSDATE" />
+          <ScalarProperty Name="BOID" ColumnName="BOID" />
+          <ScalarProperty Name="EXCEPTIONDETAILS" ColumnName="EXCEPTIONDETAILS" />
+          <ScalarProperty Name="ISIN" ColumnName="ISIN" />
+          <ScalarProperty Name="ISEXCEPTION" ColumnName="ISEXCEPTION" />
+          <ScalarProperty Name="INVESTORACREF" ColumnName="INVESTORACREF" />
+          <ScalarProperty Name="CURRENTBALANCE" ColumnName="CURRENTBALANCE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HOLIDAYCALENDERs">
+      <EntityTypeMapping TypeName="Model.HOLIDAYCALENDER">
+        <MappingFragment StoreEntitySet="HOLIDAYCALENDER">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="HOLIDAY" ColumnName="HOLIDAY" />
+          <ScalarProperty Name="NOTE" ColumnName="NOTE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="UPDATEDDATE" ColumnName="UPDATEDDATE" />
+          <ScalarProperty Name="CREADEDBY" ColumnName="CREADEDBY" />
+          <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INSTRUMENTs">
+      <EntityTypeMapping TypeName="Model.INSTRUMENT">
+        <MappingFragment StoreEntitySet="INSTRUMENT">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="INSTRUMENTID" ColumnName="INSTRUMENTID" />
+          <ScalarProperty Name="CSEID" ColumnName="CSEID" />
+          <ScalarProperty Name="INSTRUMENTTYPE" ColumnName="INSTRUMENTTYPE" />
+          <ScalarProperty Name="SHORTNAME" ColumnName="SHORTNAME" />
+          <ScalarProperty Name="ISIN" ColumnName="ISIN" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="INSTRUMENTCATEGORY_REFERENCE" ColumnName="INSTRUMENTCATEGORY_REFERENCE" />
+          <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
+          <ScalarProperty Name="ISNONMARGINABLE" ColumnName="ISNONMARGINABLE" />
+          <ScalarProperty Name="ALLOWNETTING" ColumnName="ALLOWNETTING" />
+          <ScalarProperty Name="ISSPOT" ColumnName="ISSPOT" />
+          <ScalarProperty Name="DECLARATIONDATE" ColumnName="DECLARATIONDATE" />
+          <ScalarProperty Name="FACEVALUE" ColumnName="FACEVALUE" />
+          <ScalarProperty Name="PREMIUM" ColumnName="PREMIUM" />
+          <ScalarProperty Name="IPO" ColumnName="IPO" />
+          <ScalarProperty Name="TOTALSHARE" ColumnName="TOTALSHARE" />
+          <ScalarProperty Name="PUBLICSHARE" ColumnName="PUBLICSHARE" />
+          <ScalarProperty Name="MARKETLOT" ColumnName="MARKETLOT" />
+          <ScalarProperty Name="NETASSETVALUE" ColumnName="NETASSETVALUE" />
+          <ScalarProperty Name="LATESTEPS" ColumnName="LATESTEPS" />
+          <ScalarProperty Name="PERATIO" ColumnName="PERATIO" />
+          <ScalarProperty Name="LASTMARKETPRICE" ColumnName="LASTMARKETPRICE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INSTRUMENTCATEGORies">
+      <EntityTypeMapping TypeName="Model.INSTRUMENTCATEGORY">
+        <MappingFragment StoreEntitySet="INSTRUMENTCATEGORY">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="STOCKEXCHANGE" ColumnName="STOCKEXCHANGE" />
+          <ScalarProperty Name="ALLOWNETTING" ColumnName="ALLOWNETTING" />
+          <ScalarProperty Name="ISNONMARGINABLE" ColumnName="ISNONMARGINABLE" />
+          <ScalarProperty Name="SETTLEMENTDAYS" ColumnName="SETTLEMENTDAYS" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INVESTMENTPARTICULARS">
+      <EntityTypeMapping TypeName="Model.INVESTMENTPARTICULAR">
+        <MappingFragment StoreEntitySet="INVESTMENTPARTICULARS">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="PARTICULARSNAME" ColumnName="PARTICULARSNAME" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+          <ScalarProperty Name="SEQUENCE" ColumnName="SEQUENCE" />
+          <ScalarProperty Name="PARENTID" ColumnName="PARENTID" />
+          <ScalarProperty Name="GROUPNAME" ColumnName="GROUPNAME" />
+          <ScalarProperty Name="SUBGROUPNAME" ColumnName="SUBGROUPNAME" />
+          <ScalarProperty Name="LIMITMINIMUM" ColumnName="LIMITMINIMUM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INVESTORs">
+      <EntityTypeMapping TypeName="Model.INVESTOR">
+        <MappingFragment StoreEntitySet="INVESTOR">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="ACCOUNTNUMBER" ColumnName="ACCOUNTNUMBER" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="BONUMBER" ColumnName="BONUMBER" />
+          <ScalarProperty Name="BROKER_REFERENCE" ColumnName="BROKER_REFERENCE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="ACCOUNTTYPE" ColumnName="ACCOUNTTYPE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INVESTORGROUPs">
+      <EntityTypeMapping TypeName="Model.INVESTORGROUP">
+        <MappingFragment StoreEntitySet="INVESTORGROUP">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="ISLOANAPPLICABLE" ColumnName="ISLOANAPPLICABLE" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="MARGINCATEGORY" ColumnName="MARGINCATEGORY" />
+          <ScalarProperty Name="ISALLOWEMAILNOTIFICATION" ColumnName="ISALLOWEMAILNOTIFICATION" />
+          <ScalarProperty Name="ISDEFAULT" ColumnName="ISDEFAULT" />
+          <ScalarProperty Name="TRADEVOLUME" ColumnName="TRADEVOLUME" />
+          <ScalarProperty Name="INVESTMENTMARGIN" ColumnName="INVESTMENTMARGIN" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="DISCOUNTONVOLUMEONLY" ColumnName="DISCOUNTONVOLUMEONLY" />
+          <ScalarProperty Name="ISALLOWSMSNOTIFICATION" ColumnName="ISALLOWSMSNOTIFICATION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INVESTORPROFILEs">
+      <EntityTypeMapping TypeName="Model.INVESTORPROFILE">
+        <MappingFragment StoreEntitySet="INVESTORPROFILE">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="MIDDLENAME" ColumnName="MIDDLENAME" />
+          <ScalarProperty Name="PHOTO" ColumnName="PHOTO" />
+          <ScalarProperty Name="SETUPDATE" ColumnName="SETUPDATE" />
+          <ScalarProperty Name="MOBILE" ColumnName="MOBILE" />
+          <ScalarProperty Name="PASSPORTNO" ColumnName="PASSPORTNO" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="ACCOUNTSTATUS" ColumnName="ACCOUNTSTATUS" />
+          <ScalarProperty Name="EXCEPTION" ColumnName="EXCEPTION" />
+          <ScalarProperty Name="PASSPORTISSUEPLACE" ColumnName="PASSPORTISSUEPLACE" />
+          <ScalarProperty Name="NATIONALITY" ColumnName="NATIONALITY" />
+          <ScalarProperty Name="OCCUPATION" ColumnName="OCCUPATION" />
+          <ScalarProperty Name="BONUMBER" ColumnName="BONUMBER" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="TAXID" ColumnName="TAXID" />
+          <ScalarProperty Name="DATEOFBIRTH" ColumnName="DATEOFBIRTH" />
+          <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+          <ScalarProperty Name="PASSPORTISSUEDATE" ColumnName="PASSPORTISSUEDATE" />
+          <ScalarProperty Name="SHORTNAME" ColumnName="SHORTNAME" />
+          <ScalarProperty Name="LASTNAME" ColumnName="LASTNAME" />
+          <ScalarProperty Name="FIRSTNAME" ColumnName="FIRSTNAME" />
+          <ScalarProperty Name="INTRODUCERACREF" ColumnName="INTRODUCERACREF" />
+          <ScalarProperty Name="POWEROFATTORN" ColumnName="POWEROFATTORN" />
+          <ScalarProperty Name="ACCOUNTCATEGORY" ColumnName="ACCOUNTCATEGORY" />
+          <ScalarProperty Name="ACCOUNTNUMBER" ColumnName="ACCOUNTNUMBER" />
+          <ScalarProperty Name="SECONDHOLDER" ColumnName="SECONDHOLDER" />
+          <ScalarProperty Name="PASSPORTEXPIREDATE" ColumnName="PASSPORTEXPIREDATE" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="FATHERNAME" ColumnName="FATHERNAME" />
+          <ScalarProperty Name="SIGNATURE" ColumnName="SIGNATURE" />
+          <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+          <ScalarProperty Name="MOTHERNAME" ColumnName="MOTHERNAME" />
+          <ScalarProperty Name="ORGANIZATIONACCOUNT" ColumnName="ORGANIZATIONACCOUNT" />
+          <ScalarProperty Name="NATIONALID" ColumnName="NATIONALID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INVPARTICULARSDETAILS">
+      <EntityTypeMapping TypeName="Model.INVPARTICULARSDETAIL">
+        <MappingFragment StoreEntitySet="INVPARTICULARSDETAILS">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="PRINCIPALAMOUNT" ColumnName="PRINCIPALAMOUNT" />
+          <ScalarProperty Name="TRANSACTIONDATE" ColumnName="TRANSACTIONDATE" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+          <ScalarProperty Name="INVPARTICULARS_REF" ColumnName="INVPARTICULARS_REF" />
+          <ScalarProperty Name="GROUPNAME" ColumnName="GROUPNAME" />
+          <ScalarProperty Name="PARTICULARSNAME" ColumnName="PARTICULARSNAME" />
+          <ScalarProperty Name="SUBGROUPNAME" ColumnName="SUBGROUPNAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IPOes">
+      <EntityTypeMapping TypeName="Model.IPO">
+        <MappingFragment StoreEntitySet="IPO">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="EXCEPTIONDETAILS" ColumnName="EXCEPTIONDETAILS" />
+          <ScalarProperty Name="INVESTORNAME" ColumnName="INVESTORNAME" />
+          <ScalarProperty Name="SEQUENCENO" ColumnName="SEQUENCENO" />
+          <ScalarProperty Name="ISIN" ColumnName="ISIN" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="BOACCOUNTSTATUS" ColumnName="BOACCOUNTSTATUS" />
+          <ScalarProperty Name="INVESTORACREF" ColumnName="INVESTORACREF" />
+          <ScalarProperty Name="BOCATEGORY" ColumnName="BOCATEGORY" />
+          <ScalarProperty Name="LOCKINQTY" ColumnName="LOCKINQTY" />
+          <ScalarProperty Name="CURRENTQTY" ColumnName="CURRENTQTY" />
+          <ScalarProperty Name="PROCESSFLAG" ColumnName="PROCESSFLAG" />
+          <ScalarProperty Name="EFFECTIVEDATE" ColumnName="EFFECTIVEDATE" />
+          <ScalarProperty Name="BOID" ColumnName="BOID" />
+          <ScalarProperty Name="INSTRUMENTNAME" ColumnName="INSTRUMENTNAME" />
+          <ScalarProperty Name="BUSINESSDATE" ColumnName="BUSINESSDATE" />
+          <ScalarProperty Name="RATE" ColumnName="RATE" />
+          <ScalarProperty Name="FACEVALUE" ColumnName="FACEVALUE" />
+          <ScalarProperty Name="PREMIUM" ColumnName="PREMIUM" />
+          <ScalarProperty Name="LOCKINEXPIRY" ColumnName="LOCKINEXPIRY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JOINTHOLDERs">
+      <EntityTypeMapping TypeName="Model.JOINTHOLDER">
+        <MappingFragment StoreEntitySet="JOINTHOLDER">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="PHOTO" ColumnName="PHOTO" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="MOBILE" ColumnName="MOBILE" />
+          <ScalarProperty Name="PASSPORTISSUEPLACE" ColumnName="PASSPORTISSUEPLACE" />
+          <ScalarProperty Name="NATIONALITY" ColumnName="NATIONALITY" />
+          <ScalarProperty Name="SETUPDATE" ColumnName="SETUPDATE" />
+          <ScalarProperty Name="MIDDLENAME" ColumnName="MIDDLENAME" />
+          <ScalarProperty Name="DATEOFBIRTH" ColumnName="DATEOFBIRTH" />
+          <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+          <ScalarProperty Name="PASSPORTISSUEDATE" ColumnName="PASSPORTISSUEDATE" />
+          <ScalarProperty Name="SHORTNAME" ColumnName="SHORTNAME" />
+          <ScalarProperty Name="LASTNAME" ColumnName="LASTNAME" />
+          <ScalarProperty Name="FIRSTNAME" ColumnName="FIRSTNAME" />
+          <ScalarProperty Name="PASSPORTNO" ColumnName="PASSPORTNO" />
+          <ScalarProperty Name="PASSPORTEXPIREDATE" ColumnName="PASSPORTEXPIREDATE" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="FATHERNAME" ColumnName="FATHERNAME" />
+          <ScalarProperty Name="SIGNATURE" ColumnName="SIGNATURE" />
+          <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+          <ScalarProperty Name="MOTHERNAME" ColumnName="MOTHERNAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JOURNALHEADs">
+      <EntityTypeMapping TypeName="Model.JOURNALHEAD">
+        <MappingFragment StoreEntitySet="JOURNALHEAD">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="ACCOUNTREF" ColumnName="ACCOUNTREF" />
+          <ScalarProperty Name="TRANSACTIONDATE" ColumnName="TRANSACTIONDATE" />
+          <ScalarProperty Name="JOURNALTYPE" ColumnName="JOURNALTYPE" />
+          <ScalarProperty Name="FOLIONUMBER" ColumnName="FOLIONUMBER" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="FINANCIALYEAR_REFERENCE" ColumnName="FINANCIALYEAR_REFERENCE" />
+          <ScalarProperty Name="FINANCIALPERIOD_REFERENCE" ColumnName="FINANCIALPERIOD_REFERENCE" />
+          <ScalarProperty Name="PAYMENTTYPE" ColumnName="PAYMENTTYPE" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+          <ScalarProperty Name="ISCANCELLED" ColumnName="ISCANCELLED" />
+          <ScalarProperty Name="ISRECONCILED" ColumnName="ISRECONCILED" />
+          <ScalarProperty Name="RECONCILEDDATE" ColumnName="RECONCILEDDATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JOURNALLINEs">
+      <EntityTypeMapping TypeName="Model.JOURNALLINE">
+        <MappingFragment StoreEntitySet="JOURNALLINE">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="JOURNALHEAD_REFERENCE" ColumnName="JOURNALHEAD_REFERENCE" />
+          <ScalarProperty Name="NOMINALACCOUNT_REFERENCE" ColumnName="NOMINALACCOUNT_REFERENCE" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="DEBIT" ColumnName="DEBIT" />
+          <ScalarProperty Name="CREDIT" ColumnName="CREDIT" />
+          <ScalarProperty Name="NETAMOUNT" ColumnName="NETAMOUNT" />
+          <ScalarProperty Name="ACCOUNTREF" ColumnName="ACCOUNTREF" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_ADDITIONAL_PROPERTIES">
+      <EntityTypeMapping TypeName="Model.MD_ADDITIONAL_PROPERTIES">
+        <MappingFragment StoreEntitySet="MD_ADDITIONAL_PROPERTIES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CONNECTION_ID_FK" ColumnName="CONNECTION_ID_FK" />
+          <ScalarProperty Name="REF_ID_FK" ColumnName="REF_ID_FK" />
+          <ScalarProperty Name="REF_TYPE" ColumnName="REF_TYPE" />
+          <ScalarProperty Name="PROPERTY_ORDER" ColumnName="PROPERTY_ORDER" />
+          <ScalarProperty Name="PROP_KEY" ColumnName="PROP_KEY" />
+          <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_APPLICATIONFILES">
+      <EntityTypeMapping TypeName="Model.MD_APPLICATIONFILES">
+        <MappingFragment StoreEntitySet="MD_APPLICATIONFILES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="APPLICATIONS_ID_FK" ColumnName="APPLICATIONS_ID_FK" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="URI" ColumnName="URI" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="STATE" ColumnName="STATE" />
+          <ScalarProperty Name="LANGUAGE" ColumnName="LANGUAGE" />
+          <ScalarProperty Name="LOC" ColumnName="LOC" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="UPDATED_ON" ColumnName="UPDATED_ON" />
+          <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_APPLICATIONS">
+      <EntityTypeMapping TypeName="Model.MD_APPLICATIONS">
+        <MappingFragment StoreEntitySet="MD_APPLICATIONS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="BASE_DIR" ColumnName="BASE_DIR" />
+          <ScalarProperty Name="OUTPUT_DIR" ColumnName="OUTPUT_DIR" />
+          <ScalarProperty Name="BACKUP_DIR" ColumnName="BACKUP_DIR" />
+          <ScalarProperty Name="INPLACE" ColumnName="INPLACE" />
+          <ScalarProperty Name="PROJECT_ID_FK" ColumnName="PROJECT_ID_FK" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_CATALOGS">
+      <EntityTypeMapping TypeName="Model.MD_CATALOGS">
+        <MappingFragment StoreEntitySet="MD_CATALOGS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CONNECTION_ID_FK" ColumnName="CONNECTION_ID_FK" />
+          <ScalarProperty Name="CATALOG_NAME" ColumnName="CATALOG_NAME" />
+          <ScalarProperty Name="DUMMY_FLAG" ColumnName="DUMMY_FLAG" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="NATIVE_KEY" ColumnName="NATIVE_KEY" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_COLUMNS">
+      <EntityTypeMapping TypeName="Model.MD_COLUMNS">
+        <MappingFragment StoreEntitySet="MD_COLUMNS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TABLE_ID_FK" ColumnName="TABLE_ID_FK" />
+          <ScalarProperty Name="COLUMN_NAME" ColumnName="COLUMN_NAME" />
+          <ScalarProperty Name="COLUMN_ORDER" ColumnName="COLUMN_ORDER" />
+          <ScalarProperty Name="COLUMN_TYPE" ColumnName="COLUMN_TYPE" />
+          <ScalarProperty Name="PRECISION" ColumnName="PRECISION" />
+          <ScalarProperty Name="SCALE" ColumnName="SCALE" />
+          <ScalarProperty Name="NULLABLE" ColumnName="NULLABLE" />
+          <ScalarProperty Name="DEFAULT_VALUE" ColumnName="DEFAULT_VALUE" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="NATIVE_KEY" ColumnName="NATIVE_KEY" />
+          <ScalarProperty Name="DATATYPE_TRANSFORMED_FLAG" ColumnName="DATATYPE_TRANSFORMED_FLAG" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_CONNECTIONS">
+      <EntityTypeMapping TypeName="Model.MD_CONNECTIONS">
+        <MappingFragment StoreEntitySet="MD_CONNECTIONS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PROJECT_ID_FK" ColumnName="PROJECT_ID_FK" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="HOST" ColumnName="HOST" />
+          <ScalarProperty Name="PORT" ColumnName="PORT" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="DBURL" ColumnName="DBURL" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="NUM_CATALOGS" ColumnName="NUM_CATALOGS" />
+          <ScalarProperty Name="NUM_COLUMNS" ColumnName="NUM_COLUMNS" />
+          <ScalarProperty Name="NUM_CONSTRAINTS" ColumnName="NUM_CONSTRAINTS" />
+          <ScalarProperty Name="NUM_GROUPS" ColumnName="NUM_GROUPS" />
+          <ScalarProperty Name="NUM_ROLES" ColumnName="NUM_ROLES" />
+          <ScalarProperty Name="NUM_INDEXES" ColumnName="NUM_INDEXES" />
+          <ScalarProperty Name="NUM_OTHER_OBJECTS" ColumnName="NUM_OTHER_OBJECTS" />
+          <ScalarProperty Name="NUM_PACKAGES" ColumnName="NUM_PACKAGES" />
+          <ScalarProperty Name="NUM_PRIVILEGES" ColumnName="NUM_PRIVILEGES" />
+          <ScalarProperty Name="NUM_SCHEMAS" ColumnName="NUM_SCHEMAS" />
+          <ScalarProperty Name="NUM_SEQUENCES" ColumnName="NUM_SEQUENCES" />
+          <ScalarProperty Name="NUM_STORED_PROGRAMS" ColumnName="NUM_STORED_PROGRAMS" />
+          <ScalarProperty Name="NUM_SYNONYMS" ColumnName="NUM_SYNONYMS" />
+          <ScalarProperty Name="NUM_TABLES" ColumnName="NUM_TABLES" />
+          <ScalarProperty Name="NUM_TABLESPACES" ColumnName="NUM_TABLESPACES" />
+          <ScalarProperty Name="NUM_TRIGGERS" ColumnName="NUM_TRIGGERS" />
+          <ScalarProperty Name="NUM_USER_DEFINED_DATA_TYPES" ColumnName="NUM_USER_DEFINED_DATA_TYPES" />
+          <ScalarProperty Name="NUM_USERS" ColumnName="NUM_USERS" />
+          <ScalarProperty Name="NUM_VIEWS" ColumnName="NUM_VIEWS" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_CONSTRAINT_DETAILS">
+      <EntityTypeMapping TypeName="Model.MD_CONSTRAINT_DETAILS">
+        <MappingFragment StoreEntitySet="MD_CONSTRAINT_DETAILS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="REF_FLAG" ColumnName="REF_FLAG" />
+          <ScalarProperty Name="CONSTRAINT_ID_FK" ColumnName="CONSTRAINT_ID_FK" />
+          <ScalarProperty Name="COLUMN_ID_FK" ColumnName="COLUMN_ID_FK" />
+          <ScalarProperty Name="COLUMN_PORTION" ColumnName="COLUMN_PORTION" />
+          <ScalarProperty Name="CONSTRAINT_TEXT" ColumnName="CONSTRAINT_TEXT" />
+          <ScalarProperty Name="DETAIL_ORDER" ColumnName="DETAIL_ORDER" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_CONSTRAINTS">
+      <EntityTypeMapping TypeName="Model.MD_CONSTRAINTS">
+        <MappingFragment StoreEntitySet="MD_CONSTRAINTS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DELETE_CLAUSE" ColumnName="DELETE_CLAUSE" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="CONSTRAINT_TYPE" ColumnName="CONSTRAINT_TYPE" />
+          <ScalarProperty Name="TABLE_ID_FK" ColumnName="TABLE_ID_FK" />
+          <ScalarProperty Name="REFTABLE_ID_FK" ColumnName="REFTABLE_ID_FK" />
+          <ScalarProperty Name="CONSTRAINT_TEXT" ColumnName="CONSTRAINT_TEXT" />
+          <ScalarProperty Name="LANGUAGE" ColumnName="LANGUAGE" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_DERIVATIVES">
+      <EntityTypeMapping TypeName="Model.MD_DERIVATIVES">
+        <MappingFragment StoreEntitySet="MD_DERIVATIVES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SRC_ID" ColumnName="SRC_ID" />
+          <ScalarProperty Name="SRC_TYPE" ColumnName="SRC_TYPE" />
+          <ScalarProperty Name="DERIVED_ID" ColumnName="DERIVED_ID" />
+          <ScalarProperty Name="DERIVED_TYPE" ColumnName="DERIVED_TYPE" />
+          <ScalarProperty Name="DERIVED_CONNECTION_ID_FK" ColumnName="DERIVED_CONNECTION_ID_FK" />
+          <ScalarProperty Name="TRANSFORMED" ColumnName="TRANSFORMED" />
+          <ScalarProperty Name="ORIGINAL_IDENTIFIER" ColumnName="ORIGINAL_IDENTIFIER" />
+          <ScalarProperty Name="NEW_IDENTIFIER" ColumnName="NEW_IDENTIFIER" />
+          <ScalarProperty Name="DERIVED_OBJECT_NAMESPACE" ColumnName="DERIVED_OBJECT_NAMESPACE" />
+          <ScalarProperty Name="DERIVATIVE_REASON" ColumnName="DERIVATIVE_REASON" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+          <ScalarProperty Name="ENABLED" ColumnName="ENABLED" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_FILE_ARTIFACTS">
+      <EntityTypeMapping TypeName="Model.MD_FILE_ARTIFACTS">
+        <MappingFragment StoreEntitySet="MD_FILE_ARTIFACTS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="APPLICATIONFILES_ID" ColumnName="APPLICATIONFILES_ID" />
+          <ScalarProperty Name="PATTERN" ColumnName="PATTERN" />
+          <ScalarProperty Name="STRING_FOUND" ColumnName="STRING_FOUND" />
+          <ScalarProperty Name="STRING_REPLACED" ColumnName="STRING_REPLACED" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="LINE" ColumnName="LINE" />
+          <ScalarProperty Name="PATTERN_START" ColumnName="PATTERN_START" />
+          <ScalarProperty Name="PATTERN_END" ColumnName="PATTERN_END" />
+          <ScalarProperty Name="DUE_DATE" ColumnName="DUE_DATE" />
+          <ScalarProperty Name="DB_TYPE" ColumnName="DB_TYPE" />
+          <ScalarProperty Name="CODE_TYPE" ColumnName="CODE_TYPE" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="PRIORITY" ColumnName="PRIORITY" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED" ColumnName="LAST_UPDATED" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_GROUP_MEMBERS">
+      <EntityTypeMapping TypeName="Model.MD_GROUP_MEMBERS">
+        <MappingFragment StoreEntitySet="MD_GROUP_MEMBERS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="GROUP_ID_FK" ColumnName="GROUP_ID_FK" />
+          <ScalarProperty Name="USER_ID_FK" ColumnName="USER_ID_FK" />
+          <ScalarProperty Name="GROUP_MEMBER_ID_FK" ColumnName="GROUP_MEMBER_ID_FK" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_GROUP_PRIVILEGES">
+      <EntityTypeMapping TypeName="Model.MD_GROUP_PRIVILEGES">
+        <MappingFragment StoreEntitySet="MD_GROUP_PRIVILEGES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="GROUP_ID_FK" ColumnName="GROUP_ID_FK" />
+          <ScalarProperty Name="PRIVILEGE_ID_FK" ColumnName="PRIVILEGE_ID_FK" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_GROUPS">
+      <EntityTypeMapping TypeName="Model.MD_GROUPS">
+        <MappingFragment StoreEntitySet="MD_GROUPS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCHEMA_ID_FK" ColumnName="SCHEMA_ID_FK" />
+          <ScalarProperty Name="GROUP_NAME" ColumnName="GROUP_NAME" />
+          <ScalarProperty Name="GROUP_FLAG" ColumnName="GROUP_FLAG" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="NATIVE_KEY" ColumnName="NATIVE_KEY" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_INDEX_DETAILS">
+      <EntityTypeMapping TypeName="Model.MD_INDEX_DETAILS">
+        <MappingFragment StoreEntitySet="MD_INDEX_DETAILS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="INDEX_ID_FK" ColumnName="INDEX_ID_FK" />
+          <ScalarProperty Name="COLUMN_ID_FK" ColumnName="COLUMN_ID_FK" />
+          <ScalarProperty Name="INDEX_PORTION" ColumnName="INDEX_PORTION" />
+          <ScalarProperty Name="DETAIL_ORDER" ColumnName="DETAIL_ORDER" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_INDEXES">
+      <EntityTypeMapping TypeName="Model.MD_INDEXES">
+        <MappingFragment StoreEntitySet="MD_INDEXES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="INDEX_TYPE" ColumnName="INDEX_TYPE" />
+          <ScalarProperty Name="TABLE_ID_FK" ColumnName="TABLE_ID_FK" />
+          <ScalarProperty Name="INDEX_NAME" ColumnName="INDEX_NAME" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="NATIVE_KEY" ColumnName="NATIVE_KEY" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_MIGR_DEPENDENCY">
+      <EntityTypeMapping TypeName="Model.MD_MIGR_DEPENDENCY">
+        <MappingFragment StoreEntitySet="MD_MIGR_DEPENDENCY">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CONNECTION_ID_FK" ColumnName="CONNECTION_ID_FK" />
+          <ScalarProperty Name="PARENT_ID" ColumnName="PARENT_ID" />
+          <ScalarProperty Name="CHILD_ID" ColumnName="CHILD_ID" />
+          <ScalarProperty Name="PARENT_OBJECT_TYPE" ColumnName="PARENT_OBJECT_TYPE" />
+          <ScalarProperty Name="CHILD_OBJECT_TYPE" ColumnName="CHILD_OBJECT_TYPE" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_MIGR_PARAMETER">
+      <EntityTypeMapping TypeName="Model.MD_MIGR_PARAMETER">
+        <MappingFragment StoreEntitySet="MD_MIGR_PARAMETER">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CONNECTION_ID_FK" ColumnName="CONNECTION_ID_FK" />
+          <ScalarProperty Name="OBJECT_ID" ColumnName="OBJECT_ID" />
+          <ScalarProperty Name="OBJECT_TYPE" ColumnName="OBJECT_TYPE" />
+          <ScalarProperty Name="PARAM_EXISTING" ColumnName="PARAM_EXISTING" />
+          <ScalarProperty Name="PARAM_ORDER" ColumnName="PARAM_ORDER" />
+          <ScalarProperty Name="PARAM_NAME" ColumnName="PARAM_NAME" />
+          <ScalarProperty Name="PARAM_TYPE" ColumnName="PARAM_TYPE" />
+          <ScalarProperty Name="PARAM_DATA_TYPE" ColumnName="PARAM_DATA_TYPE" />
+          <ScalarProperty Name="PERCISION" ColumnName="PERCISION" />
+          <ScalarProperty Name="SCALE" ColumnName="SCALE" />
+          <ScalarProperty Name="NULLABLE" ColumnName="NULLABLE" />
+          <ScalarProperty Name="DEFAULT_VALUE" ColumnName="DEFAULT_VALUE" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_MIGR_WEAKDEP">
+      <EntityTypeMapping TypeName="Model.MD_MIGR_WEAKDEP">
+        <MappingFragment StoreEntitySet="MD_MIGR_WEAKDEP">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CONNECTION_ID_FK" ColumnName="CONNECTION_ID_FK" />
+          <ScalarProperty Name="SCHEMA_ID_FK" ColumnName="SCHEMA_ID_FK" />
+          <ScalarProperty Name="PARENT_ID" ColumnName="PARENT_ID" />
+          <ScalarProperty Name="CHILD_NAME" ColumnName="CHILD_NAME" />
+          <ScalarProperty Name="PARENT_TYPE" ColumnName="PARENT_TYPE" />
+          <ScalarProperty Name="CHILD_TYPE" ColumnName="CHILD_TYPE" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_OTHER_OBJECTS">
+      <EntityTypeMapping TypeName="Model.MD_OTHER_OBJECTS">
+        <MappingFragment StoreEntitySet="MD_OTHER_OBJECTS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCHEMA_ID_FK" ColumnName="SCHEMA_ID_FK" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="NATIVE_KEY" ColumnName="NATIVE_KEY" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_PACKAGES">
+      <EntityTypeMapping TypeName="Model.MD_PACKAGES">
+        <MappingFragment StoreEntitySet="MD_PACKAGES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCHEMA_ID_FK" ColumnName="SCHEMA_ID_FK" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="PACKAGE_HEADER" ColumnName="PACKAGE_HEADER" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="NATIVE_KEY" ColumnName="NATIVE_KEY" />
+          <ScalarProperty Name="LANGUAGE" ColumnName="LANGUAGE" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_PARTITIONS">
+      <EntityTypeMapping TypeName="Model.MD_PARTITIONS">
+        <MappingFragment StoreEntitySet="MD_PARTITIONS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TABLE_ID_FK" ColumnName="TABLE_ID_FK" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="PARTITION_EXPRESSION" ColumnName="PARTITION_EXPRESSION" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_PRIVILEGES">
+      <EntityTypeMapping TypeName="Model.MD_PRIVILEGES">
+        <MappingFragment StoreEntitySet="MD_PRIVILEGES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCHEMA_ID_FK" ColumnName="SCHEMA_ID_FK" />
+          <ScalarProperty Name="PRIVILEGE_NAME" ColumnName="PRIVILEGE_NAME" />
+          <ScalarProperty Name="PRIVELEGE_OBJECT_ID" ColumnName="PRIVELEGE_OBJECT_ID" />
+          <ScalarProperty Name="PRIVELEGEOBJECTTYPE" ColumnName="PRIVELEGEOBJECTTYPE" />
+          <ScalarProperty Name="PRIVELEGE_TYPE" ColumnName="PRIVELEGE_TYPE" />
+          <ScalarProperty Name="ADMIN_OPTION" ColumnName="ADMIN_OPTION" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="NATIVE_KEY" ColumnName="NATIVE_KEY" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_PROJECTS">
+      <EntityTypeMapping TypeName="Model.MD_PROJECTS">
+        <MappingFragment StoreEntitySet="MD_PROJECTS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PROJECT_NAME" ColumnName="PROJECT_NAME" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_REGISTRY">
+      <EntityTypeMapping TypeName="Model.MD_REGISTRY">
+        <MappingFragment StoreEntitySet="MD_REGISTRY">
+          <ScalarProperty Name="OBJECT_TYPE" ColumnName="OBJECT_TYPE" />
+          <ScalarProperty Name="OBJECT_NAME" ColumnName="OBJECT_NAME" />
+          <ScalarProperty Name="DESC_OBJECT_NAME" ColumnName="DESC_OBJECT_NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_REPOVERSIONS">
+      <EntityTypeMapping TypeName="Model.MD_REPOVERSIONS">
+        <MappingFragment StoreEntitySet="MD_REPOVERSIONS">
+          <ScalarProperty Name="REVISION" ColumnName="REVISION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_SCHEMAS">
+      <EntityTypeMapping TypeName="Model.MD_SCHEMAS">
+        <MappingFragment StoreEntitySet="MD_SCHEMAS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CATALOG_ID_FK" ColumnName="CATALOG_ID_FK" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="CHARACTER_SET" ColumnName="CHARACTER_SET" />
+          <ScalarProperty Name="VERSION_TAG" ColumnName="VERSION_TAG" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="NATIVE_KEY" ColumnName="NATIVE_KEY" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_SEQUENCES">
+      <EntityTypeMapping TypeName="Model.MD_SEQUENCES">
+        <MappingFragment StoreEntitySet="MD_SEQUENCES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCHEMA_ID_FK" ColumnName="SCHEMA_ID_FK" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="SEQ_START" ColumnName="SEQ_START" />
+          <ScalarProperty Name="INCR" ColumnName="INCR" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="NATIVE_KEY" ColumnName="NATIVE_KEY" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_STORED_PROGRAMS">
+      <EntityTypeMapping TypeName="Model.MD_STORED_PROGRAMS">
+        <MappingFragment StoreEntitySet="MD_STORED_PROGRAMS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCHEMA_ID_FK" ColumnName="SCHEMA_ID_FK" />
+          <ScalarProperty Name="PROGRAMTYPE" ColumnName="PROGRAMTYPE" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="PACKAGE_ID_FK" ColumnName="PACKAGE_ID_FK" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="NATIVE_KEY" ColumnName="NATIVE_KEY" />
+          <ScalarProperty Name="LANGUAGE" ColumnName="LANGUAGE" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="LINECOUNT" ColumnName="LINECOUNT" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_SYNONYMS">
+      <EntityTypeMapping TypeName="Model.MD_SYNONYMS">
+        <MappingFragment StoreEntitySet="MD_SYNONYMS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCHEMA_ID_FK" ColumnName="SCHEMA_ID_FK" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="SYNONYM_FOR_ID" ColumnName="SYNONYM_FOR_ID" />
+          <ScalarProperty Name="FOR_OBJECT_TYPE" ColumnName="FOR_OBJECT_TYPE" />
+          <ScalarProperty Name="PRIVATE_VISIBILITY" ColumnName="PRIVATE_VISIBILITY" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="NATIVE_KEY" ColumnName="NATIVE_KEY" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_TABLES">
+      <EntityTypeMapping TypeName="Model.MD_TABLES">
+        <MappingFragment StoreEntitySet="MD_TABLES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCHEMA_ID_FK" ColumnName="SCHEMA_ID_FK" />
+          <ScalarProperty Name="TABLE_NAME" ColumnName="TABLE_NAME" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="NATIVE_KEY" ColumnName="NATIVE_KEY" />
+          <ScalarProperty Name="QUALIFIED_NATIVE_NAME" ColumnName="QUALIFIED_NATIVE_NAME" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_TABLESPACES">
+      <EntityTypeMapping TypeName="Model.MD_TABLESPACES">
+        <MappingFragment StoreEntitySet="MD_TABLESPACES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCHEMA_ID_FK" ColumnName="SCHEMA_ID_FK" />
+          <ScalarProperty Name="TABLESPACE_NAME" ColumnName="TABLESPACE_NAME" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="NATIVE_KEY" ColumnName="NATIVE_KEY" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_TRIGGERS">
+      <EntityTypeMapping TypeName="Model.MD_TRIGGERS">
+        <MappingFragment StoreEntitySet="MD_TRIGGERS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TABLE_OR_VIEW_ID_FK" ColumnName="TABLE_OR_VIEW_ID_FK" />
+          <ScalarProperty Name="TRIGGER_ON_FLAG" ColumnName="TRIGGER_ON_FLAG" />
+          <ScalarProperty Name="TRIGGER_NAME" ColumnName="TRIGGER_NAME" />
+          <ScalarProperty Name="TRIGGER_TIMING" ColumnName="TRIGGER_TIMING" />
+          <ScalarProperty Name="TRIGGER_OPERATION" ColumnName="TRIGGER_OPERATION" />
+          <ScalarProperty Name="TRIGGER_EVENT" ColumnName="TRIGGER_EVENT" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="NATIVE_KEY" ColumnName="NATIVE_KEY" />
+          <ScalarProperty Name="LANGUAGE" ColumnName="LANGUAGE" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="LINECOUNT" ColumnName="LINECOUNT" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_USER_DEFINED_DATA_TYPES">
+      <EntityTypeMapping TypeName="Model.MD_USER_DEFINED_DATA_TYPES">
+        <MappingFragment StoreEntitySet="MD_USER_DEFINED_DATA_TYPES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCHEMA_ID_FK" ColumnName="SCHEMA_ID_FK" />
+          <ScalarProperty Name="DATA_TYPE_NAME" ColumnName="DATA_TYPE_NAME" />
+          <ScalarProperty Name="DEFINITION" ColumnName="DEFINITION" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="NATIVE_KEY" ColumnName="NATIVE_KEY" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_USER_PRIVILEGES">
+      <EntityTypeMapping TypeName="Model.MD_USER_PRIVILEGES">
+        <MappingFragment StoreEntitySet="MD_USER_PRIVILEGES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="USER_ID_FK" ColumnName="USER_ID_FK" />
+          <ScalarProperty Name="PRIVILEGE_ID_FK" ColumnName="PRIVILEGE_ID_FK" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UDPATED_BY" ColumnName="LAST_UDPATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_USERS">
+      <EntityTypeMapping TypeName="Model.MD_USERS">
+        <MappingFragment StoreEntitySet="MD_USERS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCHEMA_ID_FK" ColumnName="SCHEMA_ID_FK" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="NATIVE_KEY" ColumnName="NATIVE_KEY" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MD_VIEWS">
+      <EntityTypeMapping TypeName="Model.MD_VIEWS">
+        <MappingFragment StoreEntitySet="MD_VIEWS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SCHEMA_ID_FK" ColumnName="SCHEMA_ID_FK" />
+          <ScalarProperty Name="VIEW_NAME" ColumnName="VIEW_NAME" />
+          <ScalarProperty Name="NATIVE_SQL" ColumnName="NATIVE_SQL" />
+          <ScalarProperty Name="NATIVE_KEY" ColumnName="NATIVE_KEY" />
+          <ScalarProperty Name="LANGUAGE" ColumnName="LANGUAGE" />
+          <ScalarProperty Name="COMMENTS" ColumnName="COMMENTS" />
+          <ScalarProperty Name="LINECOUNT" ColumnName="LINECOUNT" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MENUs">
+      <EntityTypeMapping TypeName="Model.MENU">
+        <MappingFragment StoreEntitySet="MENU">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="CAPTION" ColumnName="CAPTION" />
+          <ScalarProperty Name="MENUTYPE" ColumnName="MENUTYPE" />
+          <ScalarProperty Name="CONTROLLER" ColumnName="CONTROLLER" />
+          <ScalarProperty Name="ACTION" ColumnName="ACTION" />
+          <ScalarProperty Name="PARAMETER" ColumnName="PARAMETER" />
+          <ScalarProperty Name="PARENTNAMEID" ColumnName="PARENTNAMEID" />
+          <ScalarProperty Name="MESSAGE" ColumnName="MESSAGE" />
+          <ScalarProperty Name="ORDERINDEX" ColumnName="ORDERINDEX" />
+          <ScalarProperty Name="SETTINGSGROUP" ColumnName="SETTINGSGROUP" />
+          <ScalarProperty Name="ICON" ColumnName="ICON" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MIGR_DATATYPE_TRANSFORM_MAP">
+      <EntityTypeMapping TypeName="Model.MIGR_DATATYPE_TRANSFORM_MAP">
+        <MappingFragment StoreEntitySet="MIGR_DATATYPE_TRANSFORM_MAP">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PROJECT_ID_FK" ColumnName="PROJECT_ID_FK" />
+          <ScalarProperty Name="MAP_NAME" ColumnName="MAP_NAME" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MIGR_DATATYPE_TRANSFORM_RULE">
+      <EntityTypeMapping TypeName="Model.MIGR_DATATYPE_TRANSFORM_RULE">
+        <MappingFragment StoreEntitySet="MIGR_DATATYPE_TRANSFORM_RULE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="MAP_ID_FK" ColumnName="MAP_ID_FK" />
+          <ScalarProperty Name="SOURCE_DATA_TYPE_NAME" ColumnName="SOURCE_DATA_TYPE_NAME" />
+          <ScalarProperty Name="SOURCE_PRECISION" ColumnName="SOURCE_PRECISION" />
+          <ScalarProperty Name="SOURCE_SCALE" ColumnName="SOURCE_SCALE" />
+          <ScalarProperty Name="TARGET_DATA_TYPE_NAME" ColumnName="TARGET_DATA_TYPE_NAME" />
+          <ScalarProperty Name="TARGET_PRECISION" ColumnName="TARGET_PRECISION" />
+          <ScalarProperty Name="TARGET_SCALE" ColumnName="TARGET_SCALE" />
+          <ScalarProperty Name="SECURITY_GROUP_ID" ColumnName="SECURITY_GROUP_ID" />
+          <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="LAST_UPDATED_ON" ColumnName="LAST_UPDATED_ON" />
+          <ScalarProperty Name="LAST_UPDATED_BY" ColumnName="LAST_UPDATED_BY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MIGR_GENERATION_ORDER">
+      <EntityTypeMapping TypeName="Model.MIGR_GENERATION_ORDER">
+        <MappingFragment StoreEntitySet="MIGR_GENERATION_ORDER">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CONNECTION_ID_FK" ColumnName="CONNECTION_ID_FK" />
+          <ScalarProperty Name="OBJECT_ID" ColumnName="OBJECT_ID" />
+          <ScalarProperty Name="OBJECT_TYPE" ColumnName="OBJECT_TYPE" />
+          <ScalarProperty Name="GENERATION_ORDER" ColumnName="GENERATION_ORDER" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MIGRLOGs">
+      <EntityTypeMapping TypeName="Model.MIGRLOG">
+        <MappingFragment StoreEntitySet="MIGRLOG">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PARENT_LOG_ID" ColumnName="PARENT_LOG_ID" />
+          <ScalarProperty Name="LOG_DATE" ColumnName="LOG_DATE" />
+          <ScalarProperty Name="SEVERITY" ColumnName="SEVERITY" />
+          <ScalarProperty Name="LOGTEXT" ColumnName="LOGTEXT" />
+          <ScalarProperty Name="PHASE" ColumnName="PHASE" />
+          <ScalarProperty Name="REF_OBJECT_ID" ColumnName="REF_OBJECT_ID" />
+          <ScalarProperty Name="REF_OBJECT_TYPE" ColumnName="REF_OBJECT_TYPE" />
+          <ScalarProperty Name="CONNECTION_ID_FK" ColumnName="CONNECTION_ID_FK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NOMINALACCOUNTs">
+      <EntityTypeMapping TypeName="Model.NOMINALACCOUNT">
+        <MappingFragment StoreEntitySet="NOMINALACCOUNT">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="CAPTION" ColumnName="CAPTION" />
+          <ScalarProperty Name="ACCOUNTTYPE" ColumnName="ACCOUNTTYPE" />
+          <ScalarProperty Name="HEADER" ColumnName="HEADER" />
+          <ScalarProperty Name="SUBHEADER" ColumnName="SUBHEADER" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="ORACLENOMINALCODE" ColumnName="ORACLENOMINALCODE" />
+          <ScalarProperty Name="ORACLENOMINALNAME" ColumnName="ORACLENOMINALNAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PERIODs">
+      <EntityTypeMapping TypeName="Model.PERIOD">
+        <MappingFragment StoreEntitySet="PERIOD">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="FINANCIALYEAR_REFERENCE" ColumnName="FINANCIALYEAR_REFERENCE" />
+          <ScalarProperty Name="PERIODINDEX" ColumnName="PERIODINDEX" />
+          <ScalarProperty Name="DATEFROM" ColumnName="DATEFROM" />
+          <ScalarProperty Name="DATETO" ColumnName="DATETO" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PLEDGEs">
+      <EntityTypeMapping TypeName="Model.PLEDGE">
+        <MappingFragment StoreEntitySet="PLEDGE">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="PLEDGEEBOID" ColumnName="PLEDGEEBOID" />
+          <ScalarProperty Name="SETUPDATE" ColumnName="SETUPDATE" />
+          <ScalarProperty Name="PLEDGEQTY" ColumnName="PLEDGEQTY" />
+          <ScalarProperty Name="ISINSHORTNAME" ColumnName="ISINSHORTNAME" />
+          <ScalarProperty Name="TRANSACTIONTYPE" ColumnName="TRANSACTIONTYPE" />
+          <ScalarProperty Name="EXPIRYDATE" ColumnName="EXPIRYDATE" />
+          <ScalarProperty Name="BALANCEPLEDGEQTY" ColumnName="BALANCEPLEDGEQTY" />
+          <ScalarProperty Name="PLEDGEVALUE" ColumnName="PLEDGEVALUE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="BALANCEPLEDGEVALUE" ColumnName="BALANCEPLEDGEVALUE" />
+          <ScalarProperty Name="ISIN" ColumnName="ISIN" />
+          <ScalarProperty Name="PLEDGORBOSHORTNAME" ColumnName="PLEDGORBOSHORTNAME" />
+          <ScalarProperty Name="SEQNO" ColumnName="SEQNO" />
+          <ScalarProperty Name="PLEDGORBOID" ColumnName="PLEDGORBOID" />
+          <ScalarProperty Name="PLEDGEEBOSHORTNAME" ColumnName="PLEDGEEBOSHORTNAME" />
+          <ScalarProperty Name="BUSINESSDATE" ColumnName="BUSINESSDATE" />
+          <ScalarProperty Name="PLEDGESTATUS" ColumnName="PLEDGESTATUS" />
+          <ScalarProperty Name="UNPLEDGEQTY" ColumnName="UNPLEDGEQTY" />
+          <ScalarProperty Name="INVESTORACREF" ColumnName="INVESTORACREF" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PORTFOLIOINSTRUMENTs">
+      <EntityTypeMapping TypeName="Model.PORTFOLIOINSTRUMENT">
+        <MappingFragment StoreEntitySet="PORTFOLIOINSTRUMENT">
+          <ScalarProperty Name="INSTRUMENT" ColumnName="INSTRUMENT" />
+          <ScalarProperty Name="NETBALANCE" ColumnName="NETBALANCE" />
+          <ScalarProperty Name="MATUREDBALANCE" ColumnName="MATUREDBALANCE" />
+          <ScalarProperty Name="AVERAGECOST" ColumnName="AVERAGECOST" />
+          <ScalarProperty Name="TOTALCOST" ColumnName="TOTALCOST" />
+          <ScalarProperty Name="MARKETRATE" ColumnName="MARKETRATE" />
+          <ScalarProperty Name="MARKETVALUE" ColumnName="MARKETVALUE" />
+          <ScalarProperty Name="UNREALIZEDGAIN" ColumnName="UNREALIZEDGAIN" />
+          <ScalarProperty Name="REALIZEDGAIN" ColumnName="REALIZEDGAIN" />
+          <ScalarProperty Name="PERATIO" ColumnName="PERATIO" />
+          <ScalarProperty Name="PERCENTAGEGAIN" ColumnName="PERCENTAGEGAIN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRICEINDEXes">
+      <EntityTypeMapping TypeName="Model.PRICEINDEX">
+        <MappingFragment StoreEntitySet="PRICEINDEX">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+          <ScalarProperty Name="TRADINGDATE" ColumnName="TRADINGDATE" />
+          <ScalarProperty Name="NOOFTRADES" ColumnName="NOOFTRADES" />
+          <ScalarProperty Name="INSTRUMENTREF" ColumnName="INSTRUMENTREF" />
+          <ScalarProperty Name="HIGHESTPRICE" ColumnName="HIGHESTPRICE" />
+          <ScalarProperty Name="VOLUME" ColumnName="VOLUME" />
+          <ScalarProperty Name="IMPORTDATE" ColumnName="IMPORTDATE" />
+          <ScalarProperty Name="LOWESTPRICE" ColumnName="LOWESTPRICE" />
+          <ScalarProperty Name="MARKET" ColumnName="MARKET" />
+          <ScalarProperty Name="VARIATION" ColumnName="VARIATION" />
+          <ScalarProperty Name="CLOSINGPRICE" ColumnName="CLOSINGPRICE" />
+          <ScalarProperty Name="OPENINGPRICE" ColumnName="OPENINGPRICE" />
+          <ScalarProperty Name="ISIN" ColumnName="ISIN" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRIVATEBONDs">
+      <EntityTypeMapping TypeName="Model.PRIVATEBOND">
+        <MappingFragment StoreEntitySet="PRIVATEBOND">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="BONDID" ColumnName="BONDID" />
+          <ScalarProperty Name="BONDTYPE" ColumnName="BONDTYPE" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="INSTRUMENT" ColumnName="INSTRUMENT" />
+          <ScalarProperty Name="FINANCIALINSTITUTION_REFERENCE" ColumnName="FINANCIALINSTITUTION_REFERENCE" />
+          <ScalarProperty Name="BONDSIZE" ColumnName="BONDSIZE" />
+          <ScalarProperty Name="PURCHASEAMOUNT" ColumnName="PURCHASEAMOUNT" />
+          <ScalarProperty Name="CHEQUEDATE" ColumnName="CHEQUEDATE" />
+          <ScalarProperty Name="CHEQUEREFERENCE" ColumnName="CHEQUEREFERENCE" />
+          <ScalarProperty Name="BONDISSUEDATE" ColumnName="BONDISSUEDATE" />
+          <ScalarProperty Name="TENURE" ColumnName="TENURE" />
+          <ScalarProperty Name="TENURETERM" ColumnName="TENURETERM" />
+          <ScalarProperty Name="TERMSINDAYS" ColumnName="TERMSINDAYS" />
+          <ScalarProperty Name="INTERESTRATE" ColumnName="INTERESTRATE" />
+          <ScalarProperty Name="INTERESTPAYMENTPERIOD" ColumnName="INTERESTPAYMENTPERIOD" />
+          <ScalarProperty Name="MATURITYDATE" ColumnName="MATURITYDATE" />
+          <ScalarProperty Name="INTERESTMODE" ColumnName="INTERESTMODE" />
+          <ScalarProperty Name="ANNUALDAYS" ColumnName="ANNUALDAYS" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="ACCEPTEDBY" ColumnName="ACCEPTEDBY" />
+          <ScalarProperty Name="ACCEPTEDDATE" ColumnName="ACCEPTEDDATE" />
+          <ScalarProperty Name="REJECTEDBY" ColumnName="REJECTEDBY" />
+          <ScalarProperty Name="REJECTEDDATE" ColumnName="REJECTEDDATE" />
+          <ScalarProperty Name="OFFERRATE" ColumnName="OFFERRATE" />
+          <ScalarProperty Name="COUPONRATE" ColumnName="COUPONRATE" />
+          <ScalarProperty Name="BUYINGPRICE" ColumnName="BUYINGPRICE" />
+          <ScalarProperty Name="COSTPRICE" ColumnName="COSTPRICE" />
+          <ScalarProperty Name="PREMIUMPAID" ColumnName="PREMIUMPAID" />
+          <ScalarProperty Name="TAXRATE" ColumnName="TAXRATE" />
+          <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
+          <ScalarProperty Name="COMMISSION" ColumnName="COMMISSION" />
+          <ScalarProperty Name="HOLDINGINTERESTPAID" ColumnName="HOLDINGINTERESTPAID" />
+          <ScalarProperty Name="TOTALPURCHASEAMOUNT" ColumnName="TOTALPURCHASEAMOUNT" />
+          <ScalarProperty Name="TOTALCOMMISSIONGAIN" ColumnName="TOTALCOMMISSIONGAIN" />
+          <ScalarProperty Name="GROSSINTEREST" ColumnName="GROSSINTEREST" />
+          <ScalarProperty Name="SOURCETAX" ColumnName="SOURCETAX" />
+          <ScalarProperty Name="EXCISEDUTY" ColumnName="EXCISEDUTY" />
+          <ScalarProperty Name="OTHERCHARGE" ColumnName="OTHERCHARGE" />
+          <ScalarProperty Name="COMPOUNDINTERESTTYPE" ColumnName="COMPOUNDINTERESTTYPE" />
+          <ScalarProperty Name="COMPOUNDINTERESTINTERVAL" ColumnName="COMPOUNDINTERESTINTERVAL" />
+          <ScalarProperty Name="REDMPTIONRATE" ColumnName="REDMPTIONRATE" />
+          <ScalarProperty Name="TRANCHES" ColumnName="TRANCHES" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+          <ScalarProperty Name="NETINTEREST" ColumnName="NETINTEREST" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RIGHTSHAREDECLARATIONs">
+      <EntityTypeMapping TypeName="Model.RIGHTSHAREDECLARATION">
+        <MappingFragment StoreEntitySet="RIGHTSHAREDECLARATION">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="ACCOUNTNUMBER" ColumnName="ACCOUNTNUMBER" />
+          <ScalarProperty Name="INSTRUMENTACREF" ColumnName="INSTRUMENTACREF" />
+          <ScalarProperty Name="ISIN" ColumnName="ISIN" />
+          <ScalarProperty Name="PERCENTAGE" ColumnName="PERCENTAGE" />
+          <ScalarProperty Name="RATIO" ColumnName="RATIO" />
+          <ScalarProperty Name="BUYRATE" ColumnName="BUYRATE" />
+          <ScalarProperty Name="ENTRYDATE" ColumnName="ENTRYDATE" />
+          <ScalarProperty Name="RECORDDATE" ColumnName="RECORDDATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SCRIPTTRANSFERs">
+      <EntityTypeMapping TypeName="Model.SCRIPTTRANSFER">
+        <MappingFragment StoreEntitySet="SCRIPTTRANSFER">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="ACCOUNTNUMBER" ColumnName="ACCOUNTNUMBER" />
+          <ScalarProperty Name="INSTRUMENTACREF" ColumnName="INSTRUMENTACREF" />
+          <ScalarProperty Name="TRANSACTIONTYPE" ColumnName="TRANSACTIONTYPE" />
+          <ScalarProperty Name="CERTIFICATENO" ColumnName="CERTIFICATENO" />
+          <ScalarProperty Name="SHAREQTY" ColumnName="SHAREQTY" />
+          <ScalarProperty Name="RATE" ColumnName="RATE" />
+          <ScalarProperty Name="HOWLANUMBER" ColumnName="HOWLANUMBER" />
+          <ScalarProperty Name="ENTRYDATE" ColumnName="ENTRYDATE" />
+          <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+          <ScalarProperty Name="LOWERLIMIT" ColumnName="LOWERLIMIT" />
+          <ScalarProperty Name="UPPERLIMIT" ColumnName="UPPERLIMIT" />
+          <ScalarProperty Name="MAXIMUMQTY" ColumnName="MAXIMUMQTY" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="RECORDDATE" ColumnName="RECORDDATE" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="ISFORGOTTRADEORDER" ColumnName="ISFORGOTTRADEORDER" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SETTLEMENTs">
+      <EntityTypeMapping TypeName="Model.SETTLEMENT">
+        <MappingFragment StoreEntitySet="SETTLEMENT">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="DOCUMENTNO" ColumnName="DOCUMENTNO" />
+          <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+          <ScalarProperty Name="TRANSACTIONTYPE" ColumnName="TRANSACTIONTYPE" />
+          <ScalarProperty Name="COUNTERBOID" ColumnName="COUNTERBOID" />
+          <ScalarProperty Name="EXCEPTION" ColumnName="EXCEPTION" />
+          <ScalarProperty Name="TRANDATE" ColumnName="TRANDATE" />
+          <ScalarProperty Name="CDBLREFERENCE" ColumnName="CDBLREFERENCE" />
+          <ScalarProperty Name="BOID" ColumnName="BOID" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="INVESTORREF" ColumnName="INVESTORREF" />
+          <ScalarProperty Name="ISIN" ColumnName="ISIN" />
+          <ScalarProperty Name="INSTRUMENTREF" ColumnName="INSTRUMENTREF" />
+          <ScalarProperty Name="CHARGE" ColumnName="CHARGE" />
+          <ScalarProperty Name="CERTIFICATENO" ColumnName="CERTIFICATENO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SIGNATORies">
+      <EntityTypeMapping TypeName="Model.SIGNATORY">
+        <MappingFragment StoreEntitySet="SIGNATORY">
+          <ScalarProperty Name="Reference" ColumnName="Reference" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ReportName" ColumnName="ReportName" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SIGNATORYDETAILS">
+      <EntityTypeMapping TypeName="Model.SIGNATORYDETAIL">
+        <MappingFragment StoreEntitySet="SIGNATORYDETAILS">
+          <ScalarProperty Name="Reference" ColumnName="Reference" />
+          <ScalarProperty Name="SignatureLine1" ColumnName="SignatureLine1" />
+          <ScalarProperty Name="SignatureLine2" ColumnName="SignatureLine2" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="SIGNATORY_REF" ColumnName="SIGNATORY_REF" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="ORDERINDEX" ColumnName="ORDERINDEX" />
+          <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STATUSPARAMETERs">
+      <EntityTypeMapping TypeName="Model.STATUSPARAMETER">
+        <MappingFragment StoreEntitySet="STATUSPARAMETER">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="ENTITY" ColumnName="ENTITY" />
+          <ScalarProperty Name="PROPERTY" ColumnName="PROPERTY" />
+          <ScalarProperty Name="ISHIDDEN" ColumnName="ISHIDDEN" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STATUSPARAMETERDETAILS">
+      <EntityTypeMapping TypeName="Model.STATUSPARAMETERDETAIL">
+        <MappingFragment StoreEntitySet="STATUSPARAMETERDETAILS">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="STATUSPARAMETER_REFERENCE" ColumnName="STATUSPARAMETER_REFERENCE" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="ISHIDDEN" ColumnName="ISHIDDEN" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="ISDEFAULT" ColumnName="ISDEFAULT" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TESTs">
+      <EntityTypeMapping TypeName="Model.TEST">
+        <MappingFragment StoreEntitySet="TEST">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRADEs">
+      <EntityTypeMapping TypeName="Model.TRADE">
+        <MappingFragment StoreEntitySet="TRADE">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="NETAMOUNT" ColumnName="NETAMOUNT" />
+          <ScalarProperty Name="VAT" ColumnName="VAT" />
+          <ScalarProperty Name="INSTRUMENTCATEGORY" ColumnName="INSTRUMENTCATEGORY" />
+          <ScalarProperty Name="REALIZEDGAIN" ColumnName="REALIZEDGAIN" />
+          <ScalarProperty Name="BROKERREF" ColumnName="BROKERREF" />
+          <ScalarProperty Name="BRANCHREF" ColumnName="BRANCHREF" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="SHAREQUANTITY" ColumnName="SHAREQUANTITY" />
+          <ScalarProperty Name="TRANSACTIONTIME" ColumnName="TRANSACTIONTIME" />
+          <ScalarProperty Name="MODIFICATIONLOGS" ColumnName="MODIFICATIONLOGS" />
+          <ScalarProperty Name="TOTALCHARGE" ColumnName="TOTALCHARGE" />
+          <ScalarProperty Name="MARKET" ColumnName="MARKET" />
+          <ScalarProperty Name="TRANSACTIONDATE" ColumnName="TRANSACTIONDATE" />
+          <ScalarProperty Name="RATE" ColumnName="RATE" />
+          <ScalarProperty Name="ISEXCEPTION" ColumnName="ISEXCEPTION" />
+          <ScalarProperty Name="COMMISSION" ColumnName="COMMISSION" />
+          <ScalarProperty Name="TAX" ColumnName="TAX" />
+          <ScalarProperty Name="FILENAME" ColumnName="FILENAME" />
+          <ScalarProperty Name="INVESTORPAYABLE" ColumnName="INVESTORPAYABLE" />
+          <ScalarProperty Name="LAGA" ColumnName="LAGA" />
+          <ScalarProperty Name="TRANSACTIONTYPE" ColumnName="TRANSACTIONTYPE" />
+          <ScalarProperty Name="MEMO" ColumnName="MEMO" />
+          <ScalarProperty Name="EXCEPTIONDETAILS" ColumnName="EXCEPTIONDETAILS" />
+          <ScalarProperty Name="BROKERPAYABLE" ColumnName="BROKERPAYABLE" />
+          <ScalarProperty Name="TRADER" ColumnName="TRADER" />
+          <ScalarProperty Name="INSTRUMENT_REFERENCE" ColumnName="INSTRUMENT_REFERENCE" />
+          <ScalarProperty Name="BROKER_REFERENCE" ColumnName="BROKER_REFERENCE" />
+          <ScalarProperty Name="ORDERNO" ColumnName="ORDERNO" />
+          <ScalarProperty Name="TOTALAMOUNT" ColumnName="TOTALAMOUNT" />
+          <ScalarProperty Name="EXCEPTIONCODE" ColumnName="EXCEPTIONCODE" />
+          <ScalarProperty Name="CONTRACTNO" ColumnName="CONTRACTNO" />
+          <ScalarProperty Name="HOWLA" ColumnName="HOWLA" />
+          <ScalarProperty Name="INVESTORACREF" ColumnName="INVESTORACREF" />
+          <ScalarProperty Name="BORN" ColumnName="BORN" />
+          <ScalarProperty Name="FILETYPE" ColumnName="FILETYPE" />
+          <ScalarProperty Name="HOWLATYPE" ColumnName="HOWLATYPE" />
+          <ScalarProperty Name="FOREIGNFLAG" ColumnName="FOREIGNFLAG" />
+          <ScalarProperty Name="COMPSPOTID" ColumnName="COMPSPOTID" />
+          <ScalarProperty Name="MATUREDDATE" ColumnName="MATUREDDATE" />
+          <ScalarProperty Name="ISDEALER" ColumnName="ISDEALER" />
+          <ScalarProperty Name="AGENCY" ColumnName="AGENCY" />
+          <ScalarProperty Name="AGENCYCOMMISION" ColumnName="AGENCYCOMMISION" />
+          <ScalarProperty Name="STOCKEXCHANGE" ColumnName="STOCKEXCHANGE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRADINGCHARGEs">
+      <EntityTypeMapping TypeName="Model.TRADINGCHARGE">
+        <MappingFragment StoreEntitySet="TRADINGCHARGE">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="TRANSACTIONFEE" ColumnName="TRANSACTIONFEE" />
+          <ScalarProperty Name="CHARGERATE" ColumnName="CHARGERATE" />
+          <ScalarProperty Name="TAX" ColumnName="TAX" />
+          <ScalarProperty Name="MARKET" ColumnName="MARKET" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRANSACTIONPOSTINGMATRIces">
+      <EntityTypeMapping TypeName="Model.TRANSACTIONPOSTINGMATRIX">
+        <MappingFragment StoreEntitySet="TRANSACTIONPOSTINGMATRIX">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="TRANSACTIONCODE" ColumnName="TRANSACTIONCODE" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="BSCREDITCONTROL" ColumnName="BSCREDITCONTROL" />
+          <ScalarProperty Name="BSDEBITCONTROL" ColumnName="BSDEBITCONTROL" />
+          <ScalarProperty Name="PLCREDITCONTROL" ColumnName="PLCREDITCONTROL" />
+          <ScalarProperty Name="PLDEBITCONTROL" ColumnName="PLDEBITCONTROL" />
+          <ScalarProperty Name="BANKCREDITCONTROL" ColumnName="BANKCREDITCONTROL" />
+          <ScalarProperty Name="BANKDEBITCONTROL" ColumnName="BANKDEBITCONTROL" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRANSFEROFSECURITIES">
+      <EntityTypeMapping TypeName="Model.TRANSFEROFSECURITy">
+        <MappingFragment StoreEntitySet="TRANSFEROFSECURITIES">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="EXCEPTIONDETAILS" ColumnName="EXCEPTIONDETAILS" />
+          <ScalarProperty Name="TRANSFERORBO" ColumnName="TRANSFERORBO" />
+          <ScalarProperty Name="LINKEDBROKERID" ColumnName="LINKEDBROKERID" />
+          <ScalarProperty Name="ISIN" ColumnName="ISIN" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+          <ScalarProperty Name="ISEXCEPTION" ColumnName="ISEXCEPTION" />
+          <ScalarProperty Name="INITIATEDBY" ColumnName="INITIATEDBY" />
+          <ScalarProperty Name="BUSINESSDATE" ColumnName="BUSINESSDATE" />
+          <ScalarProperty Name="ISDEFAULTAVGCHANGE" ColumnName="ISDEFAULTAVGCHANGE" />
+          <ScalarProperty Name="INVESTORACREF" ColumnName="INVESTORACREF" />
+          <ScalarProperty Name="TRANSFERREDQTY" ColumnName="TRANSFERREDQTY" />
+          <ScalarProperty Name="TRANSFERTYPE" ColumnName="TRANSFERTYPE" />
+          <ScalarProperty Name="AUTHORIZATIONDATE" ColumnName="AUTHORIZATIONDATE" />
+          <ScalarProperty Name="TRANSFEREEBO" ColumnName="TRANSFEREEBO" />
+          <ScalarProperty Name="TRANSFEREENAME" ColumnName="TRANSFEREENAME" />
+          <ScalarProperty Name="AVGCOST" ColumnName="AVGCOST" />
+          <ScalarProperty Name="TRANSFERSTATUS" ColumnName="TRANSFERSTATUS" />
+          <ScalarProperty Name="TRANSFERORNAME" ColumnName="TRANSFERORNAME" />
+          <ScalarProperty Name="INSTRUMENTNAME" ColumnName="INSTRUMENTNAME" />
+          <ScalarProperty Name="LINKEDBROKERNAME" ColumnName="LINKEDBROKERNAME" />
+          <ScalarProperty Name="SEQNO" ColumnName="SEQNO" />
+          <ScalarProperty Name="REASONFORTRANSFER" ColumnName="REASONFORTRANSFER" />
+          <ScalarProperty Name="LOCKINBALANCE" ColumnName="LOCKINBALANCE" />
+          <ScalarProperty Name="LOCKINEXPIRY" ColumnName="LOCKINEXPIRY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USERGROUPs">
+      <EntityTypeMapping TypeName="Model.USERGROUP">
+        <MappingFragment StoreEntitySet="USERGROUP">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="DEPARTMENT_REFERENCE" ColumnName="DEPARTMENT_REFERENCE" />
+          <ScalarProperty Name="USERLEVEL" ColumnName="USERLEVEL" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WEEKENDs">
+      <EntityTypeMapping TypeName="Model.WEEKEND">
+        <MappingFragment StoreEntitySet="WEEKEND">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="WEEKEND_ONE" ColumnName="WEEKEND_ONE" />
+          <ScalarProperty Name="WEEKEND_TWO" ColumnName="WEEKEND_TWO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="XX_INVEST_GL_INTEGRATION_DATA">
+      <EntityTypeMapping TypeName="Model.XX_INVEST_GL_INTEGRATION_DATA">
+        <MappingFragment StoreEntitySet="XX_INVEST_GL_INTEGRATION_DATA">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="TRANSACTIONTYPE" ColumnName="TRANSACTIONTYPE" />
+          <ScalarProperty Name="TRANSACTIONMASTERID" ColumnName="TRANSACTIONMASTERID" />
+          <ScalarProperty Name="TRANSACTIONDETAILID" ColumnName="TRANSACTIONDETAILID" />
+          <ScalarProperty Name="TRANSACTIONDATE" ColumnName="TRANSACTIONDATE" />
+          <ScalarProperty Name="OU_CODE" ColumnName="OU_CODE" />
+          <ScalarProperty Name="UNITAGENCYCODE" ColumnName="UNITAGENCYCODE" />
+          <ScalarProperty Name="COSTCENTERCODE" ColumnName="COSTCENTERCODE" />
+          <ScalarProperty Name="ACCOUNTCODE" ColumnName="ACCOUNTCODE" />
+          <ScalarProperty Name="ACCOUNTNAME" ColumnName="ACCOUNTNAME" />
+          <ScalarProperty Name="ACCOUNTEDDR" ColumnName="ACCOUNTEDDR" />
+          <ScalarProperty Name="ACCOUNTEDCR" ColumnName="ACCOUNTEDCR" />
+          <ScalarProperty Name="REF_NUMBER" ColumnName="REF_NUMBER" />
+          <ScalarProperty Name="BANKACCOUNTNUMBER" ColumnName="BANKACCOUNTNUMBER" />
+          <ScalarProperty Name="SOURCE_ID" ColumnName="SOURCE_ID" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="PROPOSED_ACTION" ColumnName="PROPOSED_ACTION" />
+          <ScalarProperty Name="ISEXCEPTION" ColumnName="ISEXCEPTION" />
+          <ScalarProperty Name="EXCEPTION_DETAILS" ColumnName="EXCEPTION_DETAILS" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="FIXEDDEPOSIT_REF" ColumnName="FIXEDDEPOSIT_REF" />
+          <ScalarProperty Name="APPROVEDDATE" ColumnName="APPROVEDDATE" />
+          <ScalarProperty Name="APPROVEDBY" ColumnName="APPROVEDBY" />
+          <ScalarProperty Name="POSTEDDATE" ColumnName="POSTEDDATE" />
+          <ScalarProperty Name="POSTEDBY" ColumnName="POSTEDBY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FDR_MAINSTATEMENT_VIEW">
+      <EntityTypeMapping TypeName="Model.FDR_MAINSTATEMENT_VIEW">
+        <MappingFragment StoreEntitySet="FDR_MAINSTATEMENT_VIEW">
+          <ScalarProperty Name="REFERENCE" ColumnName="REFERENCE" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="LASTUPDATED" ColumnName="LASTUPDATED" />
+          <ScalarProperty Name="LASTUPDATEDBY" ColumnName="LASTUPDATEDBY" />
+          <ScalarProperty Name="DEPOSITNUMBER" ColumnName="DEPOSITNUMBER" />
+          <ScalarProperty Name="FINANCIALINSTITUTION_REFERENCE" ColumnName="FINANCIALINSTITUTION_REFERENCE" />
+          <ScalarProperty Name="PRINCIPALAMOUNT" ColumnName="PRINCIPALAMOUNT" />
+          <ScalarProperty Name="CHEQUEDATE" ColumnName="CHEQUEDATE" />
+          <ScalarProperty Name="CHEQUEREFERENCE" ColumnName="CHEQUEREFERENCE" />
+          <ScalarProperty Name="TENURE" ColumnName="TENURE" />
+          <ScalarProperty Name="TENURETERM" ColumnName="TENURETERM" />
+          <ScalarProperty Name="TERMSINDAYS" ColumnName="TERMSINDAYS" />
+          <ScalarProperty Name="INTERESTRECEIVINGPERIOD" ColumnName="INTERESTRECEIVINGPERIOD" />
+          <ScalarProperty Name="MATURITYDATE" ColumnName="MATURITYDATE" />
+          <ScalarProperty Name="EXISTINGCAPLIMIT" ColumnName="EXISTINGCAPLIMIT" />
+          <ScalarProperty Name="RATEOFINTEREST" ColumnName="RATEOFINTEREST" />
+          <ScalarProperty Name="ADVANCEDINTERESTRATE" ColumnName="ADVANCEDINTERESTRATE" />
+          <ScalarProperty Name="INTERESTMODE" ColumnName="INTERESTMODE" />
+          <ScalarProperty Name="COMPOUNDINTERESTTYPE" ColumnName="COMPOUNDINTERESTTYPE" />
+          <ScalarProperty Name="COMPOUNDINTERESTINTERVAL" ColumnName="COMPOUNDINTERESTINTERVAL" />
+          <ScalarProperty Name="ANNUALDAYS" ColumnName="ANNUALDAYS" />
+          <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+          <ScalarProperty Name="ACCEPTEDBY" ColumnName="ACCEPTEDBY" />
+          <ScalarProperty Name="ACCEPTEDDATE" ColumnName="ACCEPTEDDATE" />
+          <ScalarProperty Name="REJECTEDBY" ColumnName="REJECTEDBY" />
+          <ScalarProperty Name="REJECTEDDATE" ColumnName="REJECTEDDATE" />
+          <ScalarProperty Name="OPENINGDATE" ColumnName="OPENINGDATE" />
+          <ScalarProperty Name="RENWALDATE" ColumnName="RENWALDATE" />
+          <ScalarProperty Name="RENEWALDEPOSITNUMBER" ColumnName="RENEWALDEPOSITNUMBER" />
+          <ScalarProperty Name="TAXDEDUCTIONCRITERIA" ColumnName="TAXDEDUCTIONCRITERIA" />
+          <ScalarProperty Name="HOLDINGPERIOD" ColumnName="HOLDINGPERIOD" />
+          <ScalarProperty Name="GROSSINTEREST" ColumnName="GROSSINTEREST" />
+          <ScalarProperty Name="SOURCETAX" ColumnName="SOURCETAX" />
+          <ScalarProperty Name="EXCISEDUTY" ColumnName="EXCISEDUTY" />
+          <ScalarProperty Name="OTHERCHARGE" ColumnName="OTHERCHARGE" />
+          <ScalarProperty Name="PRESENTPRINCIPALAMOUNT" ColumnName="PRESENTPRINCIPALAMOUNT" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+          <ScalarProperty Name="NETINTERESTRECEIVABLE" ColumnName="NETINTERESTRECEIVABLE" />
+          <ScalarProperty Name="TOTALAMOUNTRECEIVABLE" ColumnName="TOTALAMOUNTRECEIVABLE" />
+          <ScalarProperty Name="RECEIVABLETILL" ColumnName="RECEIVABLETILL" />
+          <ScalarProperty Name="MRNO" ColumnName="MRNO" />
+          <ScalarProperty Name="MRDATE" ColumnName="MRDATE" />
+          <ScalarProperty Name="ENCASHMENTDATE" ColumnName="ENCASHMENTDATE" />
+          <ScalarProperty Name="ACTUALINTERESTRECEIVED" ColumnName="ACTUALINTERESTRECEIVED" />
+          <ScalarProperty Name="BRANCH_REFERENCE" ColumnName="BRANCH_REFERENCE" />
+          <ScalarProperty Name="SIGNATORY1" ColumnName="SIGNATORY1" />
+          <ScalarProperty Name="SIGNATORY2" ColumnName="SIGNATORY2" />
+          <ScalarProperty Name="TAXRATE" ColumnName="TAXRATE" />
+          <ScalarProperty Name="INITIALPRINCIPALAMOUNT" ColumnName="INITIALPRINCIPALAMOUNT" />
+          <ScalarProperty Name="INITIALOPENINGDATE" ColumnName="INITIALOPENINGDATE" />
+          <ScalarProperty Name="INITIALFIXEDDEPOSITREF" ColumnName="INITIALFIXEDDEPOSITREF" />
+          <ScalarProperty Name="PROPOSEDACTION" ColumnName="PROPOSEDACTION" />
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PARTICULARS_VIEW">
+      <EntityTypeMapping TypeName="Model.PARTICULARS_VIEW">
+        <MappingFragment StoreEntitySet="PARTICULARS_VIEW">
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+          <ScalarProperty Name="PARTICULARSNAME" ColumnName="PARTICULARSNAME" />
+          <ScalarProperty Name="GROUPNAME" ColumnName="GROUPNAME" />
+          <ScalarProperty Name="SUBGROUPNAME" ColumnName="SUBGROUPNAME" />
+          <ScalarProperty Name="TRANSACTIONDATE" ColumnName="TRANSACTIONDATE" />
+          <ScalarProperty Name="PRINCIPALAMOUNT" ColumnName="PRINCIPALAMOUNT" />
+          <ScalarProperty Name="LIMITMINIMUM" ColumnName="LIMITMINIMUM" />
+          <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="FIX_MUTUALFUND_CAP_BONUS" FunctionName="Model.Store.FIX_MUTUALFUND_CAP_BONUS" />
+    <FunctionImportMapping FunctionImportName="GETBALANCESHEET" FunctionName="Model.Store.GETBALANCESHEET" />
+    <FunctionImportMapping FunctionImportName="GETMAXPOSTINGMATRIX" FunctionName="Model.Store.GETMAXPOSTINGMATRIX" />
+    <FunctionImportMapping FunctionImportName="GETPORTFOLIOCARECEIVABLE" FunctionName="Model.Store.GETPORTFOLIOCARECEIVABLE" />
+    <FunctionImportMapping FunctionImportName="GETPOSTINGMATRIX" FunctionName="Model.Store.GETPOSTINGMATRIX" />
+    <FunctionImportMapping FunctionImportName="GET_BONUS_SHARE_RECEIVED" FunctionName="Model.Store.GET_BONUS_SHARE_RECEIVED" />
+    <FunctionImportMapping FunctionImportName="GET_CLIENTACCOUNTOPENBALANCE" FunctionName="Model.Store.GET_CLIENTACCOUNTOPENBALANCE" />
+    <FunctionImportMapping FunctionImportName="GET_COMMISSION_STATEMENT" FunctionName="Model.Store.GET_COMMISSION_STATEMENT" />
+    <FunctionImportMapping FunctionImportName="GET_DIVIDEND_LIST" FunctionName="Model.Store.GET_DIVIDEND_LIST" />
+    <FunctionImportMapping FunctionImportName="GET_DIVIDEND_RECEIVABLE" FunctionName="Model.Store.GET_DIVIDEND_RECEIVABLE" />
+    <FunctionImportMapping FunctionImportName="GET_EXTRADIVIDEND_RECEIVED" FunctionName="Model.Store.GET_EXTRADIVIDEND_RECEIVED" />
+    <FunctionImportMapping FunctionImportName="GET_INVESTORLEDGERSTATEMENT" FunctionName="Model.Store.GET_INVESTORLEDGERSTATEMENT" />
+    <FunctionImportMapping FunctionImportName="GET_PROFITLOSS_STATEMENT" FunctionName="Model.Store.GET_PROFITLOSS_STATEMENT" />
+    <FunctionImportMapping FunctionImportName="GET_RIGHT_SHARE_RECEIVED" FunctionName="Model.Store.GET_RIGHT_SHARE_RECEIVED" />
+  </EntityContainerMapping>
+</Mapping>

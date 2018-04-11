@@ -1,0 +1,147 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.TRADE
+
+<div id="Replace">
+
+        <script type="text/ecmascript">
+            $(function () {
+                $('.datepicker').datepicker({ dateFormat: formatDate('long') });
+            });
+
+    </script>
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+          @Session["currentPage"]
+        </span>
+
+    </div>
+   <ol class="breadcrumb">
+   @Html.Raw(@ViewBag.breadcum)
+    </ol>
+<div class="wrapper pl">
+    <div class="alert alert-success mt20">
+        <button class="close" data-dismiss="alert" type="button">×</button>
+         @ViewBag.Message
+    </div>
+    <div class="container-fluid">
+
+        <div class="widget col-md-5">
+            <div class="whead">
+                <h6>
+                    <label id="lblHeader" title="">@ViewBag.Header</label>
+                </h6>
+                <div class="clear">
+                </div>
+            </div>
+             @*if we want to page refresh then we remove below line from Ajax.Beginform and do menu option on layout page because if we remove this full page will reload and if no menu its cause exception
+             ,InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg"  , new { autocomplete = "off" }*@
+@using (Ajax.BeginForm("EditOpeningPortfolio", "Portfolio", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+{
+      
+
+    
+ <div class="">
+ <ul class="entryForm singleadd">
+     @Html.HiddenFor(model=>model.REFERENCE)
+      <li class="form-group">
+                            @Html.LabelFor(model => model.INSTRUMENT_REFERENCE, new { @class = "control-label entrylable" })
+                            <br />
+                            @Html.DropDownListFor(model => model.INSTRUMENT_REFERENCE, (SelectList)ViewBag.InstrumentList, "Select an Instrument", new { @onchange="getBranch(this.value);", @class = "control-label entrylable drpResize", style = "height:38px;width:50%",@required = "required" })
+                            <br />
+                            @Html.ValidationMessageFor(model => model.INSTRUMENT_REFERENCE)
+                            </li>
+  
+                              <li class="form-group">
+
+                                    @Html.LabelFor(model => model.TRANSACTIONDATE, new { @class = "control-label entrylable" })
+                                    <div class='input-group date'>
+
+                                        @Html.TextBoxFor(model => model.TRANSACTIONDATE,"{0:dd-MMM-yy}", new { @class = "datepicker form-control", @value =Model.TRANSACTIONDATE, @placeholder = "Select a Date ", required = "required" })
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+                                    </div>
+
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.TRANSACTIONDATE)
+
+                                </li>
+                                 
+                                <li class="form-group">
+
+                                    @Html.LabelFor(model => model.RATE, new { @class = "control-label entrylable" })
+
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.RATE, new { @class = "form-control decimal", @value = Model.RATE, @placeholder = "" + @Html.DisplayNameFor(model => model.RATE) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.RATE) + "'" })
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.RATE)
+
+                                </li>
+                 <li class="form-group">
+
+                                    @Html.LabelFor(model => model.SHAREQUANTITY, new { @class = "control-label entrylable" })
+
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.SHAREQUANTITY, new { @class = "form-control decimal", @value =Model.SHAREQUANTITY, @placeholder = "" + @Html.DisplayNameFor(model => model.SHAREQUANTITY) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.SHAREQUANTITY) + "'" })
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.SHAREQUANTITY)
+
+                                </li>
+
+                           <li class="form-group">
+                            @Html.LabelFor(model => model.REALIZEDGAIN, new { @class = "control-label entrylable" })
+                            <div class="input-group">
+                             @Html.TextBoxFor(model => model.REALIZEDGAIN, new { @class = "form-control decimal", @value =Model.REALIZEDGAIN, @placeholder = "" + @Html.DisplayNameFor(model => model.REALIZEDGAIN) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.REALIZEDGAIN) + "'" })
+                             <div class="input-group-addon">.00</div>
+                             </div>
+                              <br />
+                             @Html.ValidationMessageFor(model => model.REALIZEDGAIN)
+                             </li>
+
+          <li class="form-group">
+
+         <label class="control-label entrylable" for="REALIZEDLOSS">Realized Loss</label>
+
+         <div class="input-group">
+             <input class="form-control decimal" data-val="true" data-val-number="The field Realized Loss must be a number." id="REALIZEDLOSS" name="REALIZEDLOSS" onblur="this.placeholder = 'Realized Loss'" onfocus="this.placeholder = ''" placeholder="Realized Loss" type="text" value="">
+             <div class="input-group-addon">.00</div>
+         </div>
+         <br />
+         <span class="field-validation-valid" data-valmsg-for="REALIZEDLOSS" data-valmsg-replace="true"></span>
+
+     </li>
+      
+                        </ul>
+             <button type="submit" class="btn btn-success btnSingleAddForm">Update</button>
+             <a class="load btn btn-danger closeButton" href="~/#/Portfolio/ListOpeningPortfolio?lblbreadcum=">Close</a> 
+      
+            </div>
+
+
+}
+
+        </div>
+
+
+    </div>
+</div>
+    <p></p>
+
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+
+
+</div>

@@ -1,0 +1,330 @@
+﻿@model InvestmentManagement.Models.GridModel<InvestmentManagement.InvestmentManagement.Models.INSTRUMENT>
+
+<div id="replace">
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+       @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+    <div class="wrapper pl">
+        <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            <strong>Info !</strong>
+            @ViewBag.Message
+        </div>
+        <div class="container-fluid Grid-Container">
+            <div class="widget mb20">
+                <div class="whead">
+                    <h6>@Session["currentPage"]</h6>
+                   @* <select id="ddlPageSize">
+                        <option selected="selected">15</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                    <h6 style="float: right">Select Row Count</h6>*@
+                    <div class="clear"></div>
+                </div>
+
+                <div class="formRow dgHeaderBk">
+                    <div class="container-fluid">
+                        <div class="col-md-12">
+                            <input type="text" id="txtCode" class="tableSearchField" placeholder="Enter Search Criteria" />
+                            <input type="text" id="txtISIS" class="tableSearchField" placeholder="Enter Search ISIN" />
+                            <input type="button" id="btn" class="btn btn-primary dgBtn" value="Apply" />
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function ChkAddClass() {
+                        if ($('.ASPGrid').height() >= 700) {
+                            $('#InstrumentWebGrid').addClass("webgridscroll");
+                        }
+                        var dir = $('#dir').val();
+                        var col = $('#col').val().replace(/\s/g, '');
+                        //alert(col);
+
+                        var header = $('th a[href*=' + col + ']');
+                        //alert(header.text());
+                        var countTh = document.getElementsByTagName('th').length;
+
+
+                        for (var i = 1; i <= countTh; i++) {
+
+                            var txtTh = $('.ASPGrid tr th:nth-child(' + i + ')').text().replace(/\s/g, '');
+
+                            if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Ascending') {
+                                //alert("");
+                                //alert(txtTh + "" + col);
+                                $(".ASPGrid tr th").addClass("sorting");
+
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("ascending");
+                                $(".ASPGrid tr th:nth-child(15)").removeClass("sorting ascending");
+                               //   $(".ASPGrid tr th:nth-child(10)").removeClass("sorting ascending");
+
+                            }
+
+                            else if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Descending') {
+                                //alert(txtTh + "" + col);
+                                $(".ASPGrid tr th").addClass("sorting");
+
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("descending");
+                                //$(".ASPGrid tr th:nth-child(1)").removeClass("sorting descending");
+                                $(".ASPGrid tr th:nth-child(15)").removeClass("sorting descending");
+
+
+                            }
+                        }
+
+                        //$("select,.check :checkbox").not("#ddlPageSize").uniform();
+                        //$('.selector').not("#ddlPageSize").addClass('pull-right');
+                        //$('.checker').not("#ddlPageSize").addClass('dataGridCheckBox');
+                    }
+                </script>
+                <div id="InstrumentWebGrid" class="formRow noPad btbNone tScroll">
+                    @{
+                        WebGrid grid = new WebGrid(rowsPerPage: Model.RowsPerPage, ajaxUpdateContainerId: "InstrumentWebGrid", ajaxUpdateCallback: "ChkAddClass", sortFieldName: "sortdefault");
+                        grid.Bind(Model.DataModel, autoSortAndPage: false, rowCount: Model.RowsPerPage);
+				
+                        @grid.Table(columns: new[] {          
+           
+                        grid.Column("SHORTNAME", style:"textColumn",header:"Short Name"),
+                        grid.Column("ISIN", style:"textColumn",header:"ISIN"),
+                        grid.Column("NAME", style:"textColumn",header:"Name"),             
+                        grid.Column("INSTRUMENTCATEGORY.DESCRIPTION",format:@<text>@(@item.INSTRUMENTCATEGORY==null?"":@item.INSTRUMENTCATEGORY.DESCRIPTION)</text>, style:"textColumn",header:"Instrument Category"),
+                        grid.Column("CATEGORY", style:"textColumn",header:"Category"),
+                        grid.Column("INSTRUMENTTYPE", style:"textColumn",header:"Type"),
+
+                        grid.Column(header: "Is Non-Marginable",  format:@<text>
+                         <div class="checkbox">
+                             <label>
+                               <input type="checkbox" @((item.ISNONMARGINABLE=="Y")?"Checked":"") disabled readonly/>
+                               </label>
+                          </div>
+                        </text>),
+ 
+                         grid.Column(header: "Allow Netting",  format:@<text>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" @((item.ALLOWNETTING=="Y")?"Checked":"") disabled readonly/>
+                                                    </label>
+                                                </div>
+                                                </text>),
+  
+
+                        grid.Column("TOTALSHARE", format:@<text>@item.TOTALSHARE</text>, style:"numericColumn",header:"Total Share"),
+                        grid.Column("MARKETLOT", format:@<text>@item.MARKETLOT</text>, style:"numericColumn",header:"Market Lot"), 
+
+                        grid.Column("NETASSETVALUE", format:@<text>@item.NETASSETVALUE</text>, style:"numericColumn",header:"Net Asset Value"),
+                        grid.Column("LATESTEPS", format:@<text>@item.LATESTEPS</text>, style:"numericColumn",header:"Latest EPS"), 
+
+                        grid.Column("PERATIO", format:@<text>@item.PERATIO %</text>, style:"numericColumn",header:"PE Ratio"),
+                        grid.Column("LASTMARKETPRICE", format:@<text>@item.LASTMARKETPRICE</text>, style:"numericColumn",header:"Last Market Price"),
+                        grid.Column("STATUS", style:"textColumn",header:"Status"),               
+
+                        grid.Column(header: "",  format:@<text>
+                        <div class="btn-group dropdown bdrNone">
+                            <a href="#" class="tablectrl_medium bDefault" data-toggle="dropdown"><span class="iconb" data-icon=""></span></a>
+                            <ul class="dropdown-menu pull-right cMbdr cMenu">
+                              <li>
+                                @if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+                                {  
+                                 @Ajax.ActionLink("Edit", "EditInstrument", "Instrument",new {id=@item.REFERENCE},
+                                 new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET",OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" })
+                                }
+                                else
+                                {
+                                <a class="load" role="menuitem" tabindex="-1" href="~/#/Instrument/EditInstrument?id=@item.REFERENCE">Edit</a>
+                                }
+                                </li>
+                                @if (item.STATUS == "Active")
+                                {
+                                <li>       
+                                   @*<form action='@Url.Action("GeneratePurchaseNoteLetter","FDRNote",new { isin = @item.ISIN })', method='get'>*@
+                                    <form action='@Url.Action("#","FDRNote",new { isin = @item.ISIN })', method='get'>
+                                     <input id="" value="@item.ISIN" name="isin" style="" readonly="readonly" />
+                                     <input type="button" id="@item.ISIN" class="btn btn-default btn-sm btn-plain" style="border-color: rgba(0, 0, 0, 0) !important; color: #333 !important;padding-bottom:0px"
+                                    value="Mutual Bonus Reconcile" onclick="getReconcile(this.id)" /> 
+                                    </form>
+                                </li>
+                                }
+                            </ul>
+                        </div>
+                        </text>)
+                },
+                tableStyle: "ASPGrid",
+                htmlAttributes: new { cellspacing = "0", border = "0" },
+
+                footer: @<ul class="pagination">
+     
+            </ul>
+
+                );
+                        @Html.Hidden("dir", grid.SortDirection)
+                        @Html.Hidden("col", grid.SortColumn)
+                    }
+                </div>
+                @if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+                {
+                    @Ajax.ActionLink("Add", "AddInstrument", "Instrument",
+                 new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { @class = "btn btn-success m10" })
+
+                }
+                else
+                {
+                    <a class=" load btn btn-success m10" role="menuitem" tabindex="-1" href="~/#/Instrument/AddInstrument">Add</a>
+                }
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+
+
+
+    //Bonus Reconcile
+
+    function getReconcile(e) {
+        try {
+           
+            //alert(e);
+
+            $.ajax({
+                url: '@Url.Action("MutualBonusReconcile","Instrument")',
+                    contentType: 'application/html; charset=utf-8',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        isin: e,
+
+                    },
+            }).success(function (Data) {
+               // alert('Success' + Data.result);
+                if (Data.result == '1') {
+                        alert('Reconcile Successful.Please check Porfolio');
+                } else if (Data.result == '0') {
+                        alert('Reconcile May Failed.Although Please Check Portfolio.And if mismatch Call Support!');
+                    }
+                    else {
+                    alert('Reconcile Failed.Due to ' + Data.result);
+                    }
+
+                }).error(function (xhr, status) {
+                    // console.log('error\n :'+xhr.responseText)
+                    console.log(xhr.error);
+                    alert('Exception.Due to ' + xhr.error);
+                });
+            } catch (err) {
+                console.log(err.message);
+                alert('Exception: ' + err.message);
+            }
+
+        }
+        //End Bonus Reconcile
+
+    $(document).ready(function () {
+
+        if ($('.ASPGrid').height() >= 700) {
+            $('#InstrumentWebGrid').addClass("webgridscroll");
+
+        }
+        $(".ASPGrid tr th").addClass("sorting");
+        //$(".ASPGrid tr th:nth-child(1)").removeClass("sorting");
+        $(".ASPGrid tr th:nth-child(15)").removeClass("sorting");
+
+        $('.not-active').bind('click', false);
+
+        $('#btn').on('click', function () {
+            $('.loadingImage').show();
+           
+            var filterstring = $('#txtCode').val();
+            $.get("/Instrument/ListInstrument?filterstring=" + $('#txtCode').val() + "&currentFilter=" + $('#txtISIS').val() + "&rows=" + $("#ddlPageSize").val() + "", function (data) {
+                var getHTML = $(data);
+                $('#InstrumentWebGrid').empty();
+
+                $('#InstrumentWebGrid').html($('#InstrumentWebGrid', getHTML));
+                ChkAddClass();
+                $('.loadingImage').hide();
+            });
+     });
+
+        $('#ddlPageSize').on('change', function () {
+            //$('.loadingImage').show();
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+            $.get("/Instrument/ListInstrument?sort=" + $('#col').val() + "&sortdir=" + $('#dir').val() + "&filterstring=" + $('#txtCode').val() + "&rows=" + valueSelected + "", function (data) {
+                var getHTML = $(data);
+                $('#InstrumentWebGrid').empty();
+                $('#InstrumentWebGrid').andSelf().unbind();
+                $('#InstrumentWebGrid').html($('#InstrumentWebGrid', getHTML));
+                ChkAddClass();
+                //$('.loadingImage').hide();
+
+            });
+        });
+    });
+
+</script>
+
+
+<script>
+    $(document).on('keypress', '.number', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+    $(document).on('keypress', '.decimal', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+</script>
+
+<script type="text/javascript">
+    function ShowProcessingMsg() {
+
+        $('.loadingImage').show();
+
+    }
+    function HideProcessingMsg() {
+        $('.loadingImage').hide();
+    }
+
+</script>
+
+<script>
+
+
+    $(document).on('click', '.dropdown-menu li a', function (event) {
+        var selText = $(this).text();
+        $('.hidden').val(selText);
+        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+        event.preventDefault();
+        //event.stopPropagation();
+        //return false;
+    });
+
+
+
+</script>

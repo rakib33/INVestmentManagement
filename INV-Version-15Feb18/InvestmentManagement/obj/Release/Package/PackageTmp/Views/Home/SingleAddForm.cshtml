@@ -1,0 +1,171 @@
+﻿
+
+<div class="contentTop">
+    <span class="pageTitle">
+        <span class=" glyphicon glyphicon-yen"></span>
+        Home Page / Dashboard
+    </span>
+
+</div>
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+
+    <li class="active">Dashboard</li>
+</ol>
+
+@*Main Container*@
+<div class="wrapper pl">
+    <div class="alert alert-success mt20">
+        <button class="close" data-dismiss="alert" type="button">×</button>
+
+        <strong>Info !</strong>
+        This is home page. You can find all the navigation information... blah blah blah..This is home page. You can find all the navigation information... blah blah blahThis is home page. You can find all the navigation information... blah blah blah
+    </div>
+    <div class="container-fluid">
+
+        <div class="widget col-md-5">
+            <div class="whead">
+                <h6>
+                    <label id="lblHeader" title="Add New Employee">Add Financial Institution</label>
+                </h6>
+                <div class="clear">
+                </div>
+            </div>
+@using (Ajax.BeginForm("Index", "Home", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "DivStatus", OnSuccess = "OnClear()" }))
+{
+            <div class="">
+                <ul class="entryForm singleadd">
+                <li class="form-group">
+                    <label for="exampleInputEmail1" class="control-label entrylable">Code</label>
+                    <input type="text" class="form-control" id="Code" placeholder="Code" name="Code">
+                </li>
+                 <li class="form-group">
+                    <label for="exampleInputEmail1" class="control-label entrylable">Name</label>
+                    <input type="text" class="form-control" id="Name" placeholder="Name" name="Name">
+                </li>
+                 <li class="form-group">
+                    <label for="exampleInputEmail1" class="control-label entrylable">Swift Code</label>
+                    <input type="text" class="form-control" id="Swiftcode" placeholder="Swift Code" name="Swiftcode">
+                </li>
+
+                 <li class="form-group ">
+                    <label for="exampleInputEmail1" class="control-label entrylable">Cap Limit</label>
+                     <div class="input-group">
+                        <div class="input-group-addon">Tk.</div>
+                    <input type="text" class="form-control" id="CapLimit" placeholder="Cap Limit" name="CapLimit">
+                         </div>
+                </li>
+                   
+                
+                <li class="form-group">
+
+                    <label for="exampleInputEmail1" class="control-label entrylable">NPL Percentage</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">Tk.</div>
+                    <input type="text" class="form-control" id="NPLPercentage" placeholder="NPL Percentage" name="CapLimit">
+                          </div>
+                </li>
+              
+    
+                 <li class="form-group">
+                    <label for="exampleInputEmail1" class="control-label entrylable">Tax Rate</label>
+                       <div class="input-group">
+                        <div class="input-group-addon">Tk.</div>
+                    <input type="text" class="form-control" id="TaxRate" placeholder="Tax Rate" name="TaxRate">
+                </div>
+                 </li>
+                 <li class="form-group">
+                    <label for="exampleInputEmail1" class="control-label entrylable">Excise Duty</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">Tk.</div>
+                    <input type="text" class="form-control" id="ExciseDuty" placeholder="Excise Duty" name="ExciseDuty">
+                </div>
+                          </li>
+
+                <li class="form-group liSingleAddForm">
+                    <label for="exampleInputEmail1" class="control-label entrylable">Other Charge</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">Tk.</div>
+                        <input type="text" class="form-control" id="OtherCharge" placeholder="Other Charge" name="OtherCharge">
+                    </div>
+
+                </li>
+                  <li class="form-group">
+                    <label for="exampleInputEmail1" class="control-label entrylable">LastUpdated</label>
+                    <div class='input-group date'>
+                        <input type='text' class="form-control" id='LastUpdated' name="LastUpdated" />
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </li>
+                 <li class="form-group">
+                    <label for="exampleInputEmail1" class="control-label entrylable">LastUpdatedBy</label>
+                    <input type="text" class="form-control" id="LastUpdatedBy" placeholder="Employee Name" name="LastUpdatedBy">
+                </li>
+                  
+                   <li>
+                    <label class="entrylable">
+                        Institution Type :
+                    </label>
+                    <br />
+
+                    <div class="btn-group">
+
+                        <button type="button" class="btn btn-default dropdown-toggle form-control"
+                            data-toggle="dropdown">
+                            Institution Type <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Developer</a></li>
+                            <li><a href="#">Designer</a></li>
+                            <li><a href="#">HR</a></li>
+
+                        </ul>
+                    </div>
+
+                </li>
+                <li class="form-group">
+                     <label class="entrylable">
+                       Status :
+                    </label>
+                      <div class="chkbox">
+	                  <input type="checkbox" value="None" id="chkbox" name="check" />
+	                  <label for="chkbox"></label>
+                      </div>
+
+                </li>
+                        </ul>
+             <button type="submit" class="btn btn-success btnSingleAddForm">Save</button>
+             
+
+                <li class="lastli">
+                    
+                </li>
+      
+            </div>
+}
+
+        </div>
+
+
+    </div>
+</div>
+
+<p></p>
+
+
+<script>
+
+    $(function () {
+        $('#CreatedDated').datepicker({ dateFormat: "dd/mm/yy" });
+        $('#LastUpdated').datepicker({ dateFormat: "dd/mm/yy" });
+        $(".dropdown-menu li a").click(function (event) {
+            var selText = $(this).text();
+            $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+            event.preventDefault();
+        });
+
+    });
+
+</script>
+

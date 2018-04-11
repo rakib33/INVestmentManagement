@@ -1,0 +1,95 @@
+﻿+-@model List<InvestmentManagement.InvestmentManagement.Models.FIOFFERTYPE>
+
+<div id="Replace"> 
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.breadcum)
+    </ol>
+
+    @*Main Container*@
+    <div class="wrapper pl">
+        <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+
+            <strong>Info !</strong>
+            @ViewBag.Message
+        </div>
+
+        <div class="container-fluid Grid-Container">
+
+            <div class="widget bottomborder">
+                <div class="whead">
+                    <h6>
+                        <label id="lblHeader" title="Add New Employee">@ViewBag.Header</label>
+                    </h6>
+                    <div class="clear">
+                    </div>
+                </div>
+                @using (Ajax.BeginForm("EditFinancialInstitution", "FinancialInstitution", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+                {
+                    foreach (var currency in ViewBag.Currency)
+                    {
+  
+                    <div class="entryForm">
+                        <ul class="col-md-6 entryForm">
+
+                            @foreach(var item in Model)
+                            {
+                            <li class="form-group">
+                                <label for="Code" class="control-label entrylable">Code</label>
+                                <input type="text" class="form-control"  id="Code" onfocus="this.select()" onmouseup="return false" name="Code" value="@Model.CODE" tabindex="1">
+                            </li>
+                            }
+
+                        </ul>
+
+                        
+                        <button type="submit" class="btn btn-success lastli" tabindex="9">Update</button>
+                        <a class="load btn btn-danger closeButton" href="~/#/FinancialInstitution/ListFinancialInstitution?lblbreadcum=">Close</a>
+
+
+                    </div>
+                    }
+
+                }
+            </div>
+
+            @*<button id="target" type="submit" class="btn btn-success lastli" tabindex="9">test</button>*@
+        </div>
+    </div>
+
+    <p></p>
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+    <script type="text/javascript">
+        $(".load").click(function () {
+            $(".loadingImage").show();
+            var link = $(this).attr("href");
+            debugger;
+            $.get('<%= Url.Action(' + link + ') %>', {},
+                function (data) {
+                    $('#result').html(data);
+                    $('.loadingImage').hide();
+                });
+        });
+
+    </script>
+
+</div>

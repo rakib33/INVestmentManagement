@@ -1,0 +1,295 @@
+﻿@*@model InvestmentManagement.ViewModel.ViewModelBase*@
+
+@*<script type="text/javascript" src="https://www.google.com/jsapi"></script>*@
+
+@{
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";   
+ }
+
+
+
+<script src="~/Scripts/jsapi.js"></script>
+<script src="~/Scripts/MarketAnalysisChart.js"></script>
+
+<div class="contentTop">
+    <span class="pageTitle">
+        <span class=" glyphicon glyphicon-yen"></span>
+        Dashboard
+    </span>
+
+</div>
+<ol class="breadcrumb">
+
+
+    <li class="active">@Session["PreviousPage"]</li>
+</ol>
+
+@*Main Container*@
+<div class="wrapper pl">
+    <div class="alert alert-success mt20">
+        <button class="close" data-dismiss="alert" type="button">×</button>
+
+        <strong>Info !</strong>
+        @ViewBag.Message
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="formRow dgHeaderBk">
+            <div class="container-fluid">
+                            @*<div class="row">
+                            <div class="col-md-2"><h5>Account Number</h5></div>
+                            <div class="col-md-2"><input type="text"  placeholder="Account Number" class="inputWidth" id="acNumber" name="acNumber" /></div>
+                            <div class="col-md-2"><h5 >ISIN</h5></div>
+                            <div class="col-md-2"><input type="text" placeholder="ISIN " class="inputWidth"  id="isin" name="isin" /> </div>
+                            <div class="col-md-1"><h5>Transfer Status</h5></div>
+                            <div class="col-md-3">@Html.DropDownList("TType", new SelectListItem[] { new SelectListItem { Text = "In", Value = "IN" }, new SelectListItem { Text = "Out", Value = "OUT" } }, "All", new { @class = "control-label entrylable drpResize drpPos" })</div>                                                      
+                        </div>*@
+                <div class="row">
+                    <div class="col-md-1">
+                        <h5><b>Start Date</b></h5>
+                    </div>
+                    <div class="col-md-1" >
+                        <input type="text" id="startDate" style="width: 100%!important;height: 33px !important; " name="startDate" class="form-control"></div>
+                    <div class="col-md-1">
+                        <h5><b>End Date</b></h5>
+                    </div>
+                    <div class="col-md-1">
+                        <input type="text" id="endDate" name="endDate" style="width: 100%!important;height: 33px !important;" class="form-control "></div>                  
+
+                    <div class="col-md-3">
+                        <select  class="control-label " style="width: 35%!important;height: 32px !important;" name="COMPOUNDINTERESTINTERVAL">
+                            
+                            <option value="Daily">Daily</option>
+                            <option value="Monthly">Monthly</option>
+                            <option value="Quarterly">Quarterly</option>
+                            <option value="Yearly" selected>Yearly</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <input type="button" id="btn-TSearch" class="btn btn-primary dgBtn " style="margin-left:-206px;" value="Apply" /></div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div class="chartPlacement  col-md-6">
+                    <div id="chartOne"></div>
+                </div>
+                <div class="chartPlacement  col-md-6">
+                    <div id="chartTwo"></div>
+                </div>
+            </div>
+            <div>
+                <div class="chartThree  col-md-6">
+                    <div id="chartThree"></div>
+                </div>
+                <div class="chartFour  col-md-6">
+                    <div id="chartFour"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    $(function () {
+
+        $("#startDate").datepicker({ dateFormat: formatDate('long') });
+        $('#startDate').datepicker('setDate', new Date());
+        $("#endDate").datepicker({ dateFormat: formatDate('long') });
+        $('#endDate').datepicker('setDate', new Date());
+    });
+
+    (function () {
+
+        $(".numericOnly").bind('keypress', function (e) {
+            if (e.keyCode == '9' || e.keyCode == '16') {
+                return;
+            }
+            var code;
+            if (e.keyCode) code = e.keyCode;
+            else if (e.which) code = e.which;
+            if (e.which == 46)
+                return false;
+            if (code == 8 || code == 46)
+                return true;
+            if (code < 48 || code > 57)
+                return false;
+        });
+
+        //Disable paste
+        $(".numericOnly").bind("paste", function (e) {
+            e.preventDefault();
+        });
+
+        $(".numericOnly").bind('mouseenter', function (e) {
+            var val = $(this).val();
+            if (val != '0') {
+                val = val.replace(/[^0-9]+/g, "")
+                $(this).val(val);
+            }
+        });
+    });
+    //chart One
+    (function () {
+        google.load('visualization', '1', { packages: ['corechart', 'bar'] });
+        google.setOnLoadCallback(drawTrendlines);
+
+        function drawTrendlines() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Month');
+            data.addColumn('number', 'Target');
+            data.addColumn('number', 'Actual');
+
+            data.addRows([
+              ['Jan', 1, .25],
+              ['Feb', 2, .5],
+              ['Mar', 3, 1],
+              ['Apr', 4, 2.25],
+              ['May', 5, 2.25],
+              ['Jun', 6, 3],
+              ['Jul', 7, 4],
+              ['Aug', 8, 5.25],
+              ['Sep', 9, 7.5],
+              ['Oct', 8, 9],
+              ['Nov', 6, 8],
+              ['Dec', 7, 10],
+            ]);
+
+            var options = {
+                title: 'FDR Investment - Target vs Actual',
+                trendlines: {
+                    0: { type: 'linear', lineWidth: 5, opacity: .3 },
+                    1: { type: 'exponential', lineWidth: 10, opacity: .3 }
+                },
+                hAxis: {
+
+                    //format: 'h:mm a',
+                    viewWindow: {
+                        min: [7, 30, 0],
+                        max: [17, 30, 0]
+                    }
+                },
+                vAxis: {
+                    title: 'Rating (scale of 1-10)'
+                }
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('chartOne'));
+            chart.draw(data, options);
+        }
+    })();
+    //chart Two
+    (function () {
+        google.load('visualization', '1', { packages: ['corechart', 'bar'] });
+        google.setOnLoadCallback(drawTrendlines);
+
+        function drawTrendlines() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Month');
+            data.addColumn('number', 'Target');
+            data.addColumn('number', 'Actual');
+
+            data.addRows([
+              ['Jan', 5, .25],
+              ['Feb', 4, 9],
+              ['Mar', 3, 5],
+              ['Apr', 8, 2.25],
+              ['May', 5, 2.25],
+              ['Jun', 6, 3],
+              ['Jul', 7, 4],
+              ['Aug', 8, 5.25],
+              ['Sep', 9, 7.5],
+              ['Oct', 8, 9],
+              ['Nov', 6, 8],
+              ['Dec', 7, 10],
+            ]);
+
+            var options = {
+                title: 'FDR Investment - Target vs Actual',
+                trendlines: {
+                    0: { type: 'linear', lineWidth: 5, opacity: .3 },
+                    1: { type: 'exponential', lineWidth: 10, opacity: .3 }
+                },
+                hAxis: {
+
+                    //format: 'h:mm a',
+                    viewWindow: {
+                        min: [7, 30, 0],
+                        max: [17, 30, 0]
+                    }
+                },
+                vAxis: {
+                    title: 'Rating (scale of 1-10)'
+                }
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('chartTwo'));
+            chart.draw(data, options);
+        }
+    })();
+
+    //chart Three
+    (function () {
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              ['Year', 'Fixed Deposit', 'Bond', 'Equity'],
+              ['2014', 1000, 400, 200],
+              ['2015', 1170, 460, 250],
+              ['2016', 660, 1120, 300]
+              //['2017', 1030, 540, 350]
+            ]);
+
+            var options = {
+                chart: {
+                    title: 'SectorWise Investment',
+
+                },
+                bars: 'vertical',
+                vAxis: { format: 'short' },
+                height: 400,
+                colors: ['#1b9e77', '#d95f02', '#7570b3']
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('chartThree'));
+
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+
+
+
+
+        }
+    })();
+
+    //chart Four
+    (function () {
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              ['Fixed Deposit', 'Hours per Day'],
+              ['Corporate Bond', 11],
+              ['Government Bond', 2],
+              ['Equity', 2],
+              ['Real State', 2],
+
+            ]);
+
+            var options = {
+                title: 'My Daily Activities',
+                pieHole: 0.2,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('chartFour'));
+            chart.draw(data, options);
+        }
+
+    })();
+</script>
+
+

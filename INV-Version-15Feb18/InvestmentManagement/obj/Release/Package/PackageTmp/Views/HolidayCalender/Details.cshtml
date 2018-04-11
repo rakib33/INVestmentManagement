@@ -1,0 +1,36 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.HOLIDAYCALENDER
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>HOLIDAYCALENDER</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.REFERENCE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.REFERENCE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HOLIDAY)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HOLIDAY)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NOTE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NOTE)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

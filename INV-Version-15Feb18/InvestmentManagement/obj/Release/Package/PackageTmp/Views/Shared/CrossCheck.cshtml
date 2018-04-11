@@ -1,0 +1,26 @@
+﻿@model List<InvestmentManagement.InvestmentManagement.Models.ShareCrossCheck>
+
+<div id="replace">
+<h1>Below Cross Check filure are Listed</h1>
+
+
+@foreach (var item in Model)
+{ 
+   <div class="row">
+       <div class="col-md-2">
+           @item.ISIN
+       </div>
+       <div class="col-md-2">
+           @item.ShortName
+       </div>
+       <div class="col-md-3">
+           @item.FreeBalanceDiff
+       </div>
+       <div class="col-md-5">
+           @item.ErrorMessage
+       </div>
+   </div>
+
+
+}
+    </div>

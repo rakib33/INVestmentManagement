@@ -1,0 +1,427 @@
+﻿@model InvestmentManagement.Models.GridModel<InvestmentManagement.InvestmentManagement.Models.CORPORATEACTION>
+@*<link href="~/CSS/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui.js"></script>*@
+<script src="~/Scripts/Uploader/CorporateAction.js"></script>
+<div id="replace">
+
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        <li><a class="load" href="@Url.Action("Index", "Home")">@Session["PreviousPage"]</a></li>
+
+        <li class="active">@Session["currentPage"]</li>
+    </ol>
+ <div class="wrapper pl">
+         <img class="loadingImage" src="~/Images/loading.gif" style="display:none;" />
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+
+            <strong>Info !</strong>
+            @ViewBag.Message
+        </div>
+        <div class="container-fluid Grid-Container">
+
+
+
+            <div class="widget mb20">
+                <div class="whead">
+                     <h6>@Session["currentPage"]</h6>
+                     <select id="ddlPageSize">
+                                
+                                <option selected="selected">15</option>
+                                <option>50</option>
+                                <option>100</option>
+                            </select>
+                    <h6 style="float:right">Select Row Count</h6>
+                   <div class="clear"></div>
+                </div>
+
+                <div class="formRow dgHeaderBk">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2"><h5 >Account Number</h5></div>
+                            <div class="col-md-2"><input type="text" class="inputWidth" placeholder="Account Number" id="acNumber" name="acNumber" /></div>
+                            <div class="col-md-2"><h5 >Instrument</h5></div>
+                            <div class="col-md-2">
+                               @* <input type="text" placeholder="ISIN " class="inputWidth" id="isin" name="isin" /> *@
+                                 @Html.DropDownList("isin", (SelectList)ViewBag.InstrumentList, "Select Instrument", new { @class = "from-control entrylable drop-max" })
+                            </div>
+                            <div class="col-md-1"><h5>CA Type</h5></div>
+                            <div class="col-md-3">@Html.DropDownList("CAType", new SelectListItem[] { new SelectListItem { Text = "Bonus", Value = "BONUS" }, new SelectListItem { Text = "Right", Value = "RIGHT" }, new SelectListItem { Text = "Stock Split", Value = "STOCKSPLIT" } }, "All", new { @class = "control-label entrylable drpResize drpPos" })</div>
+                            
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2"><h5 >Start Date</h5></div>
+                            <div class="col-md-2"><input type="text" id="startDate" name="startDate" class="form-control inputWidth"></div>
+                            <div class="col-md-2"><h5 >End Date</h5></div>
+                            <div class="col-md-2"><input type="text" id="endDate" name="endDate" class="form-control inputWidth"></div>
+                             <div class="col-md-2"> <input type="button" id="btn-CASearch" class="btn btn-primary dgBtn " value="Apply" /></div>
+                        </div>
+                        @*<div class="row">
+                            <div class="col-md-2 col-md-offset-9">
+                               
+                            </div>
+                        </div>*@
+
+                    </div>
+                </div>
+
+               <script>
+                    function ChkAddClass() {
+                        if ($('.ASPGrid').height() >= 700) {
+                            $('#CorporateActionWebGrid').addClass("webgridscroll");
+
+                        }
+                        var dir = $('#dir').val();
+                        var col = $('#col').val().replace(/\s/g, '');
+                       //alert(col);
+                        
+                        var header = $('th a[href*='+col+']');
+                        //alert(header.text());
+                        var countTh = document.getElementsByTagName('th').length;
+
+
+                        for (var i = 1; i <= countTh; i++) {
+
+                            var txtTh = $('.ASPGrid tr th:nth-child(' + i + ')').text().replace(/\s/g, '');
+                            
+                            if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Ascending') {
+                                //alert("");
+                                //alert(txtTh + "" + col);
+                                $(".ASPGrid tr th").addClass("sorting");
+
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("ascending");
+                                //$(".ASPGrid tr th:nth-child(1)").removeClass("sorting ascending");
+                               // $(".ASPGrid tr th:nth-child(10)").removeClass("sorting ascending");
+
+                            }
+
+                            else if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Descending') {
+                                //alert(txtTh + "" + col);
+                                $(".ASPGrid tr th").addClass("sorting");
+
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("descending");
+                               // $(".ASPGrid tr th:nth-child(1)").removeClass("sorting descending");
+                                //$(".ASPGrid tr th:nth-child(10)").removeClass("sorting descending");
+
+
+                            }
+                        }
+
+                       
+                        //$("select,.check :checkbox").not("#ddlPageSize").uniform();
+
+                        //$('.selector').not("#ddlPageSize").addClass('pull-right');
+                        //$('.checker').not("#ddlPageSize").addClass('dataGridCheckBox');
+                    }
+                </script>
+<div id="CorporateActionWebGrid" class="formRow noPad btbNone tScroll">
+            @{
+                WebGrid grid = new WebGrid(rowsPerPage: Model.RowsPerPage, ajaxUpdateContainerId: "CorporateActionWebGrid", ajaxUpdateCallback: "ChkAddClass");
+                grid.Bind(Model.DataModel, autoSortAndPage: false, rowCount: Model.RowsPerPage);
+				
+                @grid.Table(columns: new[] {
+//                grid.Column(header: "Select",  format:@<text>
+//                    <div class="checkbox">
+//                            <label>
+//                                <input type="checkbox" value="">
+//                            </label>
+//                        </div>
+//                    </text>),
+  
+
+
+grid.Column("IMPORTDATE",  format: f=>f.IMPORTDATE.ToString("dd-MMM-yy"), style:"textColumn",header:"Business Date"),
+grid.Column("INVESTORREF", style:"textColumn",header:"Investor Ref"),
+grid.Column("BOID", style:"textColumn",header:"BOID"),
+grid.Column("ISIN", style:"textColumn",header:"ISIN"),
+grid.Column("INSTRUMENTNAME", style:"textColumn",header:"Instrument"),
+grid.Column("CATYPE", style:"textColumn",header:"CA Type"),
+grid.Column("RECORDDATE", format: f=>f.RECORDDATE.ToString("dd-MMM-yy"), style:"textColumn",header:"Record Date"),
+grid.Column("EFFECTIVEDATE", format: f=>f.EFFECTIVEDATE.ToString("dd-MMM-yy"), style:"textColumn",header:"Effective Date"),
+grid.Column("FREEBALANCE", format:@<text>@item.FREEBALANCE.ToString("N") BDT</text>, style:"numericColumn",header:"Free Balance"),
+grid.Column("LOCKINBALANCE", format:@<text>@item.LOCKINBALANCE.ToString("N") BDT</text>, style:"numericColumn",header:"Locking Balance"),
+grid.Column("FREEZEBALANCE", format:@<text>@item.FREEZEBALANCE.ToString("N") BDT</text>, style:"numericColumn",header:"Freeze Balance"),
+grid.Column("STATUS", style:"textColumn",header:"Status"), 
+grid.Column("DRCRFLAG", style:"textColumn",header:"Dr/Cr Flag"),              
+grid.Column("EXCEPTION", style:"textColumn",header:"Exception")
+
+
+
+//
+//                
+//
+//    
+//
+//grid.Column("PROCFLAG", style:"textColumn",header:"Proflag"),
+//
+//                
+//
+//    
+//
+//
+//                
+//
+//    
+
+//
+//                
+//
+//    
+//
+//
+//
+//                
+//
+//    
+//                
+//
+//    
+//
+
+//
+//                
+//
+//    
+//
+//grid.Column("@Html.DisplayFor(model => model.ISEXCEPTION)", style:"textColumn",header:""),
+//
+//                
+//
+//    
+//
+//grid.Column("@Html.DisplayFor(model => model.ISCREDIT)", style:"textColumn",header:""),
+//
+//                
+//
+//    
+//
+//grid.Column("@Html.DisplayFor(model => model.SEQUENCENO)", style:"textColumn",header:""),
+//
+//                
+//
+//    
+//
+//grid.Column("@Html.DisplayFor(model => model.PREMIUM)", format:@<text>@item.PREMIUM.ToString("N") BDT</text>, style:"numericColumn",header:""),
+//
+//                
+//
+//    
+//
+//
+//                
+//
+//    
+//                
+//
+//    
+//
+
+//
+//                
+//
+//    
+//grid.Column("@Html.DisplayFor(model => model.EFFECTIVEDATE)", header:"", format: f=>f.EFFECTIVEDATE.ToString("dd-MMM-yyyy"), style:"textColumn",header:""),
+//                
+//
+//    
+//
+
+//
+//                
+//
+//    
+//
+//
+//                
+//
+//    
+//
+
+//
+//                
+//
+//    
+//
+//
+//
+//                
+//
+//  grid.Column(header: "",  format:@<text>
+//                        <div class="btn-group dropdown bdrNone">
+//                            <a href="#" class="tablectrl_medium bDefault" data-toggle="dropdown"><span class="iconb" data-icon=""></span></a>
+//                            <ul class="dropdown-menu pull-right cMbdr cMenu">
+//                                <li><a href="#"><span class="icos-add"></span>Add*</a></li>
+//                                <li><a href=" @Url.Action("Edit","Home", new {id=@item.REFERENCE})"><span class=" icon-redo"></span>Share*</a></li>
+//                                <li>
+//                                    @if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+//{
+//  
+//                                    @Ajax.ActionLink("Edit", "EditCORPORATEACTION", "CORPORATEACTION",new {id=@item.REFERENCE},
+//
+//
+//    new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET",OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" })
+//
+//}
+//else
+//{
+//<a class="load" role="menuitem" tabindex="-1" href="~/#/CORPORATEACTION/EditCORPORATEACTION?id=@item.REFERENCE">Edit</a>
+//}
+//</li>
+//
+//                            </ul>
+//                        </div>
+//                        </text>)
+                },
+                tableStyle: "ASPGrid",
+                htmlAttributes: new { cellspacing = "0", border = "0" },
+
+     footer: @<ul class="pagination">
+   <li class="@ViewBag.Prev"><a  class="@ViewBag.PrevNotActive" href="/CorporateAction/ListCorporateAction?PagingType=Prev&sort=@grid.SortColumn&currentFilter=@ViewBag.CurrentFilter&currentRowPerPage=@ViewBag.currentRowPerPage" data-swhglnk="true">Prev</a></li>
+   <li class="@ViewBag.Next"><a  class="@ViewBag.NextNotActive" href="/CorporateAction/ListCorporateAction?PagingType=Next&sort=@grid.SortColumn&currentFilter=@ViewBag.CurrentFilter&currentRowPerPage=@ViewBag.currentRowPerPage" data-swhglnk="true">Next</a></li>
+
+
+     </ul>
+
+                );
+                        @Html.Hidden("dir", grid.SortDirection)
+                        @Html.Hidden("col", grid.SortColumn)
+                    }
+                </div>
+@if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+{
+                 @Ajax.ActionLink("Add", "AddCORPORATEACTION", "CORPORATEACTION",
+
+
+    new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { @class = "btn btn-success m10" })
+
+}
+else
+{
+@*<a class=" load btn btn-success m10" role="menuitem" tabindex="-1" href="~/#/CORPORATEACTION/AddCORPORATEACTION">Add</a>*@
+}
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ($('.ASPGrid').height() >= 700) {
+            $('#CorporateActionWebGrid').addClass("webgridscroll");
+
+        }
+        $(function () {
+
+            $("#startDate").datepicker({ dateFormat: formatDate('long') });
+            $('#startDate').datepicker('setDate', new Date());
+            $("#endDate").datepicker({ dateFormat: formatDate('long') });
+            $('#endDate').datepicker('setDate', new Date());
+        });
+
+        $(".ASPGrid tr th").addClass("sorting");
+        //$(".ASPGrid tr th:nth-child(1)").removeClass("sorting");
+        //$(".ASPGrid tr th:nth-child(7)").removeClass("sorting");
+
+        $('.not-active').bind('click', false);
+     $('#btn').on('click', function () {
+            $('.loadingImage').show();
+            //alert(@grid.SortColumn);
+            var filterstring = $('#txtCode').val();
+            $.get("/CorporateAction/ListCorporateAction?filterstring=" + $('#txtCode').val() + "&rows=" + $("#ddlPageSize").val() + "", function (data) {
+                var getHTML = $(data);
+                $('#CorporateActionWebGrid').empty();
+
+                $('#CorporateActionWebGrid').html($('#CorporateActionWebGrid', getHTML));
+                ChkAddClass();
+                $('.loadingImage').hide();
+            });
+        });
+
+        $('#ddlPageSize').on('change', function () {
+            //$('.loadingImage').show();
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+            $.get("/CorporateAction/ListCorporateAction?sort=" + $('#col').val() + "&sortdir=" + $('#dir').val() + "&filterstring=" + $('#txtCode').val() + "&rows=" + valueSelected + "", function (data) {
+                var getHTML = $(data);
+                $('#CorporateActionWebGrid').empty();
+                $('#CorporateActionWebGrid').andSelf().unbind();
+                $('#CorporateActionWebGrid').html($('#CorporateActionWebGrid', getHTML));
+                ChkAddClass();
+                //$('.loadingImage').hide();
+
+            });
+        });
+    });
+
+
+
+
+
+
+    var btnApply = document.getElementById('');
+
+
+</script>
+
+
+<script>
+    $(document).on('keypress', '.number', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+    $(document).on('keypress', '.decimal', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 ||event.keyCode==9) {
+            // let it happen, don't do anything
+        } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+</script>
+
+<script type="text/javascript">
+    function ShowProcessingMsg() {
+
+        $('.loadingImage').show();
+
+    }
+    function HideProcessingMsg() {
+        $('.loadingImage').hide();
+    }
+
+</script>
+
+@*    <script>
+
+   
+        $(document).on('click', '.dropdown-menu li a', function (event)
+          {
+                var selText = $(this).text();
+                $('.hidden').val(selText);
+                $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+                event.preventDefault();
+                //event.stopPropagation();
+                //return false;
+            });
+
+     
+
+</script>*@

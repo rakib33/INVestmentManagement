@@ -1,0 +1,371 @@
+﻿@model InvestmentManagement.Models.GridModel<InvestmentManagement.InvestmentManagement.Models.GOVBONDINTERESTSCHEDULE>
+@{
+   
+    var result = ViewBag.Bond;   
+ }
+<div id="replace">
+
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+    <div class="wrapper pl">
+        <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            <strong>Info ! @Html.Raw(@ViewBag.Message)</strong>                     
+        </div>
+        <div class="container-fluid Grid-Container">
+
+
+
+            <div class="widget mb20">
+                <div class="whead">
+                    <h6>@Session["currentPage"]</h6>
+                
+                    <div class="clear"></div>
+                </div>
+                
+                 <div class="formRow dgHeaderBk">
+                    <div class="container-fluid">
+                        
+                          @*@foreach(var item in result){
+                          *@
+                                   <div class="row">
+                                    <div class="col-sm-3 col-md-3">
+                                        <label>Bond Id:</label>
+                                        @result.BONDID
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-3">
+                                        <label>Issue date:</label>                                    
+                                           @result.BONDISSUEDATE.ToString("dd-MMM-yyyy")                                       
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-3">
+                                        <label>Opening date:</label>
+                                        @result.OPENINGDATE.ToString("dd-MMM-yyyy")
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-3">
+                                        <label>Matured date:</label>
+                                        @result.MATURITYDATE.ToString("dd-MMM-yyyy")
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-3">
+                                        <label>Face Value:</label>
+                                        @result.FACEVALUE.ToString("N") BDT
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-3">
+                                        <label>Tax Rate:</label>                                    
+                                           @result.TAXRATE %                                       
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-3">
+                                        <label>gross Interest:</label>
+                                        @result.GROSSINTEREST.ToString("N") BDT
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-3">
+                                        <label>Source Tax:</label>
+                                        @result.SOURCETAX.ToString("N")
+                                    </div>
+                                </div>
+                                  <div class="row">
+                                      <div class="col-sm-3 col-md-3">
+                                          <label>Cost Price:</label>
+                                          @result.COSTPRICE.ToString("N") BDT 
+                                      </div>
+                                     <div class="col-sm-3 col-md-3">
+                                          <label>Net Interest:</label>
+                                          @result.NETINTEREST.ToString("N")
+                                      </div>
+
+                                    <div class="col-sm-3 col-md-3">
+                                      <label>Tenure Term:</label>
+                                      @result.TENURE @result.TENURETERM              
+                                    </div>
+
+                                  
+
+                                    <div class="col-sm-3 col-md-3">
+                                    
+                                    </div>
+                                </div>
+                         @*   }*@
+                      
+                    </div>
+                </div>
+                <script>
+                    function ChkAddClass() {
+
+                        var dir = $('#dir').val();
+                        var col = $('#col').val().replace(/\s/g, '');
+                        //alert(col);
+
+                        var header = $('th a[href*=' + col + ']');
+                        //alert(header.text());
+                        var countTh = document.getElementsByTagName('th').length;
+
+
+                        for (var i = 1; i <= countTh; i++) {
+
+                            var txtTh = $('.ASPGrid tr th:nth-child(' + i + ')').text().replace(/\s/g, '');
+
+                            if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Ascending') {
+                                //alert("");
+                                //alert(txtTh + "" + col);
+                                $(".ASPGrid tr th").addClass("sorting");
+
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("ascending");
+                                //$(".ASPGrid tr th:nth-child(1)").removeClass("sorting ascending");
+                                $(".ASPGrid tr th:nth-child(12)").removeClass("sorting ascending");
+
+                            }
+
+                            else if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Descending') {
+                                //alert(txtTh + "" + col);
+                                $(".ASPGrid tr th").addClass("sorting");
+
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("descending");
+                                // $(".ASPGrid tr th:nth-child(1)").removeClass("sorting descending");
+                                $(".ASPGrid tr th:nth-child(12)").removeClass("sorting descending");
+
+
+                            }
+                        }
+
+
+                        //$("select,.check :checkbox").not("#ddlPageSize").uniform();
+
+                        //$('.selector').not("#ddlPageSize").addClass('pull-right');
+                        //$('.checker').not("#ddlPageSize").addClass('dataGridCheckBox');
+                    }
+                </script>
+                <div id="WebGrid" class="formRow noPad btbNone tScroll">
+                    @{
+                        WebGrid grid = new WebGrid(ajaxUpdateContainerId: "WebGrid", ajaxUpdateCallback: "ChkAddClass", sortFieldName: "sortdefault");
+                        grid.Bind(Model.DataModel, autoSortAndPage: false, rowCount: Model.RowsPerPage);  //, autoSortAndPage: false
+				
+                        @grid.Table(columns: new[] {
+            
+                grid.Column(header: "Sl No",style:"textColumn", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),
+                grid.Column("DUEDATE", format: f=>f.DUEDATE.ToString("dd-MMM-yyyy"), style:"textColumn",header:"Due Date"),
+
+                grid.Column("GROSSINTEREST", format:@<text>@item.GROSSINTEREST.ToString("N") BDT</text>, style:"numericColumn",header:"GROSS INTEREST"),
+                
+                grid.Column("SOURCETAX", format:@<text>@item.SOURCETAX.ToString("N") BDT</text>, style:"numericColumn",header:"SOURCE TAX"),   
+                    
+                grid.Column("OTHERCHARGE", format:@<text>@item.OTHERCHARGE.ToString("N") BDT</text>, style:"numericColumn",header:"OTHER CHARGE"),  
+                
+                grid.Column("NETINTEREST", format:@<text>@item.NETINTEREST.ToString("N") BDT</text>, style:"numericColumn",header:"NET INTEREST"),                
+                   
+                grid.Column("STATUS", style:"numericColumn",header:"STATUS"),
+
+                grid.Column("MRNO", style:"numericColumn",header:"MR NO"),              
+                grid.Column("MRDATE", format:@<text>@(@item.MRDATE==null?"":string.Format("{0:dd MMM yyyy}", item.MRDATE))</text>, style:"textColumn",header:"MR Date"),
+                grid.Column("INTERESTRECEIVEDDATE", format:@<text>@(@item.INTERESTRECEIVEDDATE==null?"":string.Format("{0:dd MMM yyyy}", item.INTERESTRECEIVEDDATE))</text>, style:"textColumn",header:"Interest Received Date"),                        
+                grid.Column("REMARKS", style:"numericColumn",header:"REMARKS"),
+
+                grid.Column(header: "",  format:@<text>
+                        <div class="btn-group dropdown bdrNone">
+                            <a href="#" class="tablectrl_medium bDefault" data-toggle="dropdown"><span class="iconb" data-icon=""></span></a>
+                            <ul class="dropdown-menu pull-right cMbdr cMenu">
+                                <li>
+                                    @*
+                                @if(item.STATUS == "Pending")
+                                {
+                                if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+                                {
+                                @Ajax.ActionLink("Post to Journal", "PostToJournal", "BOND",new {id=@item.REFERENCE},new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET",OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" })
+                                }
+                                else
+                                {
+                                   <a class="load" role="menuitem" tabindex="-1" href="~/#/BOND/PostToJournal?id=@item.REFERENCE">Post to Journal</a>                              
+                                }
+                                }*@   
+
+                                 @if(item.STATUS == "Pending")
+                                 {                                     
+                                  <a class="load" role="menuitem" tabindex="-1" href="~/#/BOND/SlotApproved?Ref=@item.REFERENCE&BondRef=@result.REFERENCE">Approved</a>                              
+                                
+                                 }
+                                  <a class="load" role="menuitem" tabindex="-1" href="~/#/BOND/WorkSheetNote?Ref=@item.REFERENCE">MR Entry Note</a>
+                               
+                               @* @if (item.MRNO !=null)
+                                {
+                                *@
+                                <form style="margin-bottom: 0em !important;" action='@Url.Action("WorkSheetReport", "BOND", new { Ref = @item.REFERENCE })', method='post'>                                  
+                                <input type="submit" class="btn btn-link load"  style="font-size:14px !important;font-weight: normal; color: #333 !important;text-decoration:none !important" value="WorkSheet Report" />
+                                </form>
+                         @*       }*@
+                                  
+                                 <form style="margin-bottom: 0em !important;" action='@Url.Action("BondLetter", "Report", new { reference = @item.REFERENCE })', method='post'>
+                                    <input type="submit" class="btn btn-link load"  style="font-size:14px !important;font-weight:normal; color: #333 !important;text-decoration:none !important" value="Interest Pickup Letter" />
+                                 </form>                                 
+                                </li>
+                            </ul>
+                        </div>
+                        </text>)
+                },
+                tableStyle: "ASPGrid",
+                htmlAttributes: new { cellspacing = "0", border = "0" },
+
+     footer: @<ul class="pagination">
+     </ul>
+
+                );
+                        @Html.Hidden("dir", grid.SortDirection)
+                        @Html.Hidden("col", grid.SortColumn)
+                    }
+                </div>
+                @if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+                {
+                    @Ajax.ActionLink("Add", "AddBond", "Bond",
+                    new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { @class = "btn btn-success m10" })
+                }
+                else
+                {
+                    <a class=" load btn btn-success m10" role="menuitem" tabindex="-1" href="~/#/Bond/AddBond">Add</a>
+                }
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".ASPGrid tr th").addClass("sorting");
+        //$(".ASPGrid tr th:nth-child(1)").removeClass("sorting");
+        $(".ASPGrid tr th:nth-child(12)").removeClass("sorting");
+
+        $('.not-active').bind('click', false);
+        $('#btn').on('click', function () {
+            $('.loadingImage').show();
+            @*alert(@grid.SortColumn);*@
+            var filterstring = $('#txtCode').val();
+            $.get("/BOND/ListInterestPaymentSchedule?fromDate=" + $('#FromDate').val() + "&toDate=" + $('#ToDate').val() + "", function (data) {
+                var getHTML = $(data);
+                $('#WebGrid').empty();
+
+                $('#WebGrid').html($('#WebGrid', getHTML));
+                ChkAddClass();
+                $('.loadingImage').hide();
+            });
+        });
+
+        $('#btnUpdate').on('click', function () {
+            $('.loadingImage').show();
+            if ($('#txtSourceTAX').val().length == 0) {
+                alert("Please set Source TAX");
+                $('.loadingImage').hide();
+                return;
+            }
+
+            @*alert(@grid.SortColumn);*@
+            var filterstring = $('#txtCode').val();
+            $.get("/BOND/UpdateSourceTAX?fromDate=" + $('#FromDate').val() + "&toDate=" + $('#ToDate').val() + "&sourceTAX=" + $('#txtSourceTAX').val() + "", function (data) {
+                var getHTML = $(data);
+                $('#WebGrid').empty();
+
+                $('#WebGrid').html($('#WebGrid', getHTML));
+                ChkAddClass();
+                alert("Source TAX has updated.");
+                $('.loadingImage').hide();
+            });
+        });
+
+
+
+        $('#ddlPageSize').on('change', function () {
+            //$('.loadingImage').show();
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+            $.get("/BOND/ListInterestPaymentSchedule?sort=" + $('#col').val() + "&sortdir=" + $('#dir').val() + "&rows=" + valueSelected + "&fromDate=" + $('#FromDate').val() + "&toDate=" + $('#ToDate').val() + "", function (data) {
+                var getHTML = $(data);
+                $('#WebGrid').empty();
+                $('#WebGrid').andSelf().unbind();
+                $('#WebGrid').html($('#WebGrid', getHTML));
+                ChkAddClass();
+                //$('.loadingImage').hide();
+
+            });
+        });
+    });
+
+</script>
+
+
+<script>
+    $(document).on('keypress', '.number', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+    $(document).on('keypress', '.decimal', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+</script>
+
+<script type="text/javascript">
+    function ShowProcessingMsg() {
+
+        $('.loadingImage').show();
+
+    }
+    function HideProcessingMsg() {
+        $('.loadingImage').hide();
+    }
+
+</script>
+
+<script>
+
+
+    $(document).on('click', '.dropdown-menu li a', function (event) {
+        var selText = $(this).text();
+        $('.hidden').val(selText);
+        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+        event.preventDefault();
+        //event.stopPropagation();
+        //return false;
+    });
+
+
+
+</script>
+<script>
+
+    $(function () {
+        $('.datepicker').datepicker({ dateFormat: formatDate('long') });
+
+
+    });
+
+
+
+
+</script>

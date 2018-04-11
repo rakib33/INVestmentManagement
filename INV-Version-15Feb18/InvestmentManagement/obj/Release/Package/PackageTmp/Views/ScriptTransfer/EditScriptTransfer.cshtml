@@ -1,0 +1,440 @@
+﻿
+@model InvestmentManagement.InvestmentManagement.Models.SCRIPTTRANSFER
+
+
+<div id="Replace">
+
+    <script type="text/ecmascript">
+        $(function () {
+            $('.datepicker').datepicker({ dateFormat: formatDate('long') });
+        });
+    </script>
+
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+    @*fixed Deposit markup*@
+
+    <div class="wrapper pl">
+        <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+        <div id="FixedDeposit">
+            <div class="alert alert-success mt20">
+                <button class="close" data-dismiss="alert" type="button">×</button>
+                @ViewBag.Message
+            </div>
+        
+            <div class="whead">
+                <h6>
+                    <label id="lblHeader" title="">@ViewBag.Header</label>
+                </h6>
+                <div class="clear">
+                </div>
+            </div>
+
+            
+          @using (Ajax.BeginForm("EditScriptTransfer", "ScriptTransfer", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+          {
+  
+               @Html.HiddenFor(model => model.REFERENCE)
+               @Html.Hidden("Option", new {Value=ViewBag.Option })
+
+                <div id="BondInformation" class="container-fluid">
+
+                    <div class="widget ">
+                        <div class="whead">
+                            <h6>
+                                <label id="" title="">Script Transfer and Trade Order</label>
+                            </h6>
+                            <div class="clear">
+                            </div>
+                        </div>
+
+                        <div class="">
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.ACCOUNTNUMBER, new { @class = "control-label entrylable" })
+                                    @Html.TextBoxFor(model => model.ACCOUNTNUMBER, new { @class = "form-control", @value = "Enter Bond Id", style = "width: 50%", @placeholder = "" + @Html.DisplayNameFor(model => model.ACCOUNTNUMBER) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.ACCOUNTNUMBER) + "'" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.ACCOUNTNUMBER)
+                                </li>
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable">INSTRUMENT</label>
+                                    <br />
+                                    @Html.DropDownListFor(model => model.INSTRUMENTACREF, (SelectList)ViewBag.InstrumentList, "Select an Instrument", new { @class = "control-label entrylable drpResize", @required = "required" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.INSTRUMENTACREF)
+                                </li>
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable">TRANSACTION TYPE</label>
+                                    <br />
+                                           @if (ViewBag.Option == "TradeOrder")
+                                { 
+                                 @Html.DropDownList("TRANSACTIONTYPE", new List<SelectListItem>
+                                    {                                     
+                                        new SelectListItem{ Text="Buy Order", Value = "B" }, 
+                                        new SelectListItem{ Text="Sale Order", Value = "S" },        
+                                                                 
+                                     }, "Select Transaction Type", new { @class = "control-label entrylable drpResize", @required = "required" })                                                      
+                                }
+                                else if (ViewBag.Option == "Fraction")
+                                { 
+                                 @Html.DropDownList("TRANSACTIONTYPE", new List<SelectListItem>
+                                    {                                           
+                                        new SelectListItem{ Text="Fraction Received", Value = "F" },                              
+                                     }, "Select Transaction Type", new { @class = "control-label entrylable drpResize", @required = "required" })
+                               
+                                }else{
+                                    @Html.DropDownList("TRANSACTIONTYPE", new List<SelectListItem>
+                                    {
+                                        new SelectListItem{ Text="Received", Value = "R" },
+                                        new SelectListItem{ Text="Delivery", Value = "D" },                                                                  
+                                     }, "Select Transaction Type", new { @class = "control-label entrylable drpResize", @required = "required" })
+                                } 
+                                    
+                                <br />
+                                    @Html.ValidationMessageFor(model => model.TRANSACTIONTYPE)
+                                </li>
+
+                                 <li class="form-group">
+                                    <label class="control-label entrylable">ENTRY DATE (Trade/Fraction)</label>
+                                    <div class='input-group date'>
+                                    @Html.TextBoxFor(model => model.ENTRYDATE,"{0:dd-MMM-yy}", new { @class = "datepicker form-control", @value = ViewBag.transactionDate, @placeholder = "Select a Date ", required = "required" })
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>       
+                                    <br />                             
+                                    @Html.ValidationMessageFor(model => model.ENTRYDATE)
+                                </li>
+                                      
+                                @if (ViewBag.Option == null)
+                                {                         
+                                <li class="form-group">
+                                    <label class="control-label entrylable">CERTIFICATE NUMBER</label>       
+                                                   
+                                    @Html.TextBoxFor(model => model.CERTIFICATENO, new { @class = "form-control drpResize", @style = "height:38px;width:50%" })                                   
+                                   
+                                    @Html.ValidationMessageFor(model => model.CERTIFICATENO)
+                                </li>
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable">HOWLA NUMBER</label>
+                                    <div class="input-group">
+                                    @Html.TextBoxFor(model => model.HOWLANUMBER, new { @class = "form-control decimal" })
+                                    <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.HOWLANUMBER)
+                                </li>
+                                  }
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable">SHARE QUANTITY (Trade/Fraction)</label>    
+                                     <br />                                
+                                    <div class="input-group">
+                                    @Html.TextBoxFor(model => model.SHAREQTY, new { @class = "form-control decimal", required = "required" })
+                                    <div class="input-group-addon">.00</div>
+                                    </div>    
+                                    <br />                               
+                                    @Html.ValidationMessageFor(model => model.SHAREQTY)
+                                </li>
+
+                                @if (ViewBag.Option != "Fraction")
+                                {
+                                <li class="form-group">
+                                    <label class="control-label entrylable">RATE or CLOSING</label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.RATE, new { @class = "form-control decimal", required = "required" })
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.RATE)
+                                </li>
+                               }
+
+                            </ul>
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">                                                             
+                                                                
+
+                                 <li class="form-group">
+                                    <label class="control-label entrylable">TOTAL (Trade/Fraction Amount)</label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.TOTAL, new { @class = "form-control decimal" })
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.TOTAL)
+                                </li>
+
+                                 @if (ViewBag.Option == "TradeOrder")
+                                   {
+                                 
+                                 <li class="form-group">
+                                    <label class="control-label entrylable">LOWER LIMIT</label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.LOWERLIMIT, new { @class = "form-control" })
+                                        
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.LOWERLIMIT)
+                                 </li>
+
+                                  <li class="form-group">
+                                    <label class="control-label entrylable">UPPER LIMIT</label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.UPPERLIMIT, new { @class = "form-control" })
+                                       
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.UPPERLIMIT)
+                                </li>
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable">MAXIMUM QTY</label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.MAXIMUMQTY, new { @class = "form-control" })                                        
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.MAXIMUMQTY)
+                                </li>
+                                     
+                               <li class="form-group">
+                                <label class="control-label entrylable">FUNND POSITION</label>
+                                  <div class="input-group">
+                                   @Html.TextBoxFor(model => model.DESCRIPTION, new { @class = "form-control" })
+                                   </div>
+                                   <br />
+                                   @Html.ValidationMessageFor(model => model.DESCRIPTION)
+                               </li>     
+                                     <li class="form-group">
+                                         <label class="control-label entrylable">MISSING DATE</label>
+                                         <div class="input-group">
+                                             @Html.TextBoxFor(model => model.ISFORGOTTRADEORDER, new { id = "ISFORGOTTRADEORDER", @class = "form-control", @readonly = "readonly" })
+                                         </div>
+                                         <br />
+                                         @Html.ValidationMessageFor(model => model.ISFORGOTTRADEORDER)
+                                     </li>     
+                                 }
+
+                               @if (ViewBag.Option == "Fraction")
+                                {
+                                 <li class="form-group">
+                                    <label class="control-label entrylable">DESCRIPTION (Fraction Reference)</label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.DESCRIPTION, new { @class = "form-control" })
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.DESCRIPTION)
+                                </li>
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable">RECORD DATE (Fraction)</label>
+                                    <div class='input-group date'>
+                                        @Html.TextBoxFor(model => model.RECORDDATE,"{0:dd-MMM-yy}", new { @class = "datepicker form-control", @value = ViewBag.transactionDate, @placeholder = "Select a Date " })
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.RECORDDATE)
+                                </li>
+                              }
+                            </ul>
+                         </div>
+
+                    </div>
+
+                </div>
+                
+                
+                <div class="row">
+                    <div class="col-md-offset-1" style="margin-left: 151px;">
+                       
+                        <button type="submit" class="btn btn-success btnSingleAddForm">Save</button>
+                 
+                         @if (ViewBag.Option == "TradeOrder")
+                         { 
+                             <a class="load btn btn-danger closeButton" href="~/#/ScriptTransfer/ListTradeOrder?lblbreadcum=">Close</a>
+                         }
+                         else
+                         {
+                         <a class="load btn btn-danger closeButton" href="~/#/ScriptTransfer/ListScriptTransfer?lblbreadcum=">Close</a>
+                         }
+                        <div class="col-md-6">
+                           @if (ViewBag.Option == "TradeOrder")
+                            {
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="forgot" name="forgot" class="text-danger">
+                                       <p class="text-danger">I forgot to make Trade Order.But Price file and Trade file is uploaded.</p>
+                                    </label>
+                                </div>
+                                <a id="Calculate" class="btn btn-success">Calculate</a>
+                            }
+                        </div>
+                    </div>
+                    
+                </div>
+          }
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+    <script>
+
+        var RemoveJQUIDatepicker = function () {
+            $(".datePicker").datepicker("destroy");
+            $(".datePicker").removeClass("hasDatePicker");
+            $(".datePicker").removeAttr("Disabled");
+
+            console.log('destroy');
+        };
+
+        var SetJQUIDatePicker = function () {
+            $(".datepicker").datepicker({ dateFormat: formatDate('long') });
+            jQuery.datepicker.dpDiv.appendTo(jQuery('body'));
+            console.log('Set');
+        }     
+
+        $(function () {
+            //$('.datepicker').datepicker({ dateFormat: "dd/mm/yy" });
+            $('.datepicker').datepicker({ dateFormat: formatDate('long') });
+           
+            RemoveJQUIDatepicker();
+            SetJQUIDatePicker();
+           
+        });
+
+        $("#Calculate").click(function () {
+            var instrument = $("#INSTRUMENTACREF").val();
+            var transactionType = $("#TRANSACTIONTYPE").val();
+            var Qty = $("#SHAREQTY").val();
+            var entryDate = $("#ENTRYDATE").val();
+            var IsChecked = "";
+           // alert('instrument' + instrument + ' tran type ' + transactionType + ' Qty=' + Qty + ' Date:' + entryDate);
+            var flag = 1;
+
+            if (instrument == '' || instrument == null) {
+                alert('Select a Instrument');
+                flag = 0;
+                return false;
+            }
+            if (transactionType === '' || transactionType === null) {
+                alert('Select Transaction Type Buy Order/Sell Order.');
+                flag = 0;
+                return false;
+            }
+            if (Qty < 1) {
+                alert('Insert a Share Quantity.');
+                flag = 0;
+                return false;
+            }
+            if (entryDate === '' || entryDate === null) {
+                alert('Select a Entry Date.');
+                flag = 0;
+                return false;
+            }
+            if (flag == 1) {
+                console.log('before');
+
+                if ($("#forgot").prop('checked') == true) {
+                    IsChecked = "true";
+                } else {
+                    IsChecked = "";
+                }
+
+
+                $.ajax({
+
+                    type: 'GET',
+                    url: '@Url.Action("TradeOrderCalculate", "ScriptTransfer")',
+
+                    data: {
+                        instrumentRef: instrument,
+                        Qty: Qty,
+                        tranType: transactionType,
+                        Date: entryDate,
+                        forgot: IsChecked
+                    },
+                    dataType: "json",
+                    contentType: "application/x-www-form-urlencoded; charset=UTF-8", // this is the default value, so it's optional
+
+                    success: function (result) {
+                        
+                        if (result.message == "1") {
+                            $("#RATE").val(result.MarketPrice);
+                            $("#TOTAL").val(result.Total);
+                            $('#ISFORGOTTRADEORDER').val(result.MissingBusinessDate);
+                        }
+                        else {
+                            alert(result.message);
+                        }
+                    },
+
+                    error: function (jqXHR, exception) {
+                        var msg = '';
+                        if (jqXHR.status === 0) {
+                            msg = 'Not connect.\n Verify Network.Try again.';
+                        } else if (jqXHR.status == 404) {
+                            msg = 'Requested page not found. [404].Try again.';
+                        } else if (jqXHR.status == 500) {
+                            msg = 'Internal Server Error [500].Try again.';
+                        } else if (jqXHR.status === 504) {
+                            msg = 'Gate way Time out problem.Try again';
+                        } else if (exception === 'parsererror') {
+                            msg = 'Requested JSON parse failed.Try Again.';
+                        } else if (exception === 'timeout') {
+                            msg = 'Time out error.Try Again';
+                        } else if (exception === 'abort') {
+                            msg = 'Ajax request aborted.Try Again.';
+                        } else {
+                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                        }
+                        alert("Error:" + msg);
+                    }
+
+                });
+            }
+        });     
+
+        $(document).on('keypress', '.number', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+        $(document).on('keypress', '.decimal', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+
+
+    </script>
+
+</div>
+

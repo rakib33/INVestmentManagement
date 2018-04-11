@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Positions ProcessingMode="BatchInsertOrUpdate" BrokerID="DLS" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:noNamespaceSchemaLocation="Flextrade-BOS-Positions.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <InsertOne>
+    <ClientCode>00001</ClientCode>
+    <SecurityCode>ACTIVEFINE</SecurityCode>
+    <ISIN>BD0483ACFCH9</ISIN>
+    <Quantity>90000</Quantity>
+    <TotalCost>4216341.3664751</TotalCost>
+  </InsertOne>
+  <InsertOne>
+    <ClientCode>00001</ClientCode>
+    <SecurityCode>APEXTANRY</SecurityCode>
+    <ISIN>BD0601APXTN3</ISIN>
+    <Quantity>80000</Quantity>
+    <TotalCost>12213146.0084927</TotalCost>
+  </InsertOne>
+  <InsertOne>
+    <ClientCode>00001</ClientCode>
+    <SecurityCode>MJLBD</SecurityCode>
+    <ISIN>BD0313MJLBD7</ISIN>
+    <Quantity>80000</Quantity>
+    <TotalCost>8123398.8333576</TotalCost>
+  </InsertOne>
+  <InsertOne>
+    <ClientCode>00001</ClientCode>
+    <SecurityCode>RANFOUNDRY</SecurityCode>
+    <ISIN>BD0224RPFDL3</ISIN>
+    <Quantity>80000</Quantity>
+    <TotalCost>9800595.3493150</TotalCost>
+  </InsertOne>
+  <InsertOne>
+    <ClientCode>00001</ClientCode>
+    <SecurityCode>SINOBANGLA</SecurityCode>
+    <ISIN>BD0635SBIL05</ISIN>
+    <Quantity>80000</Quantity>
+    <TotalCost>2940511.0312800</TotalCost>
+  </InsertOne>
+  <InsertOne>
+    <ClientCode>00001</ClientCode>
+    <SecurityCode>SQURPHARMA</SecurityCode>
+    <ISIN>BD0473SQPH00</ISIN>
+    <Quantity>50000</Quantity>
+    <TotalCost>2014711.0079795</TotalCost>
+  </InsertOne>
+</Positions>

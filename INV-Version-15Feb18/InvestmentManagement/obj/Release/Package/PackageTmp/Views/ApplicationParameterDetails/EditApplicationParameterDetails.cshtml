@@ -1,0 +1,189 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.APPLICATIONPARAMETERDETAIL
+
+
+
+<div id="Replace">
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+          @Session["currentPage"]
+        </span>
+
+    </div>
+ <ol class="breadcrumb">
+        <li> <a class="load" role="menuitem" tabindex="-1" href="~/#/Home/Index?lblbreadcum=@Session["PreviousPage"]">Dashboard</a></li>
+     <li><a class="load" href="~/#/Settings/Settings?lblbreadcum=Settings">Settings</a></li>
+        <li>
+<a class="load" href="~/#/ApplicationParameterDetails/ListApplicationParameterDetails?lblbreadcum=">@Session["currentPage"]</a>
+      </li>
+     
+        <li class="active">@ViewBag.breadcum</li>
+    </ol>
+<div class="wrapper pl">
+    <div class="alert alert-success mt20">
+        <button class="close" data-dismiss="alert" type="button">×</button>
+         @ViewBag.Message
+    </div>
+    <div class="container-fluid">
+
+        <div class="widget col-md-5">
+            <div class="whead">
+                <h6>
+                    <label id="lblHeader" title="">@ViewBag.breadcum</label>
+                </h6>
+                <div class="clear">
+                </div>
+            </div>
+@using (Ajax.BeginForm("EditApplicationParameterDetails", " ApplicationParameterDetails", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+{
+            <div class="">
+ <ul class="entryForm singleadd">
+     
+    @Html.Hidden("CREATEDBY", @Model.CREATEDBY)
+     @Html.Hidden("CREATEDDATE", @Model.CREATEDDATE)
+     
+     @Html.Hidden("LASTUPDATED", @Model.LASTUPDATED)
+     @Html.Hidden("LASTUPDATEDBY", @Model.LASTUPDATEDBY)
+     
+     @Html.Hidden("REFERENCE", @Model.REFERENCE)
+     @Html.Hidden("APPLICATIONPARAMETER_REFERENCE",@Model.APPLICATIONPARAMETER_REFERENCE)
+    
+    @*  <li class="form-group">
+           
+            @Html.LabelFor(model => model.APPLICATIONPARAMETER_REFERENCE,new {@class="control-label entrylable"})
+			
+        
+        <br />
+
+            @Html.DropDownListFor(model => model.APPLICATIONPARAMETER_REFERENCE, (SelectList)ViewBag.applicationParameterList, new { @class = "control-label entrylable drpResize" })
+		
+     
+ <br />
+	    @Html.ValidationMessageFor(model => model.APPLICATIONPARAMETER_REFERENCE) 
+       
+	   </li>*@
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.DESCRIPTION,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.DESCRIPTION,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.DESCRIPTION)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.DESCRIPTION)+"'"})
+		
+     
+ <br />
+	    @Html.ValidationMessageFor(model => model.DESCRIPTION) 
+       
+	   </li>
+            <li class="form-group">
+           
+            @Html.LabelFor(model => model.CODE,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.CODE,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.CODE)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.CODE)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.CODE) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.ISHIDDEN,new {@class="control-label entrylable"})
+			
+         @* <br />*@
+        
+        <input type="checkbox" value="true"  name="ISHIDDEN" id="chkIsHidden" @((Model.ISHIDDEN=="Y")?"Checked":"") />
+
+@*            @Html.TextBoxFor(model => model.ISHIDDEN,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.ISHIDDEN)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.ISHIDDEN)+"'"})*@
+		
+     
+ <br />
+	    @Html.ValidationMessageFor(model => model.ISHIDDEN) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.ISACTIVE,new {@class="control-label entrylable"})
+			
+       @* <br />*@
+        
+         <input type="checkbox" value="true"  name="ISACTIVE" id="chkIsActive" @((Model.ISACTIVE=="Y")?"Checked":"") />
+
+@*            @Html.TextBoxFor(model => model.ISACTIVE,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.ISACTIVE)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.ISACTIVE)+"'"})*@
+		
+     
+ <br />
+	    @Html.ValidationMessageFor(model => model.ISACTIVE) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.ISDEFAULT,new {@class="control-label entrylable"})
+			
+        
+        <br />
+        <input type="checkbox" value="true"  name="ISDEFAULT" id="chkIsDefault" @((Model.ISDEFAULT=="Y")?"Checked":"") />
+
+@*            @Html.TextBoxFor(model => model.ISDEFAULT,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.ISDEFAULT)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.ISDEFAULT)+"'"})*@
+		
+     
+ <br />
+	    @Html.ValidationMessageFor(model => model.ISDEFAULT) 
+       
+	   </li>
+                        </ul>
+             <button type="submit" class="btn btn-success btnSingleAddForm">Save</button>
+            <a class="load btn btn-danger closeButton" href="~/#/ApplicationParameterDetails/ListApplicationParameterDetails?lblbreadcum=">Close</a> 
+      
+            </div>
+
+
+}
+
+        </div>
+
+
+    </div>
+</div>
+    <p></p>
+
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+<script>
+
+    $(function () {
+        $('.datepicker').datepicker({ dateFormat: "dd-M-yy" });
+   
+
+    });
+
+</script>
+
+           <script type="text/javascript">
+               $(".load").click(function () {
+                   $(".loadingImage").show();
+                   var link = $(this).attr("href");
+                   debugger;
+                   $.get('<%= Url.Action(' + link + ') %>', {},
+                       function (data) {
+                           $('#result').html(data);
+                           $('.loadingImage').hide();
+                       });
+               });
+
+    </script>
+
+</div>

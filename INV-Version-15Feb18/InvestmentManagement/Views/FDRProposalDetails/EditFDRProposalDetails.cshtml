@@ -1,0 +1,354 @@
+﻿
+@model InvestmentManagement.InvestmentManagement.Models.FDRPROPOSALDETAIL
+
+
+
+
+<div id="Replace">
+    <div class="contentTop">
+        <span class="pageTitle">
+           <span class=" glyphicon glyphicon-yen"></span>
+          @Session["currentPage"]
+        </span>
+
+    </div>
+  <ol class="breadcrumb">
+ @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+<div class="wrapper pl">
+    <div class="alert alert-success mt20">
+        <button class="close" data-dismiss="alert" type="button">×</button>
+         @ViewBag.Message
+    </div>
+    <div class="container-fluid">
+
+        <div class="widget">
+            <div class="whead">
+                <h6>
+                    <label id="lblHeader" title="">@ViewBag.Header</label>
+                </h6>
+                <div class="clear">
+                </div>
+            </div>
+@using (Ajax.BeginForm("EditFDRProposalDetails", "FDRProposalDetails", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+{ 
+
+<div class=""> 
+
+         @Html.Hidden("CREATEDBY", @Model.CREATEDBY)
+         @Html.Hidden("CREATEDDATE", @Model.CREATEDDATE)
+    
+         @*REFERENCE is FDRPROPOSALDETAILS table PK*@
+         @Html.Hidden("REFERENCE", @Model.REFERENCE)
+
+         @* FDRPROPOSAL_REFERENCE is the Pk of FDRPROPOSAL table and FK is FDRPROPOSALDETAILS*@
+         @Html.Hidden("FDRPROPOSAL_REFERENCE", @Model.FDRPROPOSAL_REFERENCE)
+
+        @*@Html.HiddenFor(model=>model.BRANCH_REFERENCE)*@
+		
+        <ul class="col-md-6 entryForm bottomNonePadding">
+            
+            <li class="form-group">           
+            @Html.LabelFor(model => model.FINANCIALINSTITUTION_REFERENCE,new {@class="control-label entrylable"})		        
+            <br />
+            @Html.DropDownListFor(model => model.FINANCIALINSTITUTION_REFERENCE, (SelectList)ViewBag.FINANCIALINSTITUTIONList, new {@onchange="getBranch(this.value);", @class = "control-label entrylable drpResize", style = "height:38px;",@required = "required" })             
+		    <br />
+	        @Html.ValidationMessageFor(model => model.FINANCIALINSTITUTION_REFERENCE)        
+	        </li>
+
+
+            <li class="form-group">
+            @Html.LabelFor(model => model.BRANCH_REFERENCE, new { @class = "control-label entrylable" })
+            <br />
+            @Html.DropDownListFor(model => model.BRANCH_REFERENCE, (SelectList)ViewBag.FIBranch, @Model.BRANCH_REFERENCE, new { @class = "control-label entrylable drpResize drpsize",@required = "required" })
+            </li>
+
+
+            <li class="form-group">
+            @Html.LabelFor(model => model.EXISTINGCAPLIMIT,new {@class="control-label entrylable"})		      
+            <div class="input-group">
+            @Html.TextBoxFor(model => model.EXISTINGCAPLIMIT,new { @class="form-control decimal", @readonly = "readonly", @placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.EXISTINGCAPLIMIT)+" (Only Numeric)",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.EXISTINGCAPLIMIT)+"'" })
+		    <div class="input-group-addon">.00</div>
+            </div>
+	        <br />
+            @Html.ValidationMessageFor(model => model.EXISTINGCAPLIMIT) 
+       	    </li>
+
+            <li class="form-group">           
+            @Html.LabelFor(model => model.NPL,new {@class="control-label entrylable"})		               
+            <div class="input-group">
+            @Html.TextBoxFor(model => model.NPL,new { @class="form-control decimal", @readonly = "readonly", @placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.NPL)+" (Only Numeric)",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.NPL)+"'" })
+		    <div class="input-group-addon">.00</div>
+            </div>
+	        <br />
+	        @Html.ValidationMessageFor(model => model.NPL)        
+	        </li>                    
+                         
+
+            <li class="form-group">           
+            @Html.LabelFor(model => model.CURRENTHOLDING,new {@class="control-label entrylable"})	               
+            <div class="input-group">
+            @Html.TextBoxFor(model => model.CURRENTHOLDING,new { @class="form-control decimal",@readonly = "readonly", @placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.CURRENTHOLDING)+" (Only Numeric)",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.CURRENTHOLDING)+"'" })
+		    <div class="input-group-addon">.00</div>
+            </div>
+	        <br />
+	        @Html.ValidationMessageFor(model => model.CURRENTHOLDING)        
+	        </li>
+            
+            <li class="form-group">           
+            @Html.LabelFor(model => model.PERCENTAGEOFTOTALFDR,new {@class="control-label entrylable"})               
+            <div class="input-group">
+            @Html.TextBoxFor(model => model.PERCENTAGEOFTOTALFDR,new { @class="form-control decimal",@readonly = "readonly", @placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.PERCENTAGEOFTOTALFDR)+" (Only Numeric)",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.PERCENTAGEOFTOTALFDR)+"'" })
+		    <div class="input-group-addon">.00</div>
+            </div>
+	        <br />
+	        @Html.ValidationMessageFor(model => model.PERCENTAGEOFTOTALFDR)        
+	        </li>
+
+        @*    
+           <li class="form-group">
+           @Html.LabelFor(model => model.ANNUALDAYS, new { @class = "control-label entrylable" })
+           <div class="input-group">
+           @Html.TextBoxFor(model => model.ANNUALDAYS, new { @class = "form-control decimal",@placeholder = "Anual Days " })                            
+           </div>
+           <br />
+           @Html.ValidationMessageFor(model => model.ANNUALDAYS)
+           </li>*@
+
+
+      <li class="form-group">         
+      <button type="submit" class="btn btn-success doubleColumnButton" tabindex="">Save</button>
+      <a class="load btn btn-danger" href="~/#/FDRProposalDetails/ListFDRProposalDetails?reference=@Model.FDRPROPOSAL_REFERENCE" style="margin-top: 45px;">Close</a>      
+	  </li>
+ </ul>
+
+
+
+<ul class="col-md-6 entryForm bottomNonePadding">
+
+
+          
+         <li style="padding:0px !important;">  @*class="form-group"*@
+          @Html.LabelFor(model => model.PRINCIPALAMOUNT, new { @class = "control-label entrylable" })
+          <div class="input-group">
+          @Html.TextBoxFor(model => model.PRINCIPALAMOUNT, new {@required = "required", @class = "form-control decimal", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.PRINCIPALAMOUNT) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.PRINCIPALAMOUNT) + "'" })
+          <div class="input-group-addon">.00</div>
+          </div>
+          <br />
+          @Html.ValidationMessageFor(model => model.PRINCIPALAMOUNT)
+          </li>
+      
+ 
+
+            <li class="form-group" style="padding:0px !important;">           
+            @Html.LabelFor(model => model.STATUS,new {@class="control-label entrylable"})        
+            <br />        
+            @Html.DropDownListFor(model => model.STATUS, (SelectList)ViewBag.StatusList, "Select a list", new {@required = "required", @class = "control-label entrylable drpResize", style = "height:38px;"})	
+            <br />
+	        @Html.ValidationMessageFor(model => model.STATUS)        
+	        </li>
+
+                                      <li style="padding:0px !important;border:1px solid #f00">  @*class="form-group" *@
+                         
+                            <label class="control-label entrylable" for="Offer 1" style="color:red;">Proposed Offer - Tenure - Term - Interest Mode</label>
+                            <div class="input-group " style="width: 100% !important;">
+                            <div style="display: inline !important;">
+                            @Html.TextBoxFor(model => model.OFFERRATE, new {@required = "required", @class = "form-control decimal", style = "width: 15% !important; display:inline !important;margin-right:3px !important;", @placeholder = "Offer Rate" + @Html.DisplayNameFor(model => model.OFFERRATE) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.OFFERRATE) + "'" })
+                            @Html.TextBoxFor(model => model.TENURE, new {@required = "required", @class = "form-control number", @value = ViewBag.TENURE, style = "width: 15% !important; display:inline !important;", @type = "number", @placeholder = "" + @Html.DisplayNameFor(model => model.TENURE) + "  (Only Numeric) ", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.TENURE) + "'" })
+                            @Html.DropDownListFor(model => model.TERMS, (SelectList)ViewBag.termList, "Term", new {@required = "required", @class = "form-control", style = "margin-top:0px !important; width:15%;" })
+                            @Html.DropDownListFor(model => model.INTERESTMODE, (SelectList)ViewBag.COMPOUNDINTERESTTYPEList,(string)ViewBag.InterestType, new {@required = "required", @class = "form-control",style = "width: 20% !important; display:inline !important;" })
+                            
+                            </div>
+                            </div>
+                            </li>
+
+                            <li style="padding:0px !important;">                         
+                            <label class="control-label entrylable" for="Offer 1">Offer 1 - Tenure - Term - Interest Mode</label>
+                            <div class="input-group " style="width: 100% !important;">
+                            <div style="display: inline !important;">
+                            @Html.TextBoxFor(model => model.OFFERRATE1, new {@class = "form-control decimal", style = "width: 15% !important; display:inline !important;margin-right:3px !important;", @placeholder = "Offer Rate" + @Html.DisplayNameFor(model => model.OFFERRATE) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.OFFERRATE) + "'" })
+                            @Html.TextBoxFor(model => model.TENURE1, new {@class = "form-control number", @value = ViewBag.TENURE, style = "width: 15% !important; display:inline !important;", @type = "number", @placeholder = "" + @Html.DisplayNameFor(model => model.TENURE) + "  (Only Numeric) ", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.TENURE) + "'" })
+                            @Html.DropDownListFor(model => model.TERM1, (SelectList)ViewBag.termList, "Term", new {@class = "form-control", style = "margin-top:0px !important; width:15%;" })
+                            @Html.DropDownListFor(model => model.INTERESTMODE1, (SelectList)ViewBag.COMPOUNDINTERESTTYPEList,(string)ViewBag.InterestType1, new {@class = "form-control",style = "width: 20% !important; display:inline !important;" })
+                            
+                            </div>
+                            </div>
+                            </li>
+
+                            <li style="padding:0px !important;">
+                            <label class="control-label entrylable" for="Offer 2">Offer 2 - Tenure - Term</label>
+                            <div class="input-group " style="width: 100% !important;">
+                            <div style="display: inline !important;">
+                            @Html.TextBoxFor(model => model.OFFERRATE2, new { @class = "form-control decimal", style = "width: 15% !important; display:inline !important;margin-right:3px !important;", @placeholder = "Offer Rate" + @Html.DisplayNameFor(model => model.OFFERRATE2) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.OFFERRATE2) + "'" })
+                            @Html.TextBoxFor(model => model.TENURE2, new { @class = "form-control number", @value = ViewBag.TENURE, style = "width: 15% !important; display:inline !important;", @type = "number", @placeholder = "" + @Html.DisplayNameFor(model => model.TENURE2) + "  (Only Numeric) ", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.TENURE2) + "'" })
+                            @Html.DropDownListFor(model => model.TERM2, (SelectList)ViewBag.termList, "Term", new { @class = "form-control", style = "margin-top:0px !important; width:15%;" })
+                            @Html.DropDownListFor(model => model.INTERESTMODE2, (SelectList)ViewBag.COMPOUNDINTERESTTYPEList,(string)ViewBag.InterestType2, new { @class = "form-control",style = "width: 20% !important; display:inline !important;" })
+                           
+                            </div>
+                            </div>
+                            </li>
+                            
+                            <li style="padding:0px !important;">
+                            <label class="control-label entrylable" for="Offer 3">Offer 3 - Tenure - Term</label>
+                            <div class="input-group " style="width: 100% !important;">
+                            <div style="display: inline !important;">
+                            @Html.TextBoxFor(model => model.OFFERRATE3, new { @class = "form-control decimal", style = "width: 15% !important; display:inline !important;margin-right:3px !important;", @placeholder = "Offer Rate" + @Html.DisplayNameFor(model => model.OFFERRATE3) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.OFFERRATE3) + "'" })
+                            @Html.TextBoxFor(model => model.TENURE3, new { @class = "form-control number", @value = ViewBag.TENURE, style = "width: 15% !important; display:inline !important;", @type = "number", @placeholder = "" + @Html.DisplayNameFor(model => model.TENURE3) + "  (Only Numeric) ", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.TENURE3) + "'" })
+                            @Html.DropDownListFor(model => model.TERM3, (SelectList)ViewBag.termList, "Term", new { @class = "form-control", style = "height: 35px !important; margin-top:0px !important; width:15%;" })
+                            @Html.DropDownListFor(model => model.INTERESTMODE3, (SelectList)ViewBag.COMPOUNDINTERESTTYPEList,(string)ViewBag.InterestType3, new { @class = "form-control",style = "width: 20% !important; display:inline !important;" })
+                           
+                            </div>
+                            </div>
+                            </li>
+
+                             <li style="padding:0px !important;">
+                            <label class="control-label entrylable" for="Offer 4">Offer 4 - Tenure - Term</label>
+                            <div class="input-group " style="width: 100% !important;">
+                            <div style="display: inline !important;">
+                            @Html.TextBoxFor(model => model.OFFERRATE4, new { @class = "form-control decimal", style = "width: 15% !important; display:inline !important;margin-right:3px !important;", @placeholder = "Offer Rate" + @Html.DisplayNameFor(model => model.OFFERRATE3) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.OFFERRATE3) + "'" })
+                            @Html.TextBoxFor(model => model.TENURE4, new { @class = "form-control number", @value = ViewBag.TENURE, style = "width: 15% !important; display:inline !important;", @type = "number", @placeholder = "" + @Html.DisplayNameFor(model => model.TENURE3) + "  (Only Numeric) ", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.TENURE3) + "'" })
+                            @Html.DropDownListFor(model => model.TERM4, (SelectList)ViewBag.termList, "Term", new { @class = "form-control", style = "margin-top:0px !important; width:15%;" })
+                            @Html.DropDownListFor(model => model.INTERESTMODE4, (SelectList)ViewBag.COMPOUNDINTERESTTYPEList,(string)ViewBag.InterestType4, new { @class = "form-control",style = "width: 20% !important; display:inline !important;" })
+                           
+                            </div>
+                            </div>
+                            </li>
+
+
+
+       </ul>
+          
+     </div>
+    }
+
+   </div>
+
+    </div>
+   </div>
+   
+     <p></p>
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+    </script>
+
+   <script>
+    $(function () {
+        //$('.datepicker').datepicker({ dateFormat: "dd/mm/yy" });
+       
+        //$(".dropdown-menu li a").click(function (event) {
+            //var selText = $(this).text();
+            //$('.hidden').val(selText);
+            //$(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+            //event.preventDefault();
+        //});
+
+    });
+   </script>
+
+   <script type="text/javascript">
+       $(".load").click(function () {
+       $(".loadingImage").show();
+       var link = $(this).attr("href");
+       debugger;
+       $.get('<%= Url.Action(' + link + ') %>', {},
+       function (data) {
+       $('#result').html(data);
+       $('.loadingImage').hide();
+       });
+       });
+
+    </script>
+    <script>
+    //$(function () {
+    //$("#FINANCIALINSTITUTION_REFERENCE").on("change", function () {
+    //// You're referring to the object itself, so you can use $(this).
+    ////alert(this.value);
+    //(function () {
+    //$.get("/FDRProposalDetails/GetFIDetails?reference=" + $('#FINANCIALINSTITUTION_REFERENCE').val(), function (data) {
+    //var obj = JSON.parse(data);
+    //$('#EXISTINGCAPLIMIT').val(obj.ExciseDuty);
+    //$('#NPL').val(obj.NPL);
+    //});
+    //})();
+    //});
+        //});
+
+        //added by rakibul date<16-03-26>
+        //cashcading Dropdownlist Selectedchange event 
+        function getBranch(e) {
+            // alert(e);            
+            var CapLimit = 0;
+            var ED = 0;
+            var Npl = 0;
+            var Pfdr = 0;
+
+            var exp = 0;
+
+            $.ajax({
+                type: "GET",
+                url: '/FDRProposalDetails/GetFIDetails',
+                data: {
+                    reference: e
+                },
+                success: function (result) {
+                   // alert("success");
+                    var selectedDeviceModel = $('#BRANCH_REFERENCE');
+                    selectedDeviceModel.empty();
+                    selectedDeviceModel.append(
+                           $('<option/>', {
+                               value: "",
+                               text: "Select Branch"
+                           })
+                        );
+                    $.each(result, function (index, item) {
+                        try {
+                            if (index == 0) {
+                                CapLimit = item.CAPLimit;
+                                ED = item.ExitsingDeposit;
+                                Npl = item.NPL;
+                                Pfdr = item.FDRPerentage;
+                            }
+
+                            selectedDeviceModel.append(
+                                $('<option/>', {
+                                    value: item.REFERENCE,
+                                    text: item.NAME
+                                })
+                             );
+
+                        }
+                        catch (err) {
+                            exp = 1;
+                            alert(err.message);
+                        }
+
+                    });
+
+                    if (exp != 1) {
+                        document.getElementById('EXISTINGCAPLIMIT').value = CapLimit.toFixed(2);
+                        document.getElementById('NPL').value = Npl.toFixed(2);
+                        document.getElementById('CURRENTHOLDING').value = ED.toFixed(2);
+                        document.getElementById('PERCENTAGEOFTOTALFDR').value = Pfdr.toFixed(2);
+                    }
+                    //alert('Cap limit after loop='+CapLimit);
+                },
+                error: function () {
+                    alert("Error");
+                }
+            });
+
+
+        }
+
+    </script>
+
+</div>
+

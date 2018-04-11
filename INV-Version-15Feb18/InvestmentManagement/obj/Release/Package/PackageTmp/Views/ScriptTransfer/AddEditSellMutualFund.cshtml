@@ -1,0 +1,218 @@
+﻿
+@model InvestmentManagement.InvestmentManagement.Models.SCRIPTTRANSFER
+
+
+<div id="Replace">
+
+    <script type="text/ecmascript">
+        $(function () {
+            $('.datepicker').datepicker({ dateFormat: formatDate('long') });
+        });
+    </script>
+
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+    @*fixed Deposit markup*@
+
+    <div class="wrapper pl">
+        <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+        <div id="FixedDeposit">
+            <div class="alert alert-success mt20">
+                <button class="close" data-dismiss="alert" type="button">×</button>
+                @ViewBag.Message
+            </div>
+        
+            <div class="whead">
+                <h6>
+                    <label id="lblHeader" title="">@ViewBag.Header</label>
+                </h6>
+                <div class="clear">
+                </div>
+            </div>
+
+            
+          @using (Ajax.BeginForm("AddEditSellMutualFund", "ScriptTransfer", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+          {  
+               @Html.HiddenFor(model => model.REFERENCE)
+               @Html.Hidden("Option", new {Value=ViewBag.Option })
+
+                <div id="BondInformation" class="container-fluid">
+
+                    <div class="widget ">
+                  
+                        <div class="">                          
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.ACCOUNTNUMBER, new { @class = "control-label entrylable" })
+                                    @Html.TextBoxFor(model => model.ACCOUNTNUMBER, new { @class = "form-control",  @required = "required", style = "width: 50%", @placeholder = "" + @Html.DisplayNameFor(model => model.ACCOUNTNUMBER) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.ACCOUNTNUMBER) + "'" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.ACCOUNTNUMBER)
+                                </li>
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable">INSTRUMENT</label>
+                                    <br />
+                                    @Html.DropDownListFor(model => model.INSTRUMENTACREF, (SelectList)ViewBag.InstrumentList, "Select an Instrument", new { @class = "control-label entrylable drpResize", @required = "required" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.INSTRUMENTACREF)
+                                </li>
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable">TRANSACTION TYPE</label>
+                                    <br />                                    
+                                    @Html.DropDownList("TRANSACTIONTYPE", new List<SelectListItem>{new SelectListItem{ Text="Liquidate Share", Value = "MS" },
+                                     }, "Select Transaction Type", new { @class = "control-label entrylable drpResize", @required = "required" })                                                      
+                               
+                                <br />
+                                    @Html.ValidationMessageFor(model => model.TRANSACTIONTYPE)
+                                </li>
+
+                                 <li class="form-group">
+                                    <label class="control-label entrylable">TRANSACTION DATE</label>
+                                    <div class='input-group date'>
+                                    @Html.TextBoxFor(model => model.ENTRYDATE, "{0:dd-MMM-yy}", new { @class = "datepicker form-control", @value = ViewBag.transactionDate, @placeholder = "Select a Date ", required = "required" })
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>       
+                                    <br />                             
+                                    @Html.ValidationMessageFor(model => model.ENTRYDATE)
+                                </li>
+                                  
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable">SHARE QUANTITY</label>    
+                                     <br />                                
+                                    <div class="input-group">
+                                    @Html.TextBoxFor(model => model.SHAREQTY, new { @class = "form-control decimal", required = "required" })
+                                    <div class="input-group-addon">.00</div>
+                                    </div>    
+                                    <br />                               
+                                    @Html.ValidationMessageFor(model => model.SHAREQTY)
+                                </li>
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable">RATE</label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.RATE, new { @class = "form-control decimal", required = "required" })
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.RATE)
+                                </li>
+                              
+
+                            </ul>
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">                                                             
+                                                                
+
+                                 <li class="form-group">
+                                    <label class="control-label entrylable">TOTAL AMOUNT</label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.TOTAL, new { @class = "form-control decimal", required = "required"  })
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.TOTAL)
+                                </li>
+                                                                 
+                             
+                                 <li class="form-group">
+                                    <label class="control-label entrylable">DESCRIPTION </label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.DESCRIPTION, new { @class = "form-control" })
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.DESCRIPTION)
+                                </li>
+                                                             
+                             
+                            </ul>
+                         </div>
+
+                    </div>
+
+                </div>
+                
+                
+                <div class="row">
+                    <div class="col-md-offset-1" style="margin-left: 151px;">
+                       
+                        <button type="submit" class="btn btn-success btnSingleAddForm">Save</button>
+                 
+                        <a class="load btn btn-danger closeButton" href="~/#/ScriptTransfer/SellMutualFund?lblbreadcum=">Close</a>
+                        
+                    </div>
+                    
+                </div>
+          }
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+    <script>
+
+        var RemoveJQUIDatepicker = function () {
+            $(".datePicker").datepicker("destroy");
+            $(".datePicker").removeClass("hasDatePicker");
+            $(".datePicker").removeAttr("Disabled");
+
+            console.log('destroy');
+        };
+
+        var SetJQUIDatePicker = function () {
+            $(".datepicker").datepicker({ dateFormat: formatDate('long') });
+            jQuery.datepicker.dpDiv.appendTo(jQuery('body'));
+            console.log('Set');
+        }     
+
+        $(function () {
+            //$('.datepicker').datepicker({ dateFormat: "dd/mm/yy" });
+            $('.datepicker').datepicker({ dateFormat: formatDate('long') });
+           
+            RemoveJQUIDatepicker();
+            SetJQUIDatePicker();
+           
+        });       
+
+        $(document).on('keypress', '.number', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+        $(document).on('keypress', '.decimal', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+
+
+    </script>
+
+</div>
+

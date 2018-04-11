@@ -1,0 +1,247 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.DIVIDEND
+<div id="Replace">
+
+    <script type="text/ecmascript">
+        $(function () {
+            $('.datepicker').datepicker({ dateFormat: formatDate('long') });
+        });
+    </script>
+
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+
+
+    <div class="wrapper pl">
+        <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+        <div id="CashDividend">
+            <div class="alert alert-success mt20">
+                <button class="close" data-dismiss="alert" type="button">×</button>
+                @ViewBag.Message
+            </div>
+            @using (Ajax.BeginForm("EditCashDividend", "CDBLFiles", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+            {
+  
+                @Html.HiddenFor(model => model.REFERENCE)              
+
+                <div id="BondInformation" class="container-fluid">
+
+                    <div class="widget ">
+                        <div class="whead">
+                            <h6>
+                                <label id="" title="">Edit From</label>
+                            </h6>
+                            <div class="clear">
+                            </div>
+                        </div>
+
+                        <div class="">
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+
+                              
+                                <li class="form-group">
+                                    <label class="control-label entrylable">ISIN</label>                                   
+                                    @Html.TextBoxFor(model => model.ISIN, new { @class = "form-control", @readonly = "readonly", @value = "Enter Bond Id", style = "width: 50%", required = "required" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.ISIN)
+                                </li>
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable">Instrument Short Name</label>
+                                    @Html.TextBoxFor(model => model.BANKNAME, new { @class = "form-control", @readonly = "readonly", style = "width: 50%", required = "required" })
+
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.BANKNAME)
+                                </li>         
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable">Holding(As on Record Dt.)</label>
+                                    <div class="input-group">
+                                    @Html.TextBoxFor(model => model.BOHOLDING, new { @readonly = "readonly", @class = "form-control decimal", required = "required" })
+                                    <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.BOHOLDING)
+                                </li>                                                            
+
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable">Gross Amount</label>
+                                    <br />
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.GROSSCASHAMOUNT, new { id = "GROSSCASHAMOUNT", @readonly = "readonly", @class = "form-control decimal" })
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.GROSSCASHAMOUNT)
+                                </li>
+                                                                                   
+                                <li class="form-group">
+                                    <label class="control-label entrylable">Cash Received Date</label>
+                                    <div class='input-group date'>
+                                        @Html.TextBoxFor(model => model.CASHRECEIVEDDATE, "{0:dd-MMM-yy}", new { @class = "datepicker form-control", @placeholder = "Select a Date ", required = "required" })
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.CASHRECEIVEDDATE)
+                                </li>
+
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable">Reference NO.</label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.REMARKS, new { @class = "form-control" })
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.REMARKS)
+                                </li>
+
+                                 <li class="form-group">
+                                    <label class="control-label entrylable">Tax Rate</label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.TAXRATE, new { required = "required", @class = "form-control decimal", onkeyup = "taxCalculate(this.id)" })
+                                        <div class="input-group-addon">%</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.TAXRATE)
+                                </li>
+
+                                 <li class="form-group">
+                                    <label class="control-label entrylable">Tax Amount</label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.TAXAMOUNT, new { id = "TAXAMOUNT", @class = "form-control decimal", required = "required" })
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.TAXAMOUNT)
+                                </li>
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable">Net Cash Amount</label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.NETCASHAMOUNT, new { id = "NETCASHAMOUNT", @class = "form-control decimal", required = "required" })
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.NETCASHAMOUNT)
+                                </li>
+
+                               
+                                 <li class="form-group">
+                                   <label class="control-label entrylable">Status</label>
+                                    <div class="input-group">
+                                    @Html.DropDownList("STATUS", new List<SelectListItem>
+                                    {
+                                        new SelectListItem{ Text="Pending", Value = "Pending" },
+                                        new SelectListItem{ Text="Approved", Value = "Approved" },                                                                  
+                                     }, "Select Status", new { @class = "form-control", @required = "required" })   
+
+                                    </div>
+                                       <br />
+                                      @Html.ValidationMessageFor(model => model.STATUS)
+                                 </li>
+                                 
+
+                            </ul>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+                
+                
+                <div class="row">
+                    <div class="col-md-offset-1" style="margin-left: 151px;">
+
+                        <button type="submit" class="btn btn-success btnSingleAddForm">Save</button>
+
+                        <a class="load btn btn-danger closeButton" href="~/#/CDBLFiles/ListDivident?lblbreadcum=">Close</a>
+
+
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        function taxCalculate(e)
+        {
+
+            var taxRate = document.getElementById(e).value;
+            //alert(taxRate);
+            var GrossAmt = document.getElementById("GROSSCASHAMOUNT").value;
+
+            var taxAmount = parseFloat((GrossAmt * taxRate) / 100);
+            var NetCashAmount =parseFloat(GrossAmt - taxAmount).toFixed(2);
+            document.getElementById("TAXAMOUNT").value = taxAmount.toFixed(2);
+            document.getElementById("NETCASHAMOUNT").value = NetCashAmount;
+        }
+
+
+        var RemoveJQUIDatepicker = function () {
+            $(".datePicker").datepicker("destroy");
+            $(".datePicker").removeClass("hasDatePicker");
+            $(".datePicker").removeAttr("Disabled");
+
+            console.log('destroy');
+        };
+
+        var SetJQUIDatePicker = function () {
+            $(".datepicker").datepicker({ dateFormat: formatDate('long') });
+            jQuery.datepicker.dpDiv.appendTo(jQuery('body'));
+            console.log('Set');
+        }
+
+        $(document).ready(function () {
+
+            //Destroy datepicker
+            RemoveJQUIDatepicker();
+            SetJQUIDatePicker();
+        });
+
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+        $(document).on('keypress', '.number', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+        $(document).on('keypress', '.decimal', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+
+
+
+    </script>
+
+</div>

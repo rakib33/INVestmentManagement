@@ -1,0 +1,1780 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FDDC8315-A43C-4FD0-8E42-CEF898CEFE2E}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>InvestmentManagement</RootNamespace>
+    <AssemblyName>InvestmentManagement</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath />
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio 11.0\ReportViewer\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.DirectoryServices.Protocols" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Linq.Dynamic">
+      <HintPath>..\..\WebApplicationTemplate-Update-BOSL\WebTemplate\WebTemplate\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.20710.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.2.0.20710.0\lib\net40\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.AspNet.4.0.3.12153\lib\net40-full\DotNetOpenAuth.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Consumer.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Code\ApplicationVariable.cs" />
+    <Compile Include="App_Code\ConstantVariable.cs" />
+    <Compile Include="App_Code\FlexTradeFileGenerator.cs" />
+    <Compile Include="App_Code\GlobalVar.cs" />
+    <Compile Include="App_Code\PayInOutFileGenarator.cs" />
+    <Compile Include="App_Code\Variable.cs" />
+    <Compile Include="App_Code\FDRCalculation.cs" />
+    <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="ChequeDrawn.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChequeDrawn.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ApplicationParameterController.cs" />
+    <Compile Include="Controllers\ApplicationParameterDetailsController.cs" />
+    <Compile Include="Controllers\ApplicationUserController.cs" />
+    <Compile Include="Controllers\BondController.cs" />
+    <Compile Include="Controllers\BrokerController.cs" />
+    <Compile Include="Controllers\CDBLFilesController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\ControlAccountController.cs" />
+    <Compile Include="Controllers\CurrencyController.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\DepositorySettingsController.cs" />
+    <Compile Include="Controllers\ErrorPageController.cs" />
+    <Compile Include="Controllers\FDRNoteController.cs" />
+    <Compile Include="Controllers\FDRProposalController.cs" />
+    <Compile Include="Controllers\FDRProposalDetailsController.cs" />
+    <Compile Include="Controllers\FDRRenewalController.cs" />
+    <Compile Include="Controllers\FIBranchController.cs" />
+    <Compile Include="Controllers\FinancialInstitutionController.cs" />
+    <Compile Include="Controllers\FinancialYearController.cs" />
+    <Compile Include="Controllers\FixedDepositController.cs" />
+    <Compile Include="Controllers\FixedDepositRegisterController.cs" />
+    <Compile Include="Controllers\HolidayCalenderController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InstrumentCategoryController.cs" />
+    <Compile Include="Controllers\InstrumentController.cs" />
+    <Compile Include="Controllers\InvestorController.cs" />
+    <Compile Include="Controllers\InvParticularsController.cs" />
+    <Compile Include="Controllers\JournalHeadController.cs" />
+    <Compile Include="Controllers\MarketAnalysisController.cs" />
+    <Compile Include="Controllers\MarketPriceController.cs" />
+    <Compile Include="Controllers\NominalAccountController.cs" />
+    <Compile Include="Controllers\NominalLedgerController.cs" />
+    <Compile Include="Controllers\OracleIntegrationController.cs" />
+    <Compile Include="Controllers\PeriodController.cs" />
+    <Compile Include="Controllers\PortfolioController.cs" />
+    <Compile Include="Controllers\PostToGLController.cs" />
+    <Compile Include="Controllers\PrivateBondController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\RightShareDeclarationController.cs" />
+    <Compile Include="Controllers\ScriptTransferController.cs" />
+    <Compile Include="Controllers\SettlementController.cs" />
+    <Compile Include="Controllers\SignatoryController.cs" />
+    <Compile Include="Controllers\StatusParameterController.cs" />
+    <Compile Include="Controllers\StatusParameterDetailsController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\TradeController.cs" />
+    <Compile Include="Controllers\TradingChargeController.cs" />
+    <Compile Include="Controllers\TransactionPostingMatrixController.cs" />
+    <Compile Include="Controllers\UserGroupController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\UserSettingsController.cs" />
+    <Compile Include="DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\BondBGTB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BondBGTB.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\CashDividendReceived.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CashDividendReceived.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\DividendBonus.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DividendBonus.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\ExtraDividendReceived.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExtraDividendReceived.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\FDREncashRenewStatement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FDREncashRenewStatement.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\FDRmainStatement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FDRmainStatement.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\FDRMaturityStatement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FDRMaturityStatement.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\FDRTaxStatement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FDRTaxStatement.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\FixedDeposit.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FixedDeposit.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\LedgerStatement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LedgerStatement.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\Partuculars.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Partuculars.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\PortfolioBonus.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PortfolioBonus.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\PortfolioInstrument.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PortfolioInstrument.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\PurchaseNoteList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PurchaseNoteList.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\RenewalNoteLetter.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RenewalNoteLetter.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\RenewNoteList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RenewNoteList.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\RightShareReceived.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RightShareReceived.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\Signatory.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Signatory.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\StatementBankwise.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StatementBankwise.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\StockBuySell.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StockBuySell.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\StockCashReceivable.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StockCashReceivable.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\TradeOrder.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TradeOrder.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetContainer\TreasuryBondStatement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TreasuryBondStatement.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="FDRInterest.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FDRInterest.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="FDRmainStatement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FDRmainStatement.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="FDRRenew.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FDRRenew.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="FixedDeposit.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FixedDeposit.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\APPLICATIONPARAMETER.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\APPLICATIONPARAMETERDETAIL.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\APPLICATIONUSER.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\BalanceSheet.cs" />
+    <Compile Include="InvestmentManagement.Models\BANKACCOUNT.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\BOMAINTENANCELOG.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\BOND.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\BondBGTB.cs" />
+    <Compile Include="InvestmentManagement.Models\BondChequeViewModel.cs" />
+    <Compile Include="InvestmentManagement.Models\BONDENCASHMENT.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\BONDREDEMPTIONSCHEDULE.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\BOND_CHEQUEDRAWN.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\BONUS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\BRANCH.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\BROKER.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\CASHDIVIDENDDECLARATION.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\CHARGEHEAD.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\CHEQUEDRAWN.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\ChequeDrawnViewModel.cs" />
+    <Compile Include="InvestmentManagement.Models\CommonFunction.cs" />
+    <Compile Include="InvestmentManagement.Models\COMPANY.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\CompoundFDepositViewModel.cs" />
+    <Compile Include="InvestmentManagement.Models\CONTROLACCOUNT.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\CORPORATEACTION.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\CORPORATEACTIONRECEIVABLE.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\CURRENCY.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\DAILYCHARGE.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\DAILYCHARGEDETAIL.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\DEMATCONFIRM.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\DEPARTMENT.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\DEPOSITORYSETTING.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\DIVIDEND.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\EntityBase.cs" />
+    <Compile Include="InvestmentManagement.Models\EXTRADIVIDENDRECEIVED.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\FDRENCASHMENT.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\FDRINTEREST.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\FDRInterestViewModel.cs" />
+    <Compile Include="InvestmentManagement.Models\FDRNOTE.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\FDRPROPOSAL.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\FDRPROPOSALDETAIL.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\FDR_MAINSTATEMENT_VIEW.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\FIBRANCH.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\FINANCIALINSTITUTION.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\FINANCIALYEAR.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\FIXEDDEPOSIT.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\GOVBONDINTERESTSCHEDULE.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\GridModel.cs" />
+    <Compile Include="InvestmentManagement.Models\HOLDING.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\Holiday.cs" />
+    <Compile Include="InvestmentManagement.Models\HOLIDAYCALENDER.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\INSTRUMENT.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\INSTRUMENTCATEGORY.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\INVESTMENTPARTICULAR.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\INVESTOR.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\INVESTORGROUP.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\INVESTORPROFILE.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\INVPARTICULARSDETAIL.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\IPO.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\JOINTHOLDER.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\JOURNALHEAD.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\JOURNALLINE.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_ADDITIONAL_PROPERTIES.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_APPLICATIONFILES.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_APPLICATIONS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_CATALOGS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_COLUMNS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_CONNECTIONS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_CONSTRAINTS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_CONSTRAINT_DETAILS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_DERIVATIVES.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_FILE_ARTIFACTS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_GROUPS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_GROUP_MEMBERS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_GROUP_PRIVILEGES.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_INDEXES.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_INDEX_DETAILS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_MIGR_DEPENDENCY.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_MIGR_PARAMETER.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_MIGR_WEAKDEP.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_OTHER_OBJECTS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_PACKAGES.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_PARTITIONS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_PRIVILEGES.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_PROJECTS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_REGISTRY.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_REPOVERSIONS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_SCHEMAS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_SEQUENCES.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_STORED_PROGRAMS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_SYNONYMS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_TABLES.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_TABLESPACES.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_TRIGGERS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_USERS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_USER_DEFINED_DATA_TYPES.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_USER_PRIVILEGES.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MD_VIEWS.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MENU.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MetaData.cs" />
+    <Compile Include="InvestmentManagement.Models\MIGRLOG.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MIGR_DATATYPE_TRANSFORM_MAP.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MIGR_DATATYPE_TRANSFORM_RULE.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\MIGR_GENERATION_ORDER.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\NOMINALACCOUNT.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\PARTICULARS_VIEW.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\PERIOD.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\PLEDGE.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\Portfolio.cs" />
+    <Compile Include="InvestmentManagement.Models\PORTFOLIOINSTRUMENT.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\PRICEINDEX.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\PRIVATEBOND.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\ProtfolioBonus.cs" />
+    <Compile Include="InvestmentManagement.Models\RIGHTSHAREDECLARATION.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\RijndaelEncryption.cs" />
+    <Compile Include="InvestmentManagement.Models\SCRIPTTRANSFER.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\SETTLEMENT.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\SettlementViewModel.cs" />
+    <Compile Include="InvestmentManagement.Models\ShareCrossCheck.cs" />
+    <Compile Include="InvestmentManagement.Models\SIGNATORY.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\SIGNATORYDETAIL.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\STATUSPARAMETER.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\STATUSPARAMETERDETAIL.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\StockISIN.cs" />
+    <Compile Include="InvestmentManagement.Models\TEST.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\TRADE.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\TRADINGCHARGE.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\TransactionEngine.cs" />
+    <Compile Include="InvestmentManagement.Models\TRANSACTIONPOSTINGMATRIX.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\TransactionViewModel.cs" />
+    <Compile Include="InvestmentManagement.Models\TRANSFEROFSECURITy.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\trSearchParameter.cs" />
+    <Compile Include="InvestmentManagement.Models\USERGROUP.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\WEEKEND.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagement.Models\XX_INVEST_GL_INTEGRATION_DATA.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvestmentManagementReportDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvestmentManagementReportDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="IVMDataSetSource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IVMDataSetSource.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="PortfolioInstrument.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportDataSet.Designer.cs">
+      <DependentUpon>ReportDataSet.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="ReportViewer.aspx.cs">
+      <DependentUpon>ReportViewer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportViewer.aspx.designer.cs">
+      <DependentUpon>ReportViewer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\BankwiseReport.cs" />
+    <Compile Include="ViewModel\FDREncashedOrRenewedModel.cs" />
+    <Compile Include="ViewModel\FDRMainViewModel.cs" />
+    <Compile Include="ViewModel\GridViewModel.cs" />
+    <Compile Include="ViewModel\InterestIncomeBGTBViewModel.cs" />
+    <Compile Include="ViewModel\JournalHeadViewModel.cs" />
+    <Compile Include="ViewModel\JournalView.cs" />
+    <Compile Include="ViewModel\ParticularViewModel.cs" />
+    <Compile Include="ViewModel\StockCashReceivable.cs" />
+    <Compile Include="ViewModel\StockViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\JqueryAlertBox\jquery.alerts.css" />
+    <Content Include="Content\JqueryAlertBox\jquery.alerts.js" />
+    <Content Include="Content\JqueryAlertBox\jquery.js" />
+    <Content Include="Content\JqueryAlertBox\jquery.ui.draggable.js" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.autoFill.css" />
+    <Content Include="Content\DataTables\css\dataTables.autoFill.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap.css" />
+    <Content Include="Content\DataTables\css\dataTables.colReorder.css" />
+    <Content Include="Content\DataTables\css\dataTables.colReorder.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.colVis.css" />
+    <Content Include="Content\DataTables\css\dataTables.colvis.jqueryui.css" />
+    <Content Include="Content\DataTables\css\dataTables.colVis.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.fixedColumns.css" />
+    <Content Include="Content\DataTables\css\dataTables.fixedColumns.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.fixedHeader.css" />
+    <Content Include="Content\DataTables\css\dataTables.fixedHeader.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.foundation.css" />
+    <Content Include="Content\DataTables\css\dataTables.jqueryui.css" />
+    <Content Include="Content\DataTables\css\dataTables.keyTable.css" />
+    <Content Include="Content\DataTables\css\dataTables.keyTable.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.responsive.css" />
+    <Content Include="Content\DataTables\css\dataTables.scroller.css" />
+    <Content Include="Content\DataTables\css\dataTables.scroller.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.tableTools.css" />
+    <Content Include="Content\DataTables\css\dataTables.tableTools.min.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Content\DataTables\images\background.png" />
+    <Content Include="Content\DataTables\images\back_disabled.png" />
+    <Content Include="Content\DataTables\images\back_enabled.png" />
+    <Content Include="Content\DataTables\images\back_enabled_hover.png" />
+    <Content Include="Content\DataTables\images\collection.png" />
+    <Content Include="Content\DataTables\images\collection_hover.png" />
+    <Content Include="Content\DataTables\images\copy.png" />
+    <Content Include="Content\DataTables\images\copy_hover.png" />
+    <Content Include="Content\DataTables\images\csv.png" />
+    <Content Include="Content\DataTables\images\csv_hover.png" />
+    <Content Include="Content\DataTables\images\details_close.png" />
+    <Content Include="Content\DataTables\images\details_open.png" />
+    <Content Include="Content\DataTables\images\filler.png" />
+    <Content Include="Content\DataTables\images\forward_disabled.png" />
+    <Content Include="Content\DataTables\images\forward_enabled.png" />
+    <Content Include="Content\DataTables\images\forward_enabled_hover.png" />
+    <Content Include="Content\DataTables\images\insert.png" />
+    <Content Include="Content\DataTables\images\loading-background.png" />
+    <Content Include="Content\DataTables\images\pdf.png" />
+    <Content Include="Content\DataTables\images\pdf_hover.png" />
+    <Content Include="Content\DataTables\images\print.png" />
+    <Content Include="Content\DataTables\images\print_hover.png" />
+    <Content Include="Content\DataTables\images\sort_asc.png" />
+    <Content Include="Content\DataTables\images\sort_asc_disabled.png" />
+    <Content Include="Content\DataTables\images\sort_both.png" />
+    <Content Include="Content\DataTables\images\sort_desc.png" />
+    <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
+    <Content Include="Content\DataTables\images\xls.png" />
+    <Content Include="Content\DataTables\images\xls_hover.png" />
+    <Content Include="Content\DataTables\swf\copy_csv_xls.swf" />
+    <Content Include="Content\DataTables\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="CSS\ListReport.css" />
+    <Content Include="CSS\ui.daterangepicker.css" />
+    <Content Include="Images\calculator-icon.png" />
+    <Content Include="Images\delete.png" />
+    <Content Include="Images\Iconshow-Hardware-Printer.ico" />
+    <Content Include="Images\InvestPro.png" />
+    <Content Include="Images\InvestPro2.png" />
+    <Content Include="Images\loading2.gif" />
+    <Content Include="CSS\bootstrap-theme.min.css" />
+    <Content Include="CSS\bootstrap.min.css" />
+    <Content Include="CSS\jquery-ui.min.css" />
+    <Content Include="CSS\layout.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Images\alt.png" />
+    <Content Include="Images\checkboxes.png" />
+    <Content Include="Images\loader.gif" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\MoneyPro.png" />
+    <Content Include="Images\save.png" />
+    <Content Include="Images\selectArrow.png" />
+    <Content Include="Images\sort_asc.png" />
+    <Content Include="Images\sort_both.png" />
+    <Content Include="Images\sort_desc.png" />
+    <Content Include="Images\update.png" />
+    <Content Include="Images\waitanim.gif" />
+    <Content Include="Images\WF-Encash-FDR.png" />
+    <Content Include="Images\WF-New-FDR.png" />
+    <Content Include="InvestmentDocuments.txt" />
+    <Content Include="ReportDataSet.xsc">
+      <DependentUpon>ReportDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="ReportDataSet.xss">
+      <DependentUpon>ReportDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\FDRPurchaseNote.rdlc" />
+    <Content Include="Reports\ShareReport\SellLimit-positions-DLS-ctrl.xml" />
+    <Content Include="Reports\ShareReport\PayInPayOut.txt" />
+    <Content Include="Reports\ShareReport\SellLimit-positions-DLS.xml" />
+    <Content Include="ReportViewer.aspx" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="CodeTemplates\AddController\ApiController.tt">
+      <LastGenOutput>ApiController.cs</LastGenOutput>
+    </Content>
+    <Content Include="CodeTemplates\AddController\ApiControllerWithContext.tt">
+      <LastGenOutput>ApiControllerWithContext.cs</LastGenOutput>
+    </Content>
+    <Content Include="CodeTemplates\AddController\Controller.tt">
+      <LastGenOutput>Controller.cs</LastGenOutput>
+    </Content>
+    <Content Include="CodeTemplates\AddController\ControllerWithContext.tt">
+      <LastGenOutput>ControllerWithContext.cs</LastGenOutput>
+    </Content>
+    <Content Include="CodeTemplates\AddView\CSHTML\Empty.tt">
+      <LastGenOutput>Empty.cshtml</LastGenOutput>
+    </Content>
+    <Content Include="CodeTemplates\AddView\CSHTML\AddSingleTemplate.tt">
+      <LastGenOutput>AddSingleTemplate.cshtml</LastGenOutput>
+    </Content>
+    <Content Include="CodeTemplates\AddView\CSHTML\AddDoubleTemplate.tt">
+      <LastGenOutput>AddDoubleTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="CodeTemplates\AddView\CSHTML\UpdateSingleTemplate.tt">
+      <LastGenOutput>UpdateSingle.cs</LastGenOutput>
+    </Content>
+    <Content Include="CodeTemplates\AddView\CSHTML\UpdateDoubleTemplate.tt">
+      <LastGenOutput>UpdateDoubleTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="CodeTemplates\AddView\CSHTML\ListTemplate.tt">
+      <LastGenOutput>ListTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="Content\DataTables\css\dataTables.responsive.scss" />
+    <Content Include="Content\DataTables\css\dataTables.jqueryui.scss" />
+    <Content Include="DataSet.xsc">
+      <DependentUpon>DataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="ChequeDrawn.xsc">
+      <DependentUpon>ChequeDrawn.xsd</DependentUpon>
+    </Content>
+    <None Include="ChequeDrawn.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ChequeDrawn.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="ChequeDrawn.xss">
+      <DependentUpon>ChequeDrawn.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSet.xss">
+      <DependentUpon>DataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="InvestorPortfolioStatement.rpt" />
+    <Content Include="IVMDataSetSource.xsc">
+      <DependentUpon>IVMDataSetSource.xsd</DependentUpon>
+    </Content>
+    <Content Include="FixedDeposit.xsc">
+      <DependentUpon>FixedDeposit.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
+    <Content Include="FDRInterest.xsc">
+      <DependentUpon>FDRInterest.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\PurchaseNoteList.xsc">
+      <DependentUpon>PurchaseNoteList.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\FDRTaxStatement.xsc">
+      <DependentUpon>FDRTaxStatement.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\FDRMaturityStatement.xsc">
+      <DependentUpon>FDRMaturityStatement.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\FDREncashRenewStatement.xsc">
+      <DependentUpon>FDREncashRenewStatement.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\DividendBonus.xsc">
+      <DependentUpon>DividendBonus.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\CashDividendReceived.xsc">
+      <DependentUpon>CashDividendReceived.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\BondBGTB.xsc">
+      <DependentUpon>BondBGTB.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\BondBGTB.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BondBGTB.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\BondBGTB.xss">
+      <DependentUpon>BondBGTB.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\CashDividendReceived.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CashDividendReceived.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\CashDividendReceived.xss">
+      <DependentUpon>CashDividendReceived.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\DividendBonus.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DividendBonus.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\DividendBonus.xss">
+      <DependentUpon>DividendBonus.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\ExtraDividendReceived.xsc">
+      <DependentUpon>ExtraDividendReceived.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\ExtraDividendReceived.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ExtraDividendReceived.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\ExtraDividendReceived.xss">
+      <DependentUpon>ExtraDividendReceived.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\FDREncashRenewStatement.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FDREncashRenewStatement.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\FDREncashRenewStatement.xss">
+      <DependentUpon>FDREncashRenewStatement.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\FDRmainStatement.xsc">
+      <DependentUpon>FDRmainStatement.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\FDRmainStatement.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FDRmainStatement.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\FDRmainStatement.xss">
+      <DependentUpon>FDRmainStatement.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\FDRMaturityStatement.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FDRMaturityStatement.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\FDRMaturityStatement.xss">
+      <DependentUpon>FDRMaturityStatement.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\FDRTaxStatement.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FDRTaxStatement.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\FDRTaxStatement.xss">
+      <DependentUpon>FDRTaxStatement.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\LedgerStatement.xsc">
+      <DependentUpon>LedgerStatement.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\FixedDeposit.xsc">
+      <DependentUpon>FixedDeposit.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\FixedDeposit.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FixedDeposit.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\FixedDeposit.xss">
+      <DependentUpon>FixedDeposit.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\LedgerStatement.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>LedgerStatement.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\LedgerStatement.xss">
+      <DependentUpon>LedgerStatement.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\PortfolioBonus.xsc">
+      <DependentUpon>PortfolioBonus.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\Partuculars.xsc">
+      <DependentUpon>Partuculars.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\Partuculars.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Partuculars.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\Partuculars.xss">
+      <DependentUpon>Partuculars.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\PortfolioBonus.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PortfolioBonus.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\PortfolioBonus.xss">
+      <DependentUpon>PortfolioBonus.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\PortfolioInstrument.xsc">
+      <DependentUpon>PortfolioInstrument.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\PortfolioInstrument.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PortfolioInstrument.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\PortfolioInstrument.xss">
+      <DependentUpon>PortfolioInstrument.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\PurchaseNoteList.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PurchaseNoteList.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\PurchaseNoteList.xss">
+      <DependentUpon>PurchaseNoteList.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\RenewNoteList.xsc">
+      <DependentUpon>RenewNoteList.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\RenewalNoteLetter.xsc">
+      <DependentUpon>RenewalNoteLetter.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\RenewalNoteLetter.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RenewalNoteLetter.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\RenewalNoteLetter.xss">
+      <DependentUpon>RenewalNoteLetter.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\RenewNoteList.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RenewNoteList.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\RenewNoteList.xss">
+      <DependentUpon>RenewNoteList.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\StatementBankwise.xsc">
+      <DependentUpon>StatementBankwise.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\RightShareReceived.xsc">
+      <DependentUpon>RightShareReceived.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\RightShareReceived.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RightShareReceived.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\RightShareReceived.xss">
+      <DependentUpon>RightShareReceived.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\Signatory.xsc">
+      <DependentUpon>Signatory.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\Signatory.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Signatory.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\Signatory.xss">
+      <DependentUpon>Signatory.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\StatementBankwise.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StatementBankwise.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\StatementBankwise.xss">
+      <DependentUpon>StatementBankwise.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\StockBuySell.xsc">
+      <DependentUpon>StockBuySell.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\StockBuySell.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StockBuySell.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\StockBuySell.xss">
+      <DependentUpon>StockBuySell.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\TradeOrder.xsc">
+      <DependentUpon>TradeOrder.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\StockCashReceivable.xsc">
+      <DependentUpon>StockCashReceivable.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\StockCashReceivable.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StockCashReceivable.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\StockCashReceivable.xss">
+      <DependentUpon>StockCashReceivable.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\TradeOrder.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TradeOrder.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\TradeOrder.xss">
+      <DependentUpon>TradeOrder.xsd</DependentUpon>
+    </Content>
+    <Content Include="DataSetContainer\TreasuryBondStatement.xsc">
+      <DependentUpon>TreasuryBondStatement.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSetContainer\TreasuryBondStatement.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TreasuryBondStatement.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSetContainer\TreasuryBondStatement.xss">
+      <DependentUpon>TreasuryBondStatement.xsd</DependentUpon>
+    </Content>
+    <None Include="FDRInterest.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FDRInterest.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="FDRInterest.xss">
+      <DependentUpon>FDRInterest.xsd</DependentUpon>
+    </Content>
+    <Content Include="FDRRenew.xsc">
+      <DependentUpon>FDRRenew.xsd</DependentUpon>
+    </Content>
+    <Content Include="FDRmainStatement.xsc">
+      <DependentUpon>FDRmainStatement.xsd</DependentUpon>
+    </Content>
+    <None Include="FDRmainStatement.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FDRmainStatement.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="FDRmainStatement.xss">
+      <DependentUpon>FDRmainStatement.xsd</DependentUpon>
+    </Content>
+    <None Include="FDRRenew.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FDRRenew.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="FDRRenew.xss">
+      <DependentUpon>FDRRenew.xsd</DependentUpon>
+    </Content>
+    <None Include="FixedDeposit.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FixedDeposit.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="FixedDeposit.xss">
+      <DependentUpon>FixedDeposit.xsd</DependentUpon>
+    </Content>
+    <Content Include="InvestmentManagementReportDS.xsc">
+      <DependentUpon>InvestmentManagementReportDS.xsd</DependentUpon>
+    </Content>
+    <EntityDeploy Include="InvestmentManagement.Models\Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="InvestmentManagement.Models\Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="InvestmentManagement.Models\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Content>
+    <Content Include="InvestmentManagement.Models\Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
+    </Content>
+    <None Include="InvestmentManagementReportDS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>InvestmentManagementReportDS.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="InvestmentManagementReportDS.xss">
+      <DependentUpon>InvestmentManagementReportDS.xsd</DependentUpon>
+    </Content>
+    <None Include="IVMDataSetSource.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>IVMDataSetSource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="IVMDataSetSource.xss">
+      <DependentUpon>IVMDataSetSource.xsd</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\BoslInvestment.pubxml" />
+    <None Include="Properties\PublishProfiles\InvestmentManagement.pubxml" />
+    <Content Include="Scripts\RenewEditScript.js" />
+    <Content Include="Scripts\errors.json" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <None Include="ReportDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\calculationScript.js" />
+    <Content Include="Scripts\customgrid.js" />
+    <Content Include="Scripts\customGridBond.js" />
+    <Content Include="Scripts\CustomUploader.js" />
+    <Content Include="Scripts\DataTables\dataTables.autoFill.js" />
+    <Content Include="Scripts\DataTables\dataTables.autoFill.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap.js" />
+    <Content Include="Scripts\DataTables\dataTables.colReorder.js" />
+    <Content Include="Scripts\DataTables\dataTables.colReorder.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.colVis.js" />
+    <Content Include="Scripts\DataTables\dataTables.colVis.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedColumns.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedColumns.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedHeader.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedHeader.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.foundation.js" />
+    <Content Include="Scripts\DataTables\dataTables.jqueryui.js" />
+    <Content Include="Scripts\DataTables\dataTables.keyTable.js" />
+    <Content Include="Scripts\DataTables\dataTables.keyTable.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.responsive.js" />
+    <Content Include="Scripts\DataTables\dataTables.responsive.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.scroller.js" />
+    <Content Include="Scripts\DataTables\dataTables.scroller.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.tableTools.js" />
+    <Content Include="Scripts\DataTables\dataTables.tableTools.min.js" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.js" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
+    <Content Include="Scripts\date.js" />
+    <Content Include="Scripts\daterangepicker.jQuery.compressed.js" />
+    <Content Include="Scripts\daterangepicker.jQuery.js" />
+    <Content Include="Scripts\fileUploader.js" />
+    <Content Include="Scripts\fixedDeposit.js" />
+    <Content Include="Scripts\FormatNumber.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jsapi.js" />
+    <Content Include="Scripts\MarketAnalysisChart.js" />
+    <Content Include="Scripts\maturityCalculation.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\pVIRCalculation.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\routing.js" />
+    <Content Include="Scripts\sammy.js" />
+    <Content Include="Scripts\SearchScript.js" />
+    <Content Include="Scripts\Sell-Price-generate.js" />
+    <Content Include="Scripts\tradeUploader.js" />
+    <Content Include="Scripts\Uploader\CorporateAction.js" />
+    <Content Include="Scripts\Uploader\CorporateActionReceivable.js" />
+    <Content Include="Scripts\Uploader\Demats.js" />
+    <Content Include="Scripts\Uploader\Dividends.js" />
+    <Content Include="Scripts\Uploader\IPO.js" />
+    <Content Include="Scripts\Uploader\Pledge.js" />
+    <Content Include="Scripts\Uploader\Transfer.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Bond\ListBond.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Settlement\DLIC-PayInSampleFile\Instruction.txt" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Home\SingleAddForm.cshtml" />
+    <Content Include="Views\FinancialInstitution\AddFinancialInstitution.cshtml" />
+    <Content Include="Views\FinancialInstitution\EditFinancialInstitution.cshtml" />
+    <Content Include="Views\FinancialInstitution\ListFinancialInstitution.cshtml" />
+    <Content Include="Views\Currency\ListCurrency.cshtml" />
+    <Content Include="Views\FinancialInstitution\Test.cshtml" />
+    <Content Include="Views\FIBranch\ListFIBranch.cshtml" />
+    <Content Include="Views\FIBranch\AddFIBranch.cshtml" />
+    <Content Include="Views\Settings\Settings.cshtml" />
+    <Content Include="Views\FIBranch\DoubleTest.cshtml" />
+    <Content Include="Views\FIBranch\DoubleAddTemplate.cshtml" />
+    <Content Include="Views\FinancialInstitution\ListFinancialInstitutionNew.cshtml" />
+    <Content Include="Views\ErrorPage\Index.cshtml" />
+    <Content Include="Views\ApplicationUser\AddApplicationUser.cshtml" />
+    <Content Include="Views\ApplicationUser\EditApplicationUser.cshtml" />
+    <Content Include="Views\ApplicationUser\ListApplicationUser.cshtml" />
+    <Content Include="Views\UserGroup\ListUserGroup.cshtml" />
+    <Content Include="Views\UserGroup\AddUserGroup.cshtml" />
+    <Content Include="Views\UserGroup\EditUserGroup.cshtml" />
+    <Content Include="Views\Department\ListDepartment.cshtml" />
+    <Content Include="Views\Department\AddDepartment.cshtml" />
+    <Content Include="Views\Department\EditDepartment.cshtml" />
+    <Content Include="Views\Company\AddCompany.cshtml" />
+    <Content Include="Views\Company\EditCompany.cshtml" />
+    <Content Include="Views\Broker\AddBroker.cshtml" />
+    <Content Include="Views\Broker\EditBroker.cshtml" />
+    <Content Include="Views\Investor\AddInvestor.cshtml" />
+    <Content Include="Views\Investor\EditInvestor.cshtml" />
+    <Content Include="Views\DepositorySettings\ListDepositorySettings.cshtml" />
+    <Content Include="Views\DepositorySettings\AddDepositorySettings.cshtml" />
+    <Content Include="Views\DepositorySettings\EditDepositorySettings.cshtml" />
+    <Content Include="Views\ApplicationParameter\ListApplicationParameter.cshtml" />
+    <Content Include="Views\StatusParameter\ListStatusParameter.cshtml" />
+    <Content Include="Views\StatusParameter\AddStatusParameter.cshtml" />
+    <Content Include="Views\StatusParameter\EditStatusParameter.cshtml" />
+    <Content Include="Views\StatusParameterDetails\ListStatusParameterDetails.cshtml" />
+    <Content Include="Views\StatusParameterDetails\AddStatusParameterDetails.cshtml" />
+    <Content Include="Views\StatusParameterDetails\EditStatusParameterDetails.cshtml" />
+    <Content Include="Views\ApplicationParameter\AddApplicationParameter.cshtml" />
+    <Content Include="Views\ApplicationParameter\EditApplicationParameter.cshtml" />
+    <Content Include="Views\ApplicationParameterDetails\ListApplicationParameterDetails.cshtml" />
+    <Content Include="Views\ApplicationParameterDetails\AddApplicationParameterDetails.cshtml" />
+    <Content Include="Views\ApplicationParameterDetails\EditApplicationParameterDetails.cshtml" />
+    <Content Include="Views\FDRProposal\ListFDRProposal.cshtml" />
+    <Content Include="Views\FDRProposal\AddFDRProposal.cshtml" />
+    <Content Include="Views\FDRProposal\EditFDRProposal.cshtml" />
+    <Content Include="Views\FDRProposalDetails\ListFDRProposalDetails.cshtml" />
+    <Content Include="Views\FDRProposalDetails\AddFDRProposalDetails.cshtml" />
+    <Content Include="Views\FDRProposalDetails\EditFDRProposalDetails.cshtml" />
+    <Content Include="Views\FixedDeposit\AddFixedDeposit.cshtml" />
+    <Content Include="Views\FixedDeposit\EditFixedDeposit.cshtml" />
+    <Content Include="Views\FIBranch\EditFIBRANCH.cshtml" />
+    <Content Include="Views\InstrumentCategory\ListInstrumentCategory.cshtml" />
+    <Content Include="Views\InstrumentCategory\AddInstrumentCategory.cshtml" />
+    <Content Include="Views\InstrumentCategory\EditInstrumentCategory.cshtml" />
+    <Content Include="Views\Instrument\ListInstrument.cshtml" />
+    <Content Include="Views\Instrument\AddInstrument.cshtml" />
+    <Content Include="Views\Default\Index.cshtml" />
+    <Content Include="Views\Instrument\EditInstrument.cshtml" />
+    <Content Include="Views\Trade\ListTrade.cshtml" />
+    <Content Include="Views\MarketPrice\ListMarketPrice.cshtml" />
+    <Content Include="Views\Home\Default.cshtml" />
+    <Content Include="Views\Home\LogOut.cshtml" />
+    <Content Include="Views\Broker\ListBroker.cshtml" />
+    <Content Include="Views\CDBLFiles\Upload.cshtml" />
+    <Content Include="Views\CDBLFiles\ListCorporateAction.cshtml" />
+    <Content Include="Views\CDBLFiles\ListCorporateActionReceivable.cshtml" />
+    <Content Include="Views\CDBLFiles\ListTransfer.cshtml" />
+    <Content Include="Views\CDBLFiles\ListDemats.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\CDBLFiles\ListPledge.cshtml" />
+    <Content Include="Views\CDBLFiles\ListDivident.cshtml" />
+    <Content Include="Views\FinancialYear\ListFinancialYear.cshtml" />
+    <Content Include="Views\JournalHead\ListJournalHead.cshtml" />
+    <Content Include="Views\JournalHead\AddJournalHead.cshtml" />
+    <Content Include="Views\FinancialYear\AddFinancialYear.cshtml" />
+    <Content Include="Views\NominalAccount\ListNominalAccount.cshtml" />
+    <Content Include="Views\NominalAccount\AddNominalAccount.cshtml" />
+    <Content Include="Views\NominalAccount\EditNominalAccount.cshtml" />
+    <Content Include="Views\ControlAccount\ListControlAccount.cshtml" />
+    <Content Include="Views\ControlAccount\AddControlAccount.cshtml" />
+    <Content Include="Views\ControlAccount\EditControlAccount.cshtml" />
+    <Content Include="Views\FinancialYear\EditFinancialYear.cshtml" />
+    <Content Include="Views\Period\ListPeriod.cshtml" />
+    <Content Include="Views\Period\AddPeriod.cshtml" />
+    <Content Include="Views\Period\EditPeriod.cshtml" />
+    <Content Include="Views\JournalHead\EditJournalHead.cshtml" />
+    <Content Include="Views\Portfolio\ListPortfolio.cshtml" />
+    <Content Include="Views\FixedDepositRegister\RenewDeposit.cshtml" />
+    <Content Include="Views\FixedDepositRegister\EncashFixedDeposit.cshtml" />
+    <Content Include="Views\MarketAnalysis\Chart.cshtml" />
+    <Content Include="Views\FixedDepositRegister\ViewOnlyFixedDeposit.cshtml" />
+    <Content Include="Views\NominalLedger\BalanceSheet.cshtml" />
+    <Content Include="Views\FDRNote\ListFDRNote.cshtml" />
+    <Content Include="Views\FDRNote\FDRPurchaseNoteEntry.cshtml" />
+    <Content Include="Views\FixedDepositRegister\FDRNoteReconciliationList.cshtml" />
+    <Content Include="Views\Default\WorkFlow.cshtml" />
+    <Content Include="Views\TransactionPostingMatrix\ListTransactionPostingMatrix.cshtml" />
+    <Content Include="Views\TransactionPostingMatrix\AddTransactionPostingMatrix.cshtml" />
+    <Content Include="Views\TransactionPostingMatrix\EditTransactionPostingMatrix.cshtml" />
+    <Content Include="Views\Bond\EditBond.cshtml" />
+    <Content Include="Views\PrivateBond\ListPrivateBond.cshtml" />
+    <Content Include="Views\Bond\ListInterestPaymentSchedule.cshtml" />
+    <Content Include="Views\PrivateBond\AddPrivateBond.cshtml" />
+    <Content Include="Views\FixedDepositRegister\ListFDREncashment.cshtml" />
+    <Content Include="Views\FixedDepositRegister\EditFDRENCASHMENT.cshtml" />
+    <Content Include="Views\FixedDepositRegister\ApproveFDRNote2.cshtml" />
+    <Content Include="Views\FinancialInstitution\ListOfBranch.cshtml" />
+    <Content Include="Scripts\version.json" />
+    <Content Include="Views\FinancialInstitution\DeleteBranch.cshtml" />
+    <Content Include="Views\FinancialInstitution\EditBranch.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Test\Delete.cshtml" />
+    <Content Include="Views\Test\AddTest.cshtml" />
+    <Content Include="Views\Test\EditTest.cshtml" />
+    <Content Include="Views\FDRNote\ApproveFDRPurchaseNote.cshtml" />
+    <Content Include="Views\Home\JqueryAlertBox.cshtml" />
+    <Content Include="Views\FixedDeposit\FixedDepositInterestBreakDown.cshtml" />
+    <Content Include="Views\Shared\_LayoutMenu.cshtml" />
+    <Content Include="Views\FixedDepositRegister\FDREncashmentNoteList.cshtml" />
+    <Content Include="Views\FixedDepositRegister\RenewReconcile.cshtml" />
+    <Content Include="Views\FixedDeposit\ListFixedDeposit.cshtml" />
+    <Content Include="Views\FDRNote\ListFDRRenewalNote.cshtml" />
+    <Content Include="Views\Portfolio\ListOpeningPortfolio.cshtml" />
+    <Content Include="Views\Portfolio\AddOpeningPortfolio.cshtml" />
+    <Content Include="Views\Portfolio\EditOpeningPortfolio.cshtml" />
+    <Content Include="Views\FixedDepositRegister\AddRemark.cshtml" />
+    <Content Include="Views\FDRNote\FDRPurchaseNoteEdit.cshtml" />
+    <Content Include="Views\FixedDepositRegister\ListFixedDepositRegister.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\HolidayCalender\ListHoliday.cshtml" />
+    <Content Include="Views\HolidayCalender\Details.cshtml" />
+    <Content Include="Views\HolidayCalender\AddHoliday.cshtml" />
+    <Content Include="Views\HolidayCalender\Edit.cshtml" />
+    <Content Include="Views\HolidayCalender\Delete.cshtml" />
+    <Content Include="Views\Shared\CrossCheck.cshtml" />
+    <Content Include="Views\ScriptTransfer\ListScriptTransfer.cshtml" />
+    <Content Include="Views\ScriptTransfer\AddScriptTransfer.cshtml" />
+    <Content Include="Views\ScriptTransfer\EditScriptTransfer.cshtml" />
+    <Content Include="Views\CDBLFiles\ListIPO.cshtml" />
+    <Content Include="Views\Report\ListReport.cshtml" />
+    <Content Include="Views\RightShareDeclaration\ListRightShare.cshtml" />
+    <Content Include="Views\RightShareDeclaration\AddRightShare.cshtml" />
+    <Content Include="Views\RightShareDeclaration\EditRightShare.cshtml" />
+    <Content Include="Views\Settlement\ListPayInPayOut.cshtml" />
+    <Content Include="Views\ScriptTransfer\ListFractionReceived.cshtml" />
+    <Content Include="Views\ScriptTransfer\ListTradeOrder.cshtml" />
+    <Content Include="Views\TradingCharge\ListTcharges.cshtml" />
+    <Content Include="Views\TradingCharge\AddTCharge.cshtml" />
+    <Content Include="Views\Broker\EditTCharge.cshtml" />
+    <Content Include="Views\TradingCharge\EditTCharge.cshtml" />
+    <Content Include="Views\Bond\AddBond.cshtml" />
+    <Content Include="Views\FixedDepositRegister\ApproveFDRNote.cshtml" />
+    <Content Include="Views\Bond\Copy of EditBond.cshtml" />
+    <Content Include="Views\Bond\WorkSheetNote.cshtml" />
+    <Content Include="Views\PrivateBond\AcceptPBond.cshtml" />
+    <Content Include="Views\PrivateBond\ListApprovedBond.cshtml" />
+    <Content Include="Views\Bond\Approved.cshtml" />
+    <Content Include="Views\Bond\EncashBond.cshtml" />
+    <Content Include="Views\ScriptTransfer\EditTradeOrder.cshtml" />
+    <Content Include="Views\FDRNote\EditFDRRenewalNote.cshtml" />
+    <Content Include="Views\CDBLFiles\EditCashDividend.cshtml" />
+    <Content Include="Views\CDBLFiles\AddOthersCashDividend.cshtml" />
+    <Content Include="Views\Settlement\DLIC-PayInSampleFile\0105730026092017.01" />
+    <Content Include="Views\Settlement\DLIC-PayInSampleFile\0201730002102017.01" />
+    <Content Include="Views\ScriptTransfer\ExtraDividendReceivedList.cshtml" />
+    <Content Include="Views\ScriptTransfer\AddExtraDividend.cshtml" />
+    <Content Include="Views\ScriptTransfer\EditExtraDividend.cshtml" />
+    <Content Include="Views\Investor\ListInvestor.cshtml" />
+    <Content Include="Views\Bond\Copy of ListBond.cshtml" />
+    <Content Include="Views\ScriptTransfer\SellMutualFundList.cshtml" />
+    <Content Include="Views\ScriptTransfer\AddEditSellMutualFund.cshtml" />
+    <Content Include="Views\Signatory\ListSignatory.cshtml" />
+    <Content Include="Views\Signatory\AddSignatory.cshtml" />
+    <Content Include="Views\Signatory\ListSignatoryDetails.cshtml" />
+    <Content Include="Views\Signatory\AddSignatoryDetails.cshtml" />
+    <Content Include="Views\Signatory\EditSignatoryDetails.cshtml" />
+    <Content Include="Views\JournalHead\Copy of ListJournalHead.cshtml" />
+    <Content Include="Views\InvParticulars\ListParticularsList.cshtml" />
+    <Content Include="Views\InvParticulars\ListParticularsDetails.cshtml" />
+    <Content Include="Views\InvParticulars\AddParticularsDetails.cshtml" />
+    <Content Include="Views\OracleIntegration\ListOracleIntegration.cshtml" />
+    <Content Include="Views\InvParticulars\EditParticulars.cshtml" />
+    <Content Include="Views\InvParticulars\EditParticularsDetails.cshtml" />
+    <Content Include="Views\CDBLFiles\EditIpoRate.cshtml" />
+    <Content Include="Views\OracleIntegration\IntegrationOperation.cshtml" />
+    <Content Include="Views\OracleIntegration\AddOracleIntegration.cshtml" />
+    <Content Include="Views\OracleIntegration\AddVoucherNumber.cshtml" />
+    <Content Include="Views\OracleIntegration\View.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\BonusReceivable.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\FDProcurement.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\FDRproposal.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Edited_FDRRenewal.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\FDRRenewalNoteLetter.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\FDREncashmentNoteList.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\FDRMaturityStatement.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\BONDIncomeStatement.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\FDRPurchaseNoteLetter.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\FDREncashment.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\FDRStatement.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Reports\BondReport\BondNote.rdlc" />
+    <EmbeddedResource Include="Reports\BondReport\Copy of InterestIncomeBGTB.rdlc" />
+    <EmbeddedResource Include="Reports\BondReport\HafYearlyCouponInterest.rdlc" />
+    <EmbeddedResource Include="Reports\BondReport\HalfYearInterestLetter.rdlc" />
+    <EmbeddedResource Include="Reports\BondReport\HalfYearInterestTreasuryBond.rdlc" />
+    <EmbeddedResource Include="Reports\BondReport\InterestIncomeBGTB.rdlc" />
+    <EmbeddedResource Include="Reports\BondReport\InterestIncomeBGTB001.rdlc" />
+    <EmbeddedResource Include="Reports\BondReport\InterestIncomeBGTB2.rdlc" />
+    <EmbeddedResource Include="Reports\BondReport\ParticipationLetter.rdlc" />
+    <EmbeddedResource Include="Reports\BondReport\TreasuryBondStatement.rdlc" />
+    <EmbeddedResource Include="Reports\Copy of FDREncashmentLetter.rdlc" />
+    <Content Include="Reports\Copy of FDRRenewalNoteLetter.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\FDRRenewalNote.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Copy of FDRRenewalNote.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Reports\FDRInvestmentBankWise.rdlc" />
+    <EmbeddedResource Include="Reports\FDRMainStatementHistory.rdlc" />
+    <EmbeddedResource Include="Reports\FDRMainStatement.rdlc" />
+    <EmbeddedResource Include="Reports\FDRRenewal.rdlc" />
+    <EmbeddedResource Include="Reports\FDRStatementBankWise.rdlc" />
+    <EmbeddedResource Include="Reports\FDREncashmentLetter.rdlc" />
+    <EmbeddedResource Include="Reports\FDREncashmentTaxStatement.rdlc" />
+    <EmbeddedResource Include="Reports\FDREncshmentStatement.rdlc" />
+    <EmbeddedResource Include="Reports\FDRRenewalStatement.rdlc" />
+    <EmbeddedResource Include="Reports\FDRRenewalTaxStatement.rdlc" />
+    <EmbeddedResource Include="Reports\FDRSingleACHistory.rdlc" />
+    <EmbeddedResource Include="Reports\Particulars\ParticularStatement.rdlc" />
+    <EmbeddedResource Include="Reports\ShareReport\BonusShareReceivedStatement.rdlc" />
+    <EmbeddedResource Include="Reports\ShareReport\CashDividendReceivedStatement.rdlc" />
+    <EmbeddedResource Include="Reports\ShareReport\CommissionStatement.rdlc" />
+    <EmbeddedResource Include="Reports\ShareReport\Copy of InvestorProfitLossStatement.rdlc" />
+    <EmbeddedResource Include="Reports\ShareReport\ExtraDividendReceived.rdlc" />
+    <EmbeddedResource Include="Reports\ShareReport\FractionReceivedStatement.rdlc" />
+    <EmbeddedResource Include="Reports\ShareReport\InstrumentLedger.rdlc" />
+    <EmbeddedResource Include="Reports\ShareReport\InvestorProfitLossStatement.rdlc" />
+    <EmbeddedResource Include="Reports\ShareReport\LedgerStatement.rdlc" />
+    <EmbeddedResource Include="Reports\ShareReport\PayInStatement.rdlc" />
+    <Content Include="Reports\ShareReport\Portfolio.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Reports\ShareReport\ProfitLossStatement.rdlc" />
+    <EmbeddedResource Include="Reports\ShareReport\RightShareReceivedStatement.rdlc" />
+    <EmbeddedResource Include="Reports\ShareReport\StockBuySellStatement.rdlc" />
+    <EmbeddedResource Include="Reports\ShareReport\StockCashReceivableStatement.rdlc" />
+    <EmbeddedResource Include="Reports\ShareReport\TradeOrder.rdlc" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>3329</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1834/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

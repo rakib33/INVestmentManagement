@@ -1,0 +1,165 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.XX_INVEST_GL_INTEGRATION_DATA
+@{
+    
+    string AdminUser = "bosl";
+    
+ }
+<div id="Replace">
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+    @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+    <div class="wrapper pl">
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            @ViewBag.Message
+        </div>
+        <div class="container-fluid Grid-Container">
+
+            <div class="widget col-md-5">
+                <div class="whead">
+                    <h6>
+                        <label id="lblHeader" title="">@ViewBag.Header</label>
+                    </h6>
+                    <div class="clear">
+                    </div>
+                </div>
+                @using (Ajax.BeginForm("AddOracleIntegration", "OracleIntegration", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+                {
+                    <div class="">
+                        <ul class="entryForm singleadd">
+
+                       <input id="FDepositId" name="FDepositId" type="hidden" value="@ViewBag.fDepositId">        
+                              @Html.Hidden("Code","ViewBag.code")
+                            <li class="form-group">
+                                <label class = "control-label entrylable">Transaction Type</label>                              
+                                <br />
+                                @Html.TextBoxFor(model => model.TRANSACTIONTYPE, new { @class = "form-control", required = "required",@readonly="readonly" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.TRANSACTIONTYPE)
+                            </li>
+                          
+                               <li class="form-group">
+                                <label class = "control-label entrylable" >Transaction Date</label>                             
+                                <br />                                  
+                                @Html.TextBoxFor(model => model.TRANSACTIONDATE, new { @class = "form-control datepicker", required = "required" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.TRANSACTIONDATE)
+                            </li>
+                           
+                            <li class="form-group">
+                                <label class = "control-label entrylable">Ou Code</label>
+                              
+                                <br />
+                                @Html.TextBoxFor(model => model.OU_CODE, new { @class = "form-control", required = "required" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.OU_CODE)
+                            </li>
+
+                             <li class="form-group">
+                                <label class = "control-label entrylable" >Unit Agency Code</label>                              
+                                <br />
+                                @Html.TextBoxFor(model => model.UNITAGENCYCODE, new { @class = "form-control", required = "required" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.UNITAGENCYCODE)
+                            </li>
+
+                            
+                             <li class="form-group">
+                                <label class = "control-label entrylable">Cost Center Code</label>                              
+                                <br />
+                                @Html.TextBoxFor(model => model.COSTCENTERCODE, new { @class = "form-control", required = "required" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.COSTCENTERCODE)
+                            </li>
+                                    
+                             <li class="form-group">
+                                <label class = "control-label entrylable">Bank Account Number</label>                               
+                                <br />
+                                @Html.TextBoxFor(model => model.BANKACCOUNTNUMBER, new { @class = "form-control" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.BANKACCOUNTNUMBER)
+                            </li>
+                            <li class="form-group">
+                                <label class = "control-label entrylable" >Description</label>
+                           
+                                <br />
+                                @Html.TextBoxFor(model => model.DESCRIPTION, new { @class = "form-control" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.DESCRIPTION)
+                            </li>
+                        </ul>
+                        <button type="submit" class="btn btn-success btnSingleAddForm">Save</button>
+                        <a class="load btn btn-danger closeButton" href="~/#/OracleIntegration/ListOracleIntegration?lblbreadcum=">Close</a>
+
+
+                    </div>
+
+
+                }
+
+            </div>
+
+
+        </div>
+    </div>
+    <p></p>
+
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+    <script>
+        var RemoveJQUIDatepicker = function () {
+            $(".datePicker").datepicker("destroy");
+            $(".datePicker").removeClass("hasDatePicker");
+            $(".datePicker").removeAttr("Disabled");
+
+            console.log('destroy');
+        };
+
+        var SetJQUIDatePicker = function () {
+            $(".datepicker").datepicker({ dateFormat: formatDate('long'), minDate: 0 });
+            jQuery.datepicker.dpDiv.appendTo(jQuery('body'));
+            console.log('Set');
+        }
+
+        $(function () {
+            $(".datepicker").datepicker({ dateFormat: formatDate('long'), minDate: 0 });
+            //console.log('renew datepicker from function');
+
+            RemoveJQUIDatepicker();
+            SetJQUIDatePicker();
+        });
+       
+    </script>
+
+    <script type="text/javascript">
+        $(".load").click(function () {
+            $(".loadingImage").show();
+            var link = $(this).attr("href");
+            debugger;
+            $.get('<%= Url.Action(' + link + ') %>', {},
+                function (data) {
+                    $('#result').html(data);
+                    $('.loadingImage').hide();
+                });
+        });
+
+    </script>
+
+</div>

@@ -1,0 +1,413 @@
+﻿@model InvestmentManagement.Models.GridModel<InvestmentManagement.InvestmentManagement.Models.PortfolioViewModel>
+
+<div id="replace">
+    <style>
+        .drop-resize {
+          height: 30px !important;
+          width: 170px !important;
+          font-size: 12px !important;
+          }
+    </style>
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+    <div class="wrapper pl">
+        <img class="loadingImage top-display " src="~/Images/loading.gif" style="display:none;" />
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+
+            <strong>Info !</strong>
+            @ViewBag.Message @ViewBag.Result
+        </div>
+     <div class="container-fluid Grid-Container">
+
+        <div class="widget mb20">
+             <div class="whead">
+                 <h6>@Session["currentPage"]</h6>
+                 <select id="ddlPageSize">
+
+                     <option selected="selected">15</option>
+                     <option>50</option>
+                     <option>100</option>
+                 </select>
+                 <h6 style="float: right">Select Row Count</h6>
+                 <div class="clear"></div>
+             </div>
+
+             <div class="formRow dgHeaderBk">
+                 <div class="container-fluid">
+                     <div class="col-md-12">
+                         @using (Html.BeginForm("GeneratePortfolioReport", "Portfolio",FormMethod.Post))
+                         {
+                             <div class="row">
+
+                                 @*<div class="col-md-3">
+                                     <div class="form-group">
+                                         <label for="inputlg">From Date(only Print Instrumrnt Ledger)</label>
+                                         <input type="text" id="FromDate" name="FromDate" class="tableSearchField" style="width: 100%!important;height: 33px !important;" placeholder="Select Date" />                                          
+                                     </div>
+                                 </div>*@
+
+                                 <div class="col-md-2">
+                                     <div class="form-group">
+                                         <label for="inputlg">To Date</label>
+                                         <input type="text" id="txtCode" name="date" class="tableSearchField" style="width: 100%!important;height: 33px !important;" placeholder="Select Date" onchange="ChangeDate()" />
+                                     </div>
+                                 </div>
+
+                                 <div class="col-md-2">
+                                     <div class="form-group">
+                                         <label for="inputlg">Instrument</label>
+                                         @*<input type="text" id="txtInstrument" name="txtInstrument" style="width: 100%!important;height: 33px !important;" placeholder="Instrument Name" />*@
+                                         @Html.DropDownList("txtInstrument", (SelectList)ViewBag.InstrumentList, "Select Trade Code", new { @class = "control-label entrylable drop-resize" })
+                                     </div>
+                                 </div>
+
+                                 <div class="col-md-5">
+                                     <div class="form-group" style="padding-top:25px">
+                                         <input type="button" id="btn" class="btn btn-primary dgBtn" value="Apply" onclick="return getportfolio()" />                                        
+                                          
+                                         <input type="submit" class="btn btn-primary dgBtn" name="SubmitButton" value="Print" />
+                                         <input type="checkbox" name="IsExcell" id="IsExcell" value="true" />
+                                          <label>Excell</label>
+                                     
+                                     </div>
+                                 </div>
+                             </div>                           
+                       }                  
+                     </div>
+                    @* <div class="col-md-4 pull-left">
+                    
+                     </div>*@
+
+                 </div>
+             </div>
+          
+            
+             <script>
+                 function ChkAddClass() {
+
+                     var dir = $('#dir').val();
+                     var col = $('#col').val().replace(/\s/g, '');
+                     //alert(col);
+
+                     var header = $('th a[href*=' + col + ']');
+                     //alert(header.text());
+                     var countTh = document.getElementsByTagName('th').length;
+
+
+                     for (var i = 1; i <= countTh; i++) {
+
+                         var txtTh = $('.ASPGrid tr th:nth-child(' + i + ')').text().replace(/\s/g, '');
+
+                         if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Ascending') {                            
+                             $(".ASPGrid tr th").addClass("sorting");
+                             $('.ASPGrid tr th:nth-child(' + i + ')').addClass("ascending");
+                         }
+
+                         else if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Descending') {
+                             //alert(txtTh + "" + col);
+                             $(".ASPGrid tr th").addClass("sorting");
+                             $('.ASPGrid tr th:nth-child(' + i + ')').addClass("descending");                             
+                         }
+                     }
+                 }
+             </script>
+ @using (Html.BeginForm("GenerateSellLimit", "Portfolio", FormMethod.Post))
+ {    
+  <div id="PortfolioWebGrid" class="formRow noPad btbNone tScroll">
+  @{
+     WebGrid grid = new WebGrid(rowsPerPage: Model.RowsPerPage, ajaxUpdateContainerId: "PortfolioWebGrid", ajaxUpdateCallback: "ChkAddClass", sortFieldName: "sortdefault");
+     grid.Bind(Model.DataModel, autoSortAndPage: false, rowCount: Model.RowsPerPage);
+				
+@grid.Table(columns: new[] {             
+grid.Column(header: "Sl No", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),
+grid.Column(format:@<text><input type="checkbox" class="checkbox" name="SellLimit" value="@item.ShortName" /></text>, header: "Select"),
+
+grid.Column(format:@<text><input type="text" class="sellAmn decimal number" name="SellLimit" disabled/></text>, header: "SellLimit"), //decimal 
+                                     
+grid.Column("ShortName", style:"textColumn",header:"Instrument"),                 
+
+grid.Column("CurrentBalance",format:@<text> @item.CurrentBalance.ToString("#,##0.")</text>, style:"numericColumn",header:"Current Balance"), //Net Balance              
+
+grid.Column("MaturedBalance",format:@<text>@item.MaturedBalance.ToString("#,##0.")</text>, style:"numericColumn",header:"Free Balance"), //Matured Balance                                     
+
+grid.Column("AvgPrice", format:@<text>@item.AvgPrice.ToString("N")</text>, style:"numericColumn",header:"Average Cost"),              
+    
+grid.Column("TotalCost", format:@<text>@item.TotalCost.ToString("N")</text>, style:"numericColumn",header:"Total Cost"),                                      
+
+grid.Column("MarketPrice", format:@<text>@item.MarketPrice.ToString("N")</text>, style:"numericColumn",header:"Market Rate"),              
+    
+grid.Column("MarketValue", format:@<text>@item.MarketValue.ToString("N")</text>, style:"numericColumn",header:"Market Value"),                                       
+
+grid.Column("UnRealizedGain", format:@<text>@item.UnrealizedGain.ToString("N")</text>, style:"numericColumn",header:"Unrealized Gain"),                                        
+
+grid.Column("RealizedGain", format:@<text>@item.RealizedGain.ToString("N") </text>, style:"numericColumn",header:"Realized Gain"),
+                
+grid.Column("PercentageGain",format:@<text>@item.PercentageGain.ToString("N") </text>,style:"numericColumn",header:"% UnRel.Gain"),    
+
+//grid.Column("PERatio",style:"numericColumn",header:"PERatio"),
+},
+tableStyle: "ASPGrid",
+htmlAttributes: new { cellspacing = "0", border = "0" },
+footer: @<ul class="pagination">
+
+@* <li class="@ViewBag.Prev"><a  class="@ViewBag.PrevNotActive" href="/PortfolioInstrument/ListPortfolioInstrument?PagingType=Prev&sort=@grid.SortColumn&currentFilter=@ViewBag.CurrentFilter&currentRowPerPage=@ViewBag.currentRowPerPage" data-swhglnk="true">Prev</a></li>
+   <li class="@ViewBag.Next"><a  class="@ViewBag.NextNotActive" href="/PortfolioInstrument/ListPortfolioInstrument?PagingType=Next&sort=@grid.SortColumn&currentFilter=@ViewBag.CurrentFilter&currentRowPerPage=@ViewBag.currentRowPerPage" data-swhglnk="true">Next</a></li>*@
+
+</ul>
+);
+   @Html.Hidden("dir", grid.SortDirection)
+   @Html.Hidden("col", grid.SortColumn)
+}
+</div>
+                 <div class="row">
+                     <div class="col-md-2">
+                         <input type="submit" id="submit_button"  class="btn btn-primary" value="Generate Sell Limit File" disabled="disabled">
+                     </div>                     
+                     <div class="col-md-2">                         
+                     <input type="text" id="date" name="date" class="tableSearchField form-control" placeholder="Select Date" required="required" />
+                     </div>
+                 </div>
+ }
+
+@if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+{
+   @Ajax.ActionLink("Add", "AddPortfolioInstrument", "PortfolioInstrument",
+    new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { @class = "btn btn-success m10" })
+}
+else
+{
+<a class=" load btn btn-success m10" role="menuitem" tabindex="-1" href="~/#/PortfolioInstrument/AddPortfolioInstrument">Add</a>
+}
+
+  </div>
+    <div class="clear"></div>
+     </div>
+    </div>
+
+
+    
+
+
+</div>
+<script>
+   
+    function getportfolio() {
+
+        try {
+            $('.loadingImage').show();
+                      
+            $.ajax({
+                url: '@Url.Action("ListPortfolio","Portfolio")',
+                    contentType: 'application/html; charset=utf-8',
+                    type: 'GET',
+                    dataType: 'html',
+                    data: {
+                        instrument: $('#txtInstrument').val(),
+                        filterstring: $("#txtCode").val(),
+                        rows:$("#ddlPageSize").val(),                       
+                    },
+                }).success(function (result) {
+                    console.log('success');
+                    var getHTML = $(result);
+
+                    $('#PortfolioWebGrid').empty();
+                    $('#PortfolioWebGrid').html($('#PortfolioWebGrid', getHTML));
+
+                    ChkAddClass();
+                    $('.loadingImage').hide();
+
+                    console.log('complete');
+
+                }).error(function (xhr, status) {
+                    // console.log('error\n :'+xhr.responseText)
+                    console.log(xhr.error);
+                    //hide the loading image
+                    $('.loadingImage').hide();
+
+                    alert(xhr.responseText);
+                });
+            }
+        catch (err) {
+            $('.loadingImage').hide();
+            console.log(err.message);
+            alert(xhr.responseText);
+            }
+        }
+
+</script>
+
+<script>
+
+
+    $(document).ready(function () {
+        $(function () {
+            $("#txtCode").datepicker({ dateFormat: 'dd-M-yy', });
+            $('#txtCode').datepicker('setDate', new Date());            
+
+            $("#date").datepicker({ dateFormat: 'dd-M-yy', });
+            $('#date').datepicker('setDate', new Date());
+
+            $("#FromDate").datepicker({ dateFormat: 'dd-M-yy', });
+            $('#FromDate').datepicker('setDate', new Date());
+        });
+    });
+
+    $('table').on('keyup', '.sellAmn', function (event) {//replace table selector with an id selector, if you are targetting a specific table
+
+        var MaturedBalance = $(this).closest('tr').find('td:eq(5)').text().replace(/,/g, ''); // replace(/,/g, '') used to replace all comma from string
+        var chk = $(this).closest('tr').find('input:checkbox');
+        var SellBalance = $(this).val();
+        var currentBalance = $(this).closest('tr').find('input:text');
+
+        if (chk[0].checked) {
+            //check is sell limit is greater then zero and less then matured balance           
+
+            if (isNaN(parseFloat(SellBalance)) || parseFloat(SellBalance) > parseFloat(MaturedBalance)) {
+                $(this).val(null);
+                $('#submit_button').attr('disabled', 'disabled');
+                chk[0].checked = false;
+                currentBalance.attr('disabled', 'disabled');
+                alert('Sell Limit must be between 1 to matured Balance ' + MaturedBalance);
+            } else {
+
+                $('#submit_button').removeAttr("disabled");
+            }
+        }
+        else {
+            $(this).val(null);
+            alert('Please select the item.');
+
+        }
+
+    });
+
+    $('table').on('click', '.checkbox', function (event) {//replace table selector with an id selector, if you are targetting a specific table
+
+        //var MaturedBalance = $(this).closest('tr').find('td:eq(5)').text().replace(/,/g, ''); // replace(/,/g, '') used to replace all comma from string
+
+        var currentBalance = $(this).closest('tr').find('input:text');
+        var chk = $(this).closest('tr').find('input:checkbox');
+
+        if (chk[0].checked) {
+
+            //add instrument name on textbox txtInstrument
+            var InstrumentName = $(this).closest('tr').find('td:eq(3)').text();
+            $('#txtInstrument').val(InstrumentName);
+            currentBalance.removeAttr("disabled");
+            var MaturedBalance = $(this).closest('tr').find('td:eq(5)').text().replace(/,/g, ''); // replace(/,/g, '') used to replace all comma from string
+
+            //get current balance textbox value             
+
+            // alert('checked' + MaturedBalance + ' ' + currentBalance.val());
+        }
+        else {
+
+            $('#txtInstrument').val('');
+            currentBalance.val(null);
+            currentBalance.attr('disabled', 'disabled');
+            $('#submit_button').attr('disabled', 'disabled');
+
+            alert('Please select the item.');
+
+        }
+    });
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+              
+        console.log(1);
+
+        $(".ASPGrid tr th").addClass("sorting");    
+
+        $('.not-active').bind('click', false);
+   
+        $("#date").val($("#txtCode").val());
+
+
+        console.log(3);
+        $('#ddlPageSize').on('change', function () {
+
+            console.log(3);
+
+            $('.loadingImage').show();
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+             $.get("/PortfolioInstrument/ListPortfolioInstrument?sort=" + $('#col').val() + "&sortdir=" + $('#dir').val() + "&filterstring=" + $('#txtCode').val() + "&rows=" + valueSelected + "", function (data) {
+                var getHTML = $(data);
+                $('#PortfolioWebGrid').empty();
+                $('#PortfolioWebGrid').andSelf().unbind();
+                $('#PortfolioWebGrid').html($('#PortfolioWebGrid', getHTML));
+                ChkAddClass();
+                $('.loadingImage').hide();
+
+            });
+        });
+
+        $('.loadingImage').hide();
+        console.log(4);
+    });
+
+    function ChangeDate()
+    {      
+     $("#date").val($("#txtCode").val());
+    }
+
+</script>
+
+<script>
+    $(document).on('keypress', '.number', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+    $(document).on('keypress', '.decimal', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 ||event.keyCode==9) {
+            // let it happen, don't do anything
+        } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+
+    $(document).on('click', '#report', function (event) {
+
+        window.open("ReportViewer.aspx");
+    
+    });
+
+</script>
+
+
+
+<script>
+    function ReportValidationCheck() {
+        var url = "../../ReportViewer.aspx";  //your ASPX page path
+        var myframe = document.getElementById("ifrmReportViewer");
+        if (myframe !== null) {
+            if (myframe.src) {
+                myframe.src = url;
+            }
+            else if (myframe.contentWindow !== null && myframe.contentWindow.location !== null) {
+                myframe.contentWindow.location = url;
+            }
+            else { myframe.setAttribute('src', url); }
+        }
+        return false;
+    }
+ </script>
+

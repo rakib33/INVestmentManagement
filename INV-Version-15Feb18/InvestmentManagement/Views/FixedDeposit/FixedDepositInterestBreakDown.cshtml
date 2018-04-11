@@ -1,0 +1,668 @@
+﻿@*@model List<InvestmentManagement.InvestmentManagement.Models.FDRINTEREST>*@
+
+@model List<InvestmentManagement.InvestmentManagement.Models.FDRInterestViewModel>
+@{
+    int j = 0;
+    int i = 1;
+      
+    decimal ExciseDuty = ViewBag.ExciseDuty;
+    decimal OthersCharge = ViewBag.OthersCharge;
+    decimal? SumGrossInterest = 0;
+    decimal? SumSourceTax=0;
+    decimal? SumNetInterest = 0;
+    decimal? AmountReceive = 0;
+
+    decimal? Net = 0;
+    decimal? Total=0;
+    string TaxUpOnGross = null;
+    }
+
+
+
+<div id="Replace">
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+    <div class="wrapper pl">
+        <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+        <div id="FixedDeposit">
+            <div class="alert alert-success mt20" style="color:red">
+                <button class="close" data-dismiss="alert" type="button">×</button>
+                @ViewBag.Message
+            </div>
+            @using (Ajax.BeginForm("FixedDepositInterestBreakDown", " FixedDeposit", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+            {   
+                
+            <div class="container" style="margin-top:20px;">
+ 
+                            <div class="whead">
+                                <h6>
+                                    <label id="" title="">INTEREST DETAILS</label>
+                                </h6>
+                                <div class="clear">
+                                </div>
+                            </div>
+                   
+                    <table id="Interest" class="table table-bordered ">
+                        <thead>             
+        
+                                          <tr>
+                                            <td>
+                                            Interval
+                                          </td>
+                                          <td>
+                                              From Date
+                                          </td>
+                                          <td>
+                                              To Date
+                                          </td>
+                                          <td  class="head-right-align">
+                                              Principal Amount
+                                          </td>
+                                      
+                                          <td class="head-right-align">
+                                              Gross Interest
+                                          </td>
+                                          <td class="head-right-align">
+                                              Tax Rate (%)
+                                          </td>
+                                          <td class="head-right-align">
+                                              Source Tax
+                                          </td>
+                                          <td class="head-right-align">
+                                            Net Interest Receivable
+                                          </td>
+                                          <td class="head-right-align">
+                                              Total Amount Receivable
+                                          </td>
+          <td>
+             @*  <a id="@ViewBag.Calcu" onclick="return Calculation()"  href="#"  ><img style="width:30px;height:30px;margin-top:4px;" src="~/Images/calculator-icon.png" /></a>*@
+          </td>
+          <td>
+
+          </td>
+          
+      </tr>
+    </thead>
+       <tbody>
+       @if (Model != null && Model.Count > 0)
+                            {
+           
+           
+                                ViewBag.fromDate=null;
+                                ViewBag.todate=null;   
+                                ViewBag.Principle=null;
+                                ViewBag.GrossInterest=null;
+                                ViewBag.NetInterest=null;
+                                //ViewBag.AmountReceive=null; //block 28-Sep-17
+                                ViewBag.SourceTax=null;
+                              
+                                foreach (var item in Model)
+                                {
+                                   // decimal Principal = Math.Round(item.PRINCIPALAMOUNT.Value, 2);
+                                   // string a = Principal.ToString("N", new System.Globalization.CultureInfo("en-US"));                                  
+                                    //The above line will give Rs. 12,34,56,789. Remove the currency symbol
+                                    //String indianFormatNumber = temp.Substring(3);
+
+                                    ViewBag.fromDate = item.FROMDATE.Value.ToString("dd-MMM-yy");
+                                    ViewBag.todate = item.TODATE.Value.ToString("dd-MMM-yy");
+                                  
+                                    ViewBag.Principle =String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C2}",Convert.ToDecimal(item.PRINCIPALAMOUNT)).Replace("$", string.Empty);  //C2 means get 2 decimap places value Math.Round(item.PRINCIPALAMOUNT.Value,2);
+                                    ViewBag.GrossInterest = String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C2}",Convert.ToDecimal(item.GROSSINTEREST)).Replace("$", string.Empty);  //C2 means get 2 decimap places value Math.Round(item.GROSSINTEREST.Value,2);
+                                    ViewBag.SourceTax = String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C2}",Convert.ToDecimal(item.SOURCETAX)).Replace("$", string.Empty);  //C2 means get 2 decimap places value Math.Round(item.SOURCETAX.Value,2);
+                                    ViewBag.NetInterest = String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C2}",Convert.ToDecimal(item.NETINTERESTRECEIVABLE)).Replace("$", string.Empty);  //C2 means get 2 decimap places value Math.Round(item.NETINTERESTRECEIVABLE.Value,2);
+                                    ViewBag.AmountReceive = String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C2}",Convert.ToDecimal(item.AMOUNTRECEIVABLE)).Replace("$", string.Empty);  //C2 means get 2 decimap places value Math.Round(item.AMOUNTRECEIVABLE.Value,2);
+                                    
+                                    ViewBag.EditId = j + ".Edit";
+                                    ViewBag.Calcu = j + ".Calcu";
+
+                                     SumGrossInterest +=Convert.ToDecimal(item.GROSSINTEREST);
+                                     SumSourceTax +=Convert.ToDecimal(item.SOURCETAX);
+                                     SumNetInterest +=Convert.ToDecimal(item.NETINTERESTRECEIVABLE);
+                                     AmountReceive =Convert.ToDecimal(item.AMOUNTRECEIVABLE);                                  
+                                    
+                               <tr>
+                               @Html.TextBoxFor(a => a[j].REFERENCE, new {id="["+j+"].REFERENCE",@readonly="readonly",  @class = "form-control tdfill",@style="border:none;display:none" })      
+                               @Html.TextBoxFor(a => a[j].FIXEDDEPOSIT_REFERENCE, new {id="["+j+"].FIXEDDEPOSIT_REFERENCE",@readonly="readonly",  @class = "form-control tdfill", required = "required",@style="border:none;display:none" })      
+                               @Html.TextBoxFor(a => a[j].COMPOUNDVALUE, new {id="["+j+"].COMPOUNDVALUE",@readonly="readonly",  @class = "form-control tdfill", @style="border:none;display:none" })      
+                              
+                                   
+                                 <td>
+                                   @i
+                                 </td>                                                                                                        
+                                 <td>
+                                   @Html.TextBoxFor(a => a[j].FROMDATE, new {id="["+j+"].FROMDATE", @Value= ViewBag.fromDate,@readonly="readonly",  @class = "form-control tdfill", required = "required",@style="border:none" })      
+                                 </td>  
+                                 
+                                 <td>
+                                   @Html.TextBoxFor(a => a[j].TODATE, new {id="["+j+"].TODATE", @Value= ViewBag.todate,@readonly="readonly",  @class = "form-control tdfill", required = "required",@style="border:none" })      
+                                 </td>      
+
+                                <td>
+                                    @Html.TextBoxFor(a => a[j].PRINCIPALAMOUNT, new {id="["+j+"].PRINCIPALAMOUNT",@Value=ViewBag.Principle,  @class = "form-control tdfill decimal",@readonly="readonly", required = "required",@style="border:none" })                               
+                                </td>
+                               
+                                <td style="display:none">
+                                    @Html.TextBoxFor(a => a[j].RATEOFINTEREST, new {id="["+j+"].RATEOFINTEREST",  @class = "form-control tdfill decimal",@readonly="readonly", required = "required",@style="border:none" })                               
+                                </td>
+                               
+                                 <td>
+                                    @Html.TextBoxFor(a => a[j].GROSSINTEREST, new {id="["+j+"].GROSSINTEREST",  @Value= ViewBag.GrossInterest,@readonly="readonly",  @class = "form-control tdfill decimal", required = "required",@style="border:none" })                               
+                                 </td>
+                               
+                                 <td>
+                                    @Html.TextBoxFor(a => a[j].TAXRATE, new {id="["+j+"].TAXRATE",@onkeypress="return validateDecimal(event,this)", @readonly="readonly", @class = "form-control tdfill decimal", required = "required",@style="border:none" })                               
+                                 </td>
+
+                                  <td>
+                                   @Html.TextBoxFor(a => a[j].SOURCETAX, new {id="["+j+"].SOURCETAX",  @Value= ViewBag.SourceTax,@readonly="readonly",  @class = "form-control tdfill decimal", required = "required",@style="border:none" })      
+                                  </td>  
+                                 
+                                 <td>
+                                   @Html.TextBoxFor(a => a[j].NETINTERESTRECEIVABLE, new {id="["+j+"].NETINTERESTRECEIVABLE", @Value= ViewBag.NetInterest,@readonly="readonly",  @class = "form-control tdfill decimal", required = "required",@style="border:none" })      
+                                 </td>  
+                                 
+                                 <td>
+                                   @Html.TextBoxFor(a => a[j].AMOUNTRECEIVABLE, new {id="["+j+"].AMOUNTRECEIVABLE", @Value= ViewBag.AmountReceive, @readonly="readonly", @class = "form-control tdfill decimal", required = "required",@style="border:none" })      
+                                 </td> 
+                                   <td>  
+                                   <a id="@ViewBag.EditId" onclick="return Edit(this.id)" href="#" style="margin-top:4px;margin-left:15px;"><span class="glyphicon glyphicon-edit"></span></a>
+                                   </td>
+                                       <td>
+                                 
+                                       </td>         
+                                </tr>  
+                                    i++;
+                                    j++;
+                                   
+                                }
+                                ViewBag.SumGrossInterest = String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C2}", SumGrossInterest.Value).Replace("$", string.Empty); 
+                               //block 28-Sep-17
+                               // ViewBag.SumSourceTax = String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C2}", SumSourceTax.Value).Replace("$", string.Empty);
+                               // ViewBag.totalNetInterest = String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C2}", SumNetInterest.Value).Replace("$", string.Empty);
+                               // ViewBag.AmountReceive = String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C2}", AmountReceive.Value).Replace("$", string.Empty);
+                            }          
+               
+                </tbody>
+               </table>
+  
+    
+    
+      <div class="from-group">
+        @{
+                Net = SumNetInterest - ExciseDuty - OthersCharge;
+                Total = AmountReceive - ExciseDuty - OthersCharge;
+
+                if (ViewBag.TaxUpOnGross > 0)
+                {
+                    ViewBag.Net = String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C2}", ViewBag.totalNetInterest).Replace("$", string.Empty);
+                }
+                else
+                {
+                    ViewBag.Net = String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C2}", Net.Value).Replace("$", string.Empty);
+                }
+                if (ViewBag.PrincipalUpOnNet > 0)
+                {
+                    ViewBag.Total = String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C2}", ViewBag.PrincipalUpOnNet + ViewBag.totalNetInterest).Replace("$", string.Empty);
+                }
+                else
+                {
+                    ViewBag.Total = String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C2}", Total.Value).Replace("$", string.Empty);
+                }
+         }
+      
+         <div class="row">         
+          
+             <div class="col-md-3">
+               Apply Tax up on  Total  GrossInterest               
+             </div>
+             <div class="col-md-1">
+                 <input type="checkbox" class="btn btn-sm" id="TaxCheckBox" onclick="TaxEdit()" />
+             </div>
+
+             <div class="col-md-4 pull-left">
+                  <span>Tax Rate</span>
+                  <input type="text" class="from-control decimal" id="TaxRate" name="TaxRate" value="@ViewBag.TaxUpOnGross" readonly="readonly" onkeyup="SubmitDisable()" />                  
+                 <br />
+             </div>
+             <div class="col-md-4 pull-left">
+                 <span>Principal</span>
+                 <input type="text" class="from-control decimal" id="Principal" name="Principal" value="@ViewBag.PrincipalUpOnNet" readonly="readonly" onkeyup="SubmitDisable()" />
+             </div>
+        </div>
+          <div class="row">
+             <div class="form-group">
+              <input type="button" class="btn btn-Primary" id="@ViewBag.Calcu" tabindex="" onclick="return Calculation()" value="Calculate" style="margin-bottom: 3px;" />                           
+              <br />
+             </div>
+          </div>
+          
+           <div class="row">
+      
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+             Total  GrossInterest 
+            </div>
+            <div class="col=md-2">
+               <input readonly="true" required="required" type="text" style="border:none" name="SumGrossInterest" id="SumGrossInterest" value="@ViewBag.SumGrossInterest" />
+            </div>
+
+        </div>
+
+       <div class="row">
+        <div class="col-md-1">
+        </div>
+            <div class="col-md-2">
+             Total SourceTax 
+            </div>
+            <div class="col=md-2">
+               <input type="text" required="required" style="border:none" readonly="true" name="SumSourceTax" id="SumSourceTax" value="@ViewBag.SumSourceTax" />
+            </div>
+        </div>
+
+       <div class="row">
+        <div class="col-md-1">
+        </div>
+            <div class="col-md-2">
+            Total  NetInterest  
+            </div>
+            <div class="col=md-2">
+               <input type="text" style="border:none" readonly="true" id="SumNetInterestReceivable" value="@ViewBag.totalNetInterest" />  @* *@
+            </div>
+        </div>
+
+        
+       <div class="row">
+        <div class="col-md-1">
+        </div>
+            <div class="col-md-2">
+              Amount Receivable
+            </div>
+            <div class="col=md-2">
+               <input type="text" style="border:none" readonly="true" name="TotalAmountReceivable" id="TotalAmountReceivable" value="@ViewBag.AmountReceive" />
+            </div>
+        </div>
+
+
+        <div class="row">
+        <div class="col-md-1"></div>               
+            <div class="col-md-2">
+                Excise Duty 
+            </div>           
+            <div class="col=md-2">
+               <input type="text" style="border:none" readonly="true" name="ED" id="ED" value="@ViewBag.ExciseDuty" />  
+            </div>
+        </div>
+
+        <div class="row">
+        <div class="col-md-1"></div>               
+            <div class="col-md-2">
+                Others Charges
+            </div>           
+            <div class="col=md-2">
+               <input type="text" style="border:none" readonly="true" name="OC" id="OC"  value="@ViewBag.OthersCharge" />  
+            </div>
+        </div>
+
+        <div class="row">
+        <div class="col-md-1"></div>               
+            <div class="col-md-2">
+                Net Interest
+            </div>           
+            <div class="col=md-2">
+               <input type="text" style="border:none" readonly="true" name="FinalNetInterest" id="FinalNetInterest"  value="@ViewBag.Net" />  
+            </div>
+        </div>
+
+         <div class="row">
+        <div class="col-md-1"></div>               
+            <div class="col-md-2">
+                Principle & Interest
+            </div>           
+            <div class="col=md-2">
+               <input type="text" style="border:none" readonly="true" name="FinalAmountReceivable"  id="FinalAmountReceivable"  value="@ViewBag.Total" />  
+            </div>
+        </div>
+
+    </div>
+    <input id="submit" type="submit" class="btn btn-success" style="margin-left: 16px; margin-top: 13px;" value="Save" disabled />       
+     <a class="load btn btn-danger" href="~/#/FIXEDDEPOSIT/ListFIXEDDEPOSIT?lblbreadcum=" style="margin-top: 12px;">Close</a>
+</div>
+                
+}
+
+  <script>
+
+    function TaxEdit()  {
+
+        if ($('#TaxCheckBox').is(':checked')) {
+            IsTaxChecked = 1;
+            document.getElementById("TaxRate").readOnly = false;
+            document.getElementById("Principal").readOnly = false;            
+
+        } else {
+            IsTaxChecked = 0;
+            document.getElementById("TaxRate").readOnly = true;
+            document.getElementById("Principal").readOnly = true;
+            $('#TaxRate').val("");
+            $('#Principal').val("");
+        }
+    };
+    
+    function SubmitDisable() {
+        var submit = document.getElementById('submit');
+        if (submit.disabled == false) {
+            submit.disabled = true;
+        }
+    }
+    function Edit(e) {    
+       
+        SubmitDisable();
+        var res = e.split('.');
+        var taxRateId = "[" + res[0] + "].TAXRATE";       
+        document.getElementById(taxRateId).readOnly = false;      
+
+    }
+
+    function validateDecimal(evt, element) {   //evt
+
+        debugger;
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+      
+        var myString = element.value;
+        var mySplitResult = myString.split('.');
+      
+
+        if (charCode == 46 && mySplitResult.length == 2) {
+            return false;
+        }
+        if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+
+    }
+
+    function GetTotalRow()
+    {
+      return @j;
+    }
+
+    function GetExciseDuty() {
+        //this return initial excise duty value assigned when page load.we can notify the change of excise duty from view by comparing this value 
+      return @ExciseDuty;
+    }
+
+    function GetOthersCharge()
+    {
+        //this return initial Others Charge value assigned when page load.we can notify the change of excise duty from view by comparing this value 
+        return @OthersCharge;
+    }
+
+  
+
+    function Calculation()
+    {
+        var row = GetTotalRow();
+        var taxrateId;
+        var taxrateProperty;
+        var taxRateIsReadonly = 0;
+        var CountValidValue = 0;
+        var Value =0;
+        var PrincipleId;
+        var compoundId;
+        var RateofInterestId;
+        var GrossInterestId;
+        var SourceTaxId;
+        var NetInterestId;
+        var TotalAmountId;
+       
+
+        var RateofInterest=0;
+        var CompoundValue = 0;
+        var Principle = 0;
+        var Nextprinciple = 0;
+        var GrossInterest = 0;
+        var SourceTax = 0;
+        var NewSourceTax = 0;
+        var NetInterest = 0;
+        var TaxRate = 0;
+        var PrevExciseDuty = 0;
+        var PrevOthersCharge = 0;
+
+
+        var totalGrossInterest = 0;
+        var totalSourceTax=0;
+        var totalNetInterest = 0;
+        var totalAmountReceive = 0;
+
+        var Net = 0;
+        var Total = 0;
+
+        var IsTaxChecked = 0;
+      //  var taxrat = 0;
+                    
+        if ($('#TaxCheckBox').is(':checked')) {
+            IsTaxChecked = 1;
+        } else {
+            IsTaxChecked = 0;
+        }
+
+        //step 1 check any TaxRate field has readonly false
+        //step 2 if false check is its tax rate value is greater then 0   else error Invalid TaxRate
+        //if has tax rate then calculation 
+        //step 3 taxrate readonly true 
+        // Save btn enable
+        //else show message no change in tax rate 
+        for(var i=0;i<row;i++)
+        {
+            taxrateId = "[" + i + "].TAXRATE";
+            taxrateProperty = document.getElementById(taxrateId).readOnly;
+            TaxRate = document.getElementById(taxrateId).value;
+            // alert(taxrateProperty);
+            if (taxrateProperty == false)
+            {
+                taxRateIsReadonly += 1;
+                //no check is any taxrate value is isNan or Invalid
+                Value = parseFloat(TaxRate);
+                if (Value > 0) {
+                    CountValidValue += 1;
+                    //alert('CountValidValue' + CountValidValue + 'value :' + Value);
+                }
+                else {
+                    CountValidValue = 0;
+                    break;
+                }
+            }
+        }
+
+        //if  taxRateIsReadonly = true then show message no change 
+        if (taxRateIsReadonly ==0)
+        {           
+            alert('Currently no value change!!');
+            return false;
+        }
+
+        else if (CountValidValue == 0 && IsTaxChecked == 0) {
+            alert('Invalid tax Rate');
+            return false;
+        }
+        else {
+
+            //if all tax rate ok then check Excise duty and others charge is they have value or Nan            
+
+            //if (ExciseDuty >= 0 && OthersCharge >= 0) {
+                //calculation
+                //alert('calculation');
+                for (var i = 0; i < row; i++) {
+                    taxrateId = "[" + i + "].TAXRATE";
+                    RateofInterestId = "[" + i + "].RATEOFINTEREST";
+                    PrincipleId = "[" + i + "].PRINCIPALAMOUNT";
+                    compoundId = "[" + i + "].COMPOUNDVALUE";
+                    GrossInterestId = "[" + i + "].GROSSINTEREST";
+                    SourceTaxId = "[" + i + "].SOURCETAX";
+                    NetInterestId = "[" + i + "].NETINTERESTRECEIVABLE";
+                    TotalAmountId = "[" + i + "].AMOUNTRECEIVABLE";                  
+
+                    GrossInterest = parseFloat(document.getElementById(GrossInterestId).value.replace(/,/g, ''));
+
+                    //alert('gross value' + GrossInterest);
+
+                    if (i > 0) {
+                      
+                       // alert('principle' + document.getElementById(PrincipleId).value);
+                        Principle = parseFloat(document.getElementById(PrincipleId).value.replace(/,/g, '')); //get remaining principle   
+                        RateofInterest = parseFloat(document.getElementById(RateofInterestId).value.replace(/,/g, ''));// get rate of interest value
+                        CompoundValue = parseFloat(document.getElementById(compoundId).value.replace(/,/g, ''));// get Compound value Quarterly=4,Half Yearly=2,Yearly=1,Monthly=12
+
+                       // alert('principle removing comma'+Principle);
+                       
+                        if (Principle > 0 && Nextprinciple > 0 && RateofInterest >= 0 && CompoundValue > 0) {
+
+                            if (Principle != Nextprinciple) {
+                                document.getElementById(PrincipleId).value = addCommas(Nextprinciple.toFixed(2));
+                                //now calculate gross Interest of this new principle
+                                GrossInterest = parseFloat((Nextprinciple * RateofInterest / 100) / CompoundValue);
+
+                                document.getElementById(GrossInterestId).value = addCommas(GrossInterest.toFixed(2));
+                            }
+                        }
+
+                    }
+
+
+                    GrossInterest = parseFloat(document.getElementById(GrossInterestId).value.replace(/,/g, ''));
+                    TaxRate = parseFloat(document.getElementById(taxrateId).value);
+
+                    SourceTax = parseFloat(GrossInterest * TaxRate / 100);
+                    document.getElementById(SourceTaxId).value = addCommas(SourceTax.toFixed(2));
+
+                    NetInterest = parseFloat(GrossInterest - SourceTax);
+                    document.getElementById(NetInterestId).value = addCommas(NetInterest.toFixed(2));
+
+                    //get priciple of this row again because it may change at first condition
+                    Principle = parseFloat(document.getElementById(PrincipleId).value.replace(/,/g, ''));
+
+                    Nextprinciple = Principle + NetInterest;
+
+                    document.getElementById(TotalAmountId).value =addCommas(Nextprinciple.toFixed(2));
+
+                    //sum all
+                    totalGrossInterest += GrossInterest;
+                    totalSourceTax += SourceTax;
+                    totalNetInterest += NetInterest;
+                    totalAmountReceive = Nextprinciple;
+                    
+                }
+
+            
+
+                //calculation done now do all taxrate textbox readonly and enable save button
+
+                for (var i = 0; i < row; i++) {
+                    taxrateId = "[" + i + "].TAXRATE";
+                    taxrateProperty = document.getElementById(taxrateId).readOnly;
+
+                    if (taxrateProperty == false) {
+                        document.getElementById(taxrateId).readOnly = true;
+                    }
+                }
+
+            
+
+                var Ed = GetExciseDuty();
+                var OC = GetOthersCharge();
+            
+            //check taxrate
+                
+
+                if (IsTaxChecked == 1) 
+                {
+                    TaxRate = parseFloat($('#TaxRate').val());
+                    if (TaxRate > 0) {
+
+                        //first take this .If null then get second
+                      var   NewPrincipal =parseFloat($('#Principal').val());
+                                                  
+                           Principle = parseFloat(document.getElementById(PrincipleId).value.replace(/,/g, '')); //last principal
+                          
+                        totalSourceTax = totalGrossInterest * TaxRate / 100;
+                        totalNetInterest = totalGrossInterest - totalSourceTax;
+
+                        if (isNaN(NewPrincipal) || NewPrincipal < 0)
+                        {
+                            totalAmountReceive = Principle + totalNetInterest;
+                        }
+                        else
+                        {
+                            totalAmountReceive = NewPrincipal + totalNetInterest;
+                        }
+                        alert(totalAmountReceive);
+
+                    } else {
+
+                        alert('Input Tax Rate');
+                        return false;
+                    }
+                }
+
+                Net = parseFloat(totalNetInterest - Ed - OC);
+                Total = (totalAmountReceive - Ed - OC);
+           
+               // alert('Total :'+Total);
+
+                document.getElementById('SumGrossInterest').value = addCommas(totalGrossInterest.toFixed(2));
+                document.getElementById('SumSourceTax').value = addCommas(totalSourceTax.toFixed(2));
+                document.getElementById('SumNetInterestReceivable').value = addCommas(totalNetInterest.toFixed(2));
+                document.getElementById('TotalAmountReceivable').value = addCommas(totalAmountReceive.toFixed(2));
+
+                document.getElementById('FinalNetInterest').value = addCommas(Net.toFixed(2));
+                document.getElementById('FinalAmountReceivable').value = addCommas(Total.toFixed(2));
+
+                document.getElementById('submit').disabled = false;
+                return true;
+        }
+
+        return false;
+    }
+
+    function addCommas(nStr) {
+        
+
+        nStr += '';
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+
+       return x1 + x2;
+     }
+</script>
+
+             </div>
+    </div>
+
+    </div>
+
+
+<script type="text/javascript">
+    function ShowProcessingMsg() {
+
+        $('.loadingImage').show();
+
+    }
+    function HideProcessingMsg() {
+        $('.loadingImage').hide();
+    }
+
+</script>

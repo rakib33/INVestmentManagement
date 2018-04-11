@@ -1,0 +1,202 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.GOVBONDINTERESTSCHEDULE
+@{
+   
+    var result = ViewBag.Bond;   
+ }
+<div id="Replace">
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+    @*fixed Deposit markup*@
+
+    <div class="wrapper pl">
+        <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+        <div id="FixedDeposit">
+            <div class="alert alert-success mt20">
+                <button class="close" data-dismiss="alert" type="button">×</button>
+                @ViewBag.Message
+            </div>
+
+               <div class="formRow dgHeaderBk">
+                    <div class="container-fluid">
+                        
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-3">
+                                        <label>Bond Id:</label>
+                                        @result.BONDID
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-3">
+                                        <label>Issue date:</label>                                    
+                                           @result.BONDISSUEDATE.ToString("dd-MMM-yyyy")                                       
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-3">
+                                        <label>Opening date:</label>
+                                        @result.OPENINGDATE.ToString("dd-MMM-yyyy")
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-3">
+                                        <label>Matured date:</label>
+                                        @result.MATURITYDATE.ToString("dd-MMM-yyyy")
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-3">
+                                        <label>Face Value:</label>
+                                        @result.FACEVALUE.ToString("N") BDT
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-3">
+                                        <label>Cost Price:</label>                                    
+                                           @result.COSTPRICE.ToString("N") BDT                                        
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-3">
+                                        <label>gross Interest:</label>
+                                        @result.GROSSINTEREST.ToString("N") BDT
+                                    </div>
+
+                                    <div class="col-sm-3 col-md-3">
+                                        <label>Net Interest:</label>
+                                        @result.NETINTEREST.ToString("N")
+                                    </div>
+                                </div>
+                           
+                    </div>
+                </div>
+            @using (Ajax.BeginForm("WorkSheetNote", "Bond", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+            { 
+
+                <div id="BondInformation" class="container-fluid">
+
+                    <div class="widget ">
+                        <div class="whead">
+                            <h6>
+                                <label id="" title="">Work Sheet Information</label>
+                            </h6>
+                            <div class="clear">
+                            </div>
+                        </div>
+
+                        <div class="">
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+                                
+                                @Html.HiddenFor(model=>model.REFERENCE)
+                                @Html.HiddenFor(mode => mode.BOND_REFERENCE)
+
+                                <li class="form-group">
+                                    <label class = "control-label entrylable">MR No</label>                                    
+                                    @Html.TextBoxFor(model => model.MRNO, new { @required = "required", @class = "form-control", style = "width: 50%", @placeholder = "Enter Mr No" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.MRNO)
+                                </li>
+
+
+                                <li class="form-group">
+                                   <label class = "control-label entrylable">MR Date</label>    
+                                    <div class='input-group date'>
+                                    @Html.TextBoxFor(model => model.MRDATE,"{0:dd-MMM-yy}", new { @required = "required", @class = "datepicker form-control", style = "width: 100%", @value = "Select a Date", @placeholder = "Select a Date " })
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.MRDATE)
+                                </li>
+                           
+                                <li class="form-group">
+                                    <label class="control-label entrylable">Interest Received Date</label>
+                                    <div class='input-group date'>
+                                        @Html.TextBoxFor(model => model.INTERESTRECEIVEDDATE, "{0:dd-MMM-yy}", new { @required = "required", @class = "datepicker form-control", style = "width: 100%", @value = "Select a Date", @placeholder = "Select a Date " })
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.INTERESTRECEIVEDDATE)
+                                </li>
+                                     
+
+                                <li class="form-group">
+                                   <label class = "control-label entrylable">Remarks</label>  
+                                   
+                                    @Html.TextBoxFor(model => model.REMARKS, new { @class = "form-control", @value = "Enter any remarks", style = "width: 50%" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.REMARKS)
+                                </li>
+
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+                
+                
+                <div class="row">
+                    <div class="col-md-offset-1" style="margin-left:151px;">
+                    <button type="submit" class="btn btn-success" style="margin-left: 16px; margin-top: 13px;" tabindex="">Save</button>
+                    <a class="load btn btn-danger" href="~/#/Bond/ListInterestPaymentSchedule?reference=@result.REFERENCE" style="margin-top: 12px;">Close</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    @*End Fixed Deposit Markup*@
+    <p></p>
+    
+    <script src="~/Scripts/FormatNumber.js"></script>
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+    <script>
+
+        $(function () {
+           
+            $('.datepicker').datepicker({ dateFormat: formatDate('long') });
+
+        });
+
+    </script>
+
+    <script>
+        $(document).on('keypress', '.number', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+        $(document).on('keypress', '.decimal', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+
+
+    </script>
+
+</div>
+

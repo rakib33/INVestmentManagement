@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="RightShareReceivedStatement" targetNamespace="http://tempuri.org/RightShareReceivedStatement.xsd" xmlns:mstns="http://tempuri.org/RightShareReceivedStatement.xsd" xmlns="http://tempuri.org/RightShareReceivedStatement.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="RightShareReceivedStatement" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="RightShareReceivedStatement" msprop:Generator_UserDSName="RightShareReceivedStatement">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="RightShareReceived" msprop:Generator_TableClassName="RightShareReceivedDataTable" msprop:Generator_TableVarName="tableRightShareReceived" msprop:Generator_TablePropName="RightShareReceived" msprop:Generator_RowDeletingName="RightShareReceivedRowDeleting" msprop:Generator_RowChangingName="RightShareReceivedRowChanging" msprop:Generator_RowEvHandlerName="RightShareReceivedRowChangeEventHandler" msprop:Generator_RowDeletedName="RightShareReceivedRowDeleted" msprop:Generator_UserTableName="RightShareReceived" msprop:Generator_RowChangedName="RightShareReceivedRowChanged" msprop:Generator_RowEvArgName="RightShareReceivedRowChangeEvent" msprop:Generator_RowClassName="RightShareReceivedRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EFFECTIVEDATE" msprop:Generator_ColumnVarNameInTable="columnEFFECTIVEDATE" msprop:Generator_ColumnPropNameInRow="EFFECTIVEDATE" msprop:Generator_ColumnPropNameInTable="EFFECTIVEDATEColumn" msprop:Generator_UserColumnName="EFFECTIVEDATE" type="xs:string" minOccurs="0" />
+              <xs:element name="SHORTNAME" msprop:Generator_ColumnVarNameInTable="columnSHORTNAME" msprop:Generator_ColumnPropNameInRow="SHORTNAME" msprop:Generator_ColumnPropNameInTable="SHORTNAMEColumn" msprop:Generator_UserColumnName="SHORTNAME" type="xs:string" minOccurs="0" />
+              <xs:element name="PARHOLDING" msprop:Generator_ColumnVarNameInTable="columnPARHOLDING" msprop:Generator_ColumnPropNameInRow="PARHOLDING" msprop:Generator_ColumnPropNameInTable="PARHOLDINGColumn" msprop:Generator_UserColumnName="PARHOLDING" type="xs:string" minOccurs="0" />
+              <xs:element name="FREEBALANCE" msprop:Generator_ColumnVarNameInTable="columnFREEBALANCE" msprop:Generator_ColumnPropNameInRow="FREEBALANCE" msprop:Generator_ColumnPropNameInTable="FREEBALANCEColumn" msprop:Generator_UserColumnName="FREEBALANCE" type="xs:string" minOccurs="0" />
+              <xs:element name="PREMIUM" msprop:Generator_ColumnVarNameInTable="columnPREMIUM" msprop:Generator_ColumnPropNameInRow="PREMIUM" msprop:Generator_ColumnPropNameInTable="PREMIUMColumn" msprop:Generator_UserColumnName="PREMIUM" type="xs:string" minOccurs="0" />
+              <xs:element name="CURRENTBALANCE" msprop:Generator_ColumnVarNameInTable="columnCURRENTBALANCE" msprop:Generator_ColumnPropNameInRow="CURRENTBALANCE" msprop:Generator_ColumnPropNameInTable="CURRENTBALANCEColumn" msprop:Generator_UserColumnName="CURRENTBALANCE" type="xs:string" minOccurs="0" />
+              <xs:element name="MARKETPRICE" msprop:Generator_ColumnVarNameInTable="columnMARKETPRICE" msprop:Generator_ColumnPropNameInRow="MARKETPRICE" msprop:Generator_ColumnPropNameInTable="MARKETPRICEColumn" msprop:Generator_UserColumnName="MARKETPRICE" type="xs:string" minOccurs="0" />
+              <xs:element name="MARKETVALUE" msprop:Generator_ColumnVarNameInTable="columnMARKETVALUE" msprop:Generator_ColumnPropNameInRow="MARKETVALUE" msprop:Generator_ColumnPropNameInTable="MARKETVALUEColumn" msprop:Generator_UserColumnName="MARKETVALUE" type="xs:string" minOccurs="0" />
+              <xs:element name="AVGCOST" msprop:Generator_ColumnVarNameInTable="columnAVGCOST" msprop:Generator_ColumnPropNameInRow="AVGCOST" msprop:Generator_ColumnPropNameInTable="AVGCOSTColumn" msprop:Generator_UserColumnName="AVGCOST" type="xs:string" minOccurs="0" />
+              <xs:element name="REMARKS" msprop:Generator_ColumnVarNameInTable="columnREMARKS" msprop:Generator_ColumnPropNameInRow="REMARKS" msprop:Generator_ColumnPropNameInTable="REMARKSColumn" msprop:Generator_UserColumnName="REMARKS" type="xs:string" minOccurs="0" />
+              <xs:element name="ENTITLEMENT" msprop:Generator_ColumnVarNameInTable="columnENTITLEMENT" msprop:Generator_ColumnPropNameInRow="ENTITLEMENT" msprop:Generator_ColumnPropNameInTable="ENTITLEMENTColumn" msprop:Generator_UserColumnName="ENTITLEMENT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

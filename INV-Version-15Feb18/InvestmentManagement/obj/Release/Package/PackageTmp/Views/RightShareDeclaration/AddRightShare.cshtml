@@ -1,0 +1,161 @@
+﻿
+
+
+@model InvestmentManagement.InvestmentManagement.Models.RIGHTSHAREDECLARATION
+
+@*<div id="Replace">
+
+<h1>Hellow</h1>
+
+</div>*@
+
+<div id="Replace">
+
+        <script type="text/ecmascript">
+            $(function () {
+                $('.datepicker').datepicker({ dateFormat: formatDate('long') });
+            });
+
+    </script>
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+          @Session["currentPage"]
+        </span>
+
+    </div>
+   <ol class="breadcrumb">
+   @Html.Raw(@ViewBag.breadcum)
+    </ol>
+<div class="wrapper pl">
+    <div class="alert alert-success mt20">
+        <button class="close" data-dismiss="alert" type="button">×</button>
+         @ViewBag.Message
+    </div>
+    <div class="container-fluid">
+
+        <div class="widget col-md-5">
+            <div class="whead">
+                <h6>
+                    <label id="lblHeader" title="">@ViewBag.Header</label>
+                </h6>
+                <div class="clear">
+                </div>
+            </div>
+             @*if we want to page refresh then we remove below line from Ajax.Beginform and do menu option on layout page because if we remove this full page will reload and if no menu its cause exception
+             ,InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg"  , new { autocomplete = "off" }*@
+@using (Ajax.BeginForm("AddRightShare", "RightShareDeclaration", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+{
+  
+    @Html.HiddenFor(model=>model.REFERENCE)
+
+    <ul class="entryForm singleadd">
+
+     
+
+        <li class="form-group">
+            <label class = "control-label entrylable">INSTRUMENT</label>
+            <br />
+            @Html.DropDownListFor(model => model.INSTRUMENTACREF, (SelectList)ViewBag.InstrumentList, "Select an Instrument", new { @class = "control-label entrylable drpResize", @required = "required" })
+            <br />@**@
+            @Html.ValidationMessageFor(model => model.INSTRUMENTACREF)
+        </li>
+
+        <li class="form-group">
+            @Html.LabelFor(model => model.RATIO, new { @class = "control-label entrylable" })
+            <div class="row">  @*input-group*@
+               
+                <div class="col-md-3">
+                <input type="text" class="form-control decimal" />               
+                </div>
+                <div class="col-sm-1 text-center">:</div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(model => model.RATIO, new { @class = "form-control decimal", @onkeyup = "onchangeevent();" })
+                </div>  @*required = "required",*@
+
+            </div>
+            <br />
+            @Html.ValidationMessageFor(model => model.RATIO)
+        </li>      
+        
+        <li class="form-group">
+            @Html.LabelFor(model => model.PERCENTAGE, new { @class = "control-label entrylable" })
+            <div class="input-group">
+             @Html.TextBoxFor(model => model.PERCENTAGE, new { @class = "form-control decimal", @readonly="readonly"})
+            </div>
+            <br />  @*required = "required",*@
+            @Html.ValidationMessageFor(model => model.PERCENTAGE)
+        </li>       
+       
+         <li class="form-group">
+            <label class = "control-label entrylable">RECORD DATE</label>         
+            <div class='input-group date'>
+                @Html.TextBoxFor(model => model.RECORDDATE, new { @class = "datepicker form-control", @value = ViewBag.transactionDate, @placeholder = "Select a Date ", required = "required" })
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+            <br />
+            @Html.ValidationMessageFor(model => model.RECORDDATE)
+        </li>
+ 
+       
+        <li class="form-group">
+            <label class = "control-label entrylable">EFFECTIVE DATE</label>         
+            <div class='input-group date'>
+                @Html.TextBoxFor(model => model.ENTRYDATE, new { @class = "datepicker form-control", @value = ViewBag.transactionDate, @placeholder = "Select a Date ", required = "required" })
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+            <br />
+            @Html.ValidationMessageFor(model => model.ENTRYDATE)
+        </li>
+
+         <li class="form-group">
+            @Html.LabelFor(model => model.BUYRATE, new { @class = "control-label entrylable" })
+            <div class="input-group">
+                @Html.TextBoxFor(model => model.BUYRATE, new { @class = "form-control decimal", required = "required" })
+                <div class="input-group-addon">.00</div>
+            </div>
+            <br />
+            @Html.ValidationMessageFor(model => model.BUYRATE)
+        </li>
+
+        </ul>
+             <button type="submit" class="btn btn-success btnSingleAddForm">Save</button>
+             <a class="load btn btn-danger closeButton" href="~/#/RightShareDeclaration/ListRightShare?lblbreadcum=">Close</a> 
+      
+           
+            }
+
+        </div>
+
+
+    </div>
+</div>
+    <p></p>
+
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+        function onchangeevent() {
+            
+            var ratio = $('#RATIO').val();
+            ratio = ratio * 100;
+
+            if(isNaN(ratio))
+                $('#PERCENTAGE').val(0);
+            else
+                $('#PERCENTAGE').val(ratio);
+           
+        }
+
+    </script>
+
+
+</div>

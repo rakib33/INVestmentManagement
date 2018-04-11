@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="RenewalNoteLetter" targetNamespace="http://tempuri.org/RenewalNoteLetter.xsd" xmlns:mstns="http://tempuri.org/RenewalNoteLetter.xsd" xmlns="http://tempuri.org/RenewalNoteLetter.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="RenewalNoteLetter" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="RenewalNoteLetter" msprop:Generator_UserDSName="RenewalNoteLetter">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="NoteLetter" msprop:Generator_TableClassName="NoteLetterDataTable" msprop:Generator_TableVarName="tableNoteLetter" msprop:Generator_TablePropName="NoteLetter" msprop:Generator_RowDeletingName="NoteLetterRowDeleting" msprop:Generator_RowChangingName="NoteLetterRowChanging" msprop:Generator_RowEvHandlerName="NoteLetterRowChangeEventHandler" msprop:Generator_RowDeletedName="NoteLetterRowDeleted" msprop:Generator_UserTableName="NoteLetter" msprop:Generator_RowChangedName="NoteLetterRowChanged" msprop:Generator_RowEvArgName="NoteLetterRowChangeEvent" msprop:Generator_RowClassName="NoteLetterRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
+              <xs:element name="BRANCH" msprop:Generator_ColumnVarNameInTable="columnBRANCH" msprop:Generator_ColumnPropNameInRow="BRANCH" msprop:Generator_ColumnPropNameInTable="BRANCHColumn" msprop:Generator_UserColumnName="BRANCH" type="xs:string" minOccurs="0" />
+              <xs:element name="FDRNUMBER" msprop:Generator_ColumnVarNameInTable="columnFDRNUMBER" msprop:Generator_ColumnPropNameInRow="FDRNUMBER" msprop:Generator_ColumnPropNameInTable="FDRNUMBERColumn" msprop:Generator_UserColumnName="FDRNUMBER" type="xs:string" minOccurs="0" />
+              <xs:element name="MATURITYDATE" msprop:Generator_ColumnVarNameInTable="columnMATURITYDATE" msprop:Generator_ColumnPropNameInRow="MATURITYDATE" msprop:Generator_ColumnPropNameInTable="MATURITYDATEColumn" msprop:Generator_UserColumnName="MATURITYDATE" type="xs:string" minOccurs="0" />
+              <xs:element name="TENURE" msprop:Generator_ColumnVarNameInTable="columnTENURE" msprop:Generator_ColumnPropNameInRow="TENURE" msprop:Generator_ColumnPropNameInTable="TENUREColumn" msprop:Generator_UserColumnName="TENURE" type="xs:string" minOccurs="0" />
+              <xs:element name="TENURETERM" msprop:Generator_ColumnVarNameInTable="columnTENURETERM" msprop:Generator_ColumnPropNameInRow="TENURETERM" msprop:Generator_ColumnPropNameInTable="TENURETERMColumn" msprop:Generator_UserColumnName="TENURETERM" type="xs:string" minOccurs="0" />
+              <xs:element name="PRINCIPALAMOUNT" msprop:Generator_ColumnVarNameInTable="columnPRINCIPALAMOUNT" msprop:Generator_ColumnPropNameInRow="PRINCIPALAMOUNT" msprop:Generator_ColumnPropNameInTable="PRINCIPALAMOUNTColumn" msprop:Generator_UserColumnName="PRINCIPALAMOUNT" type="xs:string" minOccurs="0" />
+              <xs:element name="EXISTINGDEPOSIT" msprop:Generator_ColumnVarNameInTable="columnEXISTINGDEPOSIT" msprop:Generator_ColumnPropNameInRow="EXISTINGDEPOSIT" msprop:Generator_ColumnPropNameInTable="EXISTINGDEPOSITColumn" msprop:Generator_UserColumnName="EXISTINGDEPOSIT" type="xs:string" minOccurs="0" />
+              <xs:element name="PERCENTAGEOFFDR" msprop:Generator_ColumnVarNameInTable="columnPERCENTAGEOFFDR" msprop:Generator_ColumnPropNameInRow="PERCENTAGEOFFDR" msprop:Generator_ColumnPropNameInTable="PERCENTAGEOFFDRColumn" msprop:Generator_UserColumnName="PERCENTAGEOFFDR" type="xs:string" minOccurs="0" />
+              <xs:element name="CAPLIMIT" msprop:Generator_ColumnVarNameInTable="columnCAPLIMIT" msprop:Generator_ColumnPropNameInRow="CAPLIMIT" msprop:Generator_ColumnPropNameInTable="CAPLIMITColumn" msprop:Generator_UserColumnName="CAPLIMIT" type="xs:string" minOccurs="0" />
+              <xs:element name="OFFERRATE" msprop:Generator_ColumnVarNameInTable="columnOFFERRATE" msprop:Generator_ColumnPropNameInRow="OFFERRATE" msprop:Generator_ColumnPropNameInTable="OFFERRATEColumn" msprop:Generator_UserColumnName="OFFERRATE" type="xs:string" minOccurs="0" />
+              <xs:element name="PROPOSEDRATE" msprop:Generator_ColumnVarNameInTable="columnPROPOSEDRATE" msprop:Generator_ColumnPropNameInRow="PROPOSEDRATE" msprop:Generator_ColumnPropNameInTable="PROPOSEDRATEColumn" msprop:Generator_UserColumnName="PROPOSEDRATE" type="xs:string" minOccurs="0" />
+              <xs:element name="CONTACTPERSON" msprop:Generator_ColumnVarNameInTable="columnCONTACTPERSON" msprop:Generator_ColumnPropNameInRow="CONTACTPERSON" msprop:Generator_ColumnPropNameInTable="CONTACTPERSONColumn" msprop:Generator_UserColumnName="CONTACTPERSON" type="xs:string" minOccurs="0" />
+              <xs:element name="CHEQUENO" msprop:Generator_ColumnVarNameInTable="columnCHEQUENO" msprop:Generator_ColumnPropNameInRow="CHEQUENO" msprop:Generator_ColumnPropNameInTable="CHEQUENOColumn" msprop:Generator_UserColumnName="CHEQUENO" type="xs:string" minOccurs="0" />
+              <xs:element name="CHEQUEDATE" msprop:Generator_ColumnVarNameInTable="columnCHEQUEDATE" msprop:Generator_ColumnPropNameInRow="CHEQUEDATE" msprop:Generator_ColumnPropNameInTable="CHEQUEDATEColumn" msprop:Generator_UserColumnName="CHEQUEDATE" type="xs:string" minOccurs="0" />
+              <xs:element name="STATUS" msprop:Generator_ColumnVarNameInTable="columnSTATUS" msprop:Generator_ColumnPropNameInRow="STATUS" msprop:Generator_ColumnPropNameInTable="STATUSColumn" msprop:Generator_UserColumnName="STATUS" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

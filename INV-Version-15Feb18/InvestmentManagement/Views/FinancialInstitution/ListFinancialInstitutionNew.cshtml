@@ -1,0 +1,231 @@
+﻿@using System.Web.Helpers;
+@model IEnumerable<InvestmentManagement.InvestmentManagement.Models.FINANCIALINSTITUTION>
+
+<div id="replace">
+ 
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        <a class="load" role="menuitem" tabindex="-1" href="~/#/Home/Index?lblbreadcum=@Session["PreviousPage"]">Dashboard</a>
+
+        <li class="active">@Session["currentPage"]</li>
+    </ol>
+
+    @*Main Container*@
+    <div class="wrapper pl">
+         <img class="loadingImage" src="~/Images/loading.gif" style="display:none;" />
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+
+            <strong>Info !</strong>
+            @ViewBag.Message
+        </div>
+        <div class="container-fluid">
+
+
+
+            <div class="widget mb20">
+                <div class="whead">
+                    <h6>@Session["currentPage"]</h6>
+                    <div class="clear"></div>
+                </div>
+
+             
+
+                @*<div id="WebGrid" class="formRow noPad btbNone tScroll">*@
+
+                    <table id="FinancialInstitutionTable" class="ASPGrid">
+                        <thead style="border-top:1px solid black !important;">
+                            <tr>
+
+                            <th>
+                                  CODE
+                            </th>
+                            <th>
+                                NAME
+                            </th>
+                            <th>
+                                Swift Code
+                            </th>
+                             <th>
+                                 Institution Type
+                            </th>
+                                @*<th>
+                                    Cap Limit
+                                </th>*@
+                                <th></th>
+
+                            </tr>
+                            
+
+                        </thead>
+                        <tbody>
+                            @foreach (var financialModel in Model)
+                            {
+                             <tr>
+                                <td>
+                                   @financialModel.CODE 
+                                </td>
+                                <td>
+                                    @financialModel.NAME
+                                </td>
+                                <td>
+                                   @financialModel.SWIFTCODE
+                                </td>
+                                <td>
+                                   @financialModel.INSTITUTIONTYPE
+                                </td>
+                             @*   <td>
+                                    @financialModel.CAPLIMIT
+                                </td>*@  
+                                @* <td></td>*@
+                                 <td >
+
+                                     <div class="btn-group dropdown bdrNone">
+                            <a href="#" class="tablectrl_medium bDefault" data-toggle="dropdown"><span class="iconb" data-icon=""></span></a>
+                            <ul class="dropdown-menu pull-right cMbdr cMenu">
+                                @*<li><a href="#"><span class="icos-add"></span>Share</a></li>*@
+                               @* <li><a href=" @Url.Action("Edit","Home", new {id=@financialModel.REFERENCE})"><span class=" icon-redo"></span>Share*</a></li>*@
+                                <li>
+                                    @if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+                    {
+  
+                                                        @Ajax.ActionLink("Edit", "EditFinancialInstitution", "FinancialInstitution",new {id=@financialModel.REFERENCE},
+
+
+                        new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET",OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" })
+
+                    }
+                    else
+                    {
+                    <a class="load" role="menuitem" tabindex="-1" href="~/#/FinancialInstitution/EditFinancialInstitution?id=@financialModel.REFERENCE">Edit</a>
+                    }
+                      </li>
+                            </ul>
+                        </div>
+
+                                 </td>      
+                            </tr>
+                                
+                            }
+                        
+
+                        </tbody>
+
+
+                    </table>
+
+
+               @* </div>*@
+        
+@if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+{
+                 @Ajax.ActionLink("Add", "AddFinancialInstitution", "FinancialInstitution",
+
+
+    new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { @class = "btn btn-success m10" })
+
+}
+else
+{
+<a class=" load btn btn-success m10" role="menuitem" tabindex="-1" href="~/#/FinancialInstitution/AddFinancialInstitution">Add</a>
+}
+
+
+
+           @* </div>*@
+            <div class="clear"></div>
+        </div>
+
+    </div>
+
+</div>
+    </div>
+
+<script type="text/javascript">
+    
+    $(function () {
+
+
+        var oTable = $('#FinancialInstitutionTable').dataTable({
+            
+            "sPaginationType": "simple",
+            //"aoColumns": [
+            //  { "bSortable": true },
+            //  { "bSortable": true },
+            //  { "bSortable": true },
+            //   { "bSortable": true },
+            //   { "bSortable": true }
+            //],
+
+            "aLengthMenu": [20, 50, 100],
+            "iDisplayLength": 20
+
+        });
+
+    });
+</script>
+
+
+<script>
+    $(document).on('keypress', '.number', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+    $(document).on('keypress', '.decimal', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 ||event.keyCode==9) {
+            // let it happen, don't do anything
+        } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+
+
+</script>
+
+@*    <script>
+
+   
+        $(document).on('click', '.dropdown-menu li a', function (event)
+          {
+                var selText = $(this).text();
+                $('.hidden').val(selText);
+                $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+                event.preventDefault();
+                //event.stopPropagation();
+                //return false;
+            });
+
+     
+
+</script>*@
+
+
+<script type="text/javascript">
+    function ShowProcessingMsg() {
+
+        $('.loadingImage').show();
+
+    }
+    function HideProcessingMsg() {
+        $('.loadingImage').hide();
+    }
+
+</script>
+
+
+
+
+

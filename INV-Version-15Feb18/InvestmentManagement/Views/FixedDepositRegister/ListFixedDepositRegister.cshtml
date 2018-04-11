@@ -1,0 +1,486 @@
+﻿@model InvestmentManagement.Models.GridModel<InvestmentManagement.InvestmentManagement.Models.FIXEDDEPOSIT>
+@{
+    
+    DateTime? Today = DateTime.Now;   
+ }
+<div id="replace">
+   
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+    <div class="wrapper pl">
+        <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+
+            <strong>Info !</strong>
+            @ViewBag.Message
+             <strong>Integration Info ! @Html.Raw(@ViewBag.Info)</strong>       
+        </div>
+        <div class="container-fluid Grid-Container">
+
+
+
+            <div class="widget mb20">
+                <div class="whead">
+                    <h6>@Session["currentPage"]</h6>
+                    @* <select id="ddlPageSize">
+
+                        <option selected="selected">15</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                    <h6 style="float: right">Select Row Count</h6>*@
+                    <div class="clear"></div>
+                </div>
+
+                <div class="formRow dgHeaderBk">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="openingDate" class="col-sm-4 control-label">From Opening Date</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control datepicker datePickerWidth" id="openingDate" name="openingDate" placeholder="Select From Opening Date">                                         
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="matureDate" class="col-sm-4 control-label">To Matured Date</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control datepicker datePickerWidth" id="matureDate" name="matureDate" placeholder="Select To Matured Date">                                         
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="depositNumber" class="col-sm-4 control-label">Deposit No</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control datePickerWidth" id="depositNumber" name="depositNumber" placeholder="Insert Deposit No">                                         
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-6">
+                                 <div class="form-group">
+                                    <label for="FdrNo" class="col-sm-4 control-label">Financial Institution</label>
+                                    <div class="col-sm-8">
+                                          @Html.DropDownList("FINANCIALINSTITUTION_REFERENCE", (SelectList)ViewBag.financialInstitutionList, "Select All", new { @class = "control-label entrylable drpResize" })                                       
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="FdrNo" class="col-sm-4 control-label">Status</label>
+                                    <div class="col-sm-8">
+                                         @Html.DropDownList("STATUS", (SelectList)ViewBag.statuslist, "Select All", new { @class = "control-label entrylable drpResize" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="FdrNo" class="col-sm-4 control-label"></label>
+                                    <div class="col-sm-8">
+                                          <input type="button" id="btn" class="btn btn-primary dgBtn" value="Apply" onclick="return filterdata()" />  
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <script>
+                    function ChkAddClass() {
+                        if ($('.ASPGrid').height() >= 700) {
+                            $('#FixedDepositRegisterWebGrid').addClass("webgridscroll");
+
+                        }
+
+                        if ($('.ASPGrid').width() >= 1330) {
+                            $('#FixedDepositRegisterWebGrid').addClass("webgridHorizontalscroll");
+
+                        }
+                        var dir = $('#dir').val();
+                        var col = $('#col').val().replace(/\s/g, '');
+                        //alert(col);
+
+                        var header = $('th a[href*=' + col + ']');
+                        //alert(header.text());
+                        var countTh = document.getElementsByTagName('th').length;
+
+
+                        for (var i = 1; i <= countTh; i++) {
+
+                            var txtTh = $('.ASPGrid tr th:nth-child(' + i + ')').text().replace(/\s/g, '');
+
+                            if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Ascending') {
+                                //alert("");
+                                //alert(txtTh + "" + col);
+                                $(".ASPGrid tr th").addClass("sorting");
+
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("ascending");
+                                //$(".ASPGrid tr th:nth-child(1)").removeClass("sorting ascending");
+                                $(".ASPGrid tr th:nth-child(17)").removeClass("sorting ascending");
+
+                            }
+
+                            else if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Descending') {
+                                //alert(txtTh + "" + col);
+                                $(".ASPGrid tr th").addClass("sorting");
+
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("descending");
+                                //$(".ASPGrid tr th:nth-child(1)").removeClass("sorting descending");
+                                $(".ASPGrid tr th:nth-child(17)").removeClass("sorting descending");
+
+
+                            }
+                        }
+
+                        //change date time picker so that clicking Apply btn picker work 
+
+                        $(".datePicker").datepicker("destroy");
+                        $(".datePicker").removeClass("hasDatePicker");
+                        $(".datePicker").removeAttr("Disabled");
+                        $(".datepicker").datepicker({ dateFormat: formatDate('long') });
+                        jQuery.datepicker.dpDiv.appendTo(jQuery('body'));
+                        //$("select,.check :checkbox").not("#ddlPageSize").uniform();
+
+                        //$('.selector').not("#ddlPageSize").addClass('pull-right');
+                        //$('.checker').not("#ddlPageSize").addClass('dataGridCheckBox');
+                    }
+                </script>
+                <div id="FixedDepositRegisterWebGrid" class="formRow noPad btbNone tScroll">
+                    @{
+                        WebGrid grid = new WebGrid(rowsPerPage: Model.RowsPerPage, ajaxUpdateContainerId: "WebGrid", ajaxUpdateCallback: "ChkAddClass", sortFieldName: "sortdefault");
+                        grid.Bind(Model.DataModel, autoSortAndPage: false, rowCount: Model.RowsPerPage);
+				
+                        @grid.Table(columns: new[] {
+                 
+
+grid.Column(header: "Sl No", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),
+                                                
+grid.Column("CREATEDDATE", format:@<text>@(@item.CREATEDDATE==null?"":string.Format("{0:dd MMM yyyy}", item.CREATEDDATE))</text>, style:"textColumn",header:"Create Date"), //f=>f.CREATEDDATE.ToString("dd-MMM-yy")
+
+grid.Column("DEPOSITNUMBER",format: @<text><div>@(string.IsNullOrEmpty(item.DEPOSITNUMBER)==true?"":item.DEPOSITNUMBER)</div></text> ,style:"textColumn",header:"Deposit Number"),                   
+
+grid.Column("FINANCIALINSTITUTION.NAME",format: @<text><div>@(string.IsNullOrEmpty(item.FINANCIALINSTITUTION.NAME)==true?"":item.FINANCIALINSTITUTION.NAME)</div></text> , style:"textColumn",header:"Financial Institution"),
+
+                
+grid.Column("OPENINGDATE",format:@<text>@(@item.OPENINGDATE==null?"":string.Format("{0:dd MMM yyyy}", item.OPENINGDATE))</text>, style:"textColumn",header:"Opening Date"),
+
+grid.Column("MATURITYDATE",  format:@<text>@(@item.OPENINGDATE==null?"":string.Format("{0:dd MMM yyyy}", item.MATURITYDATE))</text>, style:"textColumn",header:"Maturity Date"),    
+
+grid.Column("PRINCIPALAMOUNT", format:@<text>@item.PRINCIPALAMOUNT.ToString("N")</text>, style:"numericColumn",header:"Principal Amt"),
+
+grid.Column("PRESENTPRINCIPALAMOUNT", format:@<text>@item.PRESENTPRINCIPALAMOUNT.ToString("N")</text>, style:"numericColumn",header:"Present Principal Amt"),                                        
+grid.Column("INTERESTMODE", style:"textColumn",header:"Interest Mode"), 
+grid.Column("TENURE", style:"numericColumn",header:"Tenure"),  
+grid.Column("TENURETERM", style:"textColumn",header:"Tenure Term"),              
+grid.Column("RATEOFINTEREST",  style:"numericColumn",header:"Interest Rate"), 
+grid.Column("NETINTERESTRECEIVABLE", format:@<text>@item.NETINTERESTRECEIVABLE.ToString("N")</text>, style:"numericColumn",header:"Net Interest"),                
+grid.Column("ACTUALINTERESTRECEIVED",  format:@<text>@(@item.ACTUALINTERESTRECEIVED==null?item.NETINTERESTRECEIVABLE.ToString("N"):item.ACTUALINTERESTRECEIVED.ToString("N"))</text>, style:"textColumn",header:"Actual Interest"),               
+grid.Column("STATUS", style:"textColumn",header:"Status"), 
+grid.Column("PROPOSEDACTION", style:"textColumn",header:"Action"), 
+
+grid.Column("POSTGL_STATUS", format:@<text>@item.STATUS</text>, style:"textColumn",header:"GL Status"),      
+
+                        grid.Column(header: "",  format:@<text>
+                        <div class="btn-group dropdown bdrNone">
+                            <a href="#" class="tablectrl_medium bDefault" data-toggle="dropdown"><span class="iconb" data-icon="?"></span></a>
+                            <ul class="dropdown-menu pull-right cMbdr cMenu">
+                                <li><a href="~/#/FixedDepositRegister/ViewOnlyFixedDeposit?id=@item.REFERENCE"><span class="icos-add"></span>View</a></li>
+                                <li><a href="~/#/FixedDepositRegister/AddRemark?id=@item.REFERENCE"><span class="icos-add"></span>Add Remarks</a></li>
+                                   <li>
+       @* @if (item.POSTGL_STATUS == "Pending")
+         {    *@               
+          @Ajax.ActionLink("Post To GL", "IntegrationOperation", "OracleIntegration", new {Code ="FDRIP" ,id = @item.REFERENCE },
+           new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" })
+        @* }*@
+       </li> 
+      @if (item.STATUS == "Encashed" || item.PROPOSEDACTION == "Encash")
+      {             
+          
+        
+                             
+       <li>  
+       <form action='@Url.Action("GenerateEncashedFDRReport","FixedDepositRegister",new { reference = @item.REFERENCE })', method='post'>
+       <input type="submit" class="btn btn-default btn-sm btn-plain" style="font-weight:400; border-color: rgba(0, 0, 0, 0) !important; color: #333 !important;" value="Encashment Worksheet" />
+       </form>
+       </li>                                   
+       }
+
+        @if (item.PROPOSEDACTION == "Renewal" || item.STATUS == "Renewed")
+        {
+        <li>
+         <form action='@Url.Action("GenerateRenewFDRReport","FixedDepositRegister",new { id = @item.REFERENCE })', method='post'>
+         <input type="submit" class="btn btn-default btn-sm btn-plain" style="font-weight:400; border-color: rgba(0, 0, 0, 0) !important; color: #333 !important;" value="Renewal Worksheet" />
+         </form>            
+        </li>        
+        }
+
+
+      @if (item.STATUS == "Approved" && item.MATURITYDATE<=Today)
+       {
+       if (item.PROPOSEDACTION != "Encash" && item.PROPOSEDACTION != "Renewal")
+        {
+          <li>
+          @if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+          {
+           @Ajax.ActionLink("Issue Renewal Note", "RenewDeposit", "FixedDepositRegister",new {id=@item.REFERENCE},
+           new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET",OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" })
+          }
+          else
+         {
+         <a class="load" role="menuitem" tabindex="-1" href="~/#/FixedDepositRegister/RenewDeposit?id=@item.REFERENCE">Issue Renewal Note</a>
+         }
+        </li>                      
+        <li>  
+           <a href="~/#/FixedDepositRegister/AddFDRNote?fdrRegiterRef=@item.REFERENCE"><span class="icos-add"></span>Issue Encashment Note</a>        
+        </li>
+     }    
+                                            
+   }
+    @if (item.STATUS == "Approved" || item.STATUS == "Encashed" || item.STATUS == "Renewed")
+     {
+     <li>
+     <form action="/FixedDepositRegister/GenerateFDRRegisterReport" method="post">@Html.Hidden("reference",null,new{Value=@item.REFERENCE})                  
+        <input class="btn-link" style="color:black; padding-top:3px;" value="Print" type="submit">
+     </form>
+ 
+     </li> 
+        
+
+     }
+       
+
+        @if (item.STATUS == "Approved" && item.PROPOSEDACTION == null)
+          {
+            <li>
+            @Ajax.ActionLink("Interest Break Down", "FixedDepositInterestBreakDown", "FixedDeposit", new { id = @item.REFERENCE },
+            new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" })                                     
+            </li>
+            
+            //added 29-Nov-17 according sadi sir
+            <li>               
+              <form action='@Url.Action("PrintRenewalNoteLetter", "FixedDepositRegister", new { FixedDepositRef = @item.REFERENCE })', method='post'>
+               <input type="text" name="providedate" class="form-control datepicker datePickerWidth" placeholder="provide date" required="required" />
+               <input type="submit" class="btn btn-default btn-sm btn-plain" style="border-color: rgba(0, 0, 0, 0) !important; color: #333 !important; padding-bottom: 0px" value="Print Renewal Note Letter" />
+               </form>
+            </li>
+            <li>
+                <form action='@Url.Action("PrintRenewalNoteList", "FixedDepositRegister", new { FixedDepositRef = @item.REFERENCE })', method='post'>
+                    <input type="text" name="GivenDate"  class="form-control datepicker datePickerWidth" placeholder="provide date" required="required" />     
+                    <input type="text" name="ProposedRate" class="form-control datePickerWidth" placeholder="Proposed Rate" />  
+                    <input type="text" name="ProposedAction" class="form-control datePickerWidth" placeholder="Proposed Action" />              
+                    <input  class="btn btn-default btn-sm btn-plain" style="border-color: rgba(0, 0, 0, 0) !important; color: #333 !important;" value="Renewal Note"  type="submit">
+                </form>
+            </li>
+            <li>
+              <form action='@Url.Action("GenerateEncashmentLetterCopy", "FixedDepositRegister", new { FixedDepositRef = @item.REFERENCE })', method='post'>
+                <input type="text" name="GivenDate" class="form-control datepicker datePickerWidth" placeholder="provide date" required="required" />
+                <input type="submit" class="btn btn-default btn-sm btn-plain" style="border-color: rgba(0, 0, 0, 0) !important; color: #333 !important;" value="Print Encashment Letter" />
+               </form>
+            </li>
+            <li>
+                <form action='@Url.Action("GenerateEncashmentNoteListCopy", "FixedDepositRegister", new { FixedDepositRef = @item.REFERENCE })', method='post'>
+                 <input type="text" name="ProposedRate" class="form-control datePickerWidth" placeholder="Proposed Rate" />  
+                 <input type="text" name="ProposedAction" class="form-control datePickerWidth" placeholder="Proposed Action" />     
+                 <input type="text" name="GivenDate" class="form-control datepicker datePickerWidth" placeholder="provide date" required="required" />                   
+                 <input type="submit" class="btn btn-default btn-sm btn-plain" style="border-color: rgba(0, 0, 0, 0) !important; color: #333 !important;" value="Encashment Note" />
+                </form>
+            </li>
+           //End 29-Nov-17 according sadi sir
+          }
+
+
+    </ul>
+      </div>
+       </text>)
+                },
+                         tableStyle: "ASPGrid",
+                         htmlAttributes: new { cellspacing = "0", border = "0" },
+
+              footer: @<ul class="pagination">
+     </ul>
+
+                         );
+                        @Html.Hidden("dir", grid.SortDirection)
+                        @Html.Hidden("col", grid.SortColumn)
+                    }
+                </div>
+                @using (Html.BeginForm("GenerateFDRRegisterReport", "FixedDepositRegister"))
+                {                         
+                 <input type="submit" class="btn btn-primary dgBtn" value="Print" />                      
+                }
+               
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+
+    <script>
+
+     
+        function filterdata() {
+         
+            try{
+                $('.loadingImage').show();              
+
+                var filterstring = $('#txtCode').val();
+                var _showOpeningDate;
+                var _showMatureDate;
+
+                if ($('#chkopeningDate').prop('checked')) {
+                    _showOpeningDate = "all";
+                } else {
+                    _showOpeningDate = "";
+                }
+
+                if ($('#chkmatureDate').prop('checked')) {
+                    _showMatureDate = "all";
+                } else {
+                    _showMatureDate = "";
+                }
+                var _depositNumber = document.getElementById("depositNumber").value;
+              
+                //var a = 1;
+               
+                //$('.loadingImage').hide();
+         
+                console.log('brfore hit deposit' + _depositNumber);              
+
+            
+                $.ajax({
+                    url: '@Url.Action("ListFixedDepositRegister", "FixedDepositRegister")',
+                    contentType: 'application/html; charset=utf-8',
+                    type: 'GET',
+                    dataType: 'html',
+                    data: {
+                        openingDate: $('#openingDate').val(),
+                        FINANCIALINSTITUTION_REFERENCE: $("#FINANCIALINSTITUTION_REFERENCE").val(),
+                        STATUS: $("#STATUS").val(),
+                        matureDate: $("#matureDate").val(),
+                        showOpeningDate:_showOpeningDate,
+                        showMatureDate:_showMatureDate,
+                        depositNumber: _depositNumber,
+                    },
+                }).success(function (result) {
+                    console.log('success');
+
+
+                    var getHTML = $(result);
+
+                    
+                    
+                    $('#FixedDepositRegisterWebGrid').empty();
+                    $('#FixedDepositRegisterWebGrid').html($('#FixedDepositRegisterWebGrid', getHTML));                    
+
+                    //$('#replace').empty();
+                    //$('#replace').html(result);
+
+                    _depositNumber = "";               
+                    ChkAddClass();
+                    $('.loadingImage').hide();
+
+                    console.log('complete');
+
+                }).error(function (xhr, status) {
+                   // console.log('error\n :'+xhr.responseText)
+                    console.log(xhr.error);
+                    //hide the loading image
+                    $('.loadingImage').hide();
+
+                    //alert(xhr.responseText);
+
+              
+                });
+            }
+            catch(err)
+            {
+                console.log(err.message);
+            }
+         
+        }
+
+    </script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        if ($('.ASPGrid').height() >= 700) {
+            $('#FixedDepositRegisterWebGrid').addClass("webgridscroll");
+        }
+        if ($('.ASPGrid').width() >= 1000) {
+            $('#FixedDepositRegisterWebGrid').addClass("webgridHorizontalscroll");
+
+        }
+        $(".ASPGrid tr th").addClass("sorting");
+
+        $(".ASPGrid tr th:nth-child(17)").removeClass("sorting");
+
+        $('.not-active').bind('click', false);
+
+
+        });
+       
+    
+</script>
+
+
+<script>
+    $(document).on('keypress', '.number', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+    $(document).on('keypress', '.decimal', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+</script>
+
+<script type="text/javascript">
+    function ShowProcessingMsg() {
+
+        $('.loadingImage').show();
+
+    }
+    function HideProcessingMsg() {
+        $('.loadingImage').hide();
+    }
+
+</script>
+
+
+
+<script>
+    $(function () {
+        $('.datepicker').datepicker({ dateFormat: formatDate('long') });
+
+
+    });
+
+
+</script>
+
+</div>

@@ -1,0 +1,312 @@
+﻿@using InvestmentManagement.InvestmentManagement.Models;
+
+
+
+@*<script src="~/Scripts/jquery-1.8.3.min.js"></script>*@
+<script src="~/Scripts/fileUploader.js"></script>
+<div class="contentTop">
+    <span class="pageTitle">
+        <span class=" glyphicon glyphicon-yen"></span>
+        @Session["currentPage"]
+    </span>
+
+</div>
+
+<ol class="breadcrumb">
+    <li><a class="load" role="menuitem" tabindex="-1" href="~/#/Home/Index?lblbreadcum=@Session["PreviousPage"]">Dashboard</a></li>
+
+    <li class="active">@Session["currentPage"]</li>
+</ol>
+
+
+<div class="wrapper pl">
+    <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+    <div class="alert alert-success mt20">
+        <button class="close" data-dismiss="alert" type="button">×</button>
+
+        <strong>Info !</strong>
+        @ViewBag.Message
+    </div>
+    <div class="container-fluid Grid-Container">
+
+        <!--Uploader Part -->
+        <div class="widget mb20">
+            <div class="whead">
+                <h6>CDBL File Upload</h6>
+                @*<select id="ddlPageSize">
+                                
+                                <option selected="selected">15</option>
+                                <option>50</option>
+                                <option>100</option>
+                            </select>
+                    <h6 style="float:right">Select Row Count</h6>*@
+                <div class="clear"></div>
+            </div>
+
+            <div class="formRow dgHeaderBk">
+                <div class="container-fluid">
+
+                    @foreach (var depoSet in  ViewBag.DepositorySettingList)
+                    {
+                         <div class="row" id="@(@depoSet.METHODNAME)rootId">
+                        <div class="col-md-2">
+                            <h5 class="selectPs">@depoSet.CODE-@depoSet.DESCRIPTION (@depoSet.FILENAME)</h5>
+                        </div>
+                        <div class="col-md-4" id="@(@depoSet.METHODNAME)inputDivId">
+                            <input type="file" required id="@depoSet.METHODNAME"  accept=".txt" class="inputLength" value="" />
+                        </div>
+                        <div class="col-md-2 " id="@(@depoSet.METHODNAME)btnDivId">
+                            <button type="submit" id="@(@depoSet.METHODNAME)Upload" class="btn btn-success">Upload</button>
+                            @*<input type="button" id="btn-ISUpload" class="btn btn-success  btnPosition" value="Upload" />*@
+                        </div>
+                        <div class=" col-md-3 " id="@(@depoSet.METHODNAME)pbDivId">
+                            <span class="progress progress-bar progress-bar-striped active " id="@(@depoSet.METHODNAME)PB" style="width: 0%;"></span>
+                        </div>
+                    </div>
+                    }
+
+                    @*<div class="row" id="TSrootId">
+                        <div class="col-md-2">
+                            <h5 class="selectPs">Transaction Settlements</h5>
+                        </div>
+                        <div class="col-md-3" id="TSinputDivId">
+                            <input type="file" required id="ImportSettlements" class="inputLength" multiple value="" />
+                        </div>
+                        <div class="col-md-2 " id="TSbtnDivId">
+                            <button type="submit" id="btn-ISUpload" class="btn btn-success">Upload</button>
+                          
+                        </div>
+                        <div class=" col-md-3 " id="TSpbDivId">
+                            <span class="progress progress-bar progress-bar-striped active " id="ImportSettlementsPB" style="width: 0%;"></span>
+                        </div>
+                    </div>*@
+
+                    <!-- -->
+                    <!--Corporate Action Receivable -->
+                   @* <div class="row" id="CARrootId">
+                        <div class="col-md-2">
+                            <h5 class="selectPs">CAR-Corporate Action Receivable</h5>
+                        </div>
+                        <div class="col-md-4" id="CARinputDivId">
+                            <input type="file" required id="ImportCorporateActionReceivable"  accept=".txt" class="inputLength" value="" />
+                        </div>
+                        <div class="col-md-2 " id="CARbtnDivId">
+                            <button type="submit" id="btn-CARUpload" class="btn btn-success">Upload</button>*@
+                            @*<input type="button" id="btn-ISUpload" class="btn btn-success  btnPosition" value="Upload" />*@
+                       @* </div>
+                        <div class=" col-md-3 " id="CARpbDivId">
+                            <span class="progress progress-bar progress-bar-striped active " id="ImportCorporateActionReceivablePB" style="width: 0%;"></span>
+                        </div>
+                    </div>*@
+                    <!--Corporate Action Receivable End -->
+
+
+                    <!--Corporate Action -->
+
+                   @* <div class="row" id="CArootId">
+                        <div class="col-md-2">
+                            <h5 class="selectPs">CAP-Corporate Action </h5>
+                        </div>
+                        <div class="col-md-4" id="CAinputDivId">
+                            <input type="file" required id="ImportCorporateAction" accept=".txt" class="inputLength"  value="" />
+                        </div>
+                        <div class="col-md-2 " id="CAbtnDivId">
+                            <button type="submit" id="btn-CAUpload" class="btn btn-success">Upload</button>*@
+                            @*<input type="button" id="btn-ISUpload" class="btn btn-success  btnPosition" value="Upload" />*@
+                        @*</div>
+                        <div class=" col-md-3 " id="CApbDivId">
+                            <span class="progress progress-bar progress-bar-striped active " id="ImportCorporateActionPB" style="width: 0%;"></span>
+                        </div>
+                    </div>*@
+
+
+
+                    <!-- Corporate Action End-->
+
+                    <!--Materilization & Dematerilization -->
+                    @*<div class="row" id="DematrootId">
+                        <div class="col-md-2">
+                            <h5 class="selectPs">MAT-Materilization & Dematerilization </h5>
+                        </div>
+                        <div class="col-md-4" id="DematinputDivId">
+                            <input type="file" required id="ImportDemats" accept=".txt" class="inputLength" multiple value="" />
+                        </div>
+                        <div class="col-md-2 " id="DematbtnDivId">
+                            <button type="submit" id="btn-DematUpload" class="btn btn-success">Upload</button>*@
+                            @*<input type="button" id="btn-ISUpload" class="btn btn-success  btnPosition" value="Upload" />*@
+                       @* </div>
+                        <div class=" col-md-3 " id="DematpbDivId">
+                            <span class="progress progress-bar progress-bar-striped active " id="ImportDematsPB" style="width: 0%;"></span>
+                        </div>
+                    </div>*@
+                    <!--Materilization & Dematerilization End -->
+
+                    <!--Transmission Out -->
+                   @* <div class="row" id="TOrootId">
+                        <div class="col-md-2">
+                            <h5 class="selectPs">TRANOUT-Transmission Out </h5>
+                        </div>
+                        <div class="col-md-4" id="TOinputDivId">
+                            <input type="file" required id="ImportTransmissionOut" accept=".txt" class="inputLength" multiple value="" />
+                        </div>
+                        <div class="col-md-2 " id="TObtnDivId">
+                            <button type="submit" id="btn-TOUpload" class="btn btn-success">Upload</button>*@
+                            @*<input type="button" id="btn-ISUpload" class="btn btn-success  btnPosition" value="Upload" />*@
+                       @* </div>
+                        <div class=" col-md-3 " id="TOpbDivId">
+                            <span class="progress progress-bar progress-bar-striped active " id="ImportTransmissionOutPB" style="width: 0%;"></span>
+                        </div>
+                    </div>*@
+                    <!--Transmission Out End -->
+                    <!-- Transmission In-->
+                    @*<div class="row" id="TINrootId">
+                        <div class="col-md-2">
+                            <h5 class="selectPs">TRANIN-Transmission In </h5>
+                        </div>
+                        <div class="col-md-4" id="TINinputDivId">
+                            <input type="file" required id="ImportTransmissionIn" accept=".txt" class="inputLength" multiple value="" />
+                        </div>
+                        <div class="col-md-2 " id="TINbtnDivId">
+                            <button type="submit" id="btn-TINUpload" class="btn btn-success">Upload</button>*@
+                            @*<input type="button" id="btn-ISUpload" class="btn btn-success  btnPosition" value="Upload" />*@
+                        @*</div>
+                        <div class=" col-md-3 " id="TINpbDivId">
+                            <span class="progress progress-bar progress-bar-striped active " id="ImportTransmissionInPB" style="width: 0%;"></span>
+                        </div>
+                    </div>*@
+                    <!-- Transmission In End-->
+                    
+                    <!--Pledge -->
+                    @*<div class="row" id="PledgerootId">
+                        <div class="col-md-2">
+                            <h5 class="selectPs">Pledge</h5>
+                        </div>
+                        <div class="col-md-4" id="PledgeinputDivId">
+                            <input type="file" required id="ImportPledge" accept=".txt" class="inputLength" multiple value="" />
+                        </div>
+                        <div class="col-md-2 " id="PledgebtnDivId">
+                            <button type="submit" id="btn-PledgeUpload" class="btn btn-success">Upload</button>*@
+                            @*<input type="button" id="btn-ISUpload" class="btn btn-success  btnPosition" value="Upload" />*@
+                       @* </div>
+                        <div class=" col-md-3 " id="PledgepbDivId">
+                            <span class="progress progress-bar progress-bar-striped active " id="ImportPledgePB" style="width: 0%;"></span>
+                        </div>
+                    </div>*@
+                    <!--Pledge End -->
+                    <!--Share Transfer In -->
+                     @*<div class="row" id="STIrootId">
+                        <div class="col-md-2">
+                            <h5 class="selectPs">BOIN-Share Transfer(IN)</h5>
+                        </div>
+                        <div class="col-md-4" id="STIinputDivId">
+                            <input type="file" required id="ImportSecurityTransfer" accept=".txt" class="inputLength" multiple value="" />
+                        </div>
+                        <div class="col-md-2 " id="STIbtnDivId">
+                            <button type="submit" id="btn-STIUpload" class="btn btn-success">Upload</button>*@
+                            @*<input type="button" id="btn-ISUpload" class="btn btn-success  btnPosition" value="Upload" />*@
+                       @* </div>
+                        <div class=" col-md-3 " id="STIpbDivId">
+                            <span class="progress progress-bar progress-bar-striped active " id="ImportSTIPB" style="width: 0%;"></span>
+                        </div>
+                    </div>*@
+
+                    <!--Share Transfer In  End-->
+                    <!--Share Transfer Out -->
+                   @* <div class="row" id="STOrootId">
+                        <div class="col-md-2">
+                            <h5 class="selectPs">BOOUT-Share Transfer(Out)</h5>
+                        </div>
+                        <div class="col-md-4" id="STOinputDivId">
+                            <input type="file" required id="ImportSecurityTransferOut" accept=".txt" class="inputLength" multiple value="" />
+                        </div>
+                        <div class="col-md-2 " id="STObtnDivId">
+                            <button type="submit" id="btn-STOUpload" class="btn btn-success">Upload</button>*@
+                            @*<input type="button" id="btn-ISUpload" class="btn btn-success  btnPosition" value="Upload" />*@
+                       @* </div>
+                        <div class=" col-md-3 " id="STOpbDivId">
+                            <span class="progress progress-bar progress-bar-striped active " id="ImportSTOPB" style="width: 0%;"></span>
+                        </div>
+                    </div>*@
+
+                    <!-- Share Transfer Out  End-->
+                    <!-- ImportChnageOfOwnershipIn-->
+                    @*<div class="row" id="COIrootId">
+                        <div class="col-md-2">
+                            <h5 class="selectPs">CHIN-Chnage Of Ownership(IN)</h5>
+                        </div>
+                        <div class="col-md-4" id="COIinputDivId">
+                            <input type="file" required id="ImportChnageOfOwnershipIn" accept=".txt" class="inputLength" multiple value="" />
+                        </div>
+                        <div class="col-md-2 " id="COIbtnDivId">
+                            <button type="submit" id="btn-COIUpload" class="btn btn-success">Upload</button>*@
+                            @*<input type="button" id="btn-ISUpload" class="btn btn-success  btnPosition" value="Upload" />*@
+                        @*</div>
+                        <div class=" col-md-3 " id="COIpbDivId">
+                            <span class="progress progress-bar progress-bar-striped active " id="ImportCOIPB" style="width: 0%;"></span>
+                        </div>
+                    </div>*@
+                    <!-- -->
+                    <!-- -->
+                @*    <div class="row" id="COOrootId">
+                        <div class="col-md-2">
+                            <h5 class="selectPs">CHOUT-Chnage Of Ownership(OUT)</h5>
+                        </div>
+                        <div class="col-md-4" id="COOinputDivId">
+                            <input type="file" required id="ImportChnageOfOwnershipOut" accept=".txt" class="inputLength" multiple value="" />
+                        </div>
+                        <div class="col-md-2 " id="COObtnDivId">
+                            <button type="submit" id="btn-COOUpload" class="btn btn-success">Upload</button>*@
+                            @*<input type="button" id="btn-ISUpload" class="btn btn-success  btnPosition" value="Upload" />*@
+                       @* </div>
+                        <div class=" col-md-3 " id="COOpbDivId">
+                            <span class="progress progress-bar progress-bar-striped active " id="ImportCOOPB" style="width: 0%;"></span>
+                        </div>
+                    </div>*@
+                    <!-- -->
+                     @* <div class="row" id="DRrootId">
+                        <div class="col-md-2">
+                            <h5 class="selectPs">DVR-Dividends Receivable</h5>
+                        </div>
+                        <div class="col-md-4" id="DRinputDivId">
+                            <input type="file" required id="ImportDividendsReceivable" accept=".txt" class="inputLength" multiple value="" />
+                        </div>
+                        <div class="col-md-2 " id="DRbtnDivId">
+                            <button type="submit" id="btn-DRUpload" class="btn btn-success">Upload</button>*@
+                            @*<input type="button" id="btn-ISUpload" class="btn btn-success  btnPosition" value="Upload" />*@
+                        @*</div>
+                        <div class=" col-md-3 " id="DRpbDivId">
+                            <span class="progress progress-bar progress-bar-striped active " id="ImportDRPB" style="width: 0%;"></span>
+                        </div>
+                    </div>*@
+                    <!-- -->
+
+                     <!-- -->
+                   @* <div class="row" id="DProotId">
+                        <div class="col-md-2">
+                            <h5 class="selectPs">DVP-Dividend Processed</h5>
+                        </div>
+                        <div class="col-md-4" id="DPinputDivId">
+                            <input type="file" required id="ImportDividendProcessed" accept=".txt" class="inputLength" multiple value="" />
+                        </div>
+                        <div class="col-md-2 " id="DPbtnDivId">
+                            <button type="submit" id="btn-DPUpload" class="btn btn-success">Upload</button>*@
+                            @*<input type="button" id="btn-ISUpload" class="btn btn-success  btnPosition" value="Upload" />*@
+                       @* </div>
+                        <div class=" col-md-3 " id="DPpbDivId">
+                            <span class="progress progress-bar progress-bar-striped active " id="ImportDPPB" style="width: 0%;"></span>
+                        </div>
+                    </div>*@
+                     <!-- -->
+                     <!-- -->
+                     <!-- -->
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>

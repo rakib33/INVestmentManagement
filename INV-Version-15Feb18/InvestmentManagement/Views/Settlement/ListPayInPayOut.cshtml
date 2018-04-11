@@ -1,0 +1,373 @@
+﻿@model InvestmentManagement.Models.GridModel<InvestmentManagement.InvestmentManagement.Models.SettlementViewModel>
+
+<div id="replace">
+
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+            <script>
+                $(document).ready(function () {
+                    $(function () {
+
+                        $(".dateformat").datepicker({ dateFormat: formatDate('long') });
+                        $('.dateformat').datepicker('setDate', new Date());
+                    });
+                });
+</script>
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+ <div class="wrapper pl">
+         <img class="loadingImage" src="~/Images/loading.gif" style="display:none;" />
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            <strong>Info !</strong>
+            @ViewBag.Message
+        </div>
+        <div class="container-fluid Grid-Container">            
+            <div class="widget mb20">
+                <div class="whead">
+                     @*<h6>@Session["currentPage"]</h6>
+
+                      <select id="ddlPageSize">                                
+                                <option selected="selected">15</option>
+                                <option>50</option>
+                                <option>100</option>
+                      </select>
+
+                    <h6 style="float:right">Select Row Count</h6>*@
+                   
+                   <div class="clear"></div>
+                </div>
+            @*     @using (Html.BeginForm("ListPayInPayOut", "Settlement", FormMethod.Get))
+                 {
+                *@
+                
+              @using (Html.BeginForm("GenarateFile", "Settlement", FormMethod.Post))
+                 { 
+                <div class="formRow dgHeaderBk">
+                    <div class="container-fluid">
+                        <div class="col-md-4">
+                            Business Date :
+                            <input type="text" id="BusinessDate" class="inputArea dateformat" name="BusinessDate" required="required" />
+                        </div>
+                        <div class="col-md-2 pull-left">
+                            <input type="radio" name="PayIn" id="PayIn" class="SameOption" value="PayIn" checked="@ViewBag.PayIn" />
+                            PayIn
+                        </div>
+                        <div class="col-md-2 pull-left">
+                            <input type="radio" name="PayOut" id="PayOut" class="SameOption" value="PayOut" />
+                            Pay Out
+                        </div>
+
+                        <div class="col-md-2 pull-left">
+                            <input type="button" id="btn" class="btn btn-primary dgBtn" value="Apply" />
+                        </div>
+                        <div class="col-md-2 pull-right">
+                            <input type="submit" id="btn_Generate" class="btn btn-primary dgBtn" value="Generate" />
+                        </div>
+                    </div>
+                </div>
+               @*  }*@
+               <script>
+                    function ChkAddClass() {
+                       
+                        var dir = $('#dir').val();
+                        var col = $('#col').val().replace(/\s/g, '');
+                       //alert(col);
+                        
+                        var header = $('th a[href*='+col+']');
+                        //alert(header.text());
+                        var countTh = document.getElementsByTagName('th').length;
+
+
+                        for (var i = 1; i <= countTh; i++) {
+
+                            var txtTh = $('.ASPGrid tr th:nth-child(' + i + ')').text().replace(/\s/g, '');
+                            
+                            if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Ascending') {
+                                //alert("");
+                                //alert(txtTh + "" + col);
+                                $(".ASPGrid tr th").addClass("sorting");
+
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("ascending");
+                           
+
+                            }
+
+                            else if (txtTh.trim().toLowerCase() == col.toLowerCase() && dir.trim() == 'Descending') {
+                                //alert(txtTh + "" + col);
+                                $(".ASPGrid tr th").addClass("sorting");
+
+                                $('.ASPGrid tr th:nth-child(' + i + ')').addClass("descending");
+                            
+
+                            }
+                        }
+                        
+                        //$("select,.check :checkbox").not("#ddlPageSize").uniform();
+                        //$('.selector').not("#ddlPageSize").addClass('pull-right');
+                        //$('.checker').not("#ddlPageSize").addClass('dataGridCheckBox');
+                    }
+                </script>
+
+     
+                   
+       <div id="PortfolioWebGrid" class="formRow noPad btbNone tScroll">
+            @{
+      WebGrid grid = new WebGrid(rowsPerPage: Model.RowsPerPage, ajaxUpdateContainerId: "PortfolioWebGrid", ajaxUpdateCallback: "ChkAddClass", sortFieldName: "sortdefault");
+      grid.Bind(Model.DataModel, autoSortAndPage: false, rowCount: Model.RowsPerPage);
+				
+                @grid.Table(columns: new[] {
+              
+                grid.Column(header:"Sl No",style:"textColumn", format:@<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),                
+                grid.Column("BusinessDate",format:@<text>@(@item.BusinessDate ==null?"":string.Format("{0:dd MMM yyyy}", item.BusinessDate ))</text>, style:"textColumn",header:"Business Date"),                
+                grid.Column("investoracref",format:@<text>@item.investoracref</text>, style:"textColumn",header:"A/C Number"),                                                 
+                grid.Column("bonumber",format:@<text>@item.bonumber</text>, style:"textColumn",header:"BOID"),                  
+                grid.Column("shortname",format:@<text>@item.shortname</text>, style:"textColumn",header:"Instrument"),
+                grid.Column("isin",format:@<text>@item.isin</text>, style:"textColumn",header:"ISIN"),                 
+                grid.Column("ShareQuantity", format:@<text>@item.ShareQuantity.ToString("N")</text>, style:"numericColumn",header:"Share Quantity"), 
+               
+                grid.Column(header: "",  format:@<text>
+                <div class="btn-group dropdown bdrNone">
+                 <a href="#" class="tablectrl_medium bDefault" data-toggle="dropdown"><span class="iconb" data-icon=""></span></a>
+                   <ul class="dropdown-menu pull-right cMbdr cMenu">
+                     @*<li>
+                      @if (Request.RawUrl.Contains("X-Requested-With=XMLHttpRequest") || Request.AcceptTypes.Contains("*/*"))
+                      {  
+                      @Ajax.ActionLink("Edit", "EditScriptTransfer", "ScriptTransfer",new {Ref=@item.REFERENCE},
+                      new AjaxOptions() { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "GET",OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" })
+                      }
+                      else
+                      {
+                      <a class="load" role="menuitem" tabindex="-1" href="~/#/ScriptTransfer/EditScriptTransfer?Ref=@item.REFERENCE">Edit</a>
+                      }
+                   </li>*@
+                 </ul>
+               </div>
+               </text>)
+                },
+
+                tableStyle: "ASPGrid",
+                htmlAttributes: new { cellspacing = "0", border = "0" },
+
+                footer: @<ul class="pagination">
+  
+     </ul>
+
+                );
+                        @Html.Hidden("dir", grid.SortDirection)
+                        @Html.Hidden("col", grid.SortColumn)
+                    }
+                </div>
+       
+      @*<div class="row">
+           <div class="col-md-2">
+              <input type="text" id="Business_Date" name="Business_Date" class="inputArea dateformat" placeholder="Select Date" required="required" />
+          </div>
+          <div class="col-md-2">
+              <input type="radio" id="Pay_In" name="Pay_In" required="required" />
+          </div>
+            <div class="col-md-2">
+              <input type="radio" id="Pay_Out" name="Pay_Out" required="required" />
+          </div>
+          <div class="col-md-2 pull-right">
+              <input type="submit" id="btn_Generate" class="btn btn-primary dgBtn" value="Generate" />
+          </div>
+      </div>*@
+     
+                   
+  }
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(".ASPGrid tr th").addClass("sorting");       
+
+        $('.not-active').bind('click', false);
+
+        $('#path').on('change', function () {
+            var filePath = $(this).val();
+            console.log(filePath);
+        });
+
+        $('input[type=file]').change(function () {
+            console.log(this.files[0].mozFullPath);
+        });
+
+        $('input[type=radio]').change(function() {
+            // When any radio button on the page is selected,
+            // then deselect all other radio buttons.
+            $('input[type=radio]:checked').not(this).prop('checked', false);
+        });
+
+
+        $('#btn').on('click', function () {
+            $('.loadingImage').show();
+            var PayIn;
+            var PayOut;
+            if (document.getElementById('PayIn').checked) {
+                PayIn = true;
+            }
+            else
+            {
+                PayIn = false;
+            }
+            if (document.getElementById('PayOut').checked) {
+                PayOut = true;             
+            }
+            else {
+                PayOut = false;
+            }
+            $.get("/Settlement/ListPayInPayOut?BusinessDate=" + $('#BusinessDate').val() + "&PayIn=" + PayIn + "&PayOut=" + PayOut+"&rows=" + $("#ddlPageSize").val() + "", function (data) {
+                var getHTML = $(data);
+                $('#PortfolioWebGrid').empty();
+
+                $('#PortfolioWebGrid').html($('#PortfolioWebGrid', getHTML));
+                ChkAddClass();
+                $('.loadingImage').hide();
+            });
+     });
+
+   
+
+        $('#PayIn').on('click', function () {
+            if (document.getElementById('PayIn').checked)
+            {
+                document.getElementById('Pay_In').value = true;
+            }
+            else
+            {
+                document.getElementById('Pay_In').value = false;
+            }
+        });
+
+        $('#PayOut').on('click', function () {
+                 
+            if (document.getElementById('PayOut').checked) {
+                document.getElementById('Pay_Out').value = true;
+            }
+            else {
+                document.getElementById('Pay_Out').value = false;
+            }
+
+        });
+        $('#BusinessDate').on('click', function () {
+
+            document.getElementById('Business_Date').value = $("#BusinessDate").val();
+        });
+
+             
+       @* $('#btn_Generate').on('click', function () {
+            
+            var PayIn=false;
+            var PayOut=false;
+            if (document.getElementById('PayIn').checked) {
+                PayIn = true;
+            }
+            else if (document.getElementById('PayOut').checked) {
+                PayOut = true;
+            }
+            else {
+                alert('Select a PayIn or PayOut option and Business Date.');
+                return false;
+            }
+          
+            var businessDate = $('#BusinessDate').val();
+            var path = $('#path').val();
+            if (path === null || path === '') {
+                alert('Please set a file path.');
+                return false;
+            }
+
+            if (businessDate === null || businessDate==='') {
+                alert('Select a business date.');
+                return false;
+            }
+
+            $.ajax({
+                
+                url: '@Url.Action("GenarateFile","Settlement")', // to get the right path to controller from TableRoutes of Asp.Net MVC
+                //dataType: "json", //to work with json format
+                type: "POST", //to do a post request 
+                //contentType: 'application/json; charset=utf-8', //define a contentType of your request
+                cache: false, //avoid caching results
+                data: { BusinessDate: businessDate, PayIn: PayIn, PayOut: PayOut,filePath:path }, // here you can pass arguments to your request if you need
+                success: function (data) {
+                    // data is your result from controller
+                    if (data.success) {
+                        alert(data.message);
+                    }
+                },
+                error: function (xhr) {
+                    alert('error'+xhr.error);
+                }
+            });
+
+        });*@
+
+
+
+
+    });
+
+</script>
+
+
+<script>
+    $(document).on('keypress', '.number', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9) {
+            // let it happen, don't do anything
+        } else if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+    $(document).on('keypress', '.decimal', function (event) {
+
+        if (event.keyCode == 46 || event.keyCode == 8 ||event.keyCode==9) {
+            // let it happen, don't do anything
+        } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+
+    });
+
+</script>
+
+<script type="text/javascript">
+    function ShowProcessingMsg() {
+
+        $('.loadingImage').show();
+
+    }
+    function HideProcessingMsg() {
+        $('.loadingImage').hide();
+    }
+
+     $(document).ready(function () {
+            $(function () {
+
+                $("#txtCode").datepicker({ dateFormat: 'dd-M-yy', });
+                $('#txtCode').datepicker('setDate', new Date());
+
+                $("#Business_Date").datepicker({ dateFormat: 'dd-M-yy', });
+                $('#Business_Date').datepicker('setDate', new Date());
+                
+
+            });
+
+        });
+</script>
+
+
+</div>
+

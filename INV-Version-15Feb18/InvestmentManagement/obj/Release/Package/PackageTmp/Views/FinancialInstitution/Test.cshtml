@@ -1,0 +1,277 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.FINANCIALINSTITUTION
+
+
+
+
+<div id="Replace">
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+           FINANCIALINSTITUTION
+        </span>
+
+    </div>
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+
+    <li class="active">Dashboard</li>
+</ol>
+<div class="wrapper pl">
+    <div class="alert alert-success mt20">
+        <button class="close" data-dismiss="alert" type="button">×</button>
+         @ViewBag.Message
+    </div>
+    <div class="container-fluid">
+
+        <div class="widget col-md-5">
+            <div class="whead">
+                <h6>
+                    <label id="lblHeader" title="">@ViewBag.bredcum</label>
+                </h6>
+                <div class="clear">
+                </div>
+            </div>
+@using (Ajax.BeginForm("Index", "Home", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "DivStatus", OnSuccess = "OnClear()" }))
+{
+            <div class="">
+ <ul class="entryForm singleadd">
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.REFERENCE,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.REFERENCE,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.REFERENCE)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.REFERENCE)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.REFERENCE) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.CODE,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.CODE,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.CODE)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.CODE)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.CODE) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.NAME,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.NAME,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.NAME)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.NAME)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.NAME) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.SWIFTCODE,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.SWIFTCODE,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.SWIFTCODE)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.SWIFTCODE)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.SWIFTCODE) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.CAPLIMIT,new {@class="control-label entrylable"})
+			
+        
+        
+            <div class="input-group">
+            @Html.TextBoxFor(model => model.CAPLIMIT,new { @class="form-control decimal", @placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.CAPLIMIT)+" (Only Numeric)",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.CAPLIMIT)+"'" })
+		 <div class="input-group-addon">.00</div>
+         </div>
+	     <br />
+	    @Html.ValidationMessageFor(model => model.CAPLIMIT) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.NPLPERCENTAGE,new {@class="control-label entrylable"})
+			
+        
+        
+            <div class="input-group">
+            @Html.TextBoxFor(model => model.NPLPERCENTAGE,new { @class="form-control decimal", @placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.NPLPERCENTAGE)+" (Only Numeric)",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.NPLPERCENTAGE)+"'" })
+		 <div class="input-group-addon">.00</div>
+         </div>
+	     <br />
+	    @Html.ValidationMessageFor(model => model.NPLPERCENTAGE) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.TAXRATE,new {@class="control-label entrylable"})
+			
+        
+        
+            <div class="input-group">
+            @Html.TextBoxFor(model => model.TAXRATE,new { @class="form-control decimal", @placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.TAXRATE)+" (Only Numeric)",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.TAXRATE)+"'" })
+		 <div class="input-group-addon">.00</div>
+         </div>
+	     <br />
+	    @Html.ValidationMessageFor(model => model.TAXRATE) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.EXCISEDUTY,new {@class="control-label entrylable"})
+			
+        
+        
+            <div class="input-group">
+            @Html.TextBoxFor(model => model.EXCISEDUTY,new { @class="form-control decimal", @placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.EXCISEDUTY)+" (Only Numeric)",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.EXCISEDUTY)+"'" })
+		 <div class="input-group-addon">.00</div>
+         </div>
+	     <br />
+	    @Html.ValidationMessageFor(model => model.EXCISEDUTY) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.OTHERCHARGE,new {@class="control-label entrylable"})
+			
+        
+        
+            <div class="input-group">
+            @Html.TextBoxFor(model => model.OTHERCHARGE,new { @class="form-control decimal", @placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.OTHERCHARGE)+" (Only Numeric)",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.OTHERCHARGE)+"'" })
+		 <div class="input-group-addon">.00</div>
+         </div>
+	     <br />
+	    @Html.ValidationMessageFor(model => model.OTHERCHARGE) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.CREATEDBY,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.CREATEDBY,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.CREATEDBY)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.CREATEDBY)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.CREATEDBY) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.CREATEDDATED,new {@class="control-label entrylable"})
+			
+        
+        
+            
+                <div class='input-group date'>
+
+            @Html.TextBoxFor(model => model.CREATEDDATED,new { @class="datepicker form-control"})
+ <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                       
+                    </div>
+		
+	     <br />
+	    @Html.ValidationMessageFor(model => model.CREATEDDATED) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.LASTUPDATED,new {@class="control-label entrylable"})
+			
+        
+        
+            
+                <div class='input-group date'>
+
+            @Html.TextBoxFor(model => model.LASTUPDATED,new { @class="datepicker form-control"})
+ <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                       
+                    </div>
+		
+	     <br />
+	    @Html.ValidationMessageFor(model => model.LASTUPDATED) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.LASTUPDATEDBY,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.LASTUPDATEDBY,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.LASTUPDATEDBY)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.LASTUPDATEDBY)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.LASTUPDATEDBY) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.CONTACTNO2,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.CONTACTNO2,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.CONTACTNO2)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.CONTACTNO2)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.CONTACTNO2) 
+       
+	   </li>
+                        </ul>
+             <button type="submit" class="btn btn-success btnSingleAddForm">Save</button>
+             
+      
+            </div>
+}
+
+        </div>
+
+
+    </div>
+</div>
+    <p></p>
+
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+<script>
+
+    $(function () {
+        $('.datepicker').datepicker({ dateFormat: "dd/mm/yy" });
+       
+        $(".dropdown-menu li a").click(function (event) {
+            var selText = $(this).text();
+            $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+            event.preventDefault();
+        });
+
+    });
+
+</script>
+
+</div>
+

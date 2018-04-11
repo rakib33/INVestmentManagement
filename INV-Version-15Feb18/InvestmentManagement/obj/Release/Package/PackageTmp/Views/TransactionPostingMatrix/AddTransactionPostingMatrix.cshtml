@@ -1,0 +1,202 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.TRANSACTIONPOSTINGMATRIX
+
+
+
+
+<div id="Replace">
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+     <ol class="breadcrumb">
+ @Html.Raw(@ViewBag.breadcum)
+    </ol>
+    <div class="wrapper pl">
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            @ViewBag.Message
+        </div>
+        <div class="container-fluid">
+
+            <div class="widget">
+                <div class="whead">
+                    <h6>
+                        <label id="lblHeader" title="">@ViewBag.Header</label>
+                    </h6>
+                    <div class="clear">
+                    </div>
+                </div>
+                @using (Ajax.BeginForm("AddTransactionPostingMatrix", " TransactionPostingMatrix", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+                { 
+
+                    <div class="">
+
+                        <ul class="col-md-6 entryForm bottomNonePadding">
+                          
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.TRANSACTIONCODE, new { @class = "control-label entrylable" })                                
+                                @Html.TextBoxFor(model => model.TRANSACTIONCODE, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.TRANSACTIONCODE) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.TRANSACTIONCODE) + "'" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.TRANSACTIONCODE)
+
+                            </li>
+
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.DESCRIPTION, new { @class = "control-label entrylable" })
+                                @Html.TextBoxFor(model => model.DESCRIPTION, new { @class = "form-control", @placeholder = "Please Enter Your " + @Html.DisplayNameFor(model => model.DESCRIPTION) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.DESCRIPTION) + "'" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.DESCRIPTION)
+
+                            </li>
+
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.BSDEBITCONTROL, new { @class = "control-label entrylable" })
+                                <br />
+                                @Html.DropDownListFor(model => model.BSDEBITCONTROL, (SelectList)ViewBag.BSNAList,"Select a Transaction Head", new { @class = "control-label entrylable drpResize drpsize",@style="width:100% !important" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.BSDEBITCONTROL)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.BSCREDITCONTROL, new { @class = "control-label entrylable" })
+                                <br />
+                                @Html.DropDownListFor(model => model.BSCREDITCONTROL, (SelectList)ViewBag.BSNAList,"Select a Transaction Head", new { @class = "control-label entrylable drpResize drpsize",@style="width:100% !important" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.BSCREDITCONTROL)
+
+                            </li>
+
+
+                            <li style="margin-bottom: 28px; margin-top: 8px;">
+                                <button type="submit" class="btn btn-success doubleColumnButton" style="margin-top: 8px;" tabindex="">Save</button>
+                                <a class="load btn btn-danger closeButton" href="~/#/TRANSACTIONPOSTINGMATRIX/ListTRANSACTIONPOSTINGMATRIX?lblbreadcum=">Close</a>
+                            </li>
+
+                        </ul>
+                        <ul class="col-md-6 entryForm bottomNonePadding">
+
+                            <li class="form-group">
+                                @Html.LabelFor(model => model.PLDEBITCONTROL, new { @class = "control-label entrylable" })
+                                <br />
+                                @Html.DropDownListFor(model => model.PLDEBITCONTROL, (SelectList)ViewBag.PLNAList,"Select a Transaction Head", new { @class = "control-label entrylable drpResize drpsize",@style="width:100% !important" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.PLDEBITCONTROL)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.PLCREDITCONTROL, new { @class = "control-label entrylable" })
+                                <br />
+                                @Html.DropDownListFor(model => model.PLCREDITCONTROL, (SelectList)ViewBag.PLNAList,"Select a Transaction Head", new { @class = "control-label entrylable drpResize drpsize",@style="width:100% !important" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.PLCREDITCONTROL)
+
+                            </li>
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.BANKDEBITCONTROL, new { @class = "control-label entrylable" })
+                                <br />
+                                  @Html.DropDownListFor(model => model.BANKDEBITCONTROL, (SelectList)ViewBag.BSNAList,"Select a Transaction Head", new { @class = "control-label entrylable drpResize drpsize",@style="width:100% !important" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.BANKDEBITCONTROL)
+
+                            </li>
+                             
+                            <li class="form-group">
+
+                                @Html.LabelFor(model => model.BANKCREDITCONTROL, new { @class = "control-label entrylable" })
+                                <br />
+                                @Html.DropDownListFor(model => model.BANKCREDITCONTROL, (SelectList)ViewBag.BSNAList,"Select a Transaction Head", new { @class = "control-label entrylable drpResize drpsize",@style="width:100% !important" })
+
+                                <br />
+                                @Html.ValidationMessageFor(model => model.BANKCREDITCONTROL)
+
+                            </li>
+                             <li class="form-group">
+
+                                @Html.LabelFor(model => model.REMARKS, new { @class = "control-label entrylable" })
+                                 <input class="form-control" id="REMARKS" name="REMARKS" placeholder="Please Enter Your Remarks" type="text" maxlength="150">          <br />
+                                @Html.ValidationMessageFor(model => model.REMARKS)
+
+                            </li>
+                            
+                        </ul>
+
+
+
+
+                    </div>
+
+
+
+
+                }
+
+            </div>
+
+
+        </div>
+    </div>
+    <p></p>
+
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+    <script>
+
+        $(function () {
+            $('.datepicker').datepicker({ dateFormat: "dd/mm/yy" });
+
+            //$(".dropdown-menu li a").click(function (event) {
+            //var selText = $(this).text();
+            //$('.hidden').val(selText);
+            //$(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+            //event.preventDefault();
+            //});
+
+        });
+
+    </script>
+
+    <script>
+        $(document).on('keypress', '.number', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+        $(document).on('keypress', '.decimal', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+
+
+    </script>
+
+</div>
+

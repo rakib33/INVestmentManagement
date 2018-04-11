@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PurchaseNoteList" targetNamespace="http://tempuri.org/PurchaseNoteList.xsd" xmlns:mstns="http://tempuri.org/PurchaseNoteList.xsd" xmlns="http://tempuri.org/PurchaseNoteList.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="PurchaseNoteList" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="PurchaseNoteList" msprop:Generator_UserDSName="PurchaseNoteList">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="PurchaseNoteList" msprop:Generator_TableClassName="PurchaseNoteListDataTable" msprop:Generator_TableVarName="tablePurchaseNoteList" msprop:Generator_TablePropName="_PurchaseNoteList" msprop:Generator_RowDeletingName="PurchaseNoteListRowDeleting" msprop:Generator_RowChangingName="PurchaseNoteListRowChanging" msprop:Generator_RowEvHandlerName="PurchaseNoteListRowChangeEventHandler" msprop:Generator_RowDeletedName="PurchaseNoteListRowDeleted" msprop:Generator_UserTableName="PurchaseNoteList" msprop:Generator_RowChangedName="PurchaseNoteListRowChanged" msprop:Generator_RowEvArgName="PurchaseNoteListRowChangeEvent" msprop:Generator_RowClassName="PurchaseNoteListRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FinancialInstitution" msprop:Generator_ColumnVarNameInTable="columnFinancialInstitution" msprop:Generator_ColumnPropNameInRow="FinancialInstitution" msprop:Generator_ColumnPropNameInTable="FinancialInstitutionColumn" msprop:Generator_UserColumnName="FinancialInstitution" type="xs:string" minOccurs="0" />
+              <xs:element name="FIBranch" msprop:Generator_ColumnVarNameInTable="columnFIBranch" msprop:Generator_ColumnPropNameInRow="FIBranch" msprop:Generator_ColumnPropNameInTable="FIBranchColumn" msprop:Generator_UserColumnName="FIBranch" type="xs:string" minOccurs="0" />
+              <xs:element name="PrincipalAmount" msprop:Generator_ColumnVarNameInTable="columnPrincipalAmount" msprop:Generator_ColumnPropNameInRow="PrincipalAmount" msprop:Generator_ColumnPropNameInTable="PrincipalAmountColumn" msprop:Generator_UserColumnName="PrincipalAmount" type="xs:string" minOccurs="0" />
+              <xs:element name="Period" msprop:Generator_ColumnVarNameInTable="columnPeriod" msprop:Generator_ColumnPropNameInRow="Period" msprop:Generator_ColumnPropNameInTable="PeriodColumn" msprop:Generator_UserColumnName="Period" type="xs:string" minOccurs="0" />
+              <xs:element name="OfferRate" msprop:Generator_ColumnVarNameInTable="columnOfferRate" msprop:Generator_ColumnPropNameInRow="OfferRate" msprop:Generator_ColumnPropNameInTable="OfferRateColumn" msprop:Generator_UserColumnName="OfferRate" type="xs:string" minOccurs="0" />
+              <xs:element name="ExisxtingDeposit" msprop:Generator_ColumnVarNameInTable="columnExisxtingDeposit" msprop:Generator_ColumnPropNameInRow="ExisxtingDeposit" msprop:Generator_ColumnPropNameInTable="ExisxtingDepositColumn" msprop:Generator_UserColumnName="ExisxtingDeposit" type="xs:string" minOccurs="0" />
+              <xs:element name="CapLimit" msprop:Generator_ColumnVarNameInTable="columnCapLimit" msprop:Generator_ColumnPropNameInRow="CapLimit" msprop:Generator_ColumnPropNameInTable="CapLimitColumn" msprop:Generator_UserColumnName="CapLimit" type="xs:string" minOccurs="0" />
+              <xs:element name="FDRPercentage" msprop:Generator_ColumnVarNameInTable="columnFDRPercentage" msprop:Generator_ColumnPropNameInRow="FDRPercentage" msprop:Generator_ColumnPropNameInTable="FDRPercentageColumn" msprop:Generator_UserColumnName="FDRPercentage" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

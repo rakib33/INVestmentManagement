@@ -1,0 +1,208 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.FINANCIALINSTITUTION
+
+<div id="Replace"> 
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.breadcum)
+    </ol>
+
+    @*Main Container*@
+    <div class="wrapper pl">
+        <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+        <div class="alert alert-success mt20">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+
+            <strong>Info !</strong>
+            @ViewBag.Message
+        </div>
+
+        <div class="container-fluid Grid-Container">
+
+            <div class="widget bottomborder">
+                <div class="whead">
+                    <h6>
+                        <label id="lblHeader" title="Add New Employee">@ViewBag.Header</label>
+                    </h6>
+                    <div class="clear">
+                    </div>
+                </div>
+                @using (Ajax.BeginForm("EditFinancialInstitution", "FinancialInstitution", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+                {
+                    foreach (var currency in ViewBag.Currency)
+                    {
+  
+                    <div class="entryForm">
+                        <ul class="col-md-6 entryForm">
+                            <li class="form-group">
+                                <label for="Code" class="control-label entrylable">Code</label>
+                                <input type="text" class="form-control"  id="Code" onfocus="this.select()" onmouseup="return false" name="Code" value="@Model.CODE" tabindex="1">
+                            </li>
+                            <li class="form-group">
+                                <label for="Name" class="control-label entrylable">Name</label>
+                                <input type="text" class="form-control" id="Name" onfocus="this.select()" onmouseup="return false" name="Name" value="@Model.NAME" tabindex="2" required>
+                            </li>
+                            <li class="form-group">
+                                <label for="Swiftcode" class="control-label entrylable">Swift Code</label>
+                                <input type="text" class="form-control onlyNumeric" id="Swiftcode" onfocus="this.select()" onmouseup="return false" name="Swiftcode" value="@Model.SWIFTCODE" tabindex="3">
+                            </li>
+                          
+
+                               <li class="form-group bottomborder">
+                                <label for="CONTACTNO" class="control-label entrylable">Camel Rating</label>
+                                <input type="text" class="form-control" id="CAMELRATING" placeholder="Camel Rating" value="@Model.CAMELRATING" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Camel Rating'" name="CAMELRATING" tabindex="4">
+                            </li>   
+
+                            <li class="form-group bottomborder">
+                                <label for="OFFERRATE1" class="control-label entrylable">Offer Rate 3 Month</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control decimal" id="OFFERRATE1" value="@Model.OFFERRATE1" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Offer Rate 3 Month'" name="OFFERRATE1"  tabindex="6">
+                                    <div class="input-group-addon">%</div>
+                                </div>                                
+                            </li> 
+                            <li class="form-group bottomborder">
+                                <label for="OFFERRATE2" class="control-label entrylable">Offer Rate 6 Month</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control decimal" id="OFFERRATE2" value="@Model.OFFERRATE2" placeholder="Offer Rate 6 Month" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Offer Rate 6 Month'" name="OFFERRATE2" tabindex="6">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                            </li>
+                            
+                            <li class="form-group bottomborder">
+                                <label for="OFFERRATE3" class="control-label entrylable">Offer Rate 12 Month</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control decimal" id="OFFERRATE3" value="@Model.OFFERRATE3" placeholder="Offer Rate 12 Month" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Offer Rate 12 Month'" name="OFFERRATE3" tabindex="6">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                            </li> 
+                             <li class="form-group bottomborder">
+                                <label for="Contact No" class="control-label entrylable">Selected</label>
+                                 <div class="col-md-2 pull-left">
+                                      <input type="checkbox"  name="ISSELECT" class="form-control" value="checked" tabindex="4"  @ViewBag.Selected>
+                                 </div>
+                               
+                            </li>
+
+                        </ul>
+
+
+                        <ul class="col-md-6 entryForm">
+                          
+                            <li class="form-group bottomborder">
+                              <label for="CONTACTPERSON" class="control-label entrylable">Contact Person</label>
+                              <input type="text" class="form-control" id="CONTACTPERSON" placeholder="Contact Person" value="@Model.CONTACTPERSON" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Contact Person'" name="CONTACTPERSON" tabindex="4">
+                            </li>
+
+                            <li class="form-group bottomborder">
+                                <label for="Contact No" class="control-label entrylable">Contact No</label>
+                                <input type="text" class="form-control" id="CONTACTNO" onfocus="this.select()" onmouseup="return false" name="CONTACTNO" value="@Model.CONTACTNO" tabindex="4">
+                            </li>
+
+                             <li class="form-group">
+                                <label for="NPLPercentage" class="control-label entrylable">NPL Percentage</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control decimal" required id="NPLPercentage onlyNumeric" onfocus="this.select()" onmouseup="return false" name="NPLPercentage" value="@Model.NPLPERCENTAGE" tabindex="6">
+                                    <div class="input-group-addon">.00</div>
+                                </div>
+                            </li>
+                            
+                            <li class="form-group">
+                                <label for="NPLPercentage" class="control-label entrylable">Tax Rate</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control decimal" required id="TAXRATE onlyNumeric" onfocus="this.select()" onmouseup="return false" name="TAXRATE" value="@Model.TAXRATE" tabindex="6">
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                            </li>
+                            
+                              <li class="form-group ">
+                                <label for="CapLimit" class="control-label entrylable">Cap Limit (Core)</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">@currency.CODE</div>
+
+                                    <input type="text" class="form-control decimal" required id="CapLimit" onfocus="this.select()" onmouseup="return false" name="CapLimit" value="@Model.CAPLIMIT" tabindex="5">
+                                    <div class="input-group-addon">.00</div>
+                                </div>
+                            </li>
+           
+                            <li class="form-group">
+                                <label for="ExciseDuty " class="control-label entrylable">Excise Duty</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">@currency.CODE</div>
+                                    <input type="text" class="form-control decimal" required id="ExciseDuty" onfocus="this.select()" onmouseup="return false" name="ExciseDuty" value="@Model.EXCISEDUTY" tabindex="7">
+                                    <div class="input-group-addon">.00</div>
+                                </div>
+                            </li>
+
+                          <li class="form-group">
+                                <label for="OtherCharge" class="control-label entrylable">Other Charge</label>
+                                <div class="input-group"> 
+                                    <div class="input-group-addon">@currency.CODE</div>                                   
+                                    <input type="text" class="form-control decimal" required id="OtherCharge" placeholder="Charge" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Charge'" name="OtherCharge" value="@Model.OTHERCHARGE" tabindex="8">
+                                    <div class="input-group-addon">.00</div>
+                                </div>
+                            </li>                          
+                           
+                    <li class="form-group bottomborder ">
+                    <label class=" control-label entrylable ">
+                        Institution Type :
+                    </label>
+                   
+                      <p style="margin:0 !important;"></p>
+                    <div class="btn-group">
+                      @Html.DropDownList("InstitutionType", (SelectList)ViewBag.statuslist, "Select All", new { @Value = ViewBag.SelectedInstitutionType, @class = "from-control control-label drpResize", @style = "width:100% !important" })
+                    
+                    </div>
+                     </li>
+
+                           
+             
+                            @Html.Hidden("REFERENCE", @Model.REFERENCE)
+                            @Html.Hidden("CREATEDDATED", @Model.CREATEDDATE)
+                        </ul>
+                        <button type="submit" class="btn btn-success lastli" tabindex="9">Update</button>
+                        <a class="load btn btn-danger closeButton" href="~/#/FinancialInstitution/ListFinancialInstitution?lblbreadcum=">Close</a>
+
+
+                    </div>
+                    }
+
+                }
+            </div>
+
+            @*<button id="target" type="submit" class="btn btn-success lastli" tabindex="9">test</button>*@
+        </div>
+    </div>
+
+    <p></p>
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+    <script type="text/javascript">
+        $(".load").click(function () {
+            $(".loadingImage").show();
+            var link = $(this).attr("href");
+            debugger;
+            $.get('<%= Url.Action(' + link + ') %>', {},
+                function (data) {
+                    $('#result').html(data);
+                    $('.loadingImage').hide();
+                });
+        });
+
+    </script>
+
+</div>

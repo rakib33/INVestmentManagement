@@ -1,0 +1,372 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.FIXEDDEPOSIT
+
+@{
+    TempData["RenewalFDR"] = ViewBag.RenewalFDR;
+    TempData["NewDeposit"] = ViewBag.NewDeposit; 
+    
+    
+    decimal? TaxRate = ViewBag.TaxRate;
+    string id = ViewBag.Reference as string; 
+}
+<style>
+ 
+    /*override RenewPrint class*/
+ .RenewPrint {
+    min-height: 32px;
+    margin-top: 158px !important;
+    /*margin-left: 85px !important;*/
+}
+
+ .RenewLetter {
+    min-height: 32px;
+    margin-top: 158px !important;
+    margin-left: 95px !important;
+}
+</style>
+
+<div id="Replace">
+
+    <script src="~/Scripts/calculationScript.js"></script>
+
+     <script type="text/ecmascript">
+
+         var RemoveJQUIDatepicker = function () {
+             $(".datePicker").datepicker("destroy");
+             $(".datePicker").removeClass("hasDatePicker");
+             $(".datePicker").removeAttr("Disabled");
+
+             console.log('destroy');
+         };
+
+         var SetJQUIDatePicker = function () {
+             $(".datepicker").datepicker({ dateFormat: formatDate('long') });
+             jQuery.datepicker.dpDiv.appendTo(jQuery('body'));
+             console.log('Set');
+         }
+
+
+         $(function () {
+             $('.datepicker').datepicker({ dateFormat: formatDate('long') });
+             console.log('renew datepicker from function');
+
+             RemoveJQUIDatepicker();
+             SetJQUIDatePicker();
+         });
+    </script>
+
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+
+    </ol>
+    <div class="wrapper pl">
+        <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+        <div id="FixedDeposit">
+            <div class="alert alert-success mt20">
+                <button class="close" data-dismiss="alert" type="button">×</button>
+                @ViewBag.Message
+            </div>
+                   
+          @*RenewFixedDeposit*@
+            
+            @using (Ajax.BeginForm("EditFDRRenewalNote", "FDRNote", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+            {                
+              
+                @Html.Hidden("REFERENCE", @Model.REFERENCE)
+
+                <div id="FixedDepositInformation" class="container-fluid">
+
+                    <div class="widget ">
+                        <div class="whead">
+                            <h6>
+                                <label id="" title="">Fixed Deposit Information</label>
+                            </h6>
+                            <div class="clear">
+                            </div>
+                        </div>
+
+                        <div class="">
+
+
+                            <div class="col-md-6 entryForm bottomNonePadding">
+
+                                <div class="row" style="background-color: #e8e8e8; margin-left: -1px; margin-right: -1px;">
+                                    <div class="col-md-4 col-md-offset-2">
+                                        @Html.LabelFor(model => model.OPENINGDATE, new { @class = "control-label entrylable entrylab" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(model => model.OPENINGDATE, Model.OPENINGDATE.Value.ToString("dd-MM-yyyy"), new { @class = "entrylable" })
+                                        @Html.Hidden("OPENINGDATE", @Model.OPENINGDATE)
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-left: -1px; margin-right: -1px;">
+                                    <div class="col-md-4 col-md-offset-2">
+                                        @Html.LabelFor(model => model.MATURITYDATE, new { @class = "control-label entrylable entrylab" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(model => model.MATURITYDATE, Model.MATURITYDATE.Value.ToString("dd-MM-yyyy"), new { @class = "entrylable" })
+                                        @Html.Hidden("MATURITYDATE", @Model.MATURITYDATE)
+                                    </div>
+                                </div>
+                                <div class="row" style="background-color: #e8e8e8; margin-left: -1px; margin-right: -1px;">
+                                    <div class="col-md-4 col-md-offset-2">
+                                        @Html.LabelFor(model => model.PRINCIPALAMOUNT, new { @class = "control-label entrylable entrylab" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(model => model.PRINCIPALAMOUNT, Model.PRINCIPALAMOUNT.Value.ToString("#,###.#0"), new { @class = "entrylable" })
+                                        @Html.Hidden("PRINCIPALAMOUNT", @Model.PRINCIPALAMOUNT)
+                                        @*<input id="PRINCIPALAMOUNT" type="hidden" value="50000" name="PRINCIPALAMOUNT" data-val-number="The field Principal Amount must be a number." data-val="true">*@
+
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-left: -1px; margin-right: -1px;">
+                                    <div class="col-md-4 col-md-offset-2">
+                                        @Html.LabelFor(model => model.TENURE, new { @class = "control-label entrylable entrylab" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(model => model.TENURE, Model.TENURE.ToString()+" "+Model.TENURETERM , new { @class = "entrylable" })
+                                    </div>
+                                </div>
+
+                                 <div class="row" style="background-color: #e8e8e8;margin-left: -1px; margin-right: -1px;">
+                                    <div class="col-md-4 col-md-offset-2">
+                                        @Html.LabelFor(model => model.INTERESTMODE, new { @class = "control-label entrylable entrylab" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(model => model.INTERESTMODE, Model.INTERESTMODE, new { @class = "entrylable" })
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                            <div class="col-md-6 entryForm bottomNonePadding">
+                                <div class="row" style="margin-left: -1px; margin-right: -1px;">
+                                    <div class="col-md-4 col-md-offset-2 ">
+                                        @Html.LabelFor(model => model.RATEOFINTEREST, new { @class = "control-label entrylable entrylab" })
+                                    </div>
+                                    <div class="col-md-5 ">
+                                        @Html.LabelFor(model => model.RATEOFINTEREST, Model.RATEOFINTEREST.Value.ToString("#,###.#0"), new { @class = "entrylable" })
+                                    </div>
+                                </div>
+                                <div class="row" style="background-color: #e8e8e8; margin-left: -1px; margin-right: -1px;">
+                                    <div class="col-md-4 col-md-offset-2">
+                                        @Html.LabelFor(model => model.COMPOUNDINTERESTINTERVAL, new { @class = "control-label entrylable entrylab" })
+                                    </div>
+                                    <div class="col-md-5">
+                                        @Html.LabelFor(model => model.COMPOUNDINTERESTINTERVAL, Model.COMPOUNDINTERESTINTERVAL, new { @class = "entrylable" })
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-left: -1px; margin-right: -1px;">
+                                    <div class="col-md-4 col-md-offset-2 active">
+                                        @Html.LabelFor(model => model.GROSSINTEREST, new { @class = "control-label entrylable entrylab" })
+                                    </div>
+                                    <div class="col-md-5">
+                                     @*   @Html.LabelFor(model => model.GROSSINTEREST,Model.GROSSINTEREST.Value,new { @class = "entrylable" })*@
+                                    </div>
+                                </div>
+                                <div class="row" style="background-color: #e8e8e8; margin-left: -1px; margin-right: -1px;">
+                                    <div class="col-md-4 col-md-offset-2">
+                                        @Html.LabelFor(model => model.NETINTERESTRECEIVABLE, new { @class = "control-label entrylable entrylab" })
+                                    </div>
+                                    <div class="col-md-5">
+                                       @* @Html.LabelFor(model => model.NETINTERESTRECEIVABLE,Model.NETINTERESTRECEIVABLE.Value, new { @class = "entrylable" })*@
+                                        @Html.Hidden("NETINTERESTRECEIVABLE1", @Model.NETINTERESTRECEIVABLE)                                   
+                                        <input id="temp" type="hidden" value="1" data-val="true">
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-left: -1px; margin-right: -1px;">
+                                    <div class="col-md-4 col-md-offset-2">                                      
+                                        <label class="control-label entrylable" style="font-weight: normal !important;">Financial Institution</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(model => model.FINANCIALINSTITUTION, Model.FINANCIALINSTITUTION.NAME, new { @class = "entrylable" })
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div id="RenewalInformation" class="container-fluid">
+
+                    <div class="widget ">
+                        <div class="whead">
+                            <h6>
+                                <label id="" title="">Renewal Information</label>
+                            </h6>
+                            <div class="clear">
+                            </div>
+                        </div>
+
+                        <div class="">
+
+                            <ul class="col-md-6 entryForm bottomNonePadding colhight">
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.RENEWALDEPOSITNUMBER, new { @class = "control-label entrylable" })
+                                    @Html.TextBoxFor(model => model.RENEWALDEPOSITNUMBER, new { @class = "form-control",style = "width: 50%", @readonly = "readonly"  })
+                                    <br /> 
+                                    @Html.ValidationMessageFor(model => model.RENEWALDEPOSITNUMBER)
+
+                                </li>
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.SIGNATORY1, new { @class = "control-label entrylable" })
+                                    @Html.TextBoxFor(model => model.SIGNATORY1, new {@required = "required", @class = "form-control", style = "width: 50%" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.SIGNATORY1)
+                                </li>
+
+
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.PRINCIPALAMOUNT, new { @class = "control-label entrylable" })
+                                    @Html.TextBoxFor(model => model.PRINCIPALAMOUNT, new {@required = "required",@readonly = "readonly", @Value=ViewBag.ParentPrincipalAmount, @class = "form-control decimal", style = "width: 50%"})
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.PRINCIPALAMOUNT)
+                                </li>
+
+                            </ul>
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.SIGNATORY2, new { @class = "control-label entrylable" })
+                                    @Html.TextBoxFor(model => model.SIGNATORY2, new {@required = "required", @class = "form-control", style = "width: 50%" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.SIGNATORY2)
+                                </li>
+
+                                <li class="form-group">
+                                    @Html.Label("ContactPerson","Contact Person", new { @class = "control-label entrylable" })
+                                    @Html.TextBox("ContactPerson","", new {@required = "required", @class = "form-control",@Value=ViewBag.ContactPerson, style = "width: 50%", @placeholder = "Contact Person" })
+                                    <br />
+                                    @Html.ValidationMessage("ContactPerson")
+                                </li>                              
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+    
+                <div id="FixedDepositTerms" class="container-fluid">
+
+                    <div class="widget ">
+                        <div class="whead">
+                            <h6>
+                                <label id="" title="">Fixed Deposit Terms</label>
+                            </h6>
+                            <div class="clear">
+                            </div>
+                        </div>
+
+                        <div class="">
+
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.TENURE, new { @class = "control-label entrylable" })
+                                    @Html.LabelFor(model => model.TENURETERM, new { @class = "control-label entrylable" })
+                                    <br /> 
+                                    @Html.TextBoxFor(model => model.TENURE, new {@required = "required", @class = "form-control decimal", @value = @Model.TENURE, style = "width: 20% !important; display:inline !important;", @type = "number" })
+                                    @Html.DropDownListFor(model => model.TENURETERM, (SelectList)ViewBag.TenureList, "select a list", new {@required = "required", @class = "control-label entrylable drpResize drpsize", style = "height: 35px !important; margin-top:0px !important; width:30%;" })
+                                </li>                             
+                                     
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.INTERESTMODE, new { @class = "control-label entrylable" })
+                                    <br />
+                                    @Html.DropDownListFor(model => model.INTERESTMODE, (SelectList)ViewBag.COMPOUNDINTERESTTYPEList, (string)ViewBag.INTERESTMODE, new {@required = "required", @class = "control-label entrylable drpResize drpsize" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.INTERESTMODE)
+                                </li>
+
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.COMPOUNDINTERESTINTERVAL, new { @class = "control-label entrylable" })
+                                    <br />
+                                    @Html.DropDownListFor(model => model.COMPOUNDINTERESTINTERVAL, (SelectList)ViewBag.ComoundInterestInterval, (string)ViewBag.COMPOUNDINTERESTINTERVAL, new { @class = "control-label entrylable drpResize drpsize"})
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.COMPOUNDINTERESTINTERVAL)
+                                </li>
+
+                            </ul>
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.TAXRATE, new { @class = "control-label entrylable" })
+                                    @Html.TextBoxFor(model => model.TAXRATE, new {@required = "required",@readonly="readonly", @class = "form-control", style = "width: 50%"})
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.TAXRATE)
+                                </li>
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.RATEOFINTEREST, new { @class = "control-label entrylable" })
+                                    @Html.TextBoxFor(model => model.RATEOFINTEREST, new {@required = "required", @class = "form-control decimal", style = "width: 50%", @placeholder = "Please Enter Your " })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.RATEOFINTEREST)
+                                </li>
+
+
+                                <li class="form-group" style="margin-bottom: 20px;">
+                                    @Html.LabelFor(model => model.ANNUALDAYS, new { @class = "control-label entrylable" })
+                                    <br />
+                                    @Html.TextBoxFor(model => model.ANNUALDAYS, new { @class = "form-control number",@required = "required", @value = @Model.ANNUALDAYS, style = "width: 20% !important; display:inline !important;", @type = "number" })
+                                    <br />
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+              
+                <input id="update"  type="submit" class="btn btn-success dgBtn" style="margin-left:16px; margin-top: 13px" tabindex="" value="Save" onclick="return CheckInterestMode()">                                  
+                <a class="load btn btn-danger dgBtn" href="/#/FDRNote/ListFDRRenewalNote?lblbreadcum=Renewal Notes" style="margin-left:16px;margin-top: 12px;">Cancel</a>
+            }
+                 
+   
+        </div>
+
+    </div>
+    <p></p>
+
+    
+    <script src="~/Scripts/RenewEditScript.js"></script>
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }      
+      
+    </script>
+    
+
+    <script type="text/javascript">
+        $(".load").click(function () {
+            $(".loadingImage").show();
+            var link = $(this).attr("href");
+            debugger;
+            $.get('<%= Url.Action(' + link + ') %>', {},
+                function (data) {
+                    $('#result').html(data);
+                    $('.loadingImage').hide();
+                });
+        });
+
+    </script>
+</div>
+

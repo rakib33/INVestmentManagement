@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="StockBuySell" targetNamespace="http://tempuri.org/StockBuySell.xsd" xmlns:mstns="http://tempuri.org/StockBuySell.xsd" xmlns="http://tempuri.org/StockBuySell.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="StockBuySell" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="StockBuySell" msprop:Generator_UserDSName="StockBuySell">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="StockBuySell" msprop:Generator_TableClassName="StockBuySellDataTable" msprop:Generator_TableVarName="tableStockBuySell" msprop:Generator_TablePropName="_StockBuySell" msprop:Generator_RowDeletingName="StockBuySellRowDeleting" msprop:Generator_RowChangingName="StockBuySellRowChanging" msprop:Generator_RowEvHandlerName="StockBuySellRowChangeEventHandler" msprop:Generator_RowDeletedName="StockBuySellRowDeleted" msprop:Generator_UserTableName="StockBuySell" msprop:Generator_RowChangedName="StockBuySellRowChanged" msprop:Generator_RowEvArgName="StockBuySellRowChangeEvent" msprop:Generator_RowClassName="StockBuySellRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TradeCode" msprop:Generator_ColumnVarNameInTable="columnTradeCode" msprop:Generator_ColumnPropNameInRow="TradeCode" msprop:Generator_ColumnPropNameInTable="TradeCodeColumn" msprop:Generator_UserColumnName="TradeCode" type="xs:string" minOccurs="0" />
+              <xs:element name="BuyQty" msprop:Generator_ColumnVarNameInTable="columnBuyQty" msprop:Generator_ColumnPropNameInRow="BuyQty" msprop:Generator_ColumnPropNameInTable="BuyQtyColumn" msprop:Generator_UserColumnName="BuyQty" type="xs:string" minOccurs="0" />
+              <xs:element name="BuyPrice" msprop:Generator_ColumnVarNameInTable="columnBuyPrice" msprop:Generator_ColumnPropNameInRow="BuyPrice" msprop:Generator_ColumnPropNameInTable="BuyPriceColumn" msprop:Generator_UserColumnName="BuyPrice" type="xs:string" minOccurs="0" />
+              <xs:element name="BuyAmount" msprop:Generator_ColumnVarNameInTable="columnBuyAmount" msprop:Generator_ColumnPropNameInRow="BuyAmount" msprop:Generator_ColumnPropNameInTable="BuyAmountColumn" msprop:Generator_UserColumnName="BuyAmount" type="xs:string" minOccurs="0" />
+              <xs:element name="SellQty" msprop:Generator_ColumnVarNameInTable="columnSellQty" msprop:Generator_ColumnPropNameInRow="SellQty" msprop:Generator_ColumnPropNameInTable="SellQtyColumn" msprop:Generator_UserColumnName="SellQty" type="xs:string" minOccurs="0" />
+              <xs:element name="SellPrice" msprop:Generator_ColumnVarNameInTable="columnSellPrice" msprop:Generator_ColumnPropNameInRow="SellPrice" msprop:Generator_ColumnPropNameInTable="SellPriceColumn" msprop:Generator_UserColumnName="SellPrice" type="xs:string" minOccurs="0" />
+              <xs:element name="SellAmount" msprop:Generator_ColumnVarNameInTable="columnSellAmount" msprop:Generator_ColumnPropNameInRow="SellAmount" msprop:Generator_ColumnPropNameInTable="SellAmountColumn" msprop:Generator_UserColumnName="SellAmount" type="xs:string" minOccurs="0" />
+              <xs:element name="Commission" msprop:Generator_ColumnVarNameInTable="columnCommission" msprop:Generator_ColumnPropNameInRow="Commission" msprop:Generator_ColumnPropNameInTable="CommissionColumn" msprop:Generator_UserColumnName="Commission" type="xs:string" minOccurs="0" />
+              <xs:element name="Net" msprop:Generator_ColumnVarNameInTable="columnNet" msprop:Generator_ColumnPropNameInRow="Net" msprop:Generator_ColumnPropNameInTable="NetColumn" msprop:Generator_UserColumnName="Net" type="xs:string" minOccurs="0" />
+              <xs:element name="TranDate" msprop:Generator_ColumnVarNameInTable="columnTranDate" msprop:Generator_ColumnPropNameInRow="TranDate" msprop:Generator_ColumnPropNameInTable="TranDateColumn" msprop:Generator_UserColumnName="TranDate" type="xs:string" minOccurs="0" />
+              <xs:element name="TranType" msprop:Generator_ColumnVarNameInTable="columnTranType" msprop:Generator_ColumnPropNameInRow="TranType" msprop:Generator_ColumnPropNameInTable="TranTypeColumn" msprop:Generator_UserColumnName="TranType" type="xs:string" minOccurs="0" />
+              <xs:element name="Gross" msprop:Generator_ColumnVarNameInTable="columnGross" msprop:Generator_ColumnPropNameInRow="Gross" msprop:Generator_ColumnPropNameInTable="GrossColumn" msprop:Generator_UserColumnName="Gross" type="xs:string" minOccurs="0" />
+              <xs:element name="CommissionPercentage" msprop:Generator_ColumnVarNameInTable="columnCommissionPercentage" msprop:Generator_ColumnPropNameInRow="CommissionPercentage" msprop:Generator_ColumnPropNameInTable="CommissionPercentageColumn" msprop:Generator_UserColumnName="CommissionPercentage" type="xs:string" minOccurs="0" />
+              <xs:element name="NetProfitLoss" msprop:Generator_ColumnVarNameInTable="columnNetProfitLoss" msprop:Generator_ColumnPropNameInRow="NetProfitLoss" msprop:Generator_ColumnPropNameInTable="NetProfitLossColumn" msprop:Generator_UserColumnName="NetProfitLoss" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="StockBuySellKey1">
+      <xs:selector xpath=".//mstns:StockBuySell" />
+      <xs:field xpath="mstns:TradeCode" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

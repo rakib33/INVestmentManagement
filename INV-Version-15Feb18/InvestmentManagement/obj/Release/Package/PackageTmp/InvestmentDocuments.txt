@@ -1,0 +1,537 @@
+﻿---------------After Data Base First replace This Code in Model.Context.cs---------------------------
+
+ public Entities()
+            : base("name=Entities")
+        {
+
+        }
+        public Entities(System.Data.EntityClient.EntityConnection entityConnection)
+        {
+            // TODO: Complete member initialization
+            this.entityConnection = entityConnection;
+        }
+        public System.Data.EntityClient.EntityConnection entityConnection { get; set; }
+    
+
+
+------------------------------------------------------
+When we give this software for a New Company. Then though each FDR Approved date take current date So that 
+when they entry their previous FDR and Approved then Approved/Accepted Date does not accurate.Such
+A FDR opening date was 2014 and tenure terms = 1 year so Maturity Date will be 2015
+we add this FDR in 2017-Jul-17.So when I approved it its Approved/Accepted date will 2017-Jul-17. Its causes wrong report 
+in FDR History /Bank Wise History.
+
+So that when We deliver this software to others company.We need to a Approved/Accept Date option where user set their previous FDR Approved/Accept Date
+.After finish you remove/ommite this option and then When user Approved/Accept any FDR it take current Date as Approved/Accept date 
+
+FDR HISTORY REPORT/BANK WISE HISTORY
+----------------------------------------
+This two report check 1.FDR who are Approved by given search date
+                      2.FDR ProposedAction =Encash check Approved/AcceptDate >= SearchDate <=EncashedDate (EncashDate is the MaturedDate now)
+					  3.FDR ProposedAction = Renewal check Approved/AcceptDate >= SearchDate <=RenewalDate (RenewalDate is the MaturedDate now)
+
+
+
+
+
+
+
+
+STOCK
+---------------------------------------------------------------------------------------------------------------------------------------------
+Stock is Important part of share.In this project Stock module stand upon INSTRUMENTLEDGERALL view(see mpro db view)
+Stock or Share Database listed below:
+----------------------------------------
+Before add data in Stock related table you must have data in this folwoing table
+
+1. INVESTOR*      (contains Investor info .In this project DLIC is our Investor)
+2. INSTRUMENT*
+3. INSTRUMENTCATEGORY*
+4. HOLIDAYCALENDER*
+5. WEEKEND*
+
+6. INVESTORGROUP
+7. INVESTORPROFILE
+8. SETTLEMENT
+9.DEPOSITORYSETTINGS	     (cdbl file upload info )
+
+
+STOCK TABLE
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+1. TRADE table               (while import cdbl trade file Sattlement date comes depand Holiday and Weekend,hawla laga comes TRADINGCHARGE)
+2  PRICEINDEX                (contains cdbl market price )
+2. CORPORATEACTION           (17DP70UX.TXT cdbl file no depandency)
+3. CORPORATEACTIONRECEIVABLE (17DP64UX.TXT cdbl file no depandency)
+4. DEMATCONFIRM              (16DP61UX.TXT cdbl file no depandency)
+5. IPO                       (cdbl 16DP95UX.TXT file for IPO share and 16DPB7UX.TXT for IPO processing)
+6. TRANSFEROFSECURITIES      (cdbl 11DP39UX.TXT transmission out and 11DP41UX.TXT for IN and 11DP81UX.TXT for securitytransfer, 
+                              11DP38UX.TXT for securitytransfer OUT, 11DP98UX.TXT for change OwenerShip)
+7. PLEDGE					 (cdbl 40DP31UX.TXT )
+8. DIVIDEND                  (cdbl 17DP46UX.TXT dividend process,17DP48UX.TXT dividend receive)
+9. HOLDING					 (cdbl 11DPA6UX.TXT import BOISN)
+10.SCRIPTTRANSFER            (for marging share manualy input)
+11.RIGHTSHAREDECLARATION     (add buy rate manually for right share)
+------------------------------------------------------------------------------------------------------------------------------------------------
+delete from TRADE;
+delete from PRICEINDEX;
+delete from CORPORATEACTION;
+delete from CORPORATEACTIONRECEIVABLE;
+delete from DEMATCONFIRM;
+delete from IPO;
+delete from TRANSFEROFSECURITIES;
+delete from PLEDGE;
+delete from DIVIDEND;
+delete from HOLDING;
+
+While Insert if a value contain & sign or special char it ask a popup to insert value.So to stop the popup and insert & sign write the below query
+
+select INSTRUMENTREF from PRICEINDEX where INSTRUMENTREF='KAY'||'&'||'QUE';
+
+UPDATE PRICEINDEX
+SET INSTRUMENTREF='KAY'||'&'||'QUE'
+WHERE INSTRUMENTREF='KAYQUE';
+
+
+https://www.codeproject.com/Tips/770843/Running-Crystal-Reports-in-MVC-using-PDF-js-and-PD
+//for angularjs
+https://stackoverflow.com/questions/21950828/how-to-display-a-server-side-generated-pdf-stream-in-javascript-sent-via-httpmes
+------------------------------------------------------------------------------------------------------------------------------------------------
+Oracle Function that return list eg: https://www.techonthenet.com/oracle/functions.php
+https://decipherinfosys.wordpress.com/2008/10/27/returning-a-record-set-from-a-function-in-oracle-sql-server-and-db2/
+
+create or replace TYPE PROFITLOSS_ROW AS OBJECT
+(
+  AccountNumber VARCHAR2(50),
+  TradeCode VARCHAR2(50),
+  SellQty Number(20,8),
+  SellAmount Number(20,8),
+  SellRate Number(20,8),
+  AvgRate Number(20,8),
+  BuyQty Number(20,8),
+  BuyRate Number(20,8),
+  BuyAmount Number(20,8),
+  Commission Number(20,8),
+  Gross Number(20,8),
+  NetProfitLoss Number(20,8)
+);
+
+create or replace TYPE PROFITLOSS_TABLE as table of PROFITLOSS_ROW;
+
+create or replace Function GET_PROFITLOSS_FN(from_date in date,to_date in date)
+RETURN PROFITLOSS_TABLE AS V_PROFITLOSS_TABLE PROFITLOSS_TABLE;
+BEGIN
+ 
+  SELECT PROFITLOSS_ROW(A.AccountNumber,A.TradeCode,A.BuyQty,A.BuyAmount,A.BuyRate, A.SellQty,A.AvgRate,A.Gross,A.Commission,A.SellAmount,A.SellRate,A.NetProfitLoss)
+  BULK COLLECT INTO V_PROFITLOSS_TABLE
+  FROM
+   (
+    SELECT AccountNumber, SHORTNAME TradeCode,SUM(BUY) BuyQty,SUM(NETBUYAMOUNT) BuyAmount,'0' as BuyRate,  SUM(SALE) SellQty,ROUND(SUM(NETBUYAMOUNT - COMMISSION)/SUM(BUY),4) AvgRate, SUM(NETBUYAMOUNT - COMMISSION) Gross, SUM(COMMISSION) Commission, SUM(NETSALEAMOUNT) SellAmount,'0' AS SellRate,'0' as NetProfitLoss  FROM INSTRUMENTLEDGERALL WHERE ACCOUNTNUMBER='00001' AND  TRANTYPE='Share Bought' AND trandate>=from_date AND trandate<=to_date GROUP BY SHORTNAME,AccountNumber
+    UNION 
+    SELECT AccountNumber,SHORTNAME TradeCode,SUM(BUY) BuyQty,SUM(NETBUYAMOUNT) BuyAmount,'0' as BuyRate,SUM(SALE) SellQty,ROUND(SUM(NETSALEAMOUNT + COMMISSION)/SUM(SALE),4) AvgRate, SUM(NETSALEAMOUNT + COMMISSION) Gross, SUM(COMMISSION) Commission, SUM(NETSALEAMOUNT) SellAmount,'0' AS SellRate,'0' as NetProfitLoss from INSTRUMENTLEDGERALL WHERE ACCOUNTNUMBER='00001' AND TRANTYPE='Share Sold' AND trandate>=from_date AND trandate<=to_date GROUP BY SHORTNAME,AccountNumber
+    ORDER BY TradeCode
+    )A;
+    
+RETURN V_PROFITLOSS_TABLE;
+EXCEPTION
+WHEN OTHERS THEN
+   V_PROFITLOSS_TABLE.DELETE;
+   RETURN  V_PROFITLOSS_TABLE;
+END;
+
+//Now call this function
+select * from table(GET_PROFITLOSS_FN('1-MAR-17','31-MAR-17'));
+select * from table(GET_PROFITLOSS_FN('1-MAR-17','31-MAR-17')) where tradecode='ICB';
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+create or replace TYPE PORTFOLIO_BONUS_ROW AS OBJECT
+(
+  BOID VARCHAR2(50),
+  ISIN VARCHAR2(50),
+  CATYPE VARCHAR2(50),
+  INVESTORACREF VARCHAR2(50),
+  INSTRUMENTNAME VARCHAR2(50),
+  ENTITLEMENT Number(20,8),
+  EFFECTIVEDATE DATE,
+  RECORDDATE DATE,
+  SHORTNAME VARCHAR2(50),
+  LASTMARKETRATE Number(20,8),
+  PARHOLDING Number(20,8)  
+);    
+
+create or replace TYPE PORTFOLIO_BONUS_TABLE AS TABLE OF PORTFOLIO_BONUS_ROW;  
+
+    
+CREATE OR REPLACE FUNCTION GET_PORTFOLIOBONUS_FN(effectiveDate in date)
+RETURN PORTFOLIO_BONUS_TABLE AS V_PORTFOLIO_BONUS_TABLE PORTFOLIO_BONUS_TABLE;
+BEGIN
+ 
+  SELECT PORTFOLIO_BONUS_ROW(A.BOID,A.ISIN,A.CATYPE,A.INVESTORACREF,A.INSTRUMENTNAME, A.ENTITLEMENT,A.EFFECTIVEDATE,A.RECORDDATE,A.SHORTNAME,A.LASTMARKETPRICE,A.PARHOLDING)
+  BULK COLLECT INTO V_PORTFOLIO_BONUS_TABLE
+  FROM
+   (
+  SELECT C.BOID,C.ISIN, C.CATYPE, C.INVESTORACREF,C.INSTRUMENTNAME, NVL(C.ENTITLEMENT, 0) AS ENTITLEMENT,
+         C.EFFECTIVEDATE, C.RECORDDATE, I.SHORTNAME, I.LASTMARKETPRICE,C.PARHOLDING       
+  FROM   CorporateActionReceivable C,Instrument I
+  WHERE C.ISIN = I.ISIN 
+  AND (C.EffectiveDate > effectiveDate)
+    )A;
+    
+RETURN V_PORTFOLIO_BONUS_TABLE;
+EXCEPTION
+WHEN OTHERS THEN
+   V_PORTFOLIO_BONUS_TABLE.DELETE;
+   RETURN V_PORTFOLIO_BONUS_TABLE;
+END;
+    
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  //Now call the function 
+  select * from table( fn_listDates );
+------------------------------------------------------------------------------------------------------------------------------------------------
+http://psoug.org/snippet/FUNCTIONS-with-parameters_871.htm
+http://stackoverflow.com/questions/367863/sql-find-records-from-one-table-which-dont-exist-in-another
+
+-------------GET PORTFOLIO RECEVABLE GETPORTFOLIOCARECEIVABLE CURRUNT PROCEDURE:-----------------------------------------------------------
+
+create or replace PROCEDURE  "GETPORTFOLIOCARECEIVABLE" (
+Effective_DATE IN date,
+prc out sys_refcursor
+)
+AS
+BEGIN
+
+OPEN prc FOR 
+
+SELECT CORPORATEACTIONRECEIVABLE.ISIN,CORPORATEACTIONRECEIVABLE.BOID,CATYPE,INVESTORACREF,CORPORATEACTIONRECEIVABLE.INSTRUMENTNAME,
+TO_CHAR(ENTITLEMENT,'999,999,999,999') ENTITLEMENT,TO_CHAR(EFFECTIVEDATE,'DD-MON-YYYY') EFFECTIVEDATE,TO_CHAR(RECORDDATE,'DD-MON-YYYY') RECORDDATE,
+I.SHORTNAME,TO_CHAR(I.LASTMARKETPRICE,'999,999,999,999') LASTMARKETPRICE,TO_CHAR(PARHOLDING,'999,999,999,999') PARHOLDING,TO_CHAR(I.LASTMARKETPRICE * ENTITLEMENT,'999,999,999,999') MarketValue
+FROM   CORPORATEACTIONRECEIVABLE,INSTRUMENT I
+WHERE  CORPORATEACTIONRECEIVABLE.EFFECTIVEDATE > Effective_DATE  AND CORPORATEACTIONRECEIVABLE.ISIN = I.ISIN AND NOT EXISTS
+  (SELECT *
+   FROM   CORPORATEACTION
+   WHERE  CORPORATEACTION.ISIN = CORPORATEACTIONRECEIVABLE.ISIN AND CORPORATEACTION.RECORDDATE =  CORPORATEACTIONRECEIVABLE.RECORDDATE AND CORPORATEACTION.EFFECTIVEDATE <= Effective_DATE
+   );  
+END;
+
+---------------------------PRIVIOUS PROCEDURE ------------------------
+create or replace PROCEDURE        "GETPORTFOLIOCARECEIVABLE" (
+Effective_DATE IN date,
+prc out sys_refcursor
+)
+AS
+BEGIN
+
+OPEN prc FOR SELECT CorporateActionReceivable.BOID, CorporateActionReceivable.CAType, CorporateActionReceivable.InvestorAcRef, 
+                  CorporateActionReceivable.InstrumentName, NVL(CorporateActionReceivable.Entitlement, 0) AS Entitlement, 
+                  CorporateActionReceivable.EffectiveDate, CorporateActionReceivable.RecordDate, Instrument.ShortName, Instrument.LASTMARKETPRICE, 
+                  CorporateActionReceivable.ParHolding
+FROM          CorporateActionReceivable,Instrument
+WHERE CorporateActionReceivable.ISIN = Instrument.ISIN 
+AND (CorporateActionReceivable.EffectiveDate > Effective_DATE);   
+END;
+--------------------------END---------------------------------------------
+
+-------------------------- get portfolio data from instrumentleadgerall view function -------------------------------
+create or replace TYPE retInstrumentLedger_ROW AS OBJECT
+(
+    account_number varchar2(100),		
+    short_name varchar(100),		
+    buy number(20,4),
+		netbuyamount number(34,12),
+		sale number(20,4),
+		netsaleamount number(34,12),
+		receivable number(20,4),
+		received number(20,4),
+		issued number(20,4),		
+		net_balance number(20,4),
+		matured_balance number(20,4),
+		market_price number(34,12),
+		market_value number(34,12),
+		lockin_balance number(20,4),		
+		avg_price number(34,12),
+		total_cost number(34,12),
+		realized_gain number(20,4)
+);
+
+create or replace TYPE retInstrumentLedger_TABLE as table of retInstrumentLedger_ROW;
+-----------------------------------
+
+create or replace FUNCTION GetInvestorPortfolio_FN(AccountRef in VARCHAR2,LedgerDate in Date)
+RETURN retInstrumentLedger_TABLE AS v_retInstrumentLedger retInstrumentLedger_TABLE;
+BEGIN
+  
+  DECLARE   
+   /*CUR_avg_price receivable not exists in our InstrumentLedgerAll view */
+  CURSOR CUR_avg_price  IS
+        select accountnumber, InstrumentLedgerAll.shortname, trandate, buy, netbuyamount, sale, netsaleamount,received, issued, trantype,lockinbalance, matureddate        
+		    from InstrumentLedgerAll, Instrument
+		      where 
+				accountnumber = AccountRef AND 				
+				trandate <= LedgerDate AND
+				InstrumentLedgerAll.shortname = Instrument.ShortName AND
+				Instrument.Status in ('Active', 'OTC')
+		    order by accountnumber, InstrumentLedgerAll.shortname, trandate,InstrumentLedgerAll.SEQUENCE;
+
+    netbuyamount    number(20,4);
+    buy             number(20,4);
+    sale            number(20,4);
+    netsaleamount   number(34,12);
+    receivable      number(20,4);
+    received        number(20,4);
+    issued          number(20,4);
+    trantype        varchar(100);
+    trandate        date;
+    matureddate     date;
+    total_cost      number(34,12);
+    prev_amount     number(34,12);
+    avg_cal         number(34,12);
+    commission      number(34,12);
+    market_price    number(34,12);
+    current_price   number(34,12);
+    realized_gain   number(34,12);
+    net_realized_gain number(34,12);
+    qty_cal         number(20,4);
+    maturedbalance  number(20,4);
+    total_lockin_balance  number(20,4);
+    lockinbalance         number(20,4);
+    account_number        varchar(100);
+    shortname             varchar(100);
+    prev_shortname        varchar(100);
+    totalBought           number(20,4);
+    totalSold             number(20,4);
+    totalReceivable       number(20,4);
+    totalReceived         number(20,4);
+    totalIssued           number(20,4);
+        
+    BEGIN
+       avg_cal            :=0;
+       qty_cal            :=0;
+       maturedbalance     :=0;
+       prev_amount        :=0;
+       net_realized_gain  :=0;
+       totalReceivable    :=0;
+       prev_shortname     := 'first';  
+       totalReceivable :=0;
+      /* DBMS_OUTPUT.ENABLE(1000000);*/
+       
+       OPEN CUR_avg_price;     
+      
+     LOOP
+     
+        FETCH CUR_avg_price INTO account_number,shortname,trandate,buy,netbuyamount,sale,netsaleamount,received,issued,trantype,lockinbalance,matureddate;        
+      --  BEGIN --begin under fatch         
+         --EXIT WHEN CUR_avg_price%NOTFOUND;
+        --dbms_output.put_line('short name is ' || shortname || ' prev_short ' || prev_shortname);      
+                   
+          /*first if condition*/
+          IF prev_shortname <> shortname and prev_shortname <> 'first' THEN
+             BEGIN                            
+              SELECT closingprice INTO market_price FROM priceindex where InstrumentRef = prev_shortname and TradingDate = (SElect max(Tradingdate) from PriceIndex where InstrumentRef = prev_shortname and Tradingdate <= LedgerDate);
+              SELECT LastMarketPrice INTO current_price from Instrument Where ShortName = prev_shortname;              
+              market_price := NVL(market_price, current_price);     
+             -- totalReceivable :=0;
+             dbms_output.put_line('market_price is ' || market_price || ' short name ' || shortname || 'total Receivable' || totalReceivable );    
+                       
+
+             -- EXIT;
+             END;
+          END IF;  /*end if condition*/
+                
+          IF prev_shortname <> shortname THEN
+               BEGIN
+                realized_gain := 0;
+                qty_cal := 0;
+                maturedbalance := 0;
+                total_lockin_balance := 0;
+                avg_cal := 0;
+                prev_amount := 0;
+                totalBought := 0;
+                totalSold := 0;
+                totalReceivable := 0;
+                totalReceived := 0;
+                totalIssued := 0;
+               END;
+             -- prev_shortname:= shortname;       
+               dbms_output.put_line('market_price is ' || market_price || ' short name ' || shortname || 'total Receivable' || totalReceivable );   
+          END IF;      
+                    
+          	net_realized_gain := 0;
+		        total_lockin_balance := total_lockin_balance + lockinbalance;
+          
+          IF tranType = 'IPO' and lockinbalance < 0	 THEN
+           BEGIN
+             maturedbalance := maturedbalance + buy - lockinbalance;
+           END;
+               -- dbms_output.put_line('market_price is ' || market_price || ' short name ' || shortname);      
+          END IF;      
+                
+          IF buy > 0	 THEN
+           BEGIN             
+             qty_cal := qty_cal + buy;
+				      IF matureddate <= LedgerDate THEN
+                   BEGIN
+                   maturedbalance := maturedbalance + buy - lockinbalance;
+                   END;
+               END IF;
+              
+              totalBought := totalBought + buy;
+              
+              IF qty_cal <> 0 THEN             
+                  BEGIN
+                  avg_cal :=(prev_amount+netbuyamount)/qty_cal;
+                  END;
+              END IF;
+              
+           END;
+          --  dbms_output.put_line('market_price is ' || market_price || ' short name ' || shortname);      
+          END IF;  
+          
+          IF received > 0 	 THEN
+           BEGIN --1.begin
+             
+              IF tranType = 'Bonus' THEN
+                  BEGIN
+                     maturedbalance := maturedbalance + received;
+                  END;
+              ELSE
+                  BEGIN
+                      qty_cal := qty_cal + received;
+                        BEGIN
+                          maturedbalance := maturedbalance + received - lockinbalance;
+                        END;
+                  END;
+              END IF; --tranType = 'Bonus'
+              
+              totalReceived := totalReceived + received;
+           IF qty_cal <> 0 THEN
+              BEGIN
+  					    avg_cal :=(prev_amount+netbuyamount)/qty_cal	;
+				      END;             
+           END IF; --qty_cal <> 0
+                           
+           END; --1.begin end
+             
+          END IF;  
+                   
+          IF sale > 0 	 THEN
+             BEGIN
+               qty_cal := qty_cal-sale;
+               maturedbalance := maturedbalance- sale;
+               totalSold := totalSold + sale;
+				       realized_gain := realized_gain + (netsaleamount - (avg_cal * sale));			
+             END;
+                 --dbms_output.put_line('market_price is ' || market_price || ' short name ' || shortname);      
+          END IF;  
+          
+          IF issued > 0 	 THEN
+             BEGIN
+               qty_cal := qty_cal- issued;
+               maturedbalance := maturedbalance - issued;
+               totalIssued := totalIssued + issued;
+             END;
+               --dbms_output.put_line('market_price is ' || market_price || ' short name ' || shortname);      
+          END IF;  
+          
+          IF trantype <> 'Stock Split <Received>' AND  trantype <> 'Stock Split <Delivered>' THEN
+            BEGIN
+              prev_amount := avg_cal * qty_cal;
+            END;
+                --dbms_output.put_line('market_price is ' || market_price || ' short name ' || shortname);      
+          END IF;  
+          
+          prev_shortname := shortname;
+          dbms_output.put_line('market_price is ' || market_price || ' short name ' || shortname || 'total Receivable' || totalReceivable );   
+          
+          FETCH CUR_avg_price INTO account_number,shortname,trandate,buy,netbuyamount,sale,netsaleamount,received,issued,trantype,lockinbalance,matureddate;
+          --END; -- End of Begin Under fatch
+         
+              SELECT closingprice INTO market_price FROM priceindex where InstrumentRef = prev_shortname and TradingDate = (SElect max(Tradingdate) from PriceIndex where InstrumentRef = prev_shortname and Tradingdate <= LedgerDate);
+              SELECT LastMarketPrice INTO current_price from Instrument Where ShortName = prev_shortname;              
+              market_price := NVL(market_price, current_price);     
+     
+		   
+       --INSERT @retInstrumentLedger
+	     --SELECT @account_number, @prev_shortname, @totalBought, @netbuyamount, @totalSold, @netsaleamount, @totalReceivable, @totalReceived, @totalIssued, @qty_cal,  @maturedbalance, @market_price, @market_price * @qty_cal, @total_lockin_balance, @avg_cal, (@avg_cal * @qty_cal), @realized_gain ;
+
+       END LOOP;         
+      
+       CLOSE CUR_avg_price;          
+      
+       -- BEGIN
+       -- total_cost :=avg_cal * qty_cal;
+       -- received := 0;
+       -- issued := 0;
+      -- END;
+       
+      -- DBMS_OUTPUT.ENABLE('Last Total Cost:' ||total_cost);
+      
+    END;  
+  
+END;
+
+
+
+ select accountnumber, InstrumentLedgerAll.shortname,sum(buy), sum(netbuyamount)        
+		    from InstrumentLedgerAll, Instrument
+		      where 
+				accountnumber = '00001' AND 				
+				trandate <= '06-APR-2017' AND
+				InstrumentLedgerAll.shortname = Instrument.ShortName AND
+				Instrument.Status in ('Active', 'OTC') group by accountnumber, InstrumentLedgerAll.shortname;
+
+---------------------SPOT MARKET SUPPORT------------------
+
+select count(*) from TRADE where COMPSPOTID='Y';
+select TRANSACTIONDATE,MATUREDDATE from TRADE where COMPSPOTID !='Y';
+
+select TRANSACTIONDATE,MATUREDDATE,COMPSPOTID from TRADE where COMPSPOTID='Y' and TRANSACTIONDATE='10-OCT-16';
+
+select TRANSACTIONDATE from TRADE where COMPSPOTID ='Y' GROUP BY TRANSACTIONDATE ORDER BY TRANSACTIONDATE;
+09-OCT-16
+10-OCT-16
+12-MAR-17
+13-MAR-17
+06-APR-17
+09-APR-17
+
+update TRADE
+set MATUREDDATE='10-OCT-16'
+where COMPSPOTID='Y' and TRANSACTIONDATE='9-OCT-16'; --21 row
+
+update TRADE
+set MATUREDDATE='13-OCT-16'
+where COMPSPOTID='Y' and TRANSACTIONDATE='10-OCT-16'; --39 row
+
+update TRADE
+set MATUREDDATE='13-MAR-17'
+where COMPSPOTID='Y' and TRANSACTIONDATE='12-MAR-17'; --64 row
+
+update TRADE
+set MATUREDDATE='14-MAR-17'
+where COMPSPOTID='Y' and TRANSACTIONDATE='13-MAR-17'; -- 48 row
+
+update TRADE
+set MATUREDDATE='09-APR-17'
+where COMPSPOTID='Y' and TRANSACTIONDATE='06-APR-17';
+
+update TRADE
+set MATUREDDATE='10-APR-17'
+where COMPSPOTID='Y' and TRANSACTIONDATE='09-APR-17';
+
+
+select TRANSACTIONDATE from trade where MEMO='BRACBANK' GROUP BY  TRANSACTIONDATE;
+select INSTRUMENTCATEGORY,TRANSACTIONDATE,MATUREDDATE from trade where MEMO='BRACBANK' and TRANSACTIONDATE='09-MAR-17';
+
+update TRADE
+set MATUREDDATE='13-MAR-17'
+where MEMO='BRACBANK' and TRANSACTIONDATE='09-MAR-17';
+
+-----------------------------------------------------------------
+
+convert rdlc report to excel
+https://www.youtube.com/watch?v=KpvZU7rm-Os
+Html to pdf 
+https://www.youtube.com/watch?v=RXhz-MO_eHc

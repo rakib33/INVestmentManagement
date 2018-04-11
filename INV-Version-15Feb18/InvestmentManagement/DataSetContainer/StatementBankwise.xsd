@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="StatementBankwise" targetNamespace="http://tempuri.org/StatementBankwise.xsd" xmlns:mstns="http://tempuri.org/StatementBankwise.xsd" xmlns="http://tempuri.org/StatementBankwise.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="StatementBankwise" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="StatementBankwise" msprop:Generator_UserDSName="StatementBankwise">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="BankwiseStatement" msprop:Generator_TableClassName="BankwiseStatementDataTable" msprop:Generator_TableVarName="tableBankwiseStatement" msprop:Generator_TablePropName="BankwiseStatement" msprop:Generator_RowDeletingName="BankwiseStatementRowDeleting" msprop:Generator_RowChangingName="BankwiseStatementRowChanging" msprop:Generator_RowEvHandlerName="BankwiseStatementRowChangeEventHandler" msprop:Generator_RowDeletedName="BankwiseStatementRowDeleted" msprop:Generator_UserTableName="BankwiseStatement" msprop:Generator_RowChangedName="BankwiseStatementRowChanged" msprop:Generator_RowEvArgName="BankwiseStatementRowChangeEvent" msprop:Generator_RowClassName="BankwiseStatementRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BankName" msprop:Generator_ColumnVarNameInTable="columnBankName" msprop:Generator_ColumnPropNameInRow="BankName" msprop:Generator_ColumnPropNameInTable="BankNameColumn" msprop:Generator_UserColumnName="BankName" type="xs:string" minOccurs="0" />
+              <xs:element name="FDRNo" msprop:Generator_ColumnVarNameInTable="columnFDRNo" msprop:Generator_ColumnPropNameInRow="FDRNo" msprop:Generator_ColumnPropNameInTable="FDRNoColumn" msprop:Generator_UserColumnName="FDRNo" type="xs:string" minOccurs="0" />
+              <xs:element name="PrincipalAmountTK" msprop:Generator_ColumnVarNameInTable="columnPrincipalAmountTK" msprop:Generator_ColumnPropNameInRow="PrincipalAmountTK" msprop:Generator_ColumnPropNameInTable="PrincipalAmountTKColumn" msprop:Generator_UserColumnName="PrincipalAmountTK" type="xs:string" minOccurs="0" />
+              <xs:element name="ExistingCapLimit" msprop:Generator_ColumnVarNameInTable="columnExistingCapLimit" msprop:Generator_ColumnPropNameInRow="ExistingCapLimit" msprop:Generator_ColumnPropNameInTable="ExistingCapLimitColumn" msprop:Generator_UserColumnName="ExistingCapLimit" type="xs:string" minOccurs="0" />
+              <xs:element name="PercentagetotalFDR" msprop:Generator_ColumnVarNameInTable="columnPercentagetotalFDR" msprop:Generator_ColumnPropNameInRow="PercentagetotalFDR" msprop:Generator_ColumnPropNameInTable="PercentagetotalFDRColumn" msprop:Generator_UserColumnName="PercentagetotalFDR" type="xs:string" minOccurs="0" />
+              <xs:element name="Offerrate1" msprop:Generator_ColumnVarNameInTable="columnOfferrate1" msprop:Generator_ColumnPropNameInRow="Offerrate1" msprop:Generator_ColumnPropNameInTable="Offerrate1Column" msprop:Generator_UserColumnName="Offerrate1" type="xs:string" minOccurs="0" />
+              <xs:element name="Offerrate2" msprop:Generator_ColumnVarNameInTable="columnOfferrate2" msprop:Generator_ColumnPropNameInRow="Offerrate2" msprop:Generator_ColumnPropNameInTable="Offerrate2Column" msprop:Generator_UserColumnName="Offerrate2" type="xs:string" minOccurs="0" />
+              <xs:element name="Offerrate3" msprop:Generator_ColumnVarNameInTable="columnOfferrate3" msprop:Generator_ColumnPropNameInRow="Offerrate3" msprop:Generator_ColumnPropNameInTable="Offerrate3Column" msprop:Generator_UserColumnName="Offerrate3" type="xs:string" minOccurs="0" />
+              <xs:element name="NPL" msprop:Generator_ColumnVarNameInTable="columnNPL" msprop:Generator_ColumnPropNameInRow="NPL" msprop:Generator_ColumnPropNameInTable="NPLColumn" msprop:Generator_UserColumnName="NPL" type="xs:string" minOccurs="0" />
+              <xs:element name="CamelsRating" msprop:Generator_ColumnVarNameInTable="columnCamelsRating" msprop:Generator_ColumnPropNameInRow="CamelsRating" msprop:Generator_ColumnPropNameInTable="CamelsRatingColumn" msprop:Generator_UserColumnName="CamelsRating" type="xs:string" minOccurs="0" />
+              <xs:element name="InstitutionType" msprop:Generator_ColumnVarNameInTable="columnInstitutionType" msprop:Generator_ColumnPropNameInRow="InstitutionType" msprop:Generator_ColumnPropNameInTable="InstitutionTypeColumn" msprop:Generator_UserColumnName="InstitutionType" type="xs:string" minOccurs="0" />
+              <xs:element name="AvgRate" msprop:Generator_ColumnVarNameInTable="columnAvgRate" msprop:Generator_ColumnPropNameInRow="AvgRate" msprop:Generator_ColumnPropNameInTable="AvgRateColumn" msprop:Generator_UserColumnName="AvgRate" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

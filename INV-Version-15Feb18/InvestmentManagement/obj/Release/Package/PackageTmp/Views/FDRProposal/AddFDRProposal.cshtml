@@ -1,0 +1,111 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.FDRPROPOSAL
+
+<div id="Replace">
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+          @Session["currentPage"]
+        </span>
+
+    </div>
+   <ol class="breadcrumb">
+   @Html.Raw(@ViewBag.breadcum)
+    </ol>
+<div class="wrapper pl">
+    <div class="alert alert-success mt20">
+        <button class="close" data-dismiss="alert" type="button">×</button>
+         @ViewBag.Message
+    </div>
+    <div class="container-fluid">
+
+        <div class="widget col-md-5">
+            <div class="whead">
+                <h6>
+                    <label id="lblHeader" title="">@ViewBag.Header</label>
+                </h6>
+                <div class="clear">
+                </div>
+            </div>
+             @*if we want to page refresh then we remove below line from Ajax.Beginform and do menu option on layout page because if we remove this full page will reload and if no menu its cause exception
+             ,InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg"  , new { autocomplete = "off" }*@
+@using (Ajax.BeginForm("AddFDRProposal", "FDRProposal", new AjaxOptions { HttpMethod = "POST",InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" },new { autocomplete = "off" }))
+{
+  
+     
+
+    
+            <div class="">
+ <ul class="entryForm singleadd">
+
+        <li class="form-group">
+           
+            @Html.LabelFor(model => model.PROPOSALID,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.PROPOSALID,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.NAME)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.NAME)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.PROPOSALID) 
+       
+	   </li>
+
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.NAME,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.NAME,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.NAME)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.NAME)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.NAME) 
+       
+	   </li>
+      <li class="form-group">
+           
+            @Html.LabelFor(model => model.REMARKS,new {@class="control-label entrylable"})
+			
+        
+        
+
+            @Html.TextBoxFor(model => model.REMARKS,new {@class="form-control",@placeholder="Please Enter Your "+@Html.DisplayNameFor(model => model.REMARKS)+"",@onfocus="this.placeholder = ''", @onblur="this.placeholder = '"+@Html.DisplayNameFor(model => model.REMARKS)+"'"})
+		
+     <br />
+	    @Html.ValidationMessageFor(model => model.REMARKS) 
+       
+	   </li>
+                        </ul>
+             <button type="submit" class="btn btn-success btnSingleAddForm">Save</button>
+             <a class="load btn btn-danger closeButton" href="~/#/FDRProposal/ListFDRProposal?lblbreadcum=">Close</a> 
+      
+            </div>
+
+
+}
+
+        </div>
+
+
+    </div>
+</div>
+    <p></p>
+
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+
+
+</div>
+

@@ -1,0 +1,843 @@
+﻿@model InvestmentManagement.InvestmentManagement.Models.FIXEDDEPOSIT
+
+@{
+    int index = 1;
+    int index2 = 1;
+    int Years = 0;
+
+    //if excise duty and others charge change here 
+    //NetInterestReceivable=GrossInterest-SourceTax-ExciseDuty-OthersCharge;
+    //TotalAmountReceivable=Principle+NetInterestReceivable
+    TempData["oFDRInterest"] = ViewBag.FDRINTEREST;
+    
+    
+    decimal? rateofInterest = ViewBag.RateofInterest;
+    //decimal? taxRate= ViewBag.taxRate;
+    decimal? TotalAmountReceivable = ViewBag.LastReceivableAmount;
+    decimal? TotalNetInterest = ViewBag.SumNetInterest;
+
+    decimal? SumGrossInterest = ViewBag.SumGrossInterest;
+    decimal? SumSourceTax = ViewBag.SumSourceTax;
+}
+
+<script src="~/Scripts/calculationScript.js"></script>
+<div id="Replace">
+
+    <script type="text/ecmascript">
+
+        var RemoveJQUIDatepicker = function () {
+            $(".datePicker").datepicker("destroy");
+            $(".datePicker").removeClass("hasDatePicker");
+            $(".datePicker").removeAttr("Disabled");
+
+            console.log('destroy');
+        };
+
+        var SetJQUIDatePicker = function () {
+            $(".datepicker").datepicker({ dateFormat: formatDate('long'), minDate: 0 });
+            jQuery.datepicker.dpDiv.appendTo(jQuery('body'));
+            console.log('Set');
+        }
+        $(function () {
+            $(".datepicker").datepicker({ dateFormat: formatDate('long'), minDate: 0 });
+            RemoveJQUIDatepicker();
+            SetJQUIDatePicker();
+        });
+
+    </script>
+    <div class="contentTop">
+        <span class="pageTitle">
+            <span class=" glyphicon glyphicon-yen"></span>
+            @Session["currentPage"]
+        </span>
+
+    </div>
+    <ol class="breadcrumb">
+        @Html.Raw(@ViewBag.BreadCum)
+    </ol>
+    <div class="wrapper pl">
+        <img class="loadingImage" src="~/Images/loading.gif" style="display: none;" />
+        <div id="FixedDeposit">
+            <div class="alert alert-success mt20">
+                <button class="close" data-dismiss="alert" type="button">×</button>
+                @ViewBag.Message
+            </div>
+            @using (Ajax.BeginForm("EditFixedDeposit", " FixedDeposit", new AjaxOptions { HttpMethod = "POST", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace, UpdateTargetId = "Replace", OnBegin = "ShowProcessingMsg", OnSuccess = "HideProcessingMsg" }, new { autocomplete = "off" }))
+            { 
+                @Html.Hidden("CREATEDBY", @Model.CREATEDBY)
+                @Html.Hidden("CREATEDDATE", @Model.CREATEDDATE)
+                @Html.Hidden("LASTUPDATED", @Model.LASTUPDATED)
+                @Html.Hidden("LASTUPDATEDBY", @Model.LASTUPDATEDBY)
+                @Html.Hidden("REFERENCE", @Model.REFERENCE)    
+                @Html.Hidden("STATUS", @Model.STATUS)
+                @Html.Hidden("taxRate", @Model.FINANCIALINSTITUTION.TAXRATE)               
+                @Html.Hidden("PRESENTPRINCIPALAMOUNT", @Model.PRESENTPRINCIPALAMOUNT)
+                @Html.Hidden("BRANCH_REFERENCE", @Model.BRANCH_REFERENCE)
+                @Html.Hidden("FINANCIALINSTITUTION_REFERENCE", @Model.FINANCIALINSTITUTION_REFERENCE)
+                
+                //@Html.Hidden("FINANCIALINSTITUTION_REFERENCE", @Model.FINANCIALINSTITUTION_REFERENCE)
+                
+                @Html.Hidden("RENEWALDEPOSITNUMBER", @Model.RENEWALDEPOSITNUMBER)
+                @Html.Hidden("INITIALPRINCIPALAMOUNT", @Model.INITIALPRINCIPALAMOUNT)
+                @Html.Hidden("INITIALOPENINGDATE", @Model.INITIALOPENINGDATE)
+                @Html.Hidden("INITIALFIXEDDEPOSITREF", @Model.INITIALFIXEDDEPOSITREF)    
+                
+                <div id="FixedDepositInformation" class="container-fluid">
+
+                    <div class="widget ">
+                        <div class="whead">
+                            <h6>
+                                <label id="" title="">Fixed Deposit Information</label>
+                            </h6>
+                            <div class="clear">
+                            </div>
+                        </div>
+
+                        <div class="">
+
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.DEPOSITNUMBER, new { @class = "control-label entrylable" })
+                                    @Html.TextBoxFor(model => model.DEPOSITNUMBER, new { @required = "required", @class = "form-control", @Value = ViewBag.DEPOSITNUMBER, style = "width: 50%", @placeholder = "" + @Html.DisplayNameFor(model => model.DEPOSITNUMBER) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.DEPOSITNUMBER) + "'" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.DEPOSITNUMBER)
+                                </li>
+
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.PRINCIPALAMOUNT, new { @class = "control-label entrylable" })
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.PRINCIPALAMOUNT, new { @class = "form-control decimal", @readonly = "readonly", @value = ViewBag.PRINCIPALAMOUNT, @placeholder = "" + @Html.DisplayNameFor(model => model.PRINCIPALAMOUNT) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.PRINCIPALAMOUNT) + "'" })
+                                        <div class="input-group-addon">.00</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.PRINCIPALAMOUNT)
+                                </li>
+
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.OPENINGDATE, new { @class = "control-label entrylable" })
+                                    <div class='input-group date'>
+                                        @Html.TextBoxFor(model => model.OPENINGDATE, "{0:dd-MMM-yy}", new { id = "OPENINGDATE", @class = "datepicker form-control", @value = ViewBag.OPENINGDATE, @placeholder = "Select a Date ", @onchange = "MaturedDate(this.id)" })
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+                                        <script>
+                                            $('#OPENINGDATE').datepicker({ dateFormat: formatDate('long') });
+                                        </script>
+
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.OPENINGDATE)
+                                </li>
+
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.SIGNATORY1, new { @class = "control-label entrylable" })
+                                    @Html.TextBoxFor(model => model.SIGNATORY1, new { @class = "form-control", @readonly = "readonly", @value = @Model.SIGNATORY1, style = "width: 50%", @placeholder = "" + @Html.DisplayNameFor(model => model.SIGNATORY1) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.SIGNATORY1) + "'" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.SIGNATORY1)
+                                </li>
+
+
+                                @*<li class="form-group" hidden="hidden">
+                              @Html.LabelFor(model => model.CHEQUEDATE, new { @class = "control-label entrylable" })
+                              <div class='input-group date'>
+                               <input type="text" id="DumyCHEQUEDATE" class="datepicker form-control" value="@ViewBag.chequedate" disabled="disabled"/>
+                               <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>                            
+                             <script>
+                                 $('#DumyCHEQUEDATE').datepicker({ dateFormat: formatDate('long') });
+                             </script>     
+                              </div>
+                              <br />
+                              <div style="display:none">
+                              @Html.TextBoxFor(model => model.CHEQUEDATE, "{0:dd-MMM-yy}", new { @class = "datepicker form-control", @value = ViewBag.CHEQUEDATE, @placeholder = "Select a Date "})                                                           
+                              </div>
+                              @Html.ValidationMessageFor(model => model.CHEQUEDATE)
+                              </li>*@
+
+                                @foreach (var chequeRef in ViewBag.DepositChequeRef)
+                                {
+                                    <li class="form-group">
+                                        <label class="control-label entrylable">#@index Cheque Reference</label>
+                                        <input type="text" class="form-control" style="width:50%" value="@chequeRef.CHEQUENO" readonly = "readonly" />
+                                    </li>     
+                                    index++;
+                                }
+
+
+                            </ul>
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.FINANCIALINSTITUTION_REFERENCE, new { @class = "control-label entrylable" })
+                                    <br />
+                                    @Html.DropDownListFor(model => model.FINANCIALINSTITUTION_REFERENCE, (SelectList)ViewBag.financialInstitutionList, (string)ViewBag.FinancialInstitution, new { @class = "control-label entrylable drpResize drpsize", @readonly = "readonly", style = "display:none !important" })  @* *@
+
+                                    @Html.DropDownList("DumyFINANCIALINSTITUTION_REFERENCE", (SelectList)ViewBag.financialInstitutionList, (string)ViewBag.FinancialInstitution, new { @class = "control-label entrylable drpResize drpsize", @readonly = "readonly", @disabled = "disabled" })
+
+                                </li>
+
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.BRANCH_REFERENCE, new { @class = "control-label entrylable" })
+                                    <br />
+                                    @Html.DropDownListFor(model => model.BRANCH_REFERENCE, (SelectList)ViewBag.FIBranch, @Model.FIBRANCH.REFERENCE, new { @class = "control-label entrylable drpResize drpsize", @readonly = "readonly", style = "display:none !important" })  @**@
+
+                                    @Html.DropDownList("DumyBRANCH_REFERENCE", (SelectList)ViewBag.FIBranch, @Model.FIBRANCH.REFERENCE, new { @class = "control-label entrylable drpResize drpsize", @readonly = "readonly", @disabled = "disabled" })
+
+                                </li>
+
+
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.SIGNATORY2, new { @class = "control-label entrylable" })
+                                    @Html.TextBoxFor(model => model.SIGNATORY2, new { @class = "form-control", @readonly = "readonly", @value = @Model.SIGNATORY2, style = "width: 50%", @placeholder = "" + @Html.DisplayNameFor(model => model.SIGNATORY2) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.SIGNATORY2) + "'" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.SIGNATORY2)
+                                </li>
+
+                                <li>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                </li>
+
+                                @foreach (var chequeRef in ViewBag.DepositChequeRef)
+                                {
+                                    <li class="form-group">
+                                        <label class="control-label entrylable">#@index2 Cheque Amount</label>
+                                        <input type="text" class="form-control" style="width:50%" value="@chequeRef.CHEQUEAMOUNT" disabled="disabled"  />
+                                    </li>     
+                                    index2++;
+                                }
+                            </ul>
+
+
+                        </div>
+
+
+
+
+                    </div>
+
+
+                </div>
+                <div id="FixedDepositTerms" class="container-fluid">
+
+                    <div class="widget ">
+                        <div class="whead">
+                            <h6>
+                                <label id="" title="">Fixed Deposit Terms</label>
+                            </h6>
+                            <div class="clear">
+                            </div>
+                        </div>
+
+                        <div class="">
+
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+
+
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.TENURE, new { @class = "control-label entrylable" })
+                                    <br />
+                                    @Html.TextBoxFor(model => model.TENURE, new { @class = "form-control number", @readonly = "readonly", @required = "required", @value = ViewBag.TENURE, style = "width: 20% !important; display:inline !important;", @type = "number", @placeholder = "" + @Html.DisplayNameFor(model => model.TENURE) + "  (Only Numeric) ", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.TENURE) + "'" })
+                                    @Html.DropDownListFor(model => model.TENURETERM, (SelectList)ViewBag.TenureList, (string)ViewBag.TENURETERM, new { @class = "control-label entrylable drpResize drpsize", @readonly = "readonly", @required = "required", style = "height: 35px !important; margin-top:0px !important; width:30%;display:none;" })      @**@
+
+                                    @Html.DropDownList("DumyTENURETERM", (SelectList)ViewBag.TenureList, (string)ViewBag.TENURETERM, new { @class = "control-label entrylable drpResize drpsize", @disabled = "disabled", @readonly = "readonly", @required = "required", style = "height: 35px !important; margin-top:0px !important; width:30%;" })
+
+                                    @*  <input  type="text" value="@ViewBag.tenureTermMsg" class="control-label entrylable drpResize drpsize" readonly="true" />*@
+                                </li>
+
+
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.ADVANCEDINTERESTRATE, new { @class = "control-label entrylable" })
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.ADVANCEDINTERESTRATE, new { @class = "form-control decimal", @readonly = "readonly", @value = ViewBag.ADVANCEDINTERESTRATE, @placeholder = "" + @Html.DisplayNameFor(model => model.ADVANCEDINTERESTRATE) + " (Only Numeric)", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.ADVANCEDINTERESTRATE) + "'" })
+                                        <div class="input-group-addon">%</div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.ADVANCEDINTERESTRATE)
+                                </li>
+
+                                @if (ViewBag.Interestmode != "Flat")
+                                {
+                                    <li class="form-group">
+                                        @Html.LabelFor(model => model.COMPOUNDINTERESTINTERVAL, new { @class = "control-label entrylable" })
+                                        <br />
+                                        @Html.DropDownListFor(model => model.COMPOUNDINTERESTINTERVAL, (SelectList)ViewBag.ComoundInterestInterval, (string)ViewBag.COMPOUNDINTERESTINTERVAL, new { @class = "control-label entrylable drpResize drpsize", @readonly = "readonly", @required = "required", style = "display:none !important" }) @* ,style="display:none !important" *@
+
+
+                                        <input type="text" readonly="true" value="@ViewBag.InterestInterval" class="control-label entrylable drpResize drpsize" />
+
+
+                                        <br />
+                                        @Html.ValidationMessageFor(model => model.COMPOUNDINTERESTINTERVAL)
+                                    </li>
+                                }
+
+
+                                <li class="form-group checkbox" style="margin-top: 37px; margin-bottom: 20px;">
+                                    <label>
+                                        <input type="checkbox" checked disabled="disabled">
+                                        Deduct Tax at each interval
+                                    </label>
+                                </li>
+
+                            </ul>
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.RATEOFINTEREST, new { @class = "control-label entrylable" })
+                                    @Html.TextBoxFor(model => model.RATEOFINTEREST, new { @class = "form-control decimal", @readonly = "readonly", @required = "required", style = "width: 50%", @value = ViewBag.RATEOFINTEREST, @placeholder = "" + @Html.DisplayNameFor(model => model.RATEOFINTEREST) + "", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.RATEOFINTEREST) + "'" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.RATEOFINTEREST)
+                                </li>
+
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.INTERESTMODE, new { @class = "control-label entrylable" })
+                                    <br />
+                                    @Html.DropDownListFor(model => model.INTERESTMODE, (SelectList)ViewBag.COMPOUNDINTERESTTYPEList, (string)ViewBag.COMPOUNDINTERESTTYPE, new { @class = "control-label entrylable drpResize drpsize", @readonly = "readonly", @required = "required", style = "display:none !important" })  @*,style="display:none !important" *@
+
+                                    <input type="text" readonly="true" value="@ViewBag.Interestmode" class="control-label entrylable drpResize drpsize" />
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.INTERESTMODE)
+                                </li>
+
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.MATURITYDATE, new { @class = "control-label entrylable" })
+                                    <div class='input-group date'>
+                                        <input type="text" id="DumyMATURITYDATE" class="datepicker form-control" value="@ViewBag.maturityDate" disabled="disabled"/>
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                    <div class='input-group date' style="display: none">
+                                        @*"*@
+
+                                        @Html.TextBoxFor(model => model.MATURITYDATE, "{0:dd-MMM-yy}", new { id = "MATURITYDATE", @required = "required", @class = "datepicker form-control", @value = ViewBag.MATURITYDATE, @placeholder = "Select a Date" })
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        <script>
+                                            $('#DumyMATURITYDATE').datepicker({ dateFormat: formatDate('long') });
+                                            $('#MATURITYDATE').datepicker({ dateFormat: formatDate('long') });
+                                        </script>
+
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.MATURITYDATE)
+                                </li>
+
+
+                                <li class="form-group" style="margin-bottom: 20px;">
+                                    @Html.LabelFor(model => model.ANNUALDAYS, new { @class = "control-label entrylable" })
+
+                                    <br />
+
+                                    @*@readonly = "readonly",*@
+                                    @Html.TextBoxFor(model => model.ANNUALDAYS, new { @class = "form-control decimal", @value = ViewBag.ANNUALDAYS, style = "width: 20% !important; display:inline !important;", @type = "number", @placeholder = "" + @Html.DisplayNameFor(model => model.ANNUALDAYS) + "  (Only Numeric) ", @onfocus = "this.placeholder = ''", @onblur = "this.placeholder = '" + @Html.DisplayNameFor(model => model.ANNUALDAYS) + "'" })
+
+                                    <input type="button" class="btn btn-Primary" id="Calculator" tabindex="" onclick="return CalculateTotalAmount()" value="Calculate" style="margin-bottom: 3px;" />
+                                    @*disabled*@
+
+                                    <br />
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div id="InterestReceivable" class="container-fluid">
+
+                    <div class="widget ">
+                        <div class="whead">
+                            <h6>
+                                <label id="lblHeader" title="">Interest Receivable</label>
+                            </h6>
+                            <div class="clear">
+                            </div>
+                        </div>
+
+
+                        <div class="">
+
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+
+
+                                <li class="form-group">
+
+                                    @Html.LabelFor(model => model.GROSSINTEREST, new { @class = "control-label entrylable" })
+
+
+
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.GROSSINTEREST, new { @required = "required", @Value = ViewBag.GrossInterest, @class = "form-control decimal", @readonly = "readonly" })
+                                        @*<div class="input-group-addon">%</div>*@
+                                    </div>
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.GROSSINTEREST)
+
+                                </li>
+
+
+
+                                <li class="form-group">
+
+                                    @Html.LabelFor(model => model.EXCISEDUTY, new { @class = "control-label entrylable" })
+
+                                    @Html.TextBoxFor(model => model.EXCISEDUTY, new { @required = "required", @Value = ViewBag.ExciseDuty, @class = "form-control decimal", style = "width: 50%;", @onKeyUp = "disableUpdatebtn();" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.EXCISEDUTY)
+
+                                </li>
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable" for="NETINTEREST">Net Interest Receivable</label>
+
+                                    @Html.TextBoxFor(model => model.NETINTERESTRECEIVABLE, new { @required = "required", @Value = ViewBag.NetInterestReceivable, @readonly = "readonly", @class = "form-control decimal", style = "width: 50%;" })
+
+                                    <br>
+                                </li>
+
+
+
+                            </ul>
+
+                            <ul class="col-md-6 entryForm bottomNonePadding">
+
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.SOURCETAX, new { @class = "control-label entrylable" })
+
+                                    @Html.TextBoxFor(model => model.SOURCETAX, new { @required = "required", @readonly = "readonly", @Value = ViewBag.SourceTax, @class = "form-control decimal", style = "width: 50%;" })
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.SOURCETAX)
+                                </li>
+
+
+
+                                <li class="form-group">
+                                    @Html.LabelFor(model => model.OTHERCHARGE, new { @class = "control-label entrylable" })
+
+                                    @Html.TextBoxFor(model => model.OTHERCHARGE, new { @required = "required", @Value = ViewBag.OthersCharge, @class = "form-control decimal", style = "width: 50%;", @onKeyUp = "disableUpdatebtn();" })  @* @readonly = "readonly",*@
+
+                                    <br />
+                                    @Html.ValidationMessageFor(model => model.OTHERCHARGE)
+                                </li>
+
+
+
+
+                                <li class="form-group">
+                                    <label class="control-label entrylable" for="INTERESTRECEIVED">Total Amount Receivable</label>
+
+                                    @Html.TextBoxFor(model => model.TOTALAMOUNTRECEIVABLE, new { @required = "required", @Value = ViewBag.TotalamountReceivable, @class = "form-control decimal", @readonly = "readonly", style = "width: 50%;" })
+
+                                    <br />
+                                </li>
+
+                            </ul>
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+                
+              
+                <button id="updatebtn" type="submit" class="btn btn-success" style="display: none !important; margin-top: 13px;" tabindex="" onclick="return IsMaturedDate()">Update</button>              
+                
+                <a class="load btn btn-danger" href="~/#/FIXEDDEPOSIT/ListFIXEDDEPOSIT?lblbreadcum=" style="margin-top: 12px;">Close</a>
+            }
+        </div>
+    </div>
+
+    @*    <button type="submit" class="btn btn-success doubleColumnButton" tabindex="">Save</button>
+    <a class="load btn btn-danger" href="~/#/FIXEDDEPOSIT/ListFIXEDDEPOSIT?lblbreadcum=" style="margin-top: 45px;">Close</a>*@
+    <p></p>
+    <script src="~/Scripts/maturityCalculation.js"></script>
+
+    <script type="text/javascript">
+        function ShowProcessingMsg() {
+
+            $('.loadingImage').show();
+
+        }
+        function HideProcessingMsg() {
+            $('.loadingImage').hide();
+        }
+
+    </script>
+    <script>
+
+
+        function disableUpdatebtn() {
+            //this Update button will disable if any change in Excise duty or Others Charge 
+            //but after click Calculate button Update btn will be Enable
+
+            console.log('Disable Update button');
+            document.getElementById('updatebtn').style.display = 'none';
+
+            //var result = document.getElementById("updatebtn").disabled;
+            //if (result == false)
+            //    document.getElementById("updatebtn").disabled = true;
+        }
+
+        function IsMaturedDate() {
+            var mDate = document.getElementById('MATURITYDATE').value;
+            if (mDate == "") {
+                alert("Matured Date is Required!");
+                return false;
+            }
+            return true;
+        }
+
+        function MaturedDate(OpenDateId) {
+
+            var Years = 0;
+            var incrimentYears = 0;
+            var Months = 0;
+            var _Date = 0;
+            var incrimentMonths = 0;
+            var date2 = new Date();
+
+            date2 = new Date($('#OPENINGDATE').datepicker('getDate'));
+
+
+            //date = moment(date2).add('months',3);
+            //alert('months' + date + 'fuul date day' + date.dates() + ' months :' + date.months() + ' years :' + date.years());
+
+            //date = moment(date2).add('years', 3);
+            //alert('months' + date + 'fuul date day' + date.dates() + ' months :' + date.months() + ' years :' + date.years());
+
+
+            var TENURE = parseInt(document.getElementById('TENURE').value);
+            var TENURETERM = document.getElementById('TENURETERM').value;
+
+
+            //only flat calculation
+            if (TENURETERM == 'Days') {
+
+                // alert('tenureterm Days');            
+                date = moment(date2).add('days', TENURE);
+
+                _Date = date.dates();
+                Months = date.months();
+                Years = date.years();
+                //  alert('add date' + date + 'full date day' + _Date + ' months :' + Months + ' years :' + Years);
+
+                var ndate = new Date(Years, Months, _Date);
+
+                //   alert('new date'+ndate);
+
+
+                $('#MATURITYDATE').datepicker('refresh');
+                $('#MATURITYDATE').datepicker('setDate', ndate);
+
+                $('#DumyMATURITYDATE').datepicker('refresh');
+                $('#DumyMATURITYDATE').datepicker('setDate', ndate);
+
+
+            }
+            else if (TENURETERM == 'Months') {
+
+                // alert('tenureterm Months');
+                date = moment(date2).add('months', TENURE);
+
+                _Date = date.dates();
+                Months = date.months();
+                Years = date.years();
+                //   alert('add date' + date + 'full date day' + _Date + ' months :' + Months + ' years :' + Years);
+
+                var ndate = new Date(Years, Months, _Date);
+
+                //   alert('new date'+ndate);
+
+
+                $('#MATURITYDATE').datepicker('refresh');
+                $('#MATURITYDATE').datepicker('setDate', ndate);
+
+                $('#DumyMATURITYDATE').datepicker('refresh');
+                $('#DumyMATURITYDATE').datepicker('setDate', ndate);
+
+            }
+            else if (TENURETERM == 'Years') {
+                // alert('tenureterm Years');
+                //Years = Years + TENURE;
+                //date = new Date(Years, Months, _Date);        
+
+
+                date = moment(date2).add('years', TENURE);
+
+                _Date = date.dates();
+                Months = date.months();
+                Years = date.years();
+                //   alert('add date' + date + 'full date day' + _Date + ' months :' + Months + ' years :' + Years);
+
+                var ndate = new Date(Years, Months, _Date);
+
+                //   alert('new date'+ndate);
+
+
+                $('#MATURITYDATE').datepicker('refresh');
+                $('#MATURITYDATE').datepicker('setDate', ndate);
+
+                $('#DumyMATURITYDATE').datepicker('refresh');
+                $('#DumyMATURITYDATE').datepicker('setDate', ndate);
+            }
+
+
+            Years = 0;
+            Months = 0;
+            _Date = 0;
+            incrimentMonths = incrimentYears = 0;
+
+            // alert('year :' + Years + ' months :' + Months + ' Date :' + _Date);
+        }
+
+        function GetRateofInterest() {
+
+            return @rateofInterest;
+        }
+
+        //function GetTaxRate()
+        //{
+        //   var rate = document.getElementById('taxRate').value;
+        //   return rate;
+        //}
+
+        function GetLastReceivableAmount() {
+            return @TotalAmountReceivable;
+        }
+        function GetTotalNetInterest() {
+            return @TotalNetInterest;
+        }
+
+        function GetSumGrossInterest() {
+            return @SumGrossInterest;
+        }
+
+        function GetSumSourceTax() {
+            return @SumSourceTax;
+        }
+
+        function CalculateTotalAmount() {
+
+
+            console.log("Calculation begining Fixed Deposit Edit");
+
+            var exciseduties = parseFloat(document.getElementById('EXCISEDUTY').value);
+            var sourcetax = parseFloat(document.getElementById('SOURCETAX').value);
+
+
+            var othersCharge = parseFloat(document.getElementById('OTHERCHARGE').value);
+            var principleAmount = parseFloat(document.getElementById('PRINCIPALAMOUNT').value);
+
+
+
+            var grossinterest = parseFloat(document.getElementById('GROSSINTEREST').value);
+            var rateofInterest = parseFloat(document.getElementById('RATEOFINTEREST').value);
+
+
+            var interestMode = document.getElementById('INTERESTMODE').value; //Flat ,Compound
+
+            try {
+                //if Interest Mode Flat then it will null so that it case exception
+
+                var CompoundInterestInterval = document.getElementById('COMPOUNDINTERESTINTERVAL').value;
+
+            }
+            catch (err) {
+
+                //   alert(err.message);
+            }
+            var tenure = parseFloat(document.getElementById('TENURE').value);
+
+            var terms = document.getElementById('TENURETERM').value;
+
+            var annualDays = parseFloat(document.getElementById('ANNUALDAYS').value);
+
+
+            var netInterest = 0;
+            var totalAmount = 0;
+
+            var RateOfInterest = 0;
+            var OneDayInterest = 0;
+            var OneYearInterest = 0;
+            var TaxRate = 0;
+            var GrossInterest = 0;
+            var SourceTax = 0
+
+
+
+            if (exciseduties > 0) { } else { exciseduties = 0; document.getElementById('EXCISEDUTY').value = 0; }
+            if (othersCharge > 0) { } else { othersCharge = 0; document.getElementById('OTHERCHARGE').value = 0; }
+
+
+
+
+            try {
+
+                if (interestMode == "Flat") {
+
+                    //  alert('Flat ED'+exciseduties+' OC '+othersCharge);
+
+                    if (terms == "Days") {
+
+                        rateofInterest = GetRateofInterest();
+                        TaxRate = document.getElementById('taxRate').value;
+                        //GetTaxRate();
+
+                        console.log('Rate Of Interest' + rateofInterest + " taxrate: " + TaxRate);
+
+                        OneYearInterest = parseFloat(principleAmount * rateofInterest / 100);
+                        OneDayInterest = parseFloat(OneYearInterest / annualDays);
+                        GrossInterest = parseFloat(OneDayInterest * tenure);
+                        SourceTax = parseFloat(GrossInterest * TaxRate / 100);
+
+                        console.log('Gross Interest :' + GrossInterest + " Source tax :" + SourceTax);
+
+                        netInterest = GrossInterest - SourceTax - exciseduties - othersCharge;
+                        totalAmount = principleAmount + netInterest;
+
+                        document.getElementById('GROSSINTEREST').value = GrossInterest.toFixed(2);
+                        document.getElementById('SOURCETAX').value = SourceTax.toFixed(2);
+
+                    } else {
+
+                        console.log('Rate Of Interest' + rateofInterest + " taxrate: " + TaxRate);
+                        console.log('Gross Interest :' + GrossInterest + " Source tax :" + SourceTax);
+
+                        netInterest = grossinterest - sourcetax - exciseduties - othersCharge;
+                        totalAmount = principleAmount + netInterest;
+
+                        console.log('net :' + netInterest + '  total  :' + totalAmount);
+                    }
+
+                    document.getElementById('NETINTERESTRECEIVABLE').value = netInterest.toFixed(2);
+                    document.getElementById('TOTALAMOUNTRECEIVABLE').value = totalAmount.toFixed(2);
+                }
+                else if (interestMode == "Compound") {
+
+                    var lastIntervalReceivableAmount = parseFloat(GetLastReceivableAmount());
+                    var TotalNetInterest = parseFloat(GetTotalNetInterest());
+
+                    var SumGrossInterest = parseFloat(GetSumGrossInterest());
+                    var SumSourceTax = parseFloat(GetSumSourceTax());
+
+                    console.log('Rate Of Interest' + rateofInterest + " taxrate: " + TaxRate + 'Sum GrossInterest' + SumGrossInterest + ' SumSourceTax :' + SumSourceTax);
+
+                    console.log('Excise Duty:' + exciseduties + ' Other Charge:' + othersCharge);
+
+                    netInterest = parseFloat(SumGrossInterest - SumSourceTax - exciseduties - othersCharge);
+
+                    totalAmount = principleAmount + netInterest;
+
+                    document.getElementById('NETINTERESTRECEIVABLE').value = netInterest.toFixed(2);
+                    document.getElementById('TOTALAMOUNTRECEIVABLE').value = totalAmount.toFixed(2);
+
+                }
+
+                document.getElementById('updatebtn').style.display = 'block';
+
+                //var result = document.getElementById("updatebtn").disabled;
+                //if (result == true)
+                //    document.getElementById("updatebtn").disabled = false;
+
+                return true;
+            }
+            catch (e) {
+                alert('Error in calculation!!');
+            }
+            return false;
+
+        }
+
+        function CalculatePrinciple() {
+
+        }
+    </script>
+
+    <script>
+        $(document).on('keypress', '.number', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+        $(document).on('keypress', '.decimal', function (event) {
+
+            if (event.keyCode == 46 || event.keyCode == 8) {
+                // let it happen, don't do anything
+            } else if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+
+        });
+
+
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).on('change', '#FINANCIALINSTITUTION_REFERENCE', function (event) {
+            $('.loadingImage').show();
+            var oJOURNALHEAD = new Object();
+            var DEPOSITNUMBER = $('#DEPOSITNUMBER').val();
+            var OPENINGDATE = $('#OPENINGDATE').val();
+            var CHEQUEREFERENCE = $('#CHEQUEREFERENCE').val();
+            var FINANCIALINSTITUTION_REFERENCE = $('#FINANCIALINSTITUTION_REFERENCE').val();
+            var PRINCIPALAMOUNT = $('#PRINCIPALAMOUNT').val();
+            var CHEQUEDATE = $('#CHEQUEDATE').val();
+            var TENURE = $('#TENURE').val();
+            var TENURETERM = $('#TENURETERM').val();
+            var ADVANCEDINTERESTRATE = $('#ADVANCEDINTERESTRATE').val();
+            var COMPOUNDINTERESTINTERVAL = $('#COMPOUNDINTERESTINTERVAL').val();
+            var RATEOFINTEREST = $('#RATEOFINTEREST').val();
+            var INTERESTMODE = $('#INTERESTMODE').val();
+            var MATURITYDATE = $('#MATURITYDATE').val();
+            var ANNUALDAYS = $('#ANNUALDAYS').val();
+            var GROSSINTEREST = $('#GROSSINTEREST').val();
+            var EXCISEDUTY = $('#EXCISEDUTY').val();
+            var SOURCETAX = $('#SOURCETAX').val();
+            var OTHERCHARGE = $('#OTHERCHARGE').val();
+
+
+
+            //$('.loadingImage').show();
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+            $.get("/FixedDeposit/EditFixedDeposit?financialInstitution=" + valueSelected + "&DEPOSITNUMBER=" + $('#DEPOSITNUMBER').val() + "&OPENINGDATE=" + $('#OPENINGDATE').val() + "&CHEQUEREFERENCE=" + $('#CHEQUEREFERENCE').val() + "&PRINCIPALAMOUNT=" + $('#PRINCIPALAMOUNT').val() + "&CHEQUEDATE=" + $('#CHEQUEDATE').val() + "&TENURE=" + $('#TENURE').val() + "&TENURETERM=" + $('#TENURETERM').val() + "&ADVANCEDINTERESTRATE=" + $('#ADVANCEDINTERESTRATE').val() + "&COMPOUNDINTERESTINTERVAL=" + $('#COMPOUNDINTERESTINTERVAL').val() + "&RATEOFINTEREST=" + $('#RATEOFINTEREST').val() + "&INTERESTMODE=" + $('#INTERESTMODE').val() + "&MATURITYDATE=" + $('#MATURITYDATE').val() + "&ANNUALDAYS=" + $('#ANNUALDAYS').val() + "&GROSSINTEREST=" + $('#GROSSINTEREST').val() + "&SOURCETAX=" + $('#SOURCETAX').val() + "&OTHERCHARGE=" + $('#OTHERCHARGE').val() + "", function (data) {
+                var getHTML = $(data);
+                $('#InterestReceivable').empty();
+
+                $('#InterestReceivable').html($('#InterestReceivable', getHTML));
+                $('.loadingImage').hide();
+            });
+
+        });
+
+    </script>
+
+
+</div>
+
